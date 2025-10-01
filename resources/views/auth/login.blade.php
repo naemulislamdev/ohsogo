@@ -1,4 +1,4 @@
-<x-guest-layout>
+{{-- <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -44,4 +44,67 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-guest-layout> --}}
+
+@extends('layouts.front-end.app')
+@section('title', 'Accounts')
+@section('main-content')
+    <!-- Login Form Start -->
+    <section class="login-form py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <div class="login-regiter-box">
+                        <h3 class="mb-3">Login</h3>
+                        <p class="text-muted mb-4">
+                            Don't have an account yet?
+                            <a class="text-dark" href="{{ route('register') }}">Create account</a>
+                        </p>
+
+                        <form class="mt-5" method="POST" action="{{ route('login') }}">
+                            @csrf
+
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <input type="email" name="email" autofocus
+                                    class="form-control @error('email')
+                                    is-invalid
+                                @enderror"
+                                    placeholder="Email" value="{{ old('email') }}" />
+                                @error('email')
+                                    <div class="text-danger small mt-2">{{ ucFirst($message) }}</div>
+                                @enderror
+                            </div>
+                            <!-- Password -->
+                            <div class="mb-2">
+                                <input type="password" name="password"
+                                    class="form-control @error('password')
+                                    is-invalid
+                                @enderror"
+                                    placeholder="Password" />
+                                @error('password')
+                                    <div class="text-danger small mt-2">{{ ucFirst($message) }}</div>
+                                @enderror
+                            </div>
+                            <!-- Forgot Password -->
+                            <div class="forgot-password mb-3 mt-3">
+                                <a href="{{ route('password.request') }}" class="small text-decoration-none">Forgot your
+                                    password?</a>
+                            </div>
+                            <!-- Submit + Return Store -->
+                            <div class="d-flex mt-5 flex-column flex-lg-row align-items-start align-items-lg-center">
+                                <button type="submit" class="chekout-cart-btn signin-btn">
+                                    Sign In
+                                </button>
+                                <a href="{{ url('/') }}" class="return-store-btn ms-lg-4 mt-4 mt-lg-0">Return Store</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+        </div>
+    </section>
+    <!-- Login Form End -->
+@endsection

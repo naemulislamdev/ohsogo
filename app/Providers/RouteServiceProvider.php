@@ -18,7 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
-    public const HOME = '/home';
+    public const HOME = '/user-dashboard';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -34,35 +34,38 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
-                Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/admin.php'));
+            Route::middleware('web')
+                ->group(base_path('routes/auth.php'));
 
             Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/seller.php'));
+                ->namespace($this->namespace)
+                ->group(base_path('routes/admin.php'));
 
             Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/customer.php'));
+                ->namespace($this->namespace)
+                ->group(base_path('routes/seller.php'));
 
             Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/web.php'));
+                ->namespace($this->namespace)
+                ->group(base_path('routes/customer.php'));
 
             Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/shared.php'));
+                ->namespace($this->namespace)
+                ->group(base_path('routes/web.php'));
+
+            Route::middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/shared.php'));
 
             Route::prefix('api')
-            ->middleware('api')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/api/v1/api.php'));
+                ->middleware('api')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/api/v1/api.php'));
 
             Route::prefix('api')
-            ->middleware('api')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/api/v2/api.php'));
+                ->middleware('api')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/api/v2/api.php'));
         });
     }
 }
