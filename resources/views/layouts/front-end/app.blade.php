@@ -252,7 +252,7 @@
         });
     </script>
     <!-- grid view system for lg device -->
-    <script>
+    {{-- <script>
         // grid view system
         $(document).ready(function() {
 
@@ -278,9 +278,9 @@
                     .addClass('product-image2-col-' + columns);
             });
         });
-    </script>
+    </script> --}}
     <!-- grid view system for mobile device -->
-    <script>
+    {{-- <script>
         // mobile grid view system
         $(document).ready(function() {
             $('.grid-btn-mobile').on('click', function() {
@@ -307,7 +307,7 @@
                     .addClass('product-image2-col-sm-' + columns);
             });
         });
-    </script>
+    </script> --}}
 
     <!-- Script for Price Range slider -->
     <script>
@@ -468,6 +468,67 @@
             });
         });
     </script>
+
+    {{-- new grid view script --}}
+    <script>
+        // lg device grid system
+        $(document).ready(function() {
+            $(".grid-btn").on("click", function() {
+                var columns = $(this).data("columns");
+                var category = $(this).data("category");
+
+                // lg device column change
+                $('.product-column[data-category="' + category + '"]')
+                    .removeClass("col-lg-2 col-lg-3 col-lg-4 col-lg-6")
+                    .addClass("col-lg-" + columns);
+
+                $(".grid-btn[data-category='" + category + "']").removeClass("active");
+                $(this).addClass("active");
+
+                // product box class update
+                $('.product-box[data-category="' + category + '"]')
+                    .removeClass("product-box-col-2 product-box-col-3 product-box-col-4 product-box-col-6")
+                    .addClass("product-box-col-" + columns);
+            });
+        });
+
+        // mobile / md grid system
+        $(document).ready(function() {
+            // 🔹 Default set according to active button
+            $(".grid-btn-mobile.active").each(function() {
+                var columns = $(this).data("columns");
+                var category = $(this).data("category");
+
+                $('.product-column[data-category="' + category + '"]')
+                    .removeClass("col-6 col-12 col-md-6 col-md-12")
+                    .addClass("col-" + columns + " col-md-" + columns);
+
+                $('.product-box[data-category="' + category + '"]')
+                    .removeClass("product-box-col-6 product-box-col-12")
+                    .addClass("product-box-col-" + columns);
+            });
+
+            // 🔹 On button click
+            $(".grid-btn-mobile").on("click", function() {
+                var columns = $(this).data("columns");
+                var category = $(this).data("category");
+
+                // sm & md device column change
+                $('.product-column[data-category="' + category + '"]')
+                    .removeClass("col-6 col-12 col-md-6 col-md-12")
+                    .addClass("col-" + columns + " col-md-" + columns);
+
+                $(".grid-btn-mobile[data-category='" + category + "']").removeClass("active");
+                $(this).addClass("active");
+
+                // product box class update
+                $('.product-box[data-category="' + category + '"]')
+                    .removeClass("product-box-col-6 product-box-col-12")
+                    .addClass("product-box-col-" + columns);
+            });
+        });
+    </script>
+
 </body>
 
 </html>

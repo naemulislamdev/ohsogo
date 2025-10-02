@@ -65,8 +65,7 @@
             @php($e_commerce_logo = \App\Model\BusinessSetting::where(['type' => 'company_web_logo'])->first()->value)
             <a class="d-flex justify-content-center mb-5" href="javascript:">
                 <img class="z-index-2" src="{{ asset('storage/company/' . $e_commerce_logo) }}" alt="Logo"
-                    onerror="this.src='{{ asset('assets/back-end/img/400x400/img2.jpg') }}'"
-                    style="width: 12rem;">
+                    onerror="this.src='{{ asset('assets/back-end/img/400x400/img2.jpg') }}'" style="width: 12rem;">
             </a>
 
             <div class="row justify-content-center">
@@ -75,7 +74,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="login-image">
-                                    <img src="{{ asset('assets/front-end/img/admin-login.jpg')}}" style="width: 100%;" alt="">
+                                    <img src="{{ asset('assets/front-end/img/admin-login.jpg') }}" style="width: 100%;"
+                                        alt="">
                                 </div>
                             </div>
                             <div class="col-md-6">

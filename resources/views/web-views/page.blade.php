@@ -188,7 +188,9 @@
                             <div class="col-lg-9">
                                 <!-- Grid system icon section start -->
                                 <div class="row mb-3 align-items-start align-items-lg-end mb-0 grid-icon-box">
-                                    <div class="grid-controls ">
+
+                                    <!-- LG device grid controls -->
+                                    <div class="grid-controls d-none d-lg-flex">
                                         <button class="grid-btn" data-columns="6" data-category="category1">
                                             <div class="grid-icon"></div>
                                             <div class="grid-icon"></div>
@@ -198,20 +200,24 @@
                                             <div class="grid-icon"></div>
                                             <div class="grid-icon"></div>
                                         </button>
-                                        <button class="grid-btn " data-columns="3" data-category="category1">
+                                        <button class="grid-btn" data-columns="3" data-category="category1">
                                             <div class="grid-icon"></div>
                                             <div class="grid-icon"></div>
                                             <div class="grid-icon"></div>
                                             <div class="grid-icon"></div>
                                         </button>
-
                                     </div>
-                                    <div class="grid-controls mobile-grid-controls">
+
+                                    <!-- Mobile + Tablet grid controls -->
+                                    <div class="grid-controls mobile-grid-controls d-flex d-lg-none">
+                                        <!-- 1 column button -->
                                         <button class="grid-btn grid-btn-mobile" data-columns="12"
                                             data-category="category1">
                                             <div class="grid-icon"></div>
                                         </button>
-                                        <button class="grid-btn grid-btn-mobile" data-columns="6"
+
+                                        <!-- 2 column button (default active) -->
+                                        <button class="grid-btn grid-btn-mobile active" data-columns="6"
                                             data-category="category1">
                                             <div class="grid-icon"></div>
                                             <div class="grid-icon"></div>
@@ -219,7 +225,7 @@
                                     </div>
 
                                 </div>
-                                <!-- Grid system con section end -->
+                                {{-- grid section end  --}}
                             </div>
                         </div>
                         <!-- Grid Products Row start -->
@@ -227,9 +233,10 @@
                             <div class="col-lg-12">
                                 <div class="related-products ">
                                     <div class="page-products">
-
+                                        {{-- col-sm-6 col-md-6 product-column --}}
                                         <div class="row mt-5 ">
-                                            <div class="col-sm-6 col-md-6 product-column" data-category="category1">
+                                            <div class="col-sm-6 col-md-6 col-lg-3 product-column"
+                                                data-category="category1">
                                                 <div class="product-box product-box-col-2" data-category="category1">
                                                     <div class="card border-0 product">
                                                         <div class="product-item border border-dark">
@@ -268,7 +275,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6 col-md-6 product-column" data-category="category1">
+                                            <div class="col-sm-6 col-md-6 col-lg-3 product-column"
+                                                data-category="category1">
                                                 <div class="product-box product-box-col-2" data-category="category1">
                                                     <div class="card border-0 product">
                                                         <div class="product-item border border-dark">
@@ -307,7 +315,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6 col-md-6 product-column" data-category="category1">
+                                            <div class="col-sm-6 col-md-6 col-lg-3 product-column"
+                                                data-category="category1">
                                                 <div class="product-box product-box-col-2" data-category="category1">
                                                     <div class="card border-0 product">
                                                         <div class="product-item border border-dark">
@@ -346,7 +355,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6 col-md-6 product-column" data-category="category1">
+                                            <div class="col-sm-6 col-md-6 col-lg-3 product-column"
+                                                data-category="category1">
                                                 <div class="product-box product-box-col-2" data-category="category1">
                                                     <div class="card border-0 product">
                                                         <div class="product-item border border-dark">
@@ -385,7 +395,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6 col-md-6 product-column" data-category="category1">
+                                            <div class="col-sm-6 col-md-6 col-lg-3 product-column"
+                                                data-category="category1">
                                                 <div class="product-box product-box-col-2" data-category="category1">
                                                     <div class="card border-0 product">
                                                         <div class="product-item border border-dark">
@@ -424,7 +435,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6 col-md-6 product-column" data-category="category1">
+                                            <div class="col-sm-6 col-md-6 col-lg-3 product-column"
+                                                data-category="category1">
                                                 <div class="product-box product-box-col-2" data-category="category1">
                                                     <div class="card border-0 product">
                                                         <div class="product-item border border-dark">
@@ -463,7 +475,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6 col-md-6 product-column" data-category="category1">
+                                            <div class="col-sm-6 col-md-6 col-lg-3 product-column"
+                                                data-category="category1">
                                                 <div class="product-box product-box-col-2" data-category="category1">
                                                     <div class="card border-0 product">
                                                         <div class="product-item border border-dark">

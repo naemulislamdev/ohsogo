@@ -40,9 +40,9 @@
                                 Banani, Dhaka-1213, Bangladesh
                             </p>
                             <p><strong>Timings:</strong> 8:00a.m.-10:00p.m.</p>
-                            <p><i class="fa fa-phone text-white"></i> +880 9647554411</p>
+                            <p><i class="fa fa-phone text-white me-2"></i> +880 9647554411</p>
                             <p>
-                                <i class="fa fa-envelope text-white"></i> support@ohsogo.com
+                                <i class="fa fa-envelope text-white me-2"></i> support@ohsogo.com
                             </p>
                         </div>
                     </div>

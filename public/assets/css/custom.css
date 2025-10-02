@@ -1160,7 +1160,7 @@ section.related-products {
 .related-products .product-item {
     position: relative;
     width: 100%;
-    height: 350px;
+    height: 200px;
     overflow: hidden;
     z-index: 999;
 }
@@ -1230,19 +1230,7 @@ section.related-products {
     width: 100%;
     left: 0;
 }
-/* .related-products .add-to-cart:after {
-  border-radius: 5px;
-  position: absolute;
-  content: "";
-  width: 0;
-  height: 100%;
-  top: 0;
-  z-index: -1;
-  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5), 7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0px rgba(180,180,180,.1);
-  transition: all 0.3s ease-in-out;
-  background-color: #b4b4b4;
-  right: 0;
-} */
+
 .related-products .add-to-cart:after {
     content: "";
     position: absolute;
@@ -1836,11 +1824,11 @@ h6.shipping-gradient::after {
 }
 .cart-box-container .table {
     border-collapse: separate !important;
-    border-spacing: 0 50px; /* row gap */
+    border-spacing: 0 50px;
 }
 .cart-box-container tbody tr {
     background: #fff;
-    border-radius: 8px; /* সুন্দর rounded look */
+    border-radius: 8px;
     overflow: hidden;
 }
 .cart-box-container table th {
@@ -2089,7 +2077,7 @@ input[type="range"].active::-webkit-slider-thumb {
     border-bottom: 0;
 }
 .page-products .product-item {
-    height: 500px;
+    height: 250px;
 }
 .page-products .product-info {
     padding: 0;
@@ -2098,21 +2086,18 @@ input[type="range"].active::-webkit-slider-thumb {
     padding: 10px 0px;
 }
 .product-box {
-    padding: 0 18px;
+    padding: 0;
 }
-.page-products .product-box-col-6 .product-item {
-    height: 550px;
-}
-.page-products .product-box-col-4 .product-item {
+.col-sm-6.col-md-6.product-column.col-lg-4 .product-item.border-dark {
     height: 350px;
 }
-.page-products .product-box-col-3 .product-item {
-    height: 250px;
+.col-sm-6.col-md-6.product-column.col-lg-6 .product-item.border-dark {
+    height: 550px;
 }
-.grid-icon-box {
-    opacity: 0;
-    visibility: hidden;
+.col-sm-6.product-column.col-lg-12.col-12.col-md-12 .product-item.border-dark {
+    height: 430px;
 }
+
 /* ==========================================
   Dynamic Page Section Style End
 ============================================= */
