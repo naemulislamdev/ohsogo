@@ -12,6 +12,7 @@
     <link href="assets/css/bs_customize.css" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
     <link rel="stylesheet" href="assets/css/owl.theme.default.min.css" />
+
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="assets/css/custom.css">
 
@@ -114,6 +115,7 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/owl.carousel.min.js"></script>
     <script src="assets/js/owl-extra-code.js"></script>
+
 
     <!-- Script for search system -->
     <script>

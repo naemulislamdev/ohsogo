@@ -16,9 +16,9 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Web\WebController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user-dashboard', function () {
-    return view('user-dashboard');
-})->middleware(['auth', 'verified'])->name('user.dashboard');
+Route::get('/home', function () {
+    return view('user-account');
+})->middleware(['auth', 'verified']);
 
 // WebController
 Route::controller(WebController::class)->group(function () {

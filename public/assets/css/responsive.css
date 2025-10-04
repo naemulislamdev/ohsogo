@@ -71,7 +71,7 @@
         width: 82%;
     }
     .slider-content-box > h3 {
-        font-size: 50px;
+        font-size: 3.125rem;
     }
     .login-box .signin-btn {
         padding: 10px 25px;
@@ -100,6 +100,18 @@
     }
     .col-sm-6.product-column.col-lg-6.col-6.col-md-6 .product-item.border-dark {
         height: 250px;
+    }
+    .category-box {
+        transform: scale(1);
+    }
+    .related-products .add-to-cart {
+        padding: 10px 8px;
+        font-size: 16px;
+    }
+    .related-products .product-info {
+        left: 0;
+        right: 0px;
+        bottom: 0;
     }
 }
 
@@ -137,7 +149,7 @@
         width: 80%;
     }
     .carousel-item > .slider-content-box > h3 {
-        font-size: 26px;
+        font-size: 1.625rem;
     }
     .carousel-item > .slider-content-box > .slider-inner-btn {
         display: none;
@@ -153,7 +165,7 @@
         text-align: center;
     }
     .category-title-box > .category-title > h1 {
-        font-size: 28px;
+        font-size: 1.75rem;
     }
     .tp-category-item-3 {
         min-height: 270px;
@@ -169,13 +181,13 @@
         padding: 3px 2px;
     }
     .product-box .title {
-        font-size: 15px;
+        font-size: 0.9375rem;
     }
     .product-box .price > span {
-        font-size: 13px;
+        font-size: 0.8125rem;
     }
     .product-box .price > del {
-        font-size: 12px;
+        font-size: 0.75rem;
     }
     .newslater-section {
         padding: 119px 0px;
@@ -188,7 +200,7 @@
         width: 88%;
     }
     .carousel-item > .slider-content-box > h3 {
-        font-size: 22px;
+        font-size: 1.375rem;
     }
     .header-icon {
         margin-top: -26px;
@@ -218,5 +230,8 @@
     }
     .product-box {
         padding: 0 18px;
+    }
+    .discount-btn {
+        width: 20%;
     }
 }

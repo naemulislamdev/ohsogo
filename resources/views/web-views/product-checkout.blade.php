@@ -562,23 +562,24 @@
 
                                         <div class="important-links">
                                             <div class="border-top ">
-                                                <nav class="navbar-nav mt-2">
-                                                    <ul class="navbar nav">
-                                                        <li class="nav-item"><a
-                                                                class="nav-link text-dark text-decoration-underline"
-                                                                href="">Shipping</a></li>
-                                                        <li class="nav-item"><a
-                                                                class="nav-link text-dark text-decoration-underline"
+                                                <nav class="mt-2">
+                                                    <ul style="list-style: none"
+                                                        class="ps-0 ms-0 d-flex flex-column flex-lg-row justify-content-center justify-content-lg-around text-center text-lg-start">
+                                                        <li class="d-inline"><a
+                                                                class="small text-dark text-decoration-underline fw-light d-block"
+                                                                href="{{ route('shipping') }}">Shipping</a></li>
+                                                        <li class="d-inline"><a
+                                                                class="small text-dark text-decoration-underline fw-light d-block"
                                                                 href="">Refund Policy </a></li>
-                                                        <li class="nav-item"><a
-                                                                class="nav-link text-dark text-decoration-underline"
-                                                                href="">Privacy Policy</a></li>
-                                                        <li class="nav-item"><a
-                                                                class="nav-link text-dark text-decoration-underline"
-                                                                href="">Terms of Service</a></li>
-                                                        <li class="nav-item"><a
-                                                                class="nav-link text-dark text-decoration-underline"
-                                                                href="">Contact</a></li>
+                                                        <li class="d-inline"><a
+                                                                class="small text-dark text-decoration-underline fw-light d-block"
+                                                                href="{{ route('privacy') }}">Privacy Policy</a></li>
+                                                        <li class="d-inline"><a
+                                                                class="small text-dark text-decoration-underline fw-light d-block"
+                                                                href="{{ route('terms') }}">Terms of Service</a></li>
+                                                        <li class="d-inline"><a
+                                                                class="small text-dark text-decoration-underline fw-light d-block"
+                                                                href="{{ route('contact') }}">Contact</a></li>
                                                     </ul>
                                                 </nav>
                                             </div>

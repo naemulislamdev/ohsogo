@@ -1,5 +1,6 @@
 @extends('layouts.front-end.app')
 @section('title', 'Home')
+
 @section('main-content')
     <!-- Hero Section -->
     <section class="hero-section">
@@ -45,8 +46,8 @@
     <!-- start benefit section -->
     <section class="benefit-section py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4">
+            <div class="row justify-content-center justify-content-lg-between">
+                <div class="col-md-6 col-lg-4">
                     <div class="benefit-box text-center d-flex align-items-center justify-content-center">
                         <div class="me-3">
                             <img src="assets/images/icon/bf1.png" alt="Original Products" />
@@ -57,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mt-4 mt-sm-0">
+                <div class="col-md-6 col-lg-4 mt-4 mt-md-0">
                     <div class="benefit-box text-center d-flex align-items-center justify-content-center">
                         <div class="me-3">
                             <img src="assets/images/icon/bf2.png" alt="Free Shipping" />
@@ -68,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mt-4 mt-sm-0">
+                <div class="col-md-6 col-lg-4 mt-4 mt-lg-0">
                     <div class="benefit-box text-center d-flex align-items-center justify-content-center">
                         <div class="me-3">
                             <img src="assets/images/icon/bf3.png" alt="Easy Returns" />
@@ -88,92 +89,111 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h2 class="section-title">Peep the Newest Drops!</h2>
+                    <h2 class=" mb-5 section-heading">Peep the Newest Drops!</h2>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    <div class="product-card">
-                        <a href="#">
-                            <div class="discount-badge">−13%</div>
-                            <img src="assets/images/product-img/p1.jpg" alt="Product Image" class="product-img" />
-                            <div class="product-title">
-                                <a href="product_details.html">
-                                    <h4>
-                                        Zayn & Myza Tea Tree and Salicylic Acid Foaming Face Wash
-                                        for Women (100ml) BD
-                                    </h4>
-                                </a>
+            <div class="row related-products">
+                <div class="col-6 col-lg-3 mb-3 pe-md-4">
+                    <div class="card border-0 product w-100">
+                        <div class="product-item border border-dark">
+                            <a href="" class="product-img-container">
+                                <img class="card-img-top product-img"src="./assets/images/product-img/black_seed_hair_serum_50ml_1.webp"
+                                    alt=" product image" />
+                            </a>
+                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
+                                -10%
+                            </button>
+                            <div class="product-info">
+                                <button class="add-to-cart">ADD TO CART</button>
                             </div>
-                            <div class="price">
-                                <span class="old-price">৳ 399</span>
-                                <span class="new-price">৳ 349</span>
-                            </div>
-                            <div class="stars">★★★★★</div>
-                            <button class="add-to-cart-btn">ADD TO CART</button>
-                        </a>
+                        </div>
+                        <div class="card-body px-0">
+                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
+                            </a>
+                            <p class="card-text">
+                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
+                            </p>
+                            <div class="product-rating-star">★★★★★</div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <div class="product-card">
-                        <a href="product_details.html">
-                            <div class="discount-badge">sold</div>
-                            <img src="assets/images/product-img/p1.jpg" alt="Product Image" class="product-img" />
-                            <div class="product-title">
-                                <h4>
-                                    Zayn & Myza Tea Tree and Salicylic Acid Foaming Face Wash
-                                    for Women (100ml) BD
-                                </h4>
+                <div class="col-6 col-lg-3 mb-3 pe-4">
+                    <div class="card border-0 product w-100">
+                        <div class="product-item border border-dark">
+                            <a href="" class="product-img-container">
+                                <img class="card-img-top product-img"src="./assets/images/product-img/rose_serum_foundation_30ml-golden_beige.webp"
+                                    alt=" product image" />
+                            </a>
+                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
+                                -10%
+                            </button>
+                            <div class="product-info">
+                                <button class="add-to-cart">ADD TO CART</button>
                             </div>
-                            <div class="price">
-                                <span class="old-price">৳ 399</span>
-                                <span class="new-price">৳ 349</span>
-                            </div>
-                            <div class="stars">★★★★★</div>
-                            <button class="add-to-cart-btn">ADD TO CART</button>
-                        </a>
+                        </div>
+                        <div class="card-body px-0">
+                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
+                            </a>
+                            <p class="card-text">
+                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
+                            </p>
+                            <div class="product-rating-star">★★★★★</div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <div class="product-card">
-                        <a href="product_details.html">
-                            <div class="discount-badge">−13%</div>
-                            <img src="assets/images/product-img/p1.jpg" alt="Product Image" class="product-img" />
-                            <div class="product-title">
-                                <h4>
-                                    Zayn & Myza Tea Tree and Salicylic Acid Foaming Face Wash
-                                    for Women (100ml) BD
-                                </h4>
+                <div class="col-6 col-lg-3 mb-3 pe-4">
+                    <div class="card border-0 product w-100">
+                        <div class="product-item border border-dark">
+                            <a href="" class="product-img-container">
+                                <img class="card-img-top product-img"src="./assets/images/product-img/anti_pollution_cc_cream_30ml.webp"
+                                    alt=" product image" />
+                            </a>
+                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
+                                -10%
+                            </button>
+                            <div class="product-info">
+                                <button class="add-to-cart">ADD TO CART</button>
                             </div>
-                            <div class="price">
-                                <span class="old-price">৳ 399</span>
-                                <span class="new-price">৳ 349</span>
-                            </div>
-                            <div class="stars">★★★★★</div>
-                            <button class="add-to-cart-btn">ADD TO CART</button>
-                        </a>
+                        </div>
+                        <div class="card-body px-0">
+                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
+                            </a>
+                            <p class="card-text">
+                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
+                            </p>
+                            <div class="product-rating-star">★★★★★</div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <div class="product-card">
-                        <a href="product_details.html">
-                            <div class="discount-badge">sold</div>
-                            <img src="assets/images/product-img/p1.jpg" alt="Product Image" class="product-img" />
-                            <div class="product-title">
-                                <h4>
-                                    Zayn & Myza Tea Tree and Salicylic Acid Foaming Face Wash
-                                    for Women (100ml) BD
-                                </h4>
+                <div class="col-6 col-lg-3 mb-3">
+                    <div class="card border-0 product w-100">
+                        <div class="product-item border border-dark">
+                            <a href="" class="product-img-container">
+                                <img class="card-img-top product-img"src="./assets/images/product-img/showergel.webp"
+                                    alt=" product image" />
+                            </a>
+                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
+                                -10%
+                            </button>
+                            <div class="product-info">
+                                <button class="add-to-cart">ADD TO CART</button>
                             </div>
-                            <div class="price">
-                                <span class="old-price">৳ 399</span>
-                                <span class="new-price">৳ 349</span>
-                            </div>
-                            <div class="stars">★★★★★</div>
-                            <button class="add-to-cart-btn">ADD TO CART</button>
-                        </a>
+                        </div>
+                        <div class="card-body px-0">
+                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
+                            </a>
+                            <p class="card-text">
+                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
+                            </p>
+                            <div class="product-rating-star">★★★★★</div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -182,7 +202,7 @@
     <section>
         <div class="container">
             <div class="trending-categories">
-                <h2 class="section-title">TRENDING CATEGORY</h2>
+                <h2 class="section-heading mb-5">TRENDING CATEGORY</h2>
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="category-box">
@@ -217,16 +237,17 @@
     <!---- end category Section------>
     <!---- start combo banner Section------>
     <section>
-        <div class="container">
+        <div class="container mt-5">
             <div class="row">
                 <div class="col text-center mb-3">
-                    <h2>COMBOS FOR YOU</h2>
+                    <h1 style="font-size: 48px; font-weight: 400;">COMBOS FOR YOU</h1>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-4 mt-lg-5 ">
                 <div class="col-lg-12">
                     <div class="combo-img">
-                        <img src="assets/images/product-banner/pbanner1.jpg" alt="Combo Image" class="img-fluid" />
+                        <a href=""> <img src="assets/images/product-banner/pbanner1.jpg" alt="Combo Image"
+                                class="img-fluid" /></a>
                     </div>
                 </div>
             </div>
@@ -236,7 +257,7 @@
     <!---- start recent drops Section------>
     <div class="recent-drops-section py-5">
         <div class="container">
-            <h2 class="section-title text-center mb-5">RECENT DROPS</h2>
+            <h2 class="section-heading mb-5">RECENT DROPS</h2>
 
             <div class="row g-4">
                 <!-- First Row -->
@@ -289,7 +310,7 @@
     <!---- start recent drops Section------>
     <div class="recent-drops-section py-5">
         <div class="container">
-            <h2 class="section-title text-center mb-5">OHSOGO Recommends</h2>
+            <h2 class="section-heading text-center mb-5">OHSOGO Recommends</h2>
 
             <div class="row g-4">
                 <div class="col-lg-3">
@@ -319,7 +340,7 @@
     <!---- start brand Section------>
     <div class="recent-drops-section py-5">
         <div class="container">
-            <h2 class="section-title text-center mb-5">HANDPICKED BRANDS</h2>
+            <h2 class="section-heading  mb-5">HANDPICKED BRANDS</h2>
             <div class="banner-slider3 owl-carousel owl-theme">
                 <div class="item">
                     <div class="brand-card">
@@ -364,7 +385,7 @@
     <!---- start brand Section------>
     <section class="section py-5">
         <div class="container">
-            <h2 class="section-title text-center mb-5">SHOP BY INGREDIENTS</h2>
+            <h2 class="section-heading mb-5">SHOP BY INGREDIENTS</h2>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <div class="ingredient-card">
@@ -379,9 +400,9 @@
     </section>
     <!---- end brand Section------>
     <!---- start brand Section------>
-    <section class="section py-5">
+    <section class="section py-5 home">
         <div class="container py-5">
-            <h1 class="text-center mb-5">WHAT DO YOU HAVE CONCERN WITH?</h1>
+            <h1 class="text-center mb-5">WHAT DO YOU HAVE <strong>CONCERN WITH?</strong></h1>
 
             <!-- Main Category Tabs -->
             <ul class="nav nav-tabs justify-content-center mb-4" id="mainCategoryTabs" role="tablist">
@@ -458,142 +479,109 @@
                         <!-- Acne Products -->
                         <div class="tab-pane fade show active" id="acne" role="tabpanel"
                             aria-labelledby="acne-tab">
-                            <div class="row">
-                                <!-- Product 1 -->
-                                <div class="col-md-3 mb-3">
-                                    <div class="product-card">
-                                        <a href="#">
-                                            <div class="discount-badge">−13%</div>
-                                            <img src="assets/images/product-img/p1.jpg" alt="Product Image"
-                                                class="product-img" />
-                                            <div class="product-title">
-                                                <h4>
-                                                    Zayn & Myza Tea Tree and Salicylic Acid Foaming Face
-                                                    Wash for Women (100ml) BD
-                                                </h4>
+                            <div class="row related-products">
+                                <div class="col-6 col-lg-3 mb-3 pe-md-4">
+                                    <div class="card border-0 product w-100">
+                                        <div class="product-item border border-dark">
+                                            <a href="" class="product-img-container">
+                                                <img class="card-img-top product-img"src="./assets/images/product-img/black_seed_hair_serum_50ml_1.webp"
+                                                    alt=" product image" />
+                                            </a>
+                                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
+                                                -10%
+                                            </button>
+                                            <div class="product-info">
+                                                <button class="add-to-cart">ADD TO CART</button>
                                             </div>
-                                            <div class="price">
-                                                <span class="old-price">৳ 399</span>
-                                                <span class="new-price">৳ 349</span>
-                                            </div>
-                                            <div class="stars">★★★★★</div>
-                                            <button class="add-to-cart-btn">ADD TO CART</button>
-                                        </a>
+                                        </div>
+                                        <div class="card-body px-0">
+                                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
+                                            </a>
+                                            <p class="card-text">
+                                                <span class="text-decoration-line-through">৳450</span><span
+                                                    class="ms-2">৳352</span>
+                                            </p>
+                                            <div class="product-rating-star">★★★★★</div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <!-- Product 2 -->
-                                <div class="col-md-3 mb-3">
-                                    <div class="product-card">
-                                        <a href="#">
-                                            <div class="discount-badge">−13%</div>
-                                            <img src="assets/images/product-img/p1.jpg" alt="Product Image"
-                                                class="product-img" />
-                                            <div class="product-title">
-                                                <h4>
-                                                    Zayn & Myza Tea Tree and Salicylic Acid Foaming Face
-                                                    Wash for Women (100ml) BD
-                                                </h4>
+                                <div class="col-6 col-lg-3 mb-3 pe-4">
+                                    <div class="card border-0 product w-100">
+                                        <div class="product-item border border-dark">
+                                            <a href="" class="product-img-container">
+                                                <img class="card-img-top product-img"src="./assets/images/product-img/rose_serum_foundation_30ml-golden_beige.webp"
+                                                    alt=" product image" />
+                                            </a>
+                                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
+                                                -10%
+                                            </button>
+                                            <div class="product-info">
+                                                <button class="add-to-cart">ADD TO CART</button>
                                             </div>
-                                            <div class="price">
-                                                <span class="old-price">৳ 399</span>
-                                                <span class="new-price">৳ 349</span>
-                                            </div>
-                                            <div class="stars">★★★★★</div>
-                                            <button class="add-to-cart-btn">ADD TO CART</button>
-                                        </a>
+                                        </div>
+                                        <div class="card-body px-0">
+                                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
+                                            </a>
+                                            <p class="card-text">
+                                                <span class="text-decoration-line-through">৳450</span><span
+                                                    class="ms-2">৳352</span>
+                                            </p>
+                                            <div class="product-rating-star">★★★★★</div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <!-- Product 3 -->
-                                <div class="col-md-3 mb-3">
-                                    <div class="product-card">
-                                        <a href="#">
-                                            <div class="discount-badge">−13%</div>
-                                            <img src="assets/images/product-img/p1.jpg" alt="Product Image"
-                                                class="product-img" />
-                                            <div class="product-title">
-                                                <h4>
-                                                    Zayn & Myza Tea Tree and Salicylic Acid Foaming Face
-                                                    Wash for Women (100ml) BD
-                                                </h4>
+                                <div class="col-6 col-lg-3 mb-3 pe-4">
+                                    <div class="card border-0 product w-100">
+                                        <div class="product-item border border-dark">
+                                            <a href="" class="product-img-container">
+                                                <img class="card-img-top product-img"src="./assets/images/product-img/anti_pollution_cc_cream_30ml.webp"
+                                                    alt=" product image" />
+                                            </a>
+                                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
+                                                -10%
+                                            </button>
+                                            <div class="product-info">
+                                                <button class="add-to-cart">ADD TO CART</button>
                                             </div>
-                                            <div class="price">
-                                                <span class="old-price">৳ 399</span>
-                                                <span class="new-price">৳ 349</span>
-                                            </div>
-                                            <div class="stars">★★★★★</div>
-                                            <button class="add-to-cart-btn">ADD TO CART</button>
-                                        </a>
+                                        </div>
+                                        <div class="card-body px-0">
+                                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
+                                            </a>
+                                            <p class="card-text">
+                                                <span class="text-decoration-line-through">৳450</span><span
+                                                    class="ms-2">৳352</span>
+                                            </p>
+                                            <div class="product-rating-star">★★★★★</div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <!-- Product 4 -->
-                                <div class="col-md-3 mb-3">
-                                    <div class="product-card">
-                                        <a href="#">
-                                            <div class="discount-badge">−13%</div>
-                                            <img src="assets/images/product-img/p1.jpg" alt="Product Image"
-                                                class="product-img" />
-                                            <div class="product-title">
-                                                <h4>
-                                                    Zayn & Myza Tea Tree and Salicylic Acid Foaming Face
-                                                    Wash for Women (100ml) BD
-                                                </h4>
+                                <div class="col-6 col-lg-3 mb-3">
+                                    <div class="card border-0 product w-100">
+                                        <div class="product-item border border-dark">
+                                            <a href="" class="product-img-container">
+                                                <img class="card-img-top product-img"src="./assets/images/product-img/showergel.webp"
+                                                    alt=" product image" />
+                                            </a>
+                                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
+                                                -10%
+                                            </button>
+                                            <div class="product-info">
+                                                <button class="add-to-cart">ADD TO CART</button>
                                             </div>
-                                            <div class="price">
-                                                <span class="old-price">৳ 399</span>
-                                                <span class="new-price">৳ 349</span>
-                                            </div>
-                                            <div class="stars">★★★★★</div>
-                                            <button class="add-to-cart-btn">ADD TO CART</button>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <!-- Product 5 -->
-                                <div class="col-md-3 mb-3">
-                                    <div class="product-card">
-                                        <a href="#">
-                                            <div class="discount-badge">−13%</div>
-                                            <img src="assets/images/product-img/p1.jpg" alt="Product Image"
-                                                class="product-img" />
-                                            <div class="product-title">
-                                                <h4>
-                                                    Zayn & Myza Tea Tree and Salicylic Acid Foaming Face
-                                                    Wash for Women (100ml) BD
-                                                </h4>
-                                            </div>
-                                            <div class="price">
-                                                <span class="old-price">৳ 399</span>
-                                                <span class="new-price">৳ 349</span>
-                                            </div>
-                                            <div class="stars">★★★★★</div>
-                                            <button class="add-to-cart-btn">ADD TO CART</button>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <!-- Product 6 -->
-                                <div class="col-md-3 mb-3">
-                                    <div class="product-card">
-                                        <a href="#">
-                                            <div class="discount-badge">−13%</div>
-                                            <img src="assets/images/product-img/p1.jpg" alt="Product Image"
-                                                class="product-img" />
-                                            <div class="product-title">
-                                                <h4>
-                                                    Zayn & Myza Tea Tree and Salicylic Acid Foaming Face
-                                                    Wash for Women (100ml) BD
-                                                </h4>
-                                            </div>
-                                            <div class="price">
-                                                <span class="old-price">৳ 399</span>
-                                                <span class="new-price">৳ 349</span>
-                                            </div>
-                                            <div class="stars">★★★★★</div>
-                                            <button class="add-to-cart-btn">ADD TO CART</button>
-                                        </a>
+                                        </div>
+                                        <div class="card-body px-0">
+                                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
+                                            </a>
+                                            <p class="card-text">
+                                                <span class="text-decoration-line-through">৳450</span><span
+                                                    class="ms-2">৳352</span>
+                                            </p>
+                                            <div class="product-rating-star">★★★★★</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -640,101 +628,122 @@
     </section>
     <!---- end brand Section------>
     <!----Product Section------>
-    <section class="product-section py-5">
+    <section class="product-section py-5 home">
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h2 class="section-title">Recently viewed</h2>
+                    <h2 class="section-heading mb-5">Recently viewed</h2>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    <div class="product-card">
-                        <a href="#">
-                            <div class="discount-badge">−13%</div>
-                            <img src="assets/images/product-img/p1.jpg" alt="Product Image" class="product-img" />
-                            <div class="product-title">
-                                <h4>
-                                    Zayn & Myza Tea Tree and Salicylic Acid Foaming Face Wash
-                                    for Women (100ml) BD
-                                </h4>
+            <div class="row related-products">
+                <div class="col-6 col-lg-3 mb-3">
+                    <div class="card border-0 product w-100">
+                        <div class="product-item border border-dark">
+                            <a href="" class="product-img-container">
+                                <img class="card-img-top product-img"src="./assets/images/product-img/showergel.webp"
+                                    alt=" product image" />
+                            </a>
+                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
+                                -10%
+                            </button>
+                            <div class="product-info">
+                                <button class="add-to-cart">ADD TO CART</button>
                             </div>
-                            <div class="price">
-                                <span class="old-price">৳ 399</span>
-                                <span class="new-price">৳ 349</span>
-                            </div>
-                            <div class="stars">★★★★★</div>
-                            <button class="add-to-cart-btn">ADD TO CART</button>
-                        </a>
+                        </div>
+                        <div class="card-body px-0">
+                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
+                            </a>
+                            <p class="card-text">
+                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
+                            </p>
+                            <div class="product-rating-star">★★★★★</div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <div class="product-card">
-                        <a href="#">
-                            <div class="discount-badge">sold</div>
-                            <img src="assets/images/product-img/p1.jpg" alt="Product Image" class="product-img" />
-                            <div class="product-title">
-                                <h4>
-                                    Zayn & Myza Tea Tree and Salicylic Acid Foaming Face Wash
-                                    for Women (100ml) BD
-                                </h4>
+                <div class="col-6 col-lg-3 mb-3 pe-4">
+                    <div class="card border-0 product w-100">
+                        <div class="product-item border border-dark">
+                            <a href="" class="product-img-container">
+                                <img class="card-img-top product-img"src="./assets/images/product-img/rose_serum_foundation_30ml-golden_beige.webp"
+                                    alt=" product image" />
+                            </a>
+                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
+                                -10%
+                            </button>
+                            <div class="product-info">
+                                <button class="add-to-cart">ADD TO CART</button>
                             </div>
-                            <div class="price">
-                                <span class="old-price">৳ 399</span>
-                                <span class="new-price">৳ 349</span>
-                            </div>
-                            <div class="stars">★★★★★</div>
-                            <button class="add-to-cart-btn">ADD TO CART</button>
-                        </a>
+                        </div>
+                        <div class="card-body px-0">
+                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
+                            </a>
+                            <p class="card-text">
+                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
+                            </p>
+                            <div class="product-rating-star">★★★★★</div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <div class="product-card">
-                        <a href="#">
-                            <div class="discount-badge">−13%</div>
-                            <img src="assets/images/product-img/p1.jpg" alt="Product Image" class="product-img" />
-                            <div class="product-title">
-                                <h4>
-                                    Zayn & Myza Tea Tree and Salicylic Acid Foaming Face Wash
-                                    for Women (100ml) BD
-                                </h4>
+                <div class="col-6 col-lg-3 mb-3 pe-4">
+                    <div class="card border-0 product w-100">
+                        <div class="product-item border border-dark">
+                            <a href="" class="product-img-container">
+                                <img class="card-img-top product-img"src="./assets/images/product-img/anti_pollution_cc_cream_30ml.webp"
+                                    alt=" product image" />
+                            </a>
+                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
+                                -10%
+                            </button>
+                            <div class="product-info">
+                                <button class="add-to-cart">ADD TO CART</button>
                             </div>
-                            <div class="price">
-                                <span class="old-price">৳ 399</span>
-                                <span class="new-price">৳ 349</span>
-                            </div>
-                            <div class="stars">★★★★★</div>
-                            <button class="add-to-cart-btn">ADD TO CART</button>
-                        </a>
+                        </div>
+                        <div class="card-body px-0">
+                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
+                            </a>
+                            <p class="card-text">
+                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
+                            </p>
+                            <div class="product-rating-star">★★★★★</div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <div class="product-card">
-                        <a href="#">
-                            <div class="discount-badge">sold</div>
-                            <img src="assets/images/product-img/p1.jpg" alt="Product Image" class="product-img" />
-                            <div class="product-title">
-                                <h4>
-                                    Zayn & Myza Tea Tree and Salicylic Acid Foaming Face Wash
-                                    for Women (100ml) BD
-                                </h4>
+                <div class="col-6 col-lg-3 mb-3 pe-md-4">
+                    <div class="card border-0 product w-100">
+                        <div class="product-item border border-dark">
+                            <a href="" class="product-img-container">
+                                <img class="card-img-top product-img"src="./assets/images/product-img/black_seed_hair_serum_50ml_1.webp"
+                                    alt=" product image" />
+                            </a>
+                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
+                                -10%
+                            </button>
+                            <div class="product-info">
+                                <button class="add-to-cart">ADD TO CART</button>
                             </div>
-                            <div class="price">
-                                <span class="old-price">৳ 399</span>
-                                <span class="new-price">৳ 349</span>
-                            </div>
-                            <div class="stars">★★★★★</div>
-                            <button class="add-to-cart-btn">ADD TO CART</button>
-                        </a>
+                        </div>
+                        <div class="card-body px-0">
+                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
+                            </a>
+                            <p class="card-text">
+                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
+                            </p>
+                            <div class="product-rating-star">★★★★★</div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
     <!---- End Product Section------>
     <section class="testimonial-section">
         <div class="container">
-            <h2 class="section-title">BEAUTYBFF SPEAKS</h2>
+            <h2 class="section-heading">#BEAUTYBFF SPEAKS</h2>
 
             <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">

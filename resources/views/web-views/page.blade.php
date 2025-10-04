@@ -30,7 +30,7 @@
                                     <div class="price-range">
                                         <div class="d-flex align-items-center justify-content-center mb-1">
                                             <p class="mb-0 position-relative"
-                                                style="width:5%; color:#414042; font-size:14px;">৳</p>
+                                                style="width:5%; color:#414042; font-size:14px; bottom: -9px">৳</p>
                                             <div class="range-slider ms-2" style="width:95%;">
                                                 <div class="slider-track"></div>
                                                 <div class="slider-range"></div>
@@ -233,8 +233,8 @@
                             <div class="col-lg-12">
                                 <div class="related-products ">
                                     <div class="page-products">
-                                        {{-- col-sm-6 col-md-6 product-column --}}
-                                        <div class="row mt-5 ">
+
+                                        <div class="row mt-5 justify-content-center justify-content-lg-start">
                                             <div class="col-sm-6 col-md-6 col-lg-3 product-column"
                                                 data-category="category1">
                                                 <div class="product-box product-box-col-2" data-category="category1">

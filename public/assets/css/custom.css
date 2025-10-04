@@ -16,7 +16,13 @@
     width: 30%;
     margin-left: auto;
 }
-
+.section-heading {
+    font-size: 2.0625rem;
+    font-weight: 800;
+    line-height: 43px;
+    text-transform: uppercase;
+    text-align: center;
+}
 .grid-btn {
     padding: 6px;
     background-color: #fff;
@@ -193,7 +199,7 @@ a:hover {
 }
 .navbar-brand {
     color: var(--text-black);
-    font-size: 26px;
+    font-size: 1.625rem;
     font-weight: 800;
     font-family: var(--ef);
 }
@@ -248,7 +254,7 @@ header.scrolled .navbar-brand {
     display: block;
     transition: 0.5s;
     font-family: var(--jost);
-    font-size: 17px;
+    font-size: 1.0625rem;
     font-weight: 500;
 }
 header.scrolled .menu-area a {
@@ -290,7 +296,7 @@ header.scrolled .menu-area a {
     transition: 0.4s;
     font-family: var(--bf);
     text-transform: capitalize;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .dropdown-menu1 ul li a:hover {
@@ -351,11 +357,11 @@ header.scrolled .menu-area a {
 
 .header-icon a {
     color: #232323;
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 /* search icon top-right */
 .search-icon {
-    font-size: 18px;
+    font-size: 1.125rem;
     cursor: pointer;
     padding: 15px;
     color: #414042;
@@ -395,7 +401,7 @@ header.scrolled .menu-area a {
 }
 
 .search-wrapper i {
-    font-size: 18px;
+    font-size: 1.125rem;
     color: #555;
     cursor: pointer;
 }
@@ -404,13 +410,13 @@ header.scrolled .menu-area a {
     border: none;
     outline: none;
     flex: 1;
-    font-size: 16px;
+    font-size: 1rem;
     padding: 8px 10px;
 }
 
 .close-btn {
     margin-left: 10px;
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 /* Add to cart badge */
 .header-icon .cart-wrapper {
@@ -527,7 +533,7 @@ header.scrolled .menu-area a {
 }
 
 .mm-cross-icon .fa {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: var(--ttm);
 }
 
@@ -589,13 +595,13 @@ header.scrolled .menu-area a {
     text-decoration: line-through;
     color: #888;
     margin-right: 6px;
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 .new-price {
     color: #e91e63;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 .stars {
@@ -603,79 +609,62 @@ header.scrolled .menu-area a {
     margin: 8px 0 15px;
 }
 
+.product-img-container {
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
 .product-img {
-    max-width: 100%;
-    height: 200px;
-    object-fit: contain;
-    margin-bottom: 10px;
-    transition: all 0.3s ease;
+    display: block;
+    transform: scale(0.95);
+    transition: transform 0.5s ease-in-out;
 }
 
-.add-to-cart-btn {
-    position: absolute;
-    bottom: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #e91e63;
-    color: white;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 4px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    opacity: 0;
-    width: calc(100% - 20px);
-    max-width: 200px;
+.product-img-container:hover .product-img {
+    transform: scale(1);
 }
 
-.product-card:hover .add-to-cart-btn {
-    bottom: 15px;
-    opacity: 1;
+.product-section .related-products .product-item {
+    height: 300px;
+}
+.home .related-products .product-item {
+    height: 300px;
 }
 
-.add-to-cart-btn:hover {
-    background-color: #c2185b;
-}
 /*-----Category secton----*/
 .trending-categories {
     padding: 40px 0;
+    padding-bottom: 60px;
     text-align: center;
-    background-color: #f9f9f9;
-}
-
-.section-title {
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 30px;
-    color: #333;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    background-color: #fff;
+    border-radius: 8px;
 }
 
 .category-box {
-    background: white;
     border-radius: 10px;
+    position: relative;
     overflow: hidden;
+    transform: scale(0.95);
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-}
-
-.category-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    z-index: 999;
 }
 
 .category-image {
-    height: 200px;
+    height: auto;
+    width: 100%;
     overflow: hidden;
 }
 
 .category-image img {
+    transition: transform 0.5s ease;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
+    display: block;
+    position: relative;
 }
 
 .category-box:hover .category-image img {
@@ -683,13 +672,35 @@ header.scrolled .menu-area a {
 }
 
 .category-title {
-    padding: 20px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+    text-align: left;
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    color: #fff;
     text-transform: uppercase;
     letter-spacing: 1px;
+    z-index: 99999;
 }
+.category-box::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to top,
+        rgba(4, 4, 4, 0.46) 0,
+        rgba(54, 54, 54, 0.2) 40%,
+        transparent 100%
+    );
+    opacity: 1;
+    transition: background 0.4s ease-in-out;
+    z-index: 1;
+}
+
 /*-----------recent-drops-section------------*/
 .recent-drops-section {
     background-color: #f8f9fa;
@@ -831,7 +842,7 @@ header.scrolled .menu-area a {
     right: 10px;
     background-color: #f8f9fa;
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: bold;
 }
 
@@ -842,15 +853,14 @@ header.scrolled .menu-area a {
     background-color: #eb3986;
     color: white;
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: bold;
     border-radius: 4px;
 }
 
 .category-title {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 20px;
 }
 
 .subcategory-container {
@@ -897,7 +907,7 @@ header.scrolled .menu-area a {
 }
 
 .testimonial-text {
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height: 1.6;
     color: #555;
     margin-bottom: 20px;
@@ -912,7 +922,7 @@ header.scrolled .menu-area a {
 
 .divider {
     color: #ff6b6b;
-    font-size: 24px;
+    font-size: 1.5rem;
     margin: 20px 0;
     text-align: center;
 }
@@ -1004,7 +1014,7 @@ header.scrolled .menu-area a {
 section.main-product .product-heading {
     margin-top: 20px;
     margin-bottom: 15px;
-    font-size: 24px;
+    font-size: 1.5rem;
     letter-spacing: 1px;
     line-height: 40px;
 }
@@ -1015,7 +1025,7 @@ section.main-product .product-heading {
 }
 .product-review .product-rating {
     color: #f8b84e;
-    font-size: 25px;
+    font-size: 1.5625rem;
     letter-spacing: 2px;
 }
 .product-price {
@@ -1036,7 +1046,7 @@ section.main-product .product-heading {
 .desc-text {
     letter-spacing: 3px;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 .product-description .accordion-button:not(.collapsed) {
     color: #000;
@@ -1098,7 +1108,7 @@ section.main-product .product-heading {
     background: #495057;
 }
 .share-btn button {
-    font-size: 14px;
+    font-size: 0.875rem;
     position: relative;
 }
 .share-btn button::after {
@@ -1120,7 +1130,7 @@ section.main-product .product-heading {
     color: #575757;
 }
 .write-review .review-btn {
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 600;
     background: #555;
     color: #fff;
@@ -1172,6 +1182,9 @@ section.related-products {
     top: 0;
     left: 0;
     transition: all 0.5s ease;
+}
+.related-products .product-item {
+    border-radius: 3px;
 }
 .related-products .product-item .default-img {
     opacity: 1;
@@ -1252,13 +1265,13 @@ section.related-products {
 }
 .related-products .card-text span:last-child {
     color: #dd6189;
-    font-size: 19px;
+    font-size: 1.1875rem;
     font-weight: 800;
     letter-spacing: 1px;
 }
 .related-products .product-rating-star {
     color: #f8b84e;
-    font-size: 25px;
+    font-size: 1.5625rem;
 }
 .related-products .card-text {
     margin: 10px 0;
@@ -1267,7 +1280,7 @@ section.related-products {
     border: none;
     border-radius: 5px;
     padding: 9px 65px;
-    font-size: 18px;
+    font-size: 1.125rem;
     background: #817e7b;
     color: #fff !important;
     font-weight: bold;
@@ -1277,7 +1290,7 @@ section.related-products {
 .review-submit-btn {
     background: #817e7b;
     padding: 7px 41px;
-    font-size: 17px;
+    font-size: 1.0625rem;
     font-weight: bold;
 }
 @media (max-width: 768px) {
@@ -1304,7 +1317,7 @@ section.related-products {
 }
 .product-checkout-section input.form-control,
 .product-checkout-section select {
-    font-size: 16px !important;
+    font-size: 1rem !important;
     padding-top: 12px !important;
     padding-bottom: 12px !important;
     border-width: 2px;
@@ -1323,7 +1336,7 @@ section.related-products {
 }
 
 .product-checkout-section ::placeholder {
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .section-scroll::-webkit-scrollbar {
@@ -1366,7 +1379,7 @@ section.related-products {
     font-weight: 500;
     line-height: 25px;
     margin-bottom: 0;
-    font-size: 15px;
+    font-size: 0.9375rem;
 }
 .payment-info .accordion {
     background: #f5f5f5;
@@ -1421,7 +1434,7 @@ section.related-products {
 .mini-accordion .accordion-button {
     background: transparent;
     box-shadow: none;
-    font-size: 13px;
+    font-size: 0.8125rem;
     font-weight: 500;
     padding: 0.75rem 1rem;
 }
@@ -1470,7 +1483,7 @@ section.related-products {
     color: #fff;
     padding: 9px 12px;
     border-radius: 20px;
-    font-size: 14px;
+    font-size: 0.875rem;
     opacity: 0.8;
     pointer-events: none;
     border: none;
@@ -1481,7 +1494,7 @@ section.related-products {
     visibility: hidden;
 }
 .order-summary .bdt-txt {
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: normal;
 }
 @media (max-width: 768px) {
@@ -1540,7 +1553,7 @@ section.related-products {
     margin-bottom: 50px;
 }
 h6.free-shiping-txt {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 400;
     color: #414042;
     padding-bottom: 15px;
@@ -1560,7 +1573,7 @@ h6.shipping-gradient::after {
     color: #414042;
 }
 .cart-added-products .cart-item-rate h5 {
-    font-size: 18px;
+    font-size: 1.125rem;
     color: #f1729f;
     font-weight: 700;
 }
@@ -1572,26 +1585,26 @@ h6.shipping-gradient::after {
 
 .cart-added-products .cart-item-quantity button {
     background: none;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 400;
     border: none;
     color: #414042 !important;
     cursor: pointer;
 }
 .cart-item-product-info a {
-    font-size: 16px;
+    font-size: 1rem;
     text-transform: uppercase;
 }
 .sub-total-info {
     gap: 30px;
 }
 .sub-total-info .sub-total-txt h5 {
-    font-size: 17px;
+    font-size: 1.0625rem;
     font-weight: 400;
 }
 .sub-total-info .sub-total-txt p {
     margin-bottom: 0;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 400;
 }
 .sub-total-info .sub-total-price h5 {
@@ -1612,7 +1625,7 @@ h6.shipping-gradient::after {
     background: #fff;
     border: none;
     color: #414042;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 600;
     line-height: 22px;
     text-transform: uppercase;
@@ -1660,7 +1673,7 @@ h6.shipping-gradient::after {
     background: #414042;
     border: none;
     color: #fff;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 600;
     line-height: 22px;
     text-transform: uppercase;
@@ -1721,24 +1734,24 @@ h6.shipping-gradient::after {
 }
 .suggested-product h3 {
     text-transform: uppercase;
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 400;
     line-height: 31px;
     letter-spacing: 1px;
 }
 .suggested-product-details .suggeted-title h5 {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 400;
     line-height: 25px;
     text-transform: uppercase;
 }
 .suggested-product-details .suggested-price span {
     font-weight: 300;
-    font-size: 15px;
+    font-size: 0.9375rem;
 }
 .suggested-product-details .suggested-price h6 {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: #f1729f;
 }
 .suggested-product-details .suggested-cart a img {
@@ -1765,10 +1778,10 @@ h6.shipping-gradient::after {
 .sm-related-product-section h6 {
     text-transform: uppercase;
     letter-spacing: 3px;
-    font-size: 16px;
+    font-size: 1rem;
 }
 .related-row-scroll .suggested-product-item h5 {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 400;
 }
 
@@ -1778,10 +1791,10 @@ h6.shipping-gradient::after {
 }
 .login-regiter-box h3 {
     font-weight: 400;
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 .login-regiter-box p {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 400;
 }
 .form-control {
@@ -1795,7 +1808,7 @@ h6.shipping-gradient::after {
     box-shadow: none !important;
 }
 .login-regiter-box .forgot-password a {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 400;
     color: #414042;
 }
@@ -1804,7 +1817,7 @@ h6.shipping-gradient::after {
     letter-spacing: 1px;
 }
 .login-regiter-box .return-store-btn {
-    font-size: 16px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 400;
     color: #414042;
@@ -1812,7 +1825,7 @@ h6.shipping-gradient::after {
 }
 .login-regiter-box ::placeholder {
     color: #7f7d7d;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-family: "Avenir", sans-serif;
 }
 
@@ -1835,7 +1848,7 @@ h6.shipping-gradient::after {
     color: rgba(65, 64, 66, 0.75);
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: 0.6875rem;
     letter-spacing: 1px;
 }
 .cart-box-container table th,
@@ -1845,7 +1858,7 @@ h6.shipping-gradient::after {
 .cart-box-container .table .item-price {
     color: #f1729f;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 1.125rem;
     letter-spacing: 1px;
 }
 .cart-box-container .table-quantity button {
@@ -1874,7 +1887,7 @@ h6.shipping-gradient::after {
 
 /* order note and subtotal section */
 .order-note-subtotal ::placeholder {
-    font-size: 13px;
+    font-size: 0.8125rem;
 }
 .order-note-subtotal .order-total-checkout h6 {
     font-size: 18px;
@@ -1882,7 +1895,7 @@ h6.shipping-gradient::after {
     letter-spacing: 1px;
 }
 .order-note-subtotal .order-total-checkout p {
-    font-size: 13px;
+    font-size: 0.8125rem;
     font-weight: 400;
     letter-spacing: 1px;
     margin: 20px 0;
@@ -1911,7 +1924,7 @@ h6.shipping-gradient::after {
 ============================================= */
 
 .dynamic-page-main-content-section .page-title {
-    font-size: 60px;
+    font-size: 3.75rem;
     font-weight: 400;
     line-height: 78px;
 }
@@ -1921,12 +1934,12 @@ h6.shipping-gradient::after {
     box-shadow: none;
 }
 .dynamic-page-main-content-section .range-title h6 {
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 400;
 }
 /* Range Slider style start */
 .range-values p {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 400;
     color: rgba(65, 64, 66, 0.75);
 }
@@ -1987,7 +2000,7 @@ input[type="range"].active::-webkit-slider-thumb {
     position: absolute;
     top: -35px;
     color: #000;
-    font-size: 14px;
+    font-size: 0.875rem;
     transform: translateX(-50%);
     white-space: nowrap;
     z-index: 5;
@@ -2013,7 +2026,7 @@ input[type="range"].active::-webkit-slider-thumb {
     content: "_";
     left: -12px;
     top: -6px;
-    font-size: 16px;
+    font-size: 1rem;
     color: #414042;
     font-weight: 400;
 }
@@ -2025,7 +2038,7 @@ input[type="range"].active::-webkit-slider-thumb {
     border: none;
     background: transparent;
     outline: none;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #414042;
     line-height: 25px;
     font-weight: 400;
@@ -2055,7 +2068,7 @@ input[type="range"].active::-webkit-slider-thumb {
     width: 200px;
     background: #fff;
 
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
     text-transform: uppercase;
     color: #414042;
@@ -2110,14 +2123,14 @@ input[type="range"].active::-webkit-slider-thumb {
     margin: 100px 0;
 }
 .about-us-section h2 {
-    font-size: 48px;
+    font-size: 3rem;
     font-weight: 400;
     padding-bottom: 50px;
 }
 .about-us-section p {
     font-weight: 400;
     line-height: 29px;
-    font-size: 17px;
+    font-size: 1.0625rem;
 }
 /* =========================================
   About-us Section Style Start
@@ -2128,29 +2141,29 @@ input[type="range"].active::-webkit-slider-thumb {
 ===========================================*/
 .contact-us-section .contactQ-row h4 {
     font-weight: 400;
-    font-size: 24px;
+    font-size: 1.5rem;
     line-height: 29px;
     margin-bottom: 20px;
 }
 .contact-us-section .contactQ-row p {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 22px;
     margin-bottom: 0;
 }
 .contact-m.contact-main-content.contact-support h5 {
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 400;
     line-height: 22px;
 }
 .contact-main-content .contact-support a {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 400;
     line-height: 21px;
     color: #414042;
 }
 .contact-main-content .contact-heading h2 {
-    font-size: 33px;
+    font-size: 2.0625rem;
     font-weight: 800;
     line-height: 43px;
     text-align: center;
@@ -2170,7 +2183,7 @@ input[type="range"].active::-webkit-slider-thumb {
     box-shadow: 0 4rem 8rem rgba(26, 27, 24, 0.1);
 }
 .contact-us-section .address-box .card-title {
-    font-size: 44px;
+    font-size: 2.75rem;
     font-weight: 400;
     line-height: 53px;
     text-transform: uppercase;
@@ -2179,7 +2192,7 @@ input[type="range"].active::-webkit-slider-thumb {
     width: 50%;
 }
 .contact-us-section .address-box .card-text {
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 22px;
     font-weight: 400;
     color: #1a1b18 !important;
@@ -2193,7 +2206,7 @@ input[type="range"].active::-webkit-slider-thumb {
   Terms and Condition, Privacy Policy, Shipping & Returns Section Style Start
 ===============================================================================*/
 .terms-policy-shipping h1.title {
-    font-size: 48px;
+    font-size: 3rem;
     line-height: 62px;
     font-weight: 400;
     text-align: center;
@@ -2207,7 +2220,7 @@ input[type="range"].active::-webkit-slider-thumb {
 .terms-policy-shipping p {
     line-height: 29px;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 1rem;
 }
 .terms-policy-shipping ul {
     padding-left: 17px;

@@ -12,7 +12,12 @@
         outline: 0;
         box-shadow: 0 0 0 0.25rem rgba(33, 37, 41, 0.25);
     }
+
+    section.related-products .product-item {
+        height: 300px !important;
+    }
 </style>
+
 @extends('layouts.front-end.app')
 
 @section('title', 'Product-details')
@@ -319,7 +324,7 @@
         <div class="container">
             <h2 class="h1 text-center my-4">You May Also Like</h2>
             <div class="row mt-5">
-                <div class="col-12 col-sm-6 col-lg-3 pe-md-5">
+                <div class="col-6 col-sm-6 col-lg-3 pe-md-5">
                     <div class="card border-0 product w-100">
                         <div class="product-item border border-dark">
                             <a href="">
@@ -348,7 +353,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 col-lg-3 mt-4 mt-sm-0 pe-md-5">
+                <div class="col-6 col-sm-6 col-lg-3  mt-sm-0  pe-md-5">
                     <div class="card border-0 product">
                         <div class="product-item border border-dark">
                             <a href="">
@@ -379,7 +384,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 col-lg-3 mt-4 mt-md-4 mt-lg-0 pe-md-5">
+                <div class="col-6 col-sm-6 col-lg-3 mt-4 mt-md-4 mt-lg-0 pe-md-5">
                     <div class="card border-0 product">
                         <div class="product-item border border-dark">
                             <a href="">
@@ -410,7 +415,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 col-lg-3 mt-4 mt-md-4 mt-lg-0 pe-md-5">
+                <div class="col-6 col-sm-6 col-lg-3 mt-4 mt-md-4 mt-lg-0 pe-md-5">
                     <div class="card border-0 product">
                         <div class="product-item border border-dark">
                             <a href="">
