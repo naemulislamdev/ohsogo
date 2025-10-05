@@ -119,22 +119,51 @@
 
     <!-- Script for search system -->
     <script>
+        // $(document).ready(function() {
+        //     $(".search-icon").click(function() {
+        //         $(".search-modal").addClass("active");
+        //         $(".search-box").focus();
+        //     });
+
+        //     $(".close-btn").click(function() {
+        //         $(".search-modal").removeClass("active");
+        //     });
+
+        //     $(".search-modal").click(function(e) {
+        //         if (!$(e.target).closest(".search-wrapper").length) {
+        //             $(".search-modal").removeClass("active");
+        //         }
+        //     });
+        //     $(document).keyup(function(e) {
+        //         if (e.key === "Escape") {
+        //             $(".search-modal").removeClass("active");
+        //         }
+        //     });
+        // });
         $(document).ready(function() {
-            $(".search-icon").click(function() {
-                $(".search-modal").addClass("active");
-                $(".search-box").focus();
+
+            // Open modal for any search icon (desktop + mobile both)
+            $(document).on("click", ".search-icon", function() {
+                const parent = $(this).closest("div");
+                const modal = parent.find(".search-modal");
+                modal.addClass("active");
+                modal.find(".search-box").focus();
             });
 
-            $(".close-btn").click(function() {
-                $(".search-modal").removeClass("active");
+            // Close modal (common)
+            $(document).on("click", ".close-btn", function() {
+                $(this).closest(".search-modal").removeClass("active");
             });
 
-            $(".search-modal").click(function(e) {
+            // Click outside to close
+            $(document).on("click", ".search-modal", function(e) {
                 if (!$(e.target).closest(".search-wrapper").length) {
-                    $(".search-modal").removeClass("active");
+                    $(this).removeClass("active");
                 }
             });
-            $(document).keyup(function(e) {
+
+            // ESC key to close
+            $(document).on("keyup", function(e) {
                 if (e.key === "Escape") {
                     $(".search-modal").removeClass("active");
                 }

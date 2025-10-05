@@ -52,7 +52,7 @@
             <!-- Copyright -->
             <div class="row">
                 <div class="col-12 text-center copyright">
-                    <p>
+                    <p class="text-white">
                         © 2025, OHSOGO. All rights reserved. Delivery Timeline | Inside
                         Dhaka within 2 days. Outside Dhaka within 3-5 Days.
                     </p>

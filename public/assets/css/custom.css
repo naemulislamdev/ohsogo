@@ -253,9 +253,9 @@ header.scrolled .navbar-brand {
     padding: 0px 7px;
     display: block;
     transition: 0.5s;
-    font-family: var(--jost);
-    font-size: 1.0625rem;
-    font-weight: 500;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    text-transform: uppercase;
 }
 header.scrolled .menu-area a {
     color: var(--text-black);
@@ -355,16 +355,19 @@ header.scrolled .menu-area a {
 }
 /* header icon css */
 
-.header-icon a {
+.header-icon i {
     color: #232323;
-    font-size: 1.125rem;
+    font-size: 18px !important;
+    cursor: pointer;
+    display: inline-block;
 }
+
 /* search icon top-right */
 .search-icon {
     font-size: 1.125rem;
-    cursor: pointer;
-    padding: 15px;
+    cursor: pointer !important;
     color: #414042;
+    z-index: 9999;
 }
 
 .search-modal {
@@ -425,12 +428,11 @@ header.scrolled .menu-area a {
     cursor: pointer;
 }
 
-.header-icon .cart-badge {
+header .cart-badge {
     position: absolute;
-    top: -7px;
-    right: -21px;
+    top: 1px;
+    right: 0px;
 }
-
 /*toggler css*/
 .menu-icon {
     display: none;
