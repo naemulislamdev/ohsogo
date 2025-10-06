@@ -106,7 +106,6 @@ class Product extends Model
     {
         return $this->hasMany(OrderDetail::class, 'product_id')
             ->where('delivery_status', 'delivered');
-
     }
 
     public function wish_list()

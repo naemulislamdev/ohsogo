@@ -18,6 +18,7 @@
     }
 </style>
 
+
 @extends('layouts.front-end.app')
 
 @section('title', 'Product-details')
@@ -26,44 +27,50 @@
     <section class="main-product">
         <div class="container">
             <nav class="breadcrumb my-5">
-                <a class="breadcrumb-item text-dark font-weight-bold" href="index.html">HOME /</a>
+                <a class="breadcrumb-item text-dark font-weight-bold" href="/">HOME /</a>
             </nav>
             <div class="row mt-4">
                 <div class="col-12 col-md-6">
                     <div class="xzoom-container">
                         <!-- Main Product Image -->
-                        <img class="xzoom d-block w-100" id="xzoom-default" src="./assets/images/product-img/product-1.avif"
-                            xoriginal="./assets/images/product-img/product-1.avif" />
+                        <img class="xzoom d-block w-100" id="xzoom-default"
+                            src="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $product['thumbnail'] }}"
+                            xoriginal="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $product['thumbnail'] }}" />
 
                         <!-- Thumbnail Images -->
                         <div class="xzoom-thumbs mt-3">
-                            <a href="./assets/images/product-img/product-1.avif">
-                                <img class="xzoom-gallery" width="100" src="./assets/images/product-img/product-1.avif"
-                                    xpreview="./assets/images/product-img/product-1.avif" />
+                            <a href="{{ asset('assets') }}/images/product-img/product-1.avif">
+                                <img class="xzoom-gallery" width="100"
+                                    src="{{ asset('assets') }}/images/product-img/product-1.avif"
+                                    xpreview="{{ asset('assets') }}/images/product-img/product-1.avif" />
                             </a>
-                            <a href="./assets/images/product-img/product-2.avif">
-                                <img class="xzoom-gallery" width="100" src="./assets/images/product-img/product-2.avif"
-                                    xpreview="./assets/images/product-img/product-2.avif" />
+                            <a href="{{ asset('assets') }}/images/product-img/product-2.avif">
+                                <img class="xzoom-gallery" width="100"
+                                    src="{{ asset('assets') }}/images/product-img/product-2.avif"
+                                    xpreview="{{ asset('assets') }}/images/product-img/product-2.avif" />
                             </a>
-                            <a href="./assets/images/product-img/product-3.avif">
-                                <img class="xzoom-gallery" width="100" src="./assets/images/product-img/product-3.avif"
-                                    xpreview="./assets/images/product-img/product-3.avif" />
+                            <a href="{{ asset('assets') }}/images/product-img/product-3.avif">
+                                <img class="xzoom-gallery" width="100"
+                                    src="{{ asset('assets') }}/images/product-img/product-3.avif"
+                                    xpreview="{{ asset('assets') }}/images/product-img/product-3.avif" />
                             </a>
-                            <a href="./assets/images/product-img/product-4.avif">
-                                <img class="xzoom-gallery" width="100" src="./assets/images/product-img/product-4.avif"
-                                    xpreview="./assets/images/product-img/product-4.avif" />
+                            <a href="{{ asset('assets') }}/images/product-img/product-4.avif">
+                                <img class="xzoom-gallery" width="100"
+                                    src="{{ asset('assets') }}/images/product-img/product-4.avif"
+                                    xpreview="{{ asset('assets') }}/images/product-img/product-4.avif" />
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 product-info">
                     <h3 class="product-heading">
-                        Skin Cafe 100% Natural Essential Oil (10ml) - Rosemary
+
+                        {{ $product->name }}
                     </h3>
                     <div class="product-rating">★★★★★</div>
                     <div class="product-price d-flex gap-3">
-                        <h2 class="text-decoration-line-through">৳400</h2>
-                        <h2 class="text-pink">৳340</h2>
+                        <h2 class="text-decoration-line-through">৳{{ round($product->unit_price) }}</h2>
+                        <h2 class="text-pink">৳{{ round($product->purchase_price) }}</h2>
                     </div>
                     <div class="product-form-buttons">
                         <button class="btn btn-block w-100 details-add-to-cart">
@@ -328,10 +335,12 @@
                     <div class="card border-0 product w-100">
                         <div class="product-item border border-dark">
                             <a href="">
-                                <img class="card-img-top default-img" src="./assets/images/related-product/rltd-1.2.jpg"
+                                <img class="card-img-top default-img"
+                                    src="{{ asset('assets') }}/images/related-product/rltd-1.2.jpg"
                                     alt="related product image" />
                                 <!-- hover image -->
-                                <img class="card-img-top hover-img" src="./assets/images/related-product/rltd-1.1.jpg"
+                                <img class="card-img-top hover-img"
+                                    src="{{ asset('assets') }}/images/related-product/rltd-1.1.jpg"
                                     alt="related product image" />
                             </a>
 
@@ -357,10 +366,12 @@
                     <div class="card border-0 product">
                         <div class="product-item border border-dark">
                             <a href="">
-                                <img class="card-img-top default-img" src="./assets/images/related-product/rltd-2.1.webp"
+                                <img class="card-img-top default-img"
+                                    src="{{ asset('assets') }}/images/related-product/rltd-2.1.webp"
                                     alt="related product image" />
                                 <!-- hover image -->
-                                <img class="card-img-top hover-img" src="./assets/images/related-product/rltd-2.2.webp"
+                                <img class="card-img-top hover-img"
+                                    src="{{ asset('assets') }}/images/related-product/rltd-2.2.webp"
                                     alt="related product image" />
                             </a>
 
@@ -388,10 +399,12 @@
                     <div class="card border-0 product">
                         <div class="product-item border border-dark">
                             <a href="">
-                                <img class="card-img-top default-img" src="./assets/images/related-product/rltd-3.1.webp"
+                                <img class="card-img-top default-img"
+                                    src="{{ asset('assets') }}/images/related-product/rltd-3.1.webp"
                                     alt="related product image" />
                                 <!-- hover image -->
-                                <img class="card-img-top hover-img" src="./assets/images/related-product/rltd-3.2.webp"
+                                <img class="card-img-top hover-img"
+                                    src="{{ asset('assets') }}/images/related-product/rltd-3.2.webp"
                                     alt="related product image" />
                             </a>
 
@@ -419,10 +432,12 @@
                     <div class="card border-0 product">
                         <div class="product-item border border-dark">
                             <a href="">
-                                <img class="card-img-top default-img" src="./assets/images/related-product/rltd-4.1.webp"
+                                <img class="card-img-top default-img"
+                                    src="{{ asset('assets') }}/images/related-product/rltd-4.1.webp"
                                     alt="related product image" />
                                 <!-- hover image -->
-                                <img class="card-img-top hover-img" src="./assets/images/related-product/rltd-4.2.webp"
+                                <img class="card-img-top hover-img"
+                                    src="{{ asset('assets') }}/images/related-product/rltd-4.2.webp"
                                     alt="related product image" />
                             </a>
 

@@ -35,18 +35,18 @@ use App\Model\Wishlist;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
-use function App\CPU\translate;
-use App\Model\ShippingType;
-use Facade\FlareClient\Http\Response;
-use Gregwar\Captcha\PhraseBuilder;
-use Gregwar\Captcha\CaptchaBuilder;
-use App\CPU\CustomerManager;
-use App\CPU\Convert;
-use App\Model\Branch;
-use App\ProductLandingPage;
-use Carbon\Carbon;
+// use Illuminate\Support\Facades\Mail;
+// use Illuminate\Support\Facades\Session;
+// use function App\CPU\translate;
+// use App\Model\ShippingType;
+// use Facade\FlareClient\Http\Response;
+// use Gregwar\Captcha\PhraseBuilder;
+// use Gregwar\Captcha\CaptchaBuilder;
+// use App\CPU\CustomerManager;
+// use App\CPU\Convert;
+// use App\Model\Branch;
+// use App\ProductLandingPage;
+// use Carbon\Carbon;
 
 class WebController extends Controller
 {
@@ -61,7 +61,9 @@ class WebController extends Controller
 
     public function home()
     {
-        return view("web-views.home");
+        $newDropProducts =  Product::take(6)->get(); //latest()->take(5)->
+
+        return view("web-views.home", compact("newDropProducts"));
     }
     public function about()
     {
@@ -83,8 +85,10 @@ class WebController extends Controller
     {
         return view('web-views.product-checkout');
     }
-    public function prodcutDetails()
+    public function productDetails($id)
     {
-        return view('web-views.product-details');
+        $product = Product::find($id);
+
+        return view('web-views.product-details', compact('product'));
     }
 }

@@ -6,17 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title> @yield('title') - {{ config('app.name') }}</title>
-    <link rel="shortcut icon" href="./assets/images/logo/favicon.png" type="image/x-icon" />
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/css/bs_customize.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css" />
-
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="assets/css/custom.css">
-
-    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <link rel="shortcut icon" href="{{ asset('assets') }}/images/logo/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/bs_customize.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/xzoom.min.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/custom.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/responsive.css">
     <style>
         :root {
             --primary-color: #ff6b6b;
@@ -111,35 +109,66 @@
     <!-- Footer End -->
 
     <!--Bootstrap JS Bundle with Popper -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/owl-extra-code.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery.min.js"></script>
+    <script src="{{ asset('assets') }}/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets') }}/js/owl.carousel.min.js"></script>
+    <script src="{{ asset('assets') }}/js/owl-extra-code.js"></script>
+    <script src="{{ asset('assets') }}/js/xzoom.min.js"></script>
+    {{-- owl carosel  --}}
+    <script>
+        $(document).ready(function() {
+            const owl = $('.owl-carousel');
+            owl.owlCarousel({
+                loop: false,
+                margin: 40,
+                responsiveClass: true,
+                nav: true,
+                navText: [
+                    '<i class="fa fa-chevron-left text-white"></i>',
+                    '<i class="fa fa-chevron-right text-white "></i>'
+                ],
+                smartSpeed: 400,
+                responsive: {
+                    0: {
+                        items: 2
+                    },
+                    768: {
+                        items: 3
+                    },
+                    992: {
+                        items: 4
+                    }
+                }
+            });
 
+            function updateNavState() {
+                const currentIndex = owl.find('.owl-item.active').first().index();
+                const totalItems = owl.find('.owl-item').length;
+                const itemsPerPage = owl.find('.owl-item.active').length;
+
+                // prev disable
+                if (currentIndex === 0) {
+                    $('.owl-prev').addClass('disabled');
+                } else {
+                    $('.owl-prev').removeClass('disabled');
+                }
+
+                // next disable
+                if (currentIndex + itemsPerPage >= totalItems) {
+                    $('.owl-next').addClass('disabled');
+                } else {
+                    $('.owl-next').removeClass('disabled');
+                }
+            }
+
+            // init and on change update state
+            updateNavState();
+            owl.on('changed.owl.carousel', updateNavState);
+        });
+    </script>
 
     <!-- Script for search system -->
     <script>
-        // $(document).ready(function() {
-        //     $(".search-icon").click(function() {
-        //         $(".search-modal").addClass("active");
-        //         $(".search-box").focus();
-        //     });
-
-        //     $(".close-btn").click(function() {
-        //         $(".search-modal").removeClass("active");
-        //     });
-
-        //     $(".search-modal").click(function(e) {
-        //         if (!$(e.target).closest(".search-wrapper").length) {
-        //             $(".search-modal").removeClass("active");
-        //         }
-        //     });
-        //     $(document).keyup(function(e) {
-        //         if (e.key === "Escape") {
-        //             $(".search-modal").removeClass("active");
-        //         }
-        //     });
-        // });
         $(document).ready(function() {
 
             // Open modal for any search icon (desktop + mobile both)
@@ -282,63 +311,6 @@
             });
         });
     </script>
-    <!-- grid view system for lg device -->
-    {{-- <script>
-        // grid view system
-        $(document).ready(function() {
-
-
-            $('.grid-btn').on('click', function() {
-                var columns = $(this).data('columns');
-                var category = $(this).data('category');
-                // console.log(columns);
-                $('.product-column[data-category="' + category + '"]')
-                    .removeClass('col-md-2 col-md-3 col-md-4 col-md-5 col-md-6')
-                    .addClass('col-md-' + columns);
-
-                $('.grid-btn[data-category="' + category + '"]').removeClass('active');
-                $(this).addClass('active');
-                // Apply fixed dimensions to images
-                $('.product-box[data-category="' + category + '"]')
-                    .removeClass('product-box-col-2 product-box-col-3 product-box-col-4 product-box-col-6')
-                    .addClass('product-box-col-' + columns);
-                $('.product-image2[data-category="' + category + '"]')
-                    .removeClass(
-                        'product-image2-col-2 product-image2-col-3 product-image2-col-4 product-image2-col-6'
-                    )
-                    .addClass('product-image2-col-' + columns);
-            });
-        });
-    </script> --}}
-    <!-- grid view system for mobile device -->
-    {{-- <script>
-        // mobile grid view system
-        $(document).ready(function() {
-            $('.grid-btn-mobile').on('click', function() {
-                var columns = $(this).data('columns');
-                var category = $(this).data('category');
-                // console.log(columns);
-                $('.product-column[data-category="' + category + '"]')
-                    .removeClass('col-md-2 col-md-3 col-md-4 col-md-5 col-md-6 col-sm-12 col-sm-6')
-                    .addClass('col-sm-' + columns);
-
-                $('.grid-btn-mobile[data-category="' + category + '"]').removeClass('active');
-                $(this).addClass('active');
-                // Apply fixed dimensions to images
-                $('.product-box[data-category="' + category + '"]')
-                    .removeClass(
-                        'product-box-col-2 product-box-col-3 product-box-col-4 product-box-col-6 product-box-col-sm-12 product-box-col-sm-6'
-                    )
-                    .addClass('product-box-col-sm-' + columns);
-
-                $('.product-image2[data-category="' + category + '"]')
-                    .removeClass(
-                        'product-image2-col-2 product-image2-col-3 product-image2-col-4 product-image2-col-6 product-image2-col-sm-12 product-image2-col-sm-6'
-                    )
-                    .addClass('product-image2-col-sm-' + columns);
-            });
-        });
-    </script> --}}
 
     <!-- Script for Price Range slider -->
     <script>
@@ -559,7 +531,21 @@
             });
         });
     </script>
-
+    <!-- zoom view image -->
+    <script>
+        $(document).ready(function() {
+            $(".xzoom, .xzoom-gallery").xzoom({
+                zoomWidth: 100,
+                zoomHeight: 100,
+                position: "right",
+                offset: 0,
+                lens: true,
+                lensShape: "square",
+                lensSize: 0,
+                title: false,
+            });
+        });
+    </script>
 </body>
 
 </html>

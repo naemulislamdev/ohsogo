@@ -90,110 +90,45 @@
             <div class="row">
                 <div class="col">
                     <h2 class=" mb-5 section-heading">Peep the Newest Drops!</h2>
+
                 </div>
             </div>
-            <div class="row related-products">
-                <div class="col-6 col-lg-3 mb-3 pe-md-4">
-                    <div class="card border-0 product w-100">
-                        <div class="product-item border border-dark">
-                            <a href="" class="product-img-container">
-                                <img class="card-img-top product-img"src="./assets/images/product-img/black_seed_hair_serum_50ml_1.webp"
-                                    alt=" product image" />
-                            </a>
-                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
-                                -10%
-                            </button>
-                            <div class="product-info">
-                                <button class="add-to-cart">ADD TO CART</button>
-                            </div>
-                        </div>
-                        <div class="card-body px-0">
-                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
-                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
-                            </a>
-                            <p class="card-text">
-                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
-                            </p>
-                            <div class="product-rating-star">★★★★★</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3 mb-3 pe-4">
-                    <div class="card border-0 product w-100">
-                        <div class="product-item border border-dark">
-                            <a href="" class="product-img-container">
-                                <img class="card-img-top product-img"src="./assets/images/product-img/rose_serum_foundation_30ml-golden_beige.webp"
-                                    alt=" product image" />
-                            </a>
-                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
-                                -10%
-                            </button>
-                            <div class="product-info">
-                                <button class="add-to-cart">ADD TO CART</button>
-                            </div>
-                        </div>
-                        <div class="card-body px-0">
-                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
-                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
-                            </a>
-                            <p class="card-text">
-                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
-                            </p>
-                            <div class="product-rating-star">★★★★★</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3 mb-3 pe-4">
-                    <div class="card border-0 product w-100">
-                        <div class="product-item border border-dark">
-                            <a href="" class="product-img-container">
-                                <img class="card-img-top product-img"src="./assets/images/product-img/anti_pollution_cc_cream_30ml.webp"
-                                    alt=" product image" />
-                            </a>
-                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
-                                -10%
-                            </button>
-                            <div class="product-info">
-                                <button class="add-to-cart">ADD TO CART</button>
-                            </div>
-                        </div>
-                        <div class="card-body px-0">
-                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
-                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
-                            </a>
-                            <p class="card-text">
-                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
-                            </p>
-                            <div class="product-rating-star">★★★★★</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3 mb-3">
-                    <div class="card border-0 product w-100">
-                        <div class="product-item border border-dark">
-                            <a href="" class="product-img-container">
-                                <img class="card-img-top product-img"src="./assets/images/product-img/showergel.webp"
-                                    alt=" product image" />
-                            </a>
-                            <button class="btn btn-sm bg-pink position-sticky discount-btn">
-                                -10%
-                            </button>
-                            <div class="product-info">
-                                <button class="add-to-cart">ADD TO CART</button>
-                            </div>
-                        </div>
-                        <div class="card-body px-0">
-                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
-                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
-                            </a>
-                            <p class="card-text">
-                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
-                            </p>
-                            <div class="product-rating-star">★★★★★</div>
-                        </div>
-                    </div>
-                </div>
 
+            <div class="owl-carousel related-products product-carosel">
+                @foreach ($newDropProducts as $product)
+                    <div class="item">
+                        <div class="card border-0 product w-100">
+                            <div class="product-item border border-dark">
+                                <a href="{{ route('product.details', ['id' => $product->id]) }}"
+                                    class="product-img-container">
+                                    <img class="card-img-top product-img"
+                                        src="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $product['thumbnail'] }}"
+                                        alt="{{ $product['id'] }}" />
+                                </a>
+                                <button class="btn btn-sm bg-pink position-sticky discount-btn">
+                                    -{{ $product['discount'] }}%
+                                </button>
+                                <div class="product-info">
+                                    <button class="add-to-cart">ADD TO CART</button>
+                                </div>
+                            </div>
+                            <div class="card-body px-0">
+                                <a href="{{ route('product.details', ['id' => $product->id]) }}"
+                                    class="card-title stretched-link h4">
+                                    {{ $product['name'] }}
+                                </a>
+                                <p class="card-text">
+                                    <span class="text-decoration-line-through">৳{{ round($product['unit_price']) }}</span>
+                                    <span class="ms-2">৳{{ round($product['purchase_price']) }}</span>
+                                </p>
+                                <div class="product-rating-star">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <div class="text-center mt-4">
+                <a class="chekout-cart-btn text-white" href="{{ route('page') }}">View all</a>
             </div>
         </div>
     </section>
@@ -495,7 +430,7 @@
                                             </div>
                                         </div>
                                         <div class="card-body px-0">
-                                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                            <a href="" class="card-title stretched-link h4">
                                                 Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
                                             </a>
                                             <p class="card-text">
@@ -521,7 +456,7 @@
                                             </div>
                                         </div>
                                         <div class="card-body px-0">
-                                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                            <a href="" class="card-title stretched-link h4">
                                                 Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
                                             </a>
                                             <p class="card-text">
@@ -547,7 +482,7 @@
                                             </div>
                                         </div>
                                         <div class="card-body px-0">
-                                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                            <a href="" class="card-title stretched-link h4">
                                                 Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
                                             </a>
                                             <p class="card-text">
@@ -573,7 +508,7 @@
                                             </div>
                                         </div>
                                         <div class="card-body px-0">
-                                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                                            <a href="" class="card-title stretched-link h4">
                                                 Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
                                             </a>
                                             <p class="card-text">
@@ -651,7 +586,7 @@
                             </div>
                         </div>
                         <div class="card-body px-0">
-                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                            <a href="" class="card-title stretched-link h4">
                                 Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
                             </a>
                             <p class="card-text">
@@ -676,7 +611,7 @@
                             </div>
                         </div>
                         <div class="card-body px-0">
-                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                            <a href="" class="card-title stretched-link h4">
                                 Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
                             </a>
                             <p class="card-text">
@@ -701,7 +636,7 @@
                             </div>
                         </div>
                         <div class="card-body px-0">
-                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                            <a href="" class="card-title stretched-link h4">
                                 Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
                             </a>
                             <p class="card-text">
@@ -726,7 +661,7 @@
                             </div>
                         </div>
                         <div class="card-body px-0">
-                            <a href="{{ route('product.details') }}" class="card-title stretched-link h4">
+                            <a href="" class="card-title stretched-link h4">
                                 Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
                             </a>
                             <p class="card-text">

@@ -277,14 +277,14 @@
 
                                            <div class="suggested-product-item row align-items-start mb-4">
                                                <div class="suggested-img col-3 px-0">
-                                                   <a href="{{ route('product.details') }}">
-                                                       <img src="./assets/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
+                                                   <a href="">
+                                                       <img src="{{ asset('assets') }}/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
                                                            alt="product image" />
                                                    </a>
                                                </div>
                                                <div class="suggested-product-details col-9">
                                                    <div class="suggeted-title">
-                                                       <a href="{{ route('product.details') }}">
+                                                       <a href="">
                                                            <h5>
                                                                Zayn & Myza Brightening Vitamin C Exfoliating
                                                                Face Wash (100ml) - Pack of 02
@@ -300,21 +300,21 @@
                                                    </div>
                                                    <div class="suggested-cart">
                                                        <a href="" title="Add to Cart"><img
-                                                               src="./assets/images/icon/parcel.png"
+                                                               src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                alt="bag icon" /></a>
                                                    </div>
                                                </div>
                                            </div>
                                            <div class="suggested-product-item row align-items-start mb-4">
                                                <div class="suggested-img col-3 px-0">
-                                                   <a href="{{ route('product.details') }}">
-                                                       <img src="./assets/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
+                                                   <a href="">
+                                                       <img src="{{ asset('assets') }}/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
                                                            alt="product image" />
                                                    </a>
                                                </div>
                                                <div class="suggested-product-details col-9">
                                                    <div class="suggeted-title">
-                                                       <a href="{{ route('product.details') }}">
+                                                       <a href="">
                                                            <h5>
                                                                Zayn & Myza Brightening Vitamin C Exfoliating
                                                                Face Wash (100ml) - Pack of 02
@@ -330,21 +330,21 @@
                                                    </div>
                                                    <div class="suggested-cart">
                                                        <a href="" title="Add to Cart"><img
-                                                               src="./assets/images/icon/parcel.png"
+                                                               src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                alt="bag icon" /></a>
                                                    </div>
                                                </div>
                                            </div>
                                            <div class="suggested-product-item row align-items-start mb-4">
                                                <div class="suggested-img col-3 px-0">
-                                                   <a href="{{ route('product.details') }}">
-                                                       <img src="./assets/images/related-product/Combo_09f0db7e-9c15-421f-a7d7-075c5ce14ebf.avif"
+                                                   <a href="">
+                                                       <img src="{{ asset('assets') }}/images/related-product/Combo_09f0db7e-9c15-421f-a7d7-075c5ce14ebf.avif"
                                                            alt="product image" />
                                                    </a>
                                                </div>
                                                <div class="suggested-product-details col-9">
                                                    <div class="suggeted-title">
-                                                       <a href="{{ route('product.details') }}">
+                                                       <a href="">
                                                            <h5>
                                                                Zayn & Myza Brightening Vitamin C Exfoliating
                                                                Face Wash (100ml) - Pack of 02
@@ -360,21 +360,21 @@
                                                    </div>
                                                    <div class="suggested-cart">
                                                        <a href="" title="Add to Cart"><img
-                                                               src="./assets/images/icon/parcel.png"
+                                                               src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                alt="bag icon" /></a>
                                                    </div>
                                                </div>
                                            </div>
                                            <div class="suggested-product-item row align-items-start mb-4">
                                                <div class="suggested-img col-3 px-0">
-                                                   <a href="{{ route('product.details') }}">
-                                                       <img src="./assets/images/related-product/zmniacinamidefw.avif"
+                                                   <a href="">
+                                                       <img src="{{ asset('assets') }}/images/related-product/zmniacinamidefw.avif"
                                                            alt="product image" />
                                                    </a>
                                                </div>
                                                <div class="suggested-product-details col-9">
                                                    <div class="suggeted-title">
-                                                       <a href="{{ route('product.details') }}">
+                                                       <a href="">
                                                            <h5>
                                                                Zayn & Myza Brightening Vitamin C Exfoliating
                                                                Face Wash (100ml) - Pack of 02
@@ -390,7 +390,7 @@
                                                    </div>
                                                    <div class="suggested-cart">
                                                        <a href="" title="Add to Cart"><img
-                                                               src="./assets/images/icon/parcel.png"
+                                                               src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                alt="bag icon" /></a>
                                                    </div>
                                                </div>
@@ -417,13 +417,13 @@
                                            <div class="cart-added-products">
                                                <div class="cart-item">
                                                    <div class="cart-img">
-                                                       <a href="{{ route('product.details') }}">
-                                                           <img src="./assets/images/product-img/showergel_128x128.avif"
+                                                       <a href="">
+                                                           <img src="{{ asset('assets') }}/images/product-img/showergel_128x128.avif"
                                                                alt="product image" />
                                                        </a>
                                                    </div>
                                                    <div class="cart-item-product-info ms-3">
-                                                       <a href="{{ route('product.details') }}">
+                                                       <a href="">
                                                            Zayn & Myza Age Defense Retinol & Niacinamide
                                                            Shower Gel - 200ml
                                                        </a>
@@ -446,20 +446,21 @@
                                                        </div>
                                                        <button title="Remove Cart"
                                                            class="border-0 bg-transparent cart-item-remove-icon position-absolute">
-                                                           <img width="20px" src="./assets/images/icon/close-x.svg"
+                                                           <img width="20px"
+                                                               src="{{ asset('assets') }}/images/icon/close-x.svg"
                                                                alt="" />
                                                        </button>
                                                    </div>
                                                </div>
                                                <div class="cart-item">
                                                    <div class="cart-img">
-                                                       <a href="{{ route('product.details') }}">
-                                                           <img src="./assets/images/product-img/Zayn_Myza_Vitamin_C_Brightening_Shower_Gel_-_Vaitamin_128x128.avif"
+                                                       <a href="">
+                                                           <img src="{{ asset('assets') }}/images/product-img/Zayn_Myza_Vitamin_C_Brightening_Shower_Gel_-_Vaitamin_128x128.avif"
                                                                alt="product image" />
                                                        </a>
                                                    </div>
                                                    <div class="cart-item-product-info ms-3">
-                                                       <a href="{{ route('product.details') }}">
+                                                       <a href="">
                                                            Zayn & Myza Age Defense Retinol & Niacinamide
                                                            Shower Gel - 200ml
                                                        </a>
@@ -479,7 +480,7 @@
                                                            <button title="Remove Cart"
                                                                class="border-0 bg-transparent cart-item-remove-icon position-absolute">
                                                                <img width="20px"
-                                                                   src="./assets/images/icon/close-x.svg"
+                                                                   src="{{ asset('assets') }}/images/icon/close-x.svg"
                                                                    alt="" />
                                                            </button>
                                                            <div class="cart-item-rate">
@@ -490,13 +491,13 @@
                                                </div>
                                                <div class="cart-item">
                                                    <div class="cart-img">
-                                                       <a href="{{ route('product.details') }}">
-                                                           <img src="./assets/images/product-img/Zayn_Myza_3x_Vitamin_E_Moisturizing_Cream_50gm_-_B1G1_128x128.avif"
+                                                       <a href="">
+                                                           <img src="{{ asset('assets') }}/images/product-img/Zayn_Myza_3x_Vitamin_E_Moisturizing_Cream_50gm_-_B1G1_128x128.avif"
                                                                alt="product image" />
                                                        </a>
                                                    </div>
                                                    <div class="cart-item-product-info ms-3">
-                                                       <a href="{{ route('product.details') }}">
+                                                       <a href="">
                                                            Zayn & Myza Age Defense Retinol & Niacinamide
                                                            Shower Gel - 200ml
                                                        </a>
@@ -516,7 +517,7 @@
                                                            <button title="Remove Cart"
                                                                class="border-0 bg-transparent cart-item-remove-icon position-absolute">
                                                                <img width="20px"
-                                                                   src="./assets/images/icon/close-x.svg"
+                                                                   src="{{ asset('assets') }}/images/icon/close-x.svg"
                                                                    alt="" />
                                                            </button>
                                                            <div class="cart-item-rate">
@@ -531,14 +532,14 @@
                                                    <div class="related-row-scroll mt-4">
                                                        <div class="suggested-product-item row align-items-start">
                                                            <div class="suggested-img col-3 px-0">
-                                                               <a href="{{ route('product.details') }}">
-                                                                   <img src="./assets/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
+                                                               <a href="">
+                                                                   <img src="{{ asset('assets') }}/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
                                                                        alt="product image" />
                                                                </a>
                                                            </div>
                                                            <div class="suggested-product-details col-9">
                                                                <div class="suggeted-title">
-                                                                   <a href="{{ route('product.details') }}">
+                                                                   <a href="">
                                                                        <h5>
                                                                            Zayn & Myza Brightening Vitamin C
                                                                            Exfoliating Face Wash (100ml) - Pack of
@@ -555,21 +556,21 @@
                                                                </div>
                                                                <div class="suggested-cart">
                                                                    <a href="" title="Add to Cart"><img
-                                                                           src="./assets/images/icon/parcel.png"
+                                                                           src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                            alt="bag icon" /></a>
                                                                </div>
                                                            </div>
                                                        </div>
                                                        <div class="suggested-product-item row align-items-start">
                                                            <div class="suggested-img col-3 px-0">
-                                                               <a href="{{ route('product.details') }}">
-                                                                   <img src="./assets/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
+                                                               <a href="">
+                                                                   <img src="{{ asset('assets') }}/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
                                                                        alt="product image" />
                                                                </a>
                                                            </div>
                                                            <div class="suggested-product-details col-9">
                                                                <div class="suggeted-title">
-                                                                   <a href="{{ route('product.details') }}">
+                                                                   <a href="">
                                                                        <h5>
                                                                            Zayn & Myza Brightening Vitamin C
                                                                            Exfoliating Face Wash (100ml) - Pack of
@@ -586,21 +587,21 @@
                                                                </div>
                                                                <div class="suggested-cart">
                                                                    <a href="" title="Add to Cart"><img
-                                                                           src="./assets/images/icon/parcel.png"
+                                                                           src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                            alt="bag icon" /></a>
                                                                </div>
                                                            </div>
                                                        </div>
                                                        <div class="suggested-product-item row align-items-start">
                                                            <div class="suggested-img col-3 px-0">
-                                                               <a href="{{ route('product.details') }}">
-                                                                   <img src="./assets/images/related-product/Combo_09f0db7e-9c15-421f-a7d7-075c5ce14ebf.avif"
+                                                               <a href="">
+                                                                   <img src="{{ asset('assets') }}/images/related-product/Combo_09f0db7e-9c15-421f-a7d7-075c5ce14ebf.avif"
                                                                        alt="product image" />
                                                                </a>
                                                            </div>
                                                            <div class="suggested-product-details col-9">
                                                                <div class="suggeted-title">
-                                                                   <a href="{{ route('product.details') }}">
+                                                                   <a href="">
                                                                        <h5>
                                                                            Zayn & Myza Brightening Vitamin C
                                                                            Exfoliating Face Wash (100ml) - Pack of
@@ -617,21 +618,21 @@
                                                                </div>
                                                                <div class="suggested-cart">
                                                                    <a href="" title="Add to Cart"><img
-                                                                           src="./assets/images/icon/parcel.png"
+                                                                           src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                            alt="bag icon" /></a>
                                                                </div>
                                                            </div>
                                                        </div>
                                                        <div class="suggested-product-item row align-items-start">
                                                            <div class="suggested-img col-3 px-0">
-                                                               <a href="{{ route('product.details') }}">
-                                                                   <img src="./assets/images/related-product/zmniacinamidefw.avif"
+                                                               <a href="">
+                                                                   <img src="{{ asset('assets') }}/images/related-product/zmniacinamidefw.avif"
                                                                        alt="product image" />
                                                                </a>
                                                            </div>
                                                            <div class="suggested-product-details col-9">
                                                                <div class="suggeted-title">
-                                                                   <a href="{{ route('product.details') }}">
+                                                                   <a href="">
                                                                        <h5>
                                                                            Zayn & Myza Brightening Vitamin C
                                                                            Exfoliating Face Wash (100ml) - Pack of
@@ -648,7 +649,7 @@
                                                                </div>
                                                                <div class="suggested-cart">
                                                                    <a href="" title="Add to Cart"><img
-                                                                           src="./assets/images/icon/parcel.png"
+                                                                           src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                            alt="bag icon" /></a>
                                                                </div>
                                                            </div>
@@ -725,7 +726,8 @@
                </div>
                <div class="col-lg-2 text-center">
                    <a href="{{ url('/') }}" class="navbar-brand">
-                       <img class="header-logo" src="assets/images/logo/top-logo.png" alt="" />
+                       <img class="header-logo" src="{{ asset('assets') }}/images/logo/top-logo.png"
+                           alt="" />
                    </a>
                </div>
                <div class="col-lg-4">
@@ -978,14 +980,14 @@
 
                                            <div class="suggested-product-item row align-items-start mb-4">
                                                <div class="suggested-img col-3 px-0">
-                                                   <a href="{{ route('product.details') }}">
-                                                       <img src="./assets/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
+                                                   <a href="">
+                                                       <img src="{{ asset('assets') }}/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
                                                            alt="product image" />
                                                    </a>
                                                </div>
                                                <div class="suggested-product-details col-9">
                                                    <div class="suggeted-title">
-                                                       <a href="{{ route('product.details') }}">
+                                                       <a href="">
                                                            <h5>
                                                                Zayn & Myza Brightening Vitamin C Exfoliating
                                                                Face Wash (100ml) - Pack of 02
@@ -1001,21 +1003,21 @@
                                                    </div>
                                                    <div class="suggested-cart">
                                                        <a href="" title="Add to Cart"><img
-                                                               src="./assets/images/icon/parcel.png"
+                                                               src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                alt="bag icon" /></a>
                                                    </div>
                                                </div>
                                            </div>
                                            <div class="suggested-product-item row align-items-start mb-4">
                                                <div class="suggested-img col-3 px-0">
-                                                   <a href="{{ route('product.details') }}">
-                                                       <img src="./assets/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
+                                                   <a href="">
+                                                       <img src="{{ asset('assets') }}/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
                                                            alt="product image" />
                                                    </a>
                                                </div>
                                                <div class="suggested-product-details col-9">
                                                    <div class="suggeted-title">
-                                                       <a href="{{ route('product.details') }}">
+                                                       <a href="">
                                                            <h5>
                                                                Zayn & Myza Brightening Vitamin C Exfoliating
                                                                Face Wash (100ml) - Pack of 02
@@ -1031,21 +1033,21 @@
                                                    </div>
                                                    <div class="suggested-cart">
                                                        <a href="" title="Add to Cart"><img
-                                                               src="./assets/images/icon/parcel.png"
+                                                               src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                alt="bag icon" /></a>
                                                    </div>
                                                </div>
                                            </div>
                                            <div class="suggested-product-item row align-items-start mb-4">
                                                <div class="suggested-img col-3 px-0">
-                                                   <a href="{{ route('product.details') }}">
-                                                       <img src="./assets/images/related-product/Combo_09f0db7e-9c15-421f-a7d7-075c5ce14ebf.avif"
+                                                   <a href="">
+                                                       <img src="{{ asset('assets') }}/images/related-product/Combo_09f0db7e-9c15-421f-a7d7-075c5ce14ebf.avif"
                                                            alt="product image" />
                                                    </a>
                                                </div>
                                                <div class="suggested-product-details col-9">
                                                    <div class="suggeted-title">
-                                                       <a href="{{ route('product.details') }}">
+                                                       <a href="">
                                                            <h5>
                                                                Zayn & Myza Brightening Vitamin C Exfoliating
                                                                Face Wash (100ml) - Pack of 02
@@ -1061,21 +1063,21 @@
                                                    </div>
                                                    <div class="suggested-cart">
                                                        <a href="" title="Add to Cart"><img
-                                                               src="./assets/images/icon/parcel.png"
+                                                               src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                alt="bag icon" /></a>
                                                    </div>
                                                </div>
                                            </div>
                                            <div class="suggested-product-item row align-items-start mb-4">
                                                <div class="suggested-img col-3 px-0">
-                                                   <a href="{{ route('product.details') }}">
-                                                       <img src="./assets/images/related-product/zmniacinamidefw.avif"
+                                                   <a href="">
+                                                       <img src="{{ asset('assets') }}/images/related-product/zmniacinamidefw.avif"
                                                            alt="product image" />
                                                    </a>
                                                </div>
                                                <div class="suggested-product-details col-9">
                                                    <div class="suggeted-title">
-                                                       <a href="{{ route('product.details') }}">
+                                                       <a href="">
                                                            <h5>
                                                                Zayn & Myza Brightening Vitamin C Exfoliating
                                                                Face Wash (100ml) - Pack of 02
@@ -1091,7 +1093,7 @@
                                                    </div>
                                                    <div class="suggested-cart">
                                                        <a href="" title="Add to Cart"><img
-                                                               src="./assets/images/icon/parcel.png"
+                                                               src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                alt="bag icon" /></a>
                                                    </div>
                                                </div>
@@ -1118,13 +1120,13 @@
                                            <div class="cart-added-products">
                                                <div class="cart-item">
                                                    <div class="cart-img">
-                                                       <a href="{{ route('product.details') }}">
-                                                           <img src="./assets/images/product-img/showergel_128x128.avif"
+                                                       <a href="">
+                                                           <img src="{{ asset('assets') }}/images/product-img/showergel_128x128.avif"
                                                                alt="product image" />
                                                        </a>
                                                    </div>
                                                    <div class="cart-item-product-info ms-3">
-                                                       <a href="{{ route('product.details') }}">
+                                                       <a href="">
                                                            Zayn & Myza Age Defense Retinol & Niacinamide
                                                            Shower Gel - 200ml
                                                        </a>
@@ -1147,20 +1149,21 @@
                                                        </div>
                                                        <button title="Remove Cart"
                                                            class="border-0 bg-transparent cart-item-remove-icon position-absolute">
-                                                           <img width="20px" src="./assets/images/icon/close-x.svg"
+                                                           <img width="20px"
+                                                               src="{{ asset('assets') }}/images/icon/close-x.svg"
                                                                alt="" />
                                                        </button>
                                                    </div>
                                                </div>
                                                <div class="cart-item">
                                                    <div class="cart-img">
-                                                       <a href="{{ route('product.details') }}">
-                                                           <img src="./assets/images/product-img/Zayn_Myza_Vitamin_C_Brightening_Shower_Gel_-_Vaitamin_128x128.avif"
+                                                       <a href="">
+                                                           <img src="{{ asset('assets') }}/images/product-img/Zayn_Myza_Vitamin_C_Brightening_Shower_Gel_-_Vaitamin_128x128.avif"
                                                                alt="product image" />
                                                        </a>
                                                    </div>
                                                    <div class="cart-item-product-info ms-3">
-                                                       <a href="{{ route('product.details') }}">
+                                                       <a href="">
                                                            Zayn & Myza Age Defense Retinol & Niacinamide
                                                            Shower Gel - 200ml
                                                        </a>
@@ -1180,7 +1183,7 @@
                                                            <button title="Remove Cart"
                                                                class="border-0 bg-transparent cart-item-remove-icon position-absolute">
                                                                <img width="20px"
-                                                                   src="./assets/images/icon/close-x.svg"
+                                                                   src="{{ asset('assets') }}/images/icon/close-x.svg"
                                                                    alt="" />
                                                            </button>
                                                            <div class="cart-item-rate">
@@ -1191,13 +1194,13 @@
                                                </div>
                                                <div class="cart-item">
                                                    <div class="cart-img">
-                                                       <a href="{{ route('product.details') }}">
-                                                           <img src="./assets/images/product-img/Zayn_Myza_3x_Vitamin_E_Moisturizing_Cream_50gm_-_B1G1_128x128.avif"
+                                                       <a href="">
+                                                           <img src="{{ asset('assets') }}/images/product-img/Zayn_Myza_3x_Vitamin_E_Moisturizing_Cream_50gm_-_B1G1_128x128.avif"
                                                                alt="product image" />
                                                        </a>
                                                    </div>
                                                    <div class="cart-item-product-info ms-3">
-                                                       <a href="{{ route('product.details') }}">
+                                                       <a href="">
                                                            Zayn & Myza Age Defense Retinol & Niacinamide
                                                            Shower Gel - 200ml
                                                        </a>
@@ -1217,7 +1220,7 @@
                                                            <button title="Remove Cart"
                                                                class="border-0 bg-transparent cart-item-remove-icon position-absolute">
                                                                <img width="20px"
-                                                                   src="./assets/images/icon/close-x.svg"
+                                                                   src="{{ asset('assets') }}/images/icon/close-x.svg"
                                                                    alt="" />
                                                            </button>
                                                            <div class="cart-item-rate">
@@ -1232,14 +1235,14 @@
                                                    <div class="related-row-scroll mt-4">
                                                        <div class="suggested-product-item row align-items-start">
                                                            <div class="suggested-img col-3 px-0">
-                                                               <a href="{{ route('product.details') }}">
-                                                                   <img src="./assets/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
+                                                               <a href="">
+                                                                   <img src="{{ asset('assets') }}/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
                                                                        alt="product image" />
                                                                </a>
                                                            </div>
                                                            <div class="suggested-product-details col-9">
                                                                <div class="suggeted-title">
-                                                                   <a href="{{ route('product.details') }}">
+                                                                   <a href="">
                                                                        <h5>
                                                                            Zayn & Myza Brightening Vitamin C
                                                                            Exfoliating Face Wash (100ml) - Pack of
@@ -1256,21 +1259,21 @@
                                                                </div>
                                                                <div class="suggested-cart">
                                                                    <a href="" title="Add to Cart"><img
-                                                                           src="./assets/images/icon/parcel.png"
+                                                                           src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                            alt="bag icon" /></a>
                                                                </div>
                                                            </div>
                                                        </div>
                                                        <div class="suggested-product-item row align-items-start">
                                                            <div class="suggested-img col-3 px-0">
-                                                               <a href="{{ route('product.details') }}">
-                                                                   <img src="./assets/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
+                                                               <a href="">
+                                                                   <img src="{{ asset('assets') }}/images/related-product/ChatGPTImageJul31_2025_04_14_18PM.avif"
                                                                        alt="product image" />
                                                                </a>
                                                            </div>
                                                            <div class="suggested-product-details col-9">
                                                                <div class="suggeted-title">
-                                                                   <a href="{{ route('product.details') }}">
+                                                                   <a href="">
                                                                        <h5>
                                                                            Zayn & Myza Brightening Vitamin C
                                                                            Exfoliating Face Wash (100ml) - Pack of
@@ -1287,21 +1290,21 @@
                                                                </div>
                                                                <div class="suggested-cart">
                                                                    <a href="" title="Add to Cart"><img
-                                                                           src="./assets/images/icon/parcel.png"
+                                                                           src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                            alt="bag icon" /></a>
                                                                </div>
                                                            </div>
                                                        </div>
                                                        <div class="suggested-product-item row align-items-start">
                                                            <div class="suggested-img col-3 px-0">
-                                                               <a href="{{ route('product.details') }}">
-                                                                   <img src="./assets/images/related-product/Combo_09f0db7e-9c15-421f-a7d7-075c5ce14ebf.avif"
+                                                               <a href="">
+                                                                   <img src="{{ asset('assets') }}/images/related-product/Combo_09f0db7e-9c15-421f-a7d7-075c5ce14ebf.avif"
                                                                        alt="product image" />
                                                                </a>
                                                            </div>
                                                            <div class="suggested-product-details col-9">
                                                                <div class="suggeted-title">
-                                                                   <a href="{{ route('product.details') }}">
+                                                                   <a href="">
                                                                        <h5>
                                                                            Zayn & Myza Brightening Vitamin C
                                                                            Exfoliating Face Wash (100ml) - Pack of
@@ -1318,21 +1321,21 @@
                                                                </div>
                                                                <div class="suggested-cart">
                                                                    <a href="" title="Add to Cart"><img
-                                                                           src="./assets/images/icon/parcel.png"
+                                                                           src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                            alt="bag icon" /></a>
                                                                </div>
                                                            </div>
                                                        </div>
                                                        <div class="suggested-product-item row align-items-start">
                                                            <div class="suggested-img col-3 px-0">
-                                                               <a href="{{ route('product.details') }}">
-                                                                   <img src="./assets/images/related-product/zmniacinamidefw.avif"
+                                                               <a href="">
+                                                                   <img src="{{ asset('assets') }}/images/related-product/zmniacinamidefw.avif"
                                                                        alt="product image" />
                                                                </a>
                                                            </div>
                                                            <div class="suggested-product-details col-9">
                                                                <div class="suggeted-title">
-                                                                   <a href="{{ route('product.details') }}">
+                                                                   <a href="">
                                                                        <h5>
                                                                            Zayn & Myza Brightening Vitamin C
                                                                            Exfoliating Face Wash (100ml) - Pack of
@@ -1349,7 +1352,7 @@
                                                                </div>
                                                                <div class="suggested-cart">
                                                                    <a href="" title="Add to Cart"><img
-                                                                           src="./assets/images/icon/parcel.png"
+                                                                           src="{{ asset('assets') }}/images/icon/parcel.png"
                                                                            alt="bag icon" /></a>
                                                                </div>
                                                            </div>
@@ -1432,7 +1435,8 @@
    <div class="mobile-menu">
        <div class="mm-logo" style="background: #fff; padding: 0.6875rem 1.125rem">
            <a href="{{ url('/') }}">
-               <img style="width: 50%" src="./assets/images/logo/logo_High_Res_Mob_x320.avif" alt="" />
+               <img style="width: 50%" src="{{ asset('assets') }}/images/logo/logo_High_Res_Mob_x320.avif"
+                   alt="" />
            </a>
            <div class="mm-cross-icon">
                <i class="fa fa-times mm-ci"></i>

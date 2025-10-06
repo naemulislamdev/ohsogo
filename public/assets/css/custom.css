@@ -8,6 +8,48 @@
     box-sizing: border-box;
 }
 
+.related-products .owl-nav button {
+    position: absolute;
+    top: 33%;
+    transform: translateY(-50%);
+    background: #414042 !important; /* Dark background */
+    color: #fff !important; /* White icon */
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+.related-products .owl-nav button:hover {
+    opacity: 1;
+}
+
+.related-products .owl-nav .owl-prev {
+    left: -50px;
+}
+.related-products .owl-nav .owl-next {
+    right: -50px;
+}
+.owl-nav button.disabled {
+    background: #555 !important;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .related-products .owl-nav .owl-prev {
+        left: -25px;
+    }
+    .related-products .owl-nav .owl-next {
+        right: -25px;
+    }
+}
+
 /* ========================================
   Mobile Grid View System Style Start
 =========================================== */

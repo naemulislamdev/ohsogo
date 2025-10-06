@@ -59,7 +59,8 @@
                 </div>
                 <div class="col-12">
                     <div class="payment-methods text-center">
-                        <img src="assets/images/payment/pay-with.png" alt="Payment Methods" class="img-fluid" />
+                        <img src="{{ asset('assets') }}/images/payment/pay-with.png" alt="Payment Methods"
+                            class="img-fluid" />
                     </div>
                 </div>
             </div>
