@@ -88,7 +88,10 @@ class WebController extends Controller
     public function productDetails($id)
     {
         $product = Product::find($id);
-
-        return view('web-views.product-details', compact('product'));
+        if ($product) {
+            return view('web-views.product-details', compact('product'));
+        } else {
+            return redirect("/");
+        }
     }
 }

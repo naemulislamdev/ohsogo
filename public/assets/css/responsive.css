@@ -114,6 +114,9 @@
         margin-top: -26px;
         display: flex;
     }
+    .hero-section {
+        padding: 10px 0 !important;
+    }
 }
 
 @media (max-width: 570px) {
@@ -239,5 +242,10 @@
         position: absolute;
         top: -10px;
         right: -18px;
+    }
+}
+@media (min-width: 400px) {
+    .shipping-box {
+        display: flex;
     }
 }

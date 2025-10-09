@@ -176,8 +176,12 @@
                                                     <div class="checkout-summary mt-4">
                                                         <div class="discount-code">
                                                             <form action="" class="d-flex">
-                                                                <input class="form-control discountInput" type="text"
-                                                                    name="discount-code" placeholder="Discount Code">
+                                                                <div class="form-floating">
+                                                                    <input class="form-control discountInput"
+                                                                        type="text" name="discount-code"
+                                                                        id="discount_code" placeholder="Discount Code">
+                                                                    <label for="discount_code">Discount Code</label>
+                                                                </div>
                                                                 <button type="submit"
                                                                     class="ms-3 border border-2 btn btn-light btn-lg applyBtn"
                                                                     disabled>Apply</button>
@@ -222,8 +226,13 @@
                                 <form action="">
                                     <!-- Email -->
                                     <div class="email-info">
-                                        <input class="form-control " type="text" name="email_phone" id="email_phone"
-                                            placeholder="Email or mobile phone number" />
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" name="email_phone"
+                                                id="email_phone" placeholder="name@example.com">
+                                            <label class="text-muted" for="email_phone">Email or mobile phone
+                                                number</label>
+                                        </div>
+
                                         {{-- <div class="mt-2 d-flex align-items-center">
                                             <input type="checkbox" class="form-check-input border" id="check-email" />
                                             <label for="check-email" class="form-label mb-0 ms-2 mt-1">
@@ -248,61 +257,77 @@
                                         <h5>Delivery</h5>
 
                                         <!-- Country -->
-                                        <div>
-                                            <label class="form-label">Country/Region</label>
+                                        <div class="form-floating">
+
                                             <select class="form-select form-select-lg" name="country" id="country">
                                                 <option value="Bangladesh">Bangladesh</option>
                                                 <option value="United Arab Emirates">
                                                     United Arab Emirates
                                                 </option>
                                             </select>
+                                            <label class="mb-3 " for="country">Country/Region</label>
                                         </div>
 
                                         <!-- Name -->
                                         <div class="row mt-3">
                                             <div class="col-lg-6">
-                                                <input class="form-control " type="text" name="first-name"
-                                                    id="first-name" placeholder="First name" />
+                                                <div class="form-floating">
+                                                    <input class="form-control " type="text" name="first-name"
+                                                        id="first-name" placeholder="First name" />
+                                                    <label class="text-muted" for="first-name">First name</label>
+                                                </div>
                                             </div>
                                             <div class="col-lg-6 mt-3 mt-lg-0">
-                                                <input class="form-control " type="text" name="last-name"
-                                                    id="last-name" placeholder="Last name" />
+                                                <div class="form-floating">
+                                                    <input class="form-control " type="text" name="last-name"
+                                                        id="last-name" placeholder="Last name" />
+                                                    <label class="text-muted" for="last-name">Last name</label>
+
+                                                </div>
                                             </div>
                                         </div>
 
                                         <!-- Address -->
                                         <div class="mt-3">
-                                            <input class="form-control " type="text" name="address" id="address"
-                                                placeholder="Address" />
+                                            <div class="form-floating">
+                                                <input class="form-control " type="text" name="address"
+                                                    id="address" placeholder="Address" />
+                                                <label for="address">Address</label>
+                                            </div>
                                         </div>
                                         <div class="mt-3">
-                                            <input class="form-control " type="text" name="apartment" id="apartment"
-                                                placeholder="Apartment, suite, etc. (optional)" />
+                                            <div class="form-floating">
+                                                <input class="form-control " type="text" name="apartment"
+                                                    id="appartment" placeholder="Apartment, suite, etc. (optional)" />
+                                                <label for="appartment">Apartment, suite, etc. (optional)</label>
+                                            </div>
                                         </div>
 
                                         <!-- City & UAE City -->
                                         <div class="row mt-3">
                                             <div class="col-lg-6">
-                                                <input class="form-control " type="text" name="city"
-                                                    id="city" placeholder="City" />
+                                                <div class="form-floating">
+                                                    <input class="form-control " type="text" name="city"
+                                                        id="city" placeholder="City" />
+                                                    <label for="city">City</label>
+                                                </div>
                                             </div>
                                             <div class="col-lg-6 mt-3 mt-lg-0">
-                                                <select class="form-select form-select-lg" name="uae-city">
-                                                    <option value="Abu Dhabi">Abu Dhabi</option>
-                                                    <option value="Ajman">Ajman</option>
-                                                    <option value="Dubai">Dubai</option>
-                                                    <option value="Fujairah">Fujairah</option>
-                                                    <option value="Ras al-Khimah">Ras al-Khimah</option>
-                                                    <option value="Sharjah">Sharjah</option>
-                                                    <option value="Umm al-Quwain">Umm al-Quwain</option>
-                                                </select>
+                                                <div class="form-floating">
+                                                    <input class="form-control" type="text" name="post_code"
+                                                        id="post_code" placeholder="Postal code (option)">
+                                                    <label>Postal code (option)</label>
+                                                </div>
                                             </div>
                                         </div>
 
                                         <!-- Phone -->
                                         <div class="mt-3">
-                                            <input class="form-control form-select-lg" type="tel" name="phone"
-                                                id="phone" placeholder="Phone" />
+                                            <div class="form-floating">
+                                                <input class="form-control form-select-lg" type="tel" name="phone"
+                                                    id="phone" placeholder="Phone" />
+                                                <label for="phone">Phone</label>
+                                            </div>
                                         </div>
 
                                         <!-- Save Info -->
@@ -338,44 +363,51 @@
                                         <div class="select-address mt-4">
                                             <div class="row ">
                                                 <div class="col-lg-4">
-                                                    <label for="division">Division</label>
-                                                    <select class="form-select form-select-lg" name="division"
-                                                        id="division">
-                                                        <option>Select</option>
-                                                        <option value="Dhaka">Dhaka</option>
-                                                        <option value="Barishal">Barishal</option>
-                                                        <option value="Chitagong">Chitagong</option>
-                                                        <option value="Rajshahi">Rajshahi</option>
-                                                        <option value="Sylhet">Sylhet</option>
-                                                        <option value="Rangpur">Rangpur</option>
-                                                        <option value="Khulna">Khulna</option>
-                                                    </select>
+
+                                                    <div class="form-floating">
+                                                        <select class="form-select form-select-lg" name="division"
+                                                            id="division">
+                                                            <option>Select</option>
+                                                            <option value="Dhaka">Dhaka</option>
+                                                            <option value="Barishal">Barishal</option>
+                                                            <option value="Chitagong">Chitagong</option>
+                                                            <option value="Rajshahi">Rajshahi</option>
+                                                            <option value="Sylhet">Sylhet</option>
+                                                            <option value="Rangpur">Rangpur</option>
+                                                            <option value="Khulna">Khulna</option>
+                                                        </select>
+                                                        <label for="division">Division</label>
+                                                    </div>
                                                 </div>
                                                 <div class="col-lg-4 mt-3  mt-lg-0">
-                                                    <label for="district">District</label>
-                                                    <select class="form-select form-select-lg" name="district"
-                                                        id="district">
-                                                        <option>Select</option>
-                                                        <option value="Patuakhli">Patuakhli</option>
-                                                        <option value="Barishal">Barishal</option>
-                                                        <option value="Barguna">Barguna</option>
-                                                        <option value="Bhola">Bhola</option>
-                                                        <option value="Jhalokathi">Jhalokathi</option>
-                                                        <option value="Pirojpur">Pirojpur</option>
-                                                    </select>
+                                                    <div class="form-floating">
+                                                        <select class="form-select form-select-lg" name="district"
+                                                            id="district">
+                                                            <option>Select</option>
+                                                            <option value="Patuakhli">Patuakhli</option>
+                                                            <option value="Barishal">Barishal</option>
+                                                            <option value="Barguna">Barguna</option>
+                                                            <option value="Bhola">Bhola</option>
+                                                            <option value="Jhalokathi">Jhalokathi</option>
+                                                            <option value="Pirojpur">Pirojpur</option>
+                                                        </select>
+                                                        <label for="district">District</label>
+                                                    </div>
                                                 </div>
                                                 <div class="col-lg-4 mt-3 mt-lg-0">
-                                                    <label for="upazila">Upazila</label>
-                                                    <select class="form-select form-select-lg" name="upazila"
-                                                        id="upazila">
-                                                        <option>Select</option>
-                                                        <option value="Patuakhli Sadar">Patuakhli Sadar</option>
-                                                        <option value="Bauphal">Bauphal</option>
-                                                        <option value="Dashmina">Dashmina</option>
-                                                        <option value="Dumki">Dumki</option>
-                                                        <option value="Galachipa">Galachipa</option>
-                                                        <option value="Mirzagonj">Mirzagonj</option>
-                                                    </select>
+                                                    <div class="form-floating">
+                                                        <select class="form-select form-select-lg" name="upazila"
+                                                            id="upazila">
+                                                            <option>Select</option>
+                                                            <option value="Patuakhli Sadar">Patuakhli Sadar</option>
+                                                            <option value="Bauphal">Bauphal</option>
+                                                            <option value="Dashmina">Dashmina</option>
+                                                            <option value="Dumki">Dumki</option>
+                                                            <option value="Galachipa">Galachipa</option>
+                                                            <option value="Mirzagonj">Mirzagonj</option>
+                                                        </select>
+                                                        <label for="upazila">Upazila</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -395,7 +427,7 @@
                                                             aria-controls="collapseOne">
 
 
-                                                            <label class="shipping-box d-flex">
+                                                            <label class="shipping-box">
                                                                 <input class="form-check-input" checked type="radio"
                                                                     name="payment_method" value="" onchange="">
                                                                 <span class="d-inline-block ms-1 mt-1 text-dark ">
@@ -407,7 +439,15 @@
                                                                         alt="">
                                                                     <img src="./assets/images/logo/american-express.svg"
                                                                         alt="">
-                                                                    <button class="btn btn-light py-0 border">+2</button>
+                                                                    <div class="d-inline-block position-relative paymentTwo-box">
+                                                                        <span
+                                                                            class="btn btn-light py-0 border payment-2btn">+2</span>
+                                                                            <div class="d-flex justify-content-between align-items-center gap-1 bg-dark px-3 py-2 rounded-2 payment-hover-item" >
+                                                                                <img src="./assets/images/logo/diners_club.svg" alt="diners club">
+                                                                                <img src="./assets/images/logo/unionpay.svg" alt="unionpay">
+                                                                                <div class="triangle"></div>
+                                                                            </div>
+                                                                    </div>
                                                                 </div>
                                                             </label>
                                                         </div>
@@ -502,17 +542,20 @@
                                                             <div class="accordion-body ">
                                                                 <div class="different-billing-address-form">
                                                                     <div>
-                                                                        <label>Select Country</label>
-                                                                        <select name="" id=""
-                                                                            class="form-select">
-                                                                            <option value="">----</option>
-                                                                            <option value="Bangladesh">Bangladesh</option>
-                                                                            <option value="India">India</option>
-                                                                            <option value="Nepal">Nepal</option>
-                                                                            <option value="Bhutan">Bhutan</option>
-                                                                            <option value="Srilanka">Srilanka</option>
-                                                                            <option value="Pakistan">Pakistan</option>
-                                                                        </select>
+                                                                        <div class="form-floating">
+                                                                            <select name="" id=""
+                                                                                class="form-select">
+                                                                                <option value="">----</option>
+                                                                                <option value="Bangladesh">Bangladesh
+                                                                                </option>
+                                                                                <option value="India">India</option>
+                                                                                <option value="Nepal">Nepal</option>
+                                                                                <option value="Bhutan">Bhutan</option>
+                                                                                <option value="Srilanka">Srilanka</option>
+                                                                                <option value="Pakistan">Pakistan</option>
+                                                                            </select>
+                                                                            <label>Country/Region</label>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="row mt-3">
                                                                         <div class="col-lg-6">
@@ -709,8 +752,11 @@
                     <div class="checkout-summary mt-4">
                         <div class="discount-code">
                             <form class="d-flex">
-                                <input class="form-control discountInput" type="text" name="discount-code"
-                                    placeholder="Discount Code">
+                                <div class="form-floating w-75">
+                                    <input class="form-control discountInput" type="text" id="discount_code"
+                                        name="discount-code" placeholder="Discount Code">
+                                    <label for="discount_code">Discount Code</label>
+                                </div>
                                 <button class="ms-3 border border-2 btn btn-light btn-lg applyBtn" disabled>Apply</button>
 
                             </form>

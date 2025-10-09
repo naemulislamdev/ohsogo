@@ -7,13 +7,39 @@
     padding: 0;
     box-sizing: border-box;
 }
+.payment-hover-item {
+    position: absolute;
+    width: 100px;
+    z-index: 999;
+    left: 0;
+    top: -51px;
+    transform: scale(0.6);
+    opacity: 0;
+    transition: all 0.2s ease-out;
+}
+.triangle {
+    position: absolute;
+    width: 0px;
+    left: 18%;
+    bottom: -6px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0 6px 8px 6px;
+    border-color: transparent transparent #000000 transparent;
+    transform: rotate(180deg);
+
+}
+.paymentTwo-box:hover .payment-hover-item  {
+    transform: scale(1);
+    opacity: 1;
+}
 
 .related-products .owl-nav button {
     position: absolute;
     top: 33%;
     transform: translateY(-50%);
-    background: #414042 !important; /* Dark background */
-    color: #fff !important; /* White icon */
+    background: #eb3986 !important;
+    color: #fff !important;
     border: none;
     border-radius: 50%;
     width: 40px;
@@ -34,11 +60,6 @@
 }
 .related-products .owl-nav .owl-next {
     right: -50px;
-}
-.owl-nav button.disabled {
-    background: #555 !important;
-    opacity: 0.5;
-    cursor: not-allowed;
 }
 
 @media (max-width: 768px) {
@@ -679,7 +700,7 @@ header .cart-badge {
 
 /*-----Category secton----*/
 .trending-categories {
-    padding: 40px 0;
+    padding: 0 0;
     padding-bottom: 60px;
     text-align: center;
     background-color: #fff;
@@ -975,7 +996,7 @@ header .cart-badge {
 .carousel-control-next {
     width: 40px;
     height: 40px;
-    background-color: #ff6b6b;
+    background-color: #eb3986;
     border-radius: 50%;
     top: 50%;
     transform: translateY(-50%);
@@ -1362,9 +1383,10 @@ section.related-products {
 .product-checkout-section input.form-control,
 .product-checkout-section select {
     font-size: 1rem !important;
-    padding-top: 12px !important;
-    padding-bottom: 12px !important;
     border-width: 2px;
+}
+.product-checkout-section select {
+    padding-top: 24px !important;
 }
 .product-checkout-section .form-control:focus {
     border-color: #212529 !important;
