@@ -27,9 +27,8 @@
     border-width: 0 6px 8px 6px;
     border-color: transparent transparent #000000 transparent;
     transform: rotate(180deg);
-
 }
-.paymentTwo-box:hover .payment-hover-item  {
+.paymentTwo-box:hover .payment-hover-item {
     transform: scale(1);
     opacity: 1;
 }
@@ -2297,3 +2296,39 @@ input[type="range"].active::-webkit-slider-thumb {
 /* ================================================================================
   Terms and Condition, Privacy Policy, Shipping & Returns Section Style end
 ===============================================================================*/
+#mainCategoryTabs .nav-link {
+    border: 1px solid #b5b6b5;
+    color: #414042;
+    font-weight: 800;
+    padding: 14px 62px;
+    margin-right: 5px;
+    text-transform: uppercase;
+    font-size: 1.125rem;
+    border-radius: 12px;
+}
+#mainCategoryTabs .nav-link.active {
+    background-color: #b5b6b5;
+    color: #fff;
+}
+#mainCategoryTabs {
+    gap: 40px;
+}
+#faceSubcategoryTabs {
+    justify-content: center;
+    gap: 30px;
+}
+#faceSubcategoryTabs .nav-link {
+    margin-bottom: -1px;
+    border: 1px solid #e2f0d8 !important;
+    background: #fff;
+    border-radius: 12px !important;
+    padding: 12px 25px !important;
+    font-size: 19px;
+    font-weight: 400 !important;
+    border: 1px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+#faceSubcategoryTabs .nav-link.active {
+    background-color: #e2f0d8;
+}

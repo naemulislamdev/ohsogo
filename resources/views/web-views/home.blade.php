@@ -363,7 +363,7 @@
             </ul>
 
             <div class="text-center mb-5">
-                <p>Select the concern below to find the Products you need.</p>
+                <p style="font-size: 18px"><strong>Select the concern below </strong> to find the Products you need.</p>
             </div>
 
             <!-- Tab Content -->
