@@ -604,124 +604,166 @@
             </div>
         </div>
     </section>
-    <div class="container mt-5">
-        <h2 class="mb-4">Popular Searches</h2>
-
-        <!-- Bootstrap Accordion -->
-        <div class="accordion" id="searchesAccordion">
-            <!-- Skincare Category -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingSkincare">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseSkincare" aria-expanded="false" aria-controls="collapseSkincare">
-                        Skincare Products
-                    </button>
-                </h2>
-                <div id="collapseSkincare" class="accordion-collapse collapse" aria-labelledby="headingSkincare"
-                    data-bs-parent="#searchesAccordion">
-                    <div class="accordion-body">
-                        <ul class="list-unstyled">
-                            <li><a href="#">Face serum products</a></li>
-                            <li><a href="#">Foaming face wash</a></li>
-                            <li><a href="#">Buy moisturiser online</a></li>
-                            <li><a href="#">Day cream</a></li>
-                            <li><a href="#">Night cream online</a></li>
-                            <li><a href="#">Brightening eye cream</a></li>
-                            <li><a href="#">Facial cleanser online</a></li>
-                            <li><a href="#">Face moisturiser cream</a></li>
-                            <li><a href="#">Oil free sunscreen</a></li>
-                        </ul>
+    <section class="faq-section">
+        <div class="container mt-5 mb-5">
+            <!-- Bootstrap Accordion -->
+            <div class="accordion" id="searchesAccordion">
+                <!-- Skincare Category -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingSkincare">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseSkincare" aria-expanded="false" aria-controls="collapseSkincare">
+                            <span class="accordion-title">Popular Searches</span>
+                        </button>
+                    </h2>
+                    <div id="collapseSkincare" class="accordion-collapse collapse" aria-labelledby="headingSkincare"
+                        data-bs-parent="#searchesAccordion">
+                        <div class="accordion-body popular-search">
+                            <ul class="list-unstyled">
+                                <li><a href="#">Makeup Products</a></li>
+                                <li><a href="#">Face Primer</a></li>
+                                <li><a href="#">Makeup Foundation</a></li>
+                                <li><a href="#">Compact Powder</a></li>
+                                <li><a href="#">BB Cream</a></li>
+                                <li><a href="#">Highlighter Makeup</a></li>
+                                <li><a href="#">Makeup Remover</a></li>
+                                <li><a href="#">Makeup Setting Spray </a></li>
+                                <li><a href="#">Eye Kajal</a></li>
+                                <li><a href="#">Waterproof Mascara</a></li>
+                                <li><a href="#">Eyeshadow Palette</a></li>
+                                <li><a href="#">Eyebrow Pencil</a></li>
+                                <li><a href="#">Eyelashes</a></li>
+                                <li><a href="#">Lipstick</a></li>
+                                <li><a href="#">Matte Lipstick</a></li>
+                                <li><a href="#">Liquid Lipstick</a></li>
+                                <li><a href="#">Lip Tint</a></li>
+                                <li><a href="#">Nail Polish</a></li>
+                                <li><a href="#">Nail Polish Remover</a></li>
+                                <li><a href="#">Concealer</a></li>
+                                <li><a href="#">Contour</a></li>
+                                <li><a href="#">Blush</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Makeup Category -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingMakeup">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseMakeup" aria-expanded="false" aria-controls="collapseMakeup">
-                        Makeup Products
-                    </button>
-                </h2>
-                <div id="collapseMakeup" class="accordion-collapse collapse" aria-labelledby="headingMakeup"
-                    data-bs-parent="#searchesAccordion">
-                    <div class="accordion-body">
-                        <ul class="list-unstyled">
-                            <li><a href="#">Tinted lip balm</a></li>
-                            <li><a href="#">matte lipstick shades</a></li>
-                            <li><a href="#">Liquid lipstick online</a></li>
-                            <li><a href="#">Face concealer</a></li>
-                            <li><a href="#">CC cream makeup</a></li>
-                            <li><a href="#">Buy makeup primer</a></li>
-                            <li><a href="#">Waterproof eyeliner</a></li>
-                            <li><a href="#">Eyeshadow palette online</a></li>
-                            <li><a href="#">Face compact powder</a></li>
-                            <li><a href="#">Buy makeup highlighter</a></li>
-                            <li><a href="#">Waterproof mascara</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Haircare Category -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingHaircare">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseHaircare" aria-expanded="false" aria-controls="collapseHaircare">
-                        Haircare Products
-                    </button>
-                </h2>
-                <div id="collapseHaircare" class="accordion-collapse collapse" aria-labelledby="headingHaircare"
-                    data-bs-parent="#searchesAccordion">
-                    <div class="accordion-body">
-                        <ul class="list-unstyled">
-                            <li><a href="#">Buy shampoo online</a></li>
-                            <li><a href="#">Hair fall control oil</a></li>
-                            <li><a href="#">Hair serum online</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Body & Fragrance Category -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingBody">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseBody" aria-expanded="false" aria-controls="collapseBody">
-                        Body & Fragrance
-                    </button>
-                </h2>
-                <div id="collapseBody" class="accordion-collapse collapse" aria-labelledby="headingBody"
-                    data-bs-parent="#searchesAccordion">
-                    <div class="accordion-body">
-                        <ul class="list-unstyled">
-                            <li><a href="#">Body lotion online</a></li>
-                            <li><a href="#">Women’s fragrances</a></li>
-                            <li><a href="#">Men’s fragrances</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Nail & Tools Category -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingNail">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseNail" aria-expanded="false" aria-controls="collapseNail">
-                        Nail & Makeup Tools
-                    </button>
-                </h2>
-                <div id="collapseNail" class="accordion-collapse collapse" aria-labelledby="headingNail"
-                    data-bs-parent="#searchesAccordion">
-                    <div class="accordion-body">
-                        <ul class="list-unstyled">
-                            <li><a href="#">Nail polish products</a></li>
-                            <li><a href="#">Waterproof makeup remover</a></li>
-                            <li><a href="#">Nail polish remover</a></li>
-                        </ul>
+                <!--More Info-->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingMakeup">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseMakeup" aria-expanded="false" aria-controls="collapseMakeup">
+                            <span class="accordion-title">More Information</span>
+                        </button>
+                    </h2>
+                    <div id="collapseMakeup" class="accordion-collapse collapse" aria-labelledby="headingMakeup"
+                        data-bs-parent="#searchesAccordion">
+                        <div class="accordion-body">
+                            <div class="more-info">
+                                <h4>Ohsogo: The Best Collection of Makeup Products Online in Bangladesh </h4>
+                                <p>Makeup is an excellent form of self-expression for all women. Whether you are a bold,
+                                    daring personality that loves sporting red hues and colorful nail tips or a subtle, shy
+                                    character that loves a natural, luminous look with blushy cheeks, wearing makeup in your
+                                    unique style sets you apart from the crowd! </p>
+                                <p> At Ohsogo, we offer a selection of makeup & skincare products developed by the most
+                                    revered cosmetic brands from across the globe. From high-quality face makeup products to
+                                    vibrant eye makeup products & bold lip makeup products, you can pick from a vast array
+                                    of beauty products while shopping at our online store. Whether you’re looking for makeup
+                                    brands that offer products with a long-wear formula, or those that provide
+                                    chemical-free, skin-friendly products, we’ve got it all! Flaunt a flawless, glowing
+                                    makeup look everywhere by using exclusive makeup products from Ohsogo!</p>
+                                <h5> Indulge in a variety of makeup products at Ohsogo </h5>
+                                <p> Leaving everything aside, women love variety. While shopping for clothes, or beauty
+                                    products, women love having a vast assortment to shop from. At Ohsogo, you can browse
+                                    through our colossal online collection of makeup products to make an informed decision &
+                                    buy products that not only suit your preference but also your skin’s needs!
+                                </p>
+                                <p> Face makeup products: Create a seamless, glowing base for your makeup with face makeup
+                                    products like primer, foundation, concealer, compact, blush, highlighter, and much more.
+                                </p>
+                                <p> Eye makeup products: Create a deep, intense eye look with eye makeup products such as
+                                    kajal, mascara, eyeshadow, and eyebrow enhancers to captivate everyone with your
+                                    enticing eyes! </p>
+                                <p> Lip makeup products: Sport the perfect pout for every occasion with our collection of
+                                    lip makeup products, including matte & creamy lipstick, liquid lipstick & lip tints.
+                                </p>
+                                <p> Nail products: Besides face makeup, we also offer you a wide collection of nail polishes
+                                    & removers to maintain bright, vibrant & healthy nails! </p>
+                                <h5>Buy Exclusive Makeup Products Online at Ohsogo </h5>
+                                <p> At Ohsogo, we’ve designed a one-stop destination for all your cosmetics & skincare
+                                    needs. Enhance your makeup collection with select products formulated by the most
+                                    esteemed & preferred brands worldwide to create a makeup look that flaunts your natural
+                                    charm & beauty! </p>
+                                <h5 class="my-4"> FAQs </h5>
+                                <p>1. Is there a proper order for applying makeup? What is it? </p>
+                                <p>While you can easily buy several makeup products online, it is essential to know the
+                                    application process. Following a proper order of applying makeup products is the best
+                                    way to enjoy makeup that lasts all day long while also protecting your skin health. The
+                                    best order to apply makeup products is:- </p>
+                                <ul style="list-style: decimal">
+                                    <li>Set a base by using a makeup primer. </li>
+                                    <li>Use a foundation that suits your skin type and tone. </li>
+                                    <li>Use a concealer to conceal dark spots, acne & dark under eyes. </li>
+                                    <li>Use a compact powder to set your liquid makeup products. </li>
+                                    <li>Use various eye makeup products such as eye shadow, kajal, liner, and mascara to
+                                        create an eye look. </li>
+                                    <li>Use a pretty blush or bronzer to add color to your cheeks. </li>
+                                    <li>Wear a bold pout by applying matte or velvety lipstick. </li>
+                                    <li> Complete your look with a setting spray to keeps your makeup intact all day. </li>
+                                </ul>
+                                <ul class="mt-3 mb-5" style="list-style: decimal">
+                                    <li>How To Prevent An Oily Face After Applying Makeup?</li>
+                                </ul>
+                                <p>Everyone has a different skin tone and skin type. While many of us have normal skin,
+                                    several others have combination, sensitive or oily skin that can turn your face oily
+                                    after applying makeup. If you find your T-zone or other areas of your face getting oily
+                                    after applying cosmetic products, make sure to follow these few tips:- </p>
+                                <ul style="list-style: decimal">
+                                    <li>Never forget to use a makeup primer that shrinks your pores for a more seamless look
+                                        that does not get oily throughout the day. </li>
+                                    <li>Always use powder makeup products to set and mattify your liquid products such as
+                                        foundation and concealer. </li>
+                                    <li>Opt for makeup products that have a mattifying formula than a creamy texture to
+                                        control oil build-up. </li>
+                                    <li>Use a setting spray to keep the makeup intact all day. </li>
+                                    <li>Lightly pat your face with a compact every few hours when you find your face turning
+                                        oily. </li>
+                                </ul>
+                                <ul style="list-style: ">
+                                    <li>
+                                        Which makeup products should women splurge on the most? </li>
+                                </ul>
+                                <p>At Ohsogo, we offer a wide assortment of premium-quality beauty & cosmetic products
+                                    online. Whether you are looking for skincare products that fix all your skin issues, or
+                                    you’re looking for makeup products that give you a flawless complexion, women across
+                                    Bangladesh can splurge on a variety of makeup products such as foundation, concealer,
+                                    primer, eye makeup, liquid lipstick, nail paints, and much more, at our online store.
+                                </p>
+                                <ul style="list-style: decimal">
+                                    <li>Can I wear makeup every day? How do I stop it from slipping off? </li>
+                                </ul>
+                                <p>Yes, you can enjoy a flawless makeup look every day. While it feels great to wear makeup
+                                    every morning, it can slip off during the day. To ensure that your makeup look stays
+                                    intact, indulge in makeup products that have a long-lasting formula. You can also use a
+                                    setting spray from esteemed brands that set your makeup in place which doesn’t allow it
+                                    to budge all day. Lastly, you can touch up your face with makeup products such as
+                                    compacts to instantly fix your look. </p>
+                                <ul style="list-style: decimal">
+                                    <li>What makeup products do you need for a full face makeup? </li>
+                                </ul>
+                                <p>Enjoy creating a bold, full face makeup look every day with these essential beauty
+                                    products that you can find shopping online at Ohsogo! </p>
+                                <ul class="ps-0 ms-0">
+                                    <li>Face makeup products: Primer, foundation, concealer, compact, blush, highlighter.
+                                    </li>
+                                    <li>Eye makeup products: Kajal, mascara, eyeshadow, eyebrow enhancers. </li>
+                                    <li>Lip makeup products: Lipstick, liquid lipstick. </li>
+                                    <li>Makeup setting spray. </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection
