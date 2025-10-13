@@ -117,6 +117,10 @@
     .hero-section {
         padding: 10px 0 !important;
     }
+    .no-js .owl-carousel,
+    .owl-carousel.owl-loaded {
+        height: 270px;
+    }
 }
 
 @media (max-width: 570px) {

@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/css/xzoom.min.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/custom.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/responsive.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/slick/slick.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/slick/slick-theme.css">
     <style>
         :root {
             --primary-color: #ff6b6b;
@@ -25,49 +27,49 @@
 
         .navbar-brand {
             font-weight: 800;
-            font-size: 32px;
+            font-size: 2rem;
             color: var(--primary-color);
         }
 
         .hero-section {
             background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
-            padding: 3.125rem 0;
-            margin-bottom: 1.875rem;
+            padding: 50px 0;
+            margin-bottom: 30px;
         }
 
         .hero-title {
-            font-size: 56px;
+            font-size: 3.5rem;
             font-weight: 800;
             color: var(--dark-color);
-            margin-bottom: 1.25rem;
+            margin-bottom: 20px;
         }
 
         .hero-subtitle {
-            font-size: 19.2px;
+            font-size: 1.2rem;
             color: #666;
-            margin-bottom: 1.875rem;
+            margin-bottom: 30px;
         }
 
         .carousel-item img {
-            border-radius: 0.625rem;
-            height: 25rem;
+            border-radius: 10px;
+            height: 400px;
             object-fit: cover;
         }
 
         .carousel-indicators button {
-            width: 0.625rem;
-            height: 0.625rem;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            margin: 0 0.3125rem;
+            margin: 0 5px;
         }
 
-        @media (max-width: 48rem) {
+        @media (max-width: 768px) {
             .hero-title {
-                font-size: 40px;
+                font-size: 2.5rem;
             }
 
             .carousel-item img {
-                height: 15.625rem;
+                height: 250px;
             }
         }
 
@@ -114,6 +116,7 @@
     <script src="{{ asset('assets') }}/js/owl.carousel.min.js"></script>
     <script src="{{ asset('assets') }}/js/owl-extra-code.js"></script>
     <script src="{{ asset('assets') }}/js/xzoom.min.js"></script>
+    <script src="{{ asset('assets') }}/slick/slick.min.js"></script>
     {{-- owl carosel  --}}
     <script>
         $(document).ready(function() {
@@ -546,6 +549,106 @@
             });
         });
     </script>
+    {{-- <script>
+        $(document).ready(function() {
+            $('.center').slick({
+                centerMode: true,
+                centerPadding: '0rem',
+                slidesToShow: 3,
+                infinite: true,
+                arrows: true,
+                autoplay: true,
+                autoplaySpeed: 2500,
+                pauseOnHover: false,
+                responsive: [{
+                    breakpoint: 768,
+                    settings: {
+                        arrows: false,
+                        centerMode: true,
+                        slidesToShow: 1
+                    }
+                }]
+            });
+        });
+    </script> --}}
+    <script>
+        $(document).ready(function() {
+            const testimonials = [{
+                    quote: "I couldn't be happier with OHSOGO. They consistently deliver 100% original products with lightning-fast delivery.",
+                    name: "– Sanjida Toma",
+                    rating: 5
+                },
+                {
+                    quote: "I've always received exceptional service from OHSOGO with the best prices, making it my top choice for all my beauty needs",
+                    name: "– Shilpi Akter",
+                    rating: 4
+                },
+                {
+                    quote: "OHSOGO is my go-to for exclusive brands and 100% original products that never disappoint",
+                    name: "– Tawsia Ramy",
+                    rating: 3
+                },
+                {
+                    quote: "I've always received exceptional service from OHSOGO with the best prices, making it my top choice for all my beauty needs",
+                    name: "– Shilpi Akter",
+                    rating: 4
+                }
+            ];
+
+            const $slider = $('.testimonial-slider');
+
+            // Initialize Slick slider
+            $slider.slick({
+                centerMode: true,
+                centerPadding: '0',
+                slidesToShow: 3,
+                autoplay: true,
+                autoplaySpeed: 2500,
+                arrows: false,
+                infinite: true,
+                pauseOnHover: false,
+                responsive: [{
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        centerMode: true
+                    }
+                }]
+            });
+
+            // Update testimonial content
+            function updateContent(index) {
+                const current = testimonials[index % testimonials.length]; // safeguard
+                const fullStars = '<i class="fa fa-star"></i>'.repeat(current.rating);
+                const emptyStars = '<i class="fa fa-star-o"></i>'.repeat(5 - current.rating);
+
+                $('.testimonial-quote, .testimonial-name, .stars').css('opacity', 0);
+
+                setTimeout(() => {
+                    $('.testimonial-quote').text(`“${current.quote}”`).css('opacity', 1);
+                    $('.testimonial-name').text(current.name).css('opacity', 1);
+                    $('.stars').html(fullStars + emptyStars).css('opacity', 1);
+                }, 200);
+            }
+
+            // Initial load
+            updateContent(0);
+
+            // On slide change
+            $slider.on('afterChange', function(event, slick, currentSlide) {
+                updateContent(currentSlide);
+            });
+
+            // next/prev buttons
+            $('.next-btn').click(function() {
+                $slider.slick('slickNext');
+            });
+            $('.prev-btn').click(function() {
+                $slider.slick('slickPrev');
+            });
+        });
+    </script>
+
 </body>
 
 </html>

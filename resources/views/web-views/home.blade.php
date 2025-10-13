@@ -1,6 +1,8 @@
 @extends('layouts.front-end.app')
 @section('title', 'Home')
 
+
+
 @section('main-content')
     <!-- Hero Section -->
     <section class="hero-section">
@@ -337,7 +339,7 @@
     <!---- end brand Section------>
     <!---- start brand Section------>
     <section class="section home">
-        <div class="container py-5">
+        <div class="container  py-lg-5">
             <h1 class="text-center mb-5">WHAT DO YOU HAVE <strong>CONCERN WITH?</strong></h1>
 
             <!-- Main Category Tabs -->
@@ -538,69 +540,34 @@
     <section class="testimonial-section">
         <div class="container">
             <h2 class="section-heading">#BEAUTYBFF SPEAKS</h2>
-
-            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <!-- Testimonial 1 -->
-                    <div class="carousel-item active">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="testimonial-card text-center">
-                                    <p class="testimonial-text">
-                                        I couldn't be happier with OHSOGO. They consistently
-                                        deliver 100% original products with lightning-fast
-                                        delivery.
-                                    </p>
-                                    <div class="divider">*****</div>
-                                    <p class="client-name">- Sanjida Toma</p>
-                                </div>
-                            </div>
+            <div class="row mt-5">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="slider-wrapper">
+                        <!-- Image Slider -->
+                        <div class="testimonial-slider">
+                            <div><img src="assets/images/testimonial/customer-1.webp" alt="Skincare Products" /></div>
+                            <div><img src="assets/images/testimonial/customer-2.png" alt="Skincare Products" /></div>
+                            <div><img src="assets/images/testimonial/customer-3.png" alt="Skincare Products" /></div>
+                            <div><img src="assets/images/testimonial/customer-2.png" alt="Skincare Products" /></div>
                         </div>
+
+                        <!-- Dynamic Content -->
+                        <div class="testimonial-content text-center">
+                            <div class="stars"></div>
+                            <p class="testimonial-quote">
+                                “”</p>
+                            <p class="testimonial-name"></p>
+                        </div>
+                        <!-- Custom Next/Prev Buttons -->
+                        <button class="prev-btn btn btn-danger"><i class="fa fa-chevron-left text-white"
+                                aria-hidden="true"></i></button>
+                        <button class="next-btn btn btn-danger"><i class="fa fa-chevron-right text-white"
+                                aria-hidden="true"></i></button>
                     </div>
 
-                    <!-- Testimonial 2 -->
-                    <div class="carousel-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="testimonial-card text-center">
-                                    <p class="testimonial-text">
-                                        The quality of products from OHSOGO is exceptional. I've
-                                        been a loyal customer for years and they never disappoint.
-                                    </p>
-                                    <div class="divider">*****</div>
-                                    <p class="client-name">- Jessica Williams</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 3 -->
-                    <div class="carousel-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="testimonial-card text-center">
-                                    <p class="testimonial-text">
-                                        Fast delivery and authentic products! OHSOGO is my go-to
-                                        for all beauty needs. Highly recommended!
-                                    </p>
-                                    <div class="divider">*****</div>
-                                    <p class="client-name">- Michael Chen</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
-                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                <div class="col-lg-2"></div>
             </div>
         </div>
     </section>

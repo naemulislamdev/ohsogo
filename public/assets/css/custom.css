@@ -932,7 +932,6 @@ header .cart-badge {
 }
 /*-----------------Test monial Section-----------------*/
 .testimonial-section {
-    background-color: #f8f9fa;
     padding: 80px 0;
     position: relative;
 }
@@ -1012,9 +1011,8 @@ header .cart-badge {
 
 @media (max-width: 768px) {
     .testimonial-section {
-        padding: 50px 0;
+        padding-top: 290px;
     }
-
     .carousel-control-prev {
         left: 0;
     }
@@ -2384,4 +2382,104 @@ input[type="range"].active::-webkit-slider-thumb {
 }
 .faq-section .more-info ul li {
     margin-bottom: 10px;
+}
+
+/* Testimonial section */
+
+.slider-wrapper {
+    width: 80%;
+    margin: auto;
+}
+
+.testimonial-slider {
+    margin-bottom: 30px;
+}
+
+.testimonial-slider img {
+    width: 100px;
+    height: 100px;
+
+    object-fit: cover;
+    margin: auto;
+    transition: all 0.4s ease;
+    opacity: 0.5;
+    transform: scale(0.8);
+}
+.testimonial-content .stars {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+.testimonial-content .stars i {
+    color: #ffc107;
+    margin-bottom: 10px;
+}
+
+.slick-center img {
+    width: 140px;
+    height: 140px;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.slick-slide {
+    margin: 0 40px;
+}
+.slick-list {
+    margin: 0 -40px;
+}
+
+/* Content area */
+.testimonial-content {
+    max-width: 600px;
+    margin: auto;
+    transition: opacity 0.5s ease;
+}
+
+.stars {
+    color: #ffc107;
+    margin-bottom: 10px;
+}
+
+.testimonial-quote {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.testimonial-name {
+    font-weight: 600;
+    font-size: 18px;
+    color: #000;
+}
+
+@media (max-width: 768px) {
+    .slider-wrapper {
+        width: 95%;
+    }
+    .slick-slide {
+        margin: 0 15px;
+    }
+    .slick-list {
+        margin: 0 -15px;
+    }
+}
+.testimonial-section .slider-wrapper {
+    position: relative;
+    height: 300px;
+}
+.testimonial-section .slider-wrapper .prev-btn {
+    position: absolute;
+    left: 0;
+    top: 10%;
+}
+.testimonial-section .slider-wrapper .next-btn {
+    position: absolute;
+    right: 0;
+    top: 10%;
+}
+.testimonial-section .testimonial-quote {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
 }
