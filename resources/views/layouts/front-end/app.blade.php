@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/css/responsive.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/slick/slick.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/slick/slick-theme.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/animate.min.css">
+
     <style>
         :root {
             --primary-color: #ff6b6b;
@@ -117,20 +119,25 @@
     <script src="{{ asset('assets') }}/js/owl-extra-code.js"></script>
     <script src="{{ asset('assets') }}/js/xzoom.min.js"></script>
     <script src="{{ asset('assets') }}/slick/slick.min.js"></script>
-    {{-- owl carosel  --}}
+    <script src="{{ asset('assets') }}/js/wow.min.js"></script>
+
+    {{-- owl carosel for product slide --}}
     <script>
         $(document).ready(function() {
             const owl = $('.owl-carousel');
             owl.owlCarousel({
-                loop: false,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 3000, // প্রতিটি slide 3 সেকেন্ড পর পরিবর্তন হবে
+                autoplayHoverPause: true, // mouse hover করলে থেমে যাবে
                 margin: 40,
                 responsiveClass: true,
                 nav: true,
                 navText: [
                     '<i class="fa fa-chevron-left text-white"></i>',
-                    '<i class="fa fa-chevron-right text-white "></i>'
+                    '<i class="fa fa-chevron-right text-white"></i>'
                 ],
-                smartSpeed: 400,
+                smartSpeed: 800,
                 responsive: {
                     0: {
                         items: 2
@@ -143,32 +150,9 @@
                     }
                 }
             });
-
-            function updateNavState() {
-                const currentIndex = owl.find('.owl-item.active').first().index();
-                const totalItems = owl.find('.owl-item').length;
-                const itemsPerPage = owl.find('.owl-item.active').length;
-
-                // prev disable
-                if (currentIndex === 0) {
-                    $('.owl-prev').addClass('disabled');
-                } else {
-                    $('.owl-prev').removeClass('disabled');
-                }
-
-                // next disable
-                if (currentIndex + itemsPerPage >= totalItems) {
-                    $('.owl-next').addClass('disabled');
-                } else {
-                    $('.owl-next').removeClass('disabled');
-                }
-            }
-
-            // init and on change update state
-            updateNavState();
-            owl.on('changed.owl.carousel', updateNavState);
         });
     </script>
+
 
     <!-- Script for search system -->
     <script>

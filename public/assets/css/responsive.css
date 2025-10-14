@@ -117,9 +117,12 @@
     .hero-section {
         padding: 10px 0 !important;
     }
-    .no-js .owl-carousel,
-    .owl-carousel.owl-loaded {
-        height: 270px;
+    .testimonial-section {
+        height: 580px;
+    }
+    .slick-list {
+        padding: 0px;
+        height: 200px;
     }
 }
 

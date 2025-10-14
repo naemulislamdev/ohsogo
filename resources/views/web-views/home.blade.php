@@ -2,10 +2,9 @@
 @section('title', 'Home')
 
 
-
 @section('main-content')
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero-section ">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-12">
@@ -18,7 +17,7 @@
                             <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="2"></button>
                         </div>
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
+                            <div class="carousel-item active ">
                                 <img src="assets/images/slider/tbanner1.jpg" class="d-block w-100" alt="Makeup Products" />
                             </div>
                             <div class="carousel-item">
@@ -46,10 +45,10 @@
         </div>
     </section>
     <!-- start benefit section -->
-    <section class="benefit-section py-5">
-        <div class="container">
+    <section class="benefit-section py-5 ">
+        <div class="container ">
             <div class="row justify-content-center justify-content-lg-between">
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 ">
                     <div class="benefit-box text-center d-flex align-items-center justify-content-center">
                         <div class="me-3">
                             <img src="assets/images/icon/bf1.png" alt="Original Products" />
@@ -139,8 +138,8 @@
         <div class="container">
             <div class="trending-categories">
                 <h2 class="section-heading mb-5">TRENDING CATEGORY</h2>
-                <div class="row">
-                    <div class="col-lg-4">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6">
                         <div class="category-box">
                             <div class="category-image">
                                 <img src="assets/images/category/cat1.jpg" alt="Men's Grooming" />
@@ -149,7 +148,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 mt-4 mt-lg-0">
+                    <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
                         <div class="category-box">
                             <div class="category-image">
                                 <img src="assets/images/category/cat2.jpg" alt="Korean Beauty" />
@@ -158,7 +157,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 mt-4 mt-lg-0">
+                    <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
                         <div class="category-box">
                             <div class="category-image">
                                 <img src="assets/images/category/cat3.jpg" alt="Babycare" />
@@ -173,7 +172,7 @@
     <!---- end category Section------>
     <!---- start combo banner Section------>
     <section>
-        <div class="container">
+        <div class="container ">
             <div class="row">
                 <div class="col text-center mb-3">
                     <h1 style="font-size: 48px; font-weight: 400;">COMBOS FOR YOU</h1>
@@ -322,7 +321,7 @@
     <section class="section py-5">
         <div class="container">
             <h2 class="section-heading mb-5">SHOP BY INGREDIENTS</h2>
-            <div class="row">
+            <div class="row ">
                 <div class="col-md-6 mb-3">
                     <div class="ingredient-card">
                         <img src="assets/images/product-banner/ni1.jpg" alt="Ingredient Image" class="img-fluid" />
@@ -538,7 +537,7 @@
     </section>
     <!---- End Product Section------>
     <section class="testimonial-section">
-        <div class="container">
+        <div class="container ">
             <h2 class="section-heading">#BEAUTYBFF SPEAKS</h2>
             <div class="row mt-5">
                 <div class="col-lg-2"></div>
@@ -571,7 +570,7 @@
             </div>
         </div>
     </section>
-    <section class="faq-section">
+    <section class="faq-section py-2 my-3">
         <div class="container mt-5 mb-5">
             <!-- Bootstrap Accordion -->
             <div class="accordion" id="searchesAccordion">
