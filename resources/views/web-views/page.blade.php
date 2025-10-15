@@ -239,7 +239,8 @@
                                                 data-category="category1">
                                                 <div class="product-box product-box-col-2" data-category="category1">
                                                     <div class="card border-0 product">
-                                                        <div class="product-item border border-dark">
+                                                        <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
+                                                            data-aos-delay="0.5s">
                                                             <a href="">
                                                                 <img class="card-img-top default-img"
                                                                     src="./assets/images/related-product/rltd-1.1.jpg"
@@ -279,7 +280,8 @@
                                                 data-category="category1">
                                                 <div class="product-box product-box-col-2" data-category="category1">
                                                     <div class="card border-0 product">
-                                                        <div class="product-item border border-dark">
+                                                        <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
+                                                            data-aos-delay="0.5s">
                                                             <a href="">
                                                                 <img class="card-img-top default-img"
                                                                     src="./assets/images/related-product/rltd-2.1.webp"
@@ -319,7 +321,8 @@
                                                 data-category="category1">
                                                 <div class="product-box product-box-col-2" data-category="category1">
                                                     <div class="card border-0 product">
-                                                        <div class="product-item border border-dark">
+                                                        <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
+                                                            data-aos-delay="0.5s">
                                                             <a href="">
                                                                 <img class="card-img-top default-img"
                                                                     src="./assets/images/related-product/rltd-3.1.webp"
@@ -359,7 +362,8 @@
                                                 data-category="category1">
                                                 <div class="product-box product-box-col-2" data-category="category1">
                                                     <div class="card border-0 product">
-                                                        <div class="product-item border border-dark">
+                                                        <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
+                                                            data-aos-delay="0.5s">
                                                             <a href="">
                                                                 <img class="card-img-top default-img"
                                                                     src="./assets/images/related-product/rltd-4.1.webp"
@@ -399,7 +403,8 @@
                                                 data-category="category1">
                                                 <div class="product-box product-box-col-2" data-category="category1">
                                                     <div class="card border-0 product">
-                                                        <div class="product-item border border-dark">
+                                                        <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
+                                                            data-aos-delay="0.5s">
                                                             <a href="">
                                                                 <img class="card-img-top default-img"
                                                                     src="./assets/images/related-product/rltd-4.1.webp"
@@ -439,7 +444,8 @@
                                                 data-category="category1">
                                                 <div class="product-box product-box-col-2" data-category="category1">
                                                     <div class="card border-0 product">
-                                                        <div class="product-item border border-dark">
+                                                        <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
+                                                            data-aos-delay="0.5s">
                                                             <a href="">
                                                                 <img class="card-img-top default-img"
                                                                     src="./assets/images/related-product/rltd-4.1.webp"
@@ -479,7 +485,8 @@
                                                 data-category="category1">
                                                 <div class="product-box product-box-col-2" data-category="category1">
                                                     <div class="card border-0 product">
-                                                        <div class="product-item border border-dark">
+                                                        <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
+                                                            data-aos-delay="0.5s">
                                                             <a href="">
                                                                 <img class="card-img-top default-img"
                                                                     src="./assets/images/related-product/rltd-4.1.webp"
@@ -530,12 +537,12 @@
     </main>
     <!-- Page Main Content end -->
     <!-- FAQ Accordion -->
-    <section class="faq-section">
+    <section class="faq-section py-2 my-3">
         <div class="container mt-5 mb-5">
             <!-- Bootstrap Accordion -->
             <div class="accordion" id="searchesAccordion">
                 <!-- Skincare Category -->
-                <div class="accordion-item">
+                <div class="accordion-item wow animate__animated animate__fadeInUp">
                     <h2 class="accordion-header" id="headingSkincare">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseSkincare" aria-expanded="false" aria-controls="collapseSkincare">
@@ -574,7 +581,7 @@
                 </div>
 
                 <!--More Info-->
-                <div class="accordion-item">
+                <div class="accordion-item wow animate__animated animate__fadeInUp">
                     <h2 class="accordion-header" id="headingMakeup">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseMakeup" aria-expanded="false" aria-controls="collapseMakeup">

@@ -35,7 +35,7 @@
 
         .hero-section {
             background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
-            padding: 50px 0;
+            padding: 30px 0;
             margin-bottom: 30px;
         }
 
@@ -54,7 +54,7 @@
 
         .carousel-item img {
             border-radius: 10px;
-            height: 400px;
+            height: 100%;
             object-fit: cover;
         }
 
@@ -120,6 +120,10 @@
     <script src="{{ asset('assets') }}/js/xzoom.min.js"></script>
     <script src="{{ asset('assets') }}/slick/slick.min.js"></script>
     <script src="{{ asset('assets') }}/js/wow.min.js"></script>
+
+    <script>
+        new WOW().init();
+    </script>
 
     {{-- owl carosel for product slide --}}
     <script>

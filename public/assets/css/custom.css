@@ -2,6 +2,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Jost:ital,wght@0,100..900;1,100..900&display=swap'); */
 @import url("https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Jost:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 @import url("https://fonts.cdnfonts.com/css/avenir");
+@keyframes zoomOutLite {
+    0% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+        /* slightly smaller */
+    }
+}
+
+.animate__zoomOutLite {
+    animation-name: zoomOutLite;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
 * {
     margin: 0;
     padding: 0;

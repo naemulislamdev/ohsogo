@@ -66,7 +66,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-7 address-card-column">
-                        <div class="card text-start address-box">
+                        <div class="card text-start address-box wow animate__animated animate__fadeInUp">
                             <div class="card-body">
                                 <h2 class="card-title">Our Office</h2>
                                 <p class="card-text m-0 my-3">

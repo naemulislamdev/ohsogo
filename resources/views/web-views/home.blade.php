@@ -9,23 +9,27 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <!-- Carousel Slider -->
-                    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
                         <div class="carousel-indicators">
                             <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="0"
                                 class="active"></button>
                             <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="1"></button>
                             <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="2"></button>
                         </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active ">
-                                <img src="assets/images/slider/tbanner1.jpg" class="d-block w-100" alt="Makeup Products" />
+                        <div class="carousel-inner ">
+                            <div class="carousel-item active  ">
+                                <img src="assets/images/slider/tbanner1.jpg"
+                                    class="d-block w-100 wow animate__animated animate__zoomOutLite" data-wow-delay="0.5s"
+                                    alt="Makeup Products" />
                             </div>
-                            <div class="carousel-item">
-                                <img src="assets/images/slider/tbanner2.jpg" class="d-block w-100"
+                            <div class="carousel-item ">
+                                <img src="assets/images/slider/tbanner2.jpg"
+                                    class="d-block w-100 wow animate__animated animate__zoomOutLite" data-wow-delay="0.5s"
                                     alt="Skincare Products" />
                             </div>
-                            <div class="carousel-item">
-                                <img src="assets/images/slider/slider-1.jpg" class="d-block w-100"
+                            <div class="carousel-item ">
+                                <img src="assets/images/slider/slider-1.jpg"
+                                    class="d-block w-100 wow animate__animated animate__zoomOutLite" data-wow-delay="0.5s"
                                     alt="Hair Care Products" />
                             </div>
                         </div>
@@ -45,10 +49,10 @@
         </div>
     </section>
     <!-- start benefit section -->
-    <section class="benefit-section py-5 ">
+    <section class="benefit-section py-5 wow animate__animated animate__fadeInUp">
         <div class="container ">
             <div class="row justify-content-center justify-content-lg-between">
-                <div class="col-md-6 col-lg-4 ">
+                <div class="col-md-6 col-lg-4 wow animate__animated animate__zoomIn"data-wow-duration="1.5s">
                     <div class="benefit-box text-center d-flex align-items-center justify-content-center">
                         <div class="me-3">
                             <img src="assets/images/icon/bf1.png" alt="Original Products" />
@@ -59,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mt-4 mt-md-0">
+                <div class="col-md-6 col-lg-4 mt-4 mt-md-0 wow animate__animated animate__zoomIn" data-wow-duration="2s">
                     <div class="benefit-box text-center d-flex align-items-center justify-content-center">
                         <div class="me-3">
                             <img src="assets/images/icon/bf2.png" alt="Free Shipping" />
@@ -70,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mt-4 mt-lg-0">
+                <div class="col-md-6 col-lg-4 mt-4 mt-lg-0 wow animate__animated animate__zoomIn" data-wow-duration="2s">
                     <div class="benefit-box text-center d-flex align-items-center justify-content-center">
                         <div class="me-3">
                             <img src="assets/images/icon/bf3.png" alt="Easy Returns" />
@@ -87,8 +91,8 @@
     <!-- end benefit section -->
     <!----Product Section------>
     <section class="product-section py-5">
-        <div class="container">
-            <div class="row">
+        <div class="container ">
+            <div class="row wow animate__animated animate__fadeInUp">
                 <div class="col">
                     <h2 class=" mb-5 section-heading">Peep the Newest Drops!</h2>
                 </div>
@@ -97,10 +101,10 @@
             <div class="owl-carousel related-products product-carosel">
                 @foreach ($newDropProducts as $product)
                     <div class="item">
-                        <div class="card border-0 product w-100">
-                            <div class="product-item border border-dark">
+                        <div class="card border-0 product w-100 ">
+                            <div class="product-item border border-dark wow animate__animated animate__zoomOutLite">
                                 <a href="{{ route('product.details', ['id' => $product->id]) }}"
-                                    class="product-img-container">
+                                    class="product-img-container ">
                                     <img class="card-img-top product-img"
                                         src="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $product['thumbnail'] }}"
                                         alt="{{ $product['id'] }}" />
@@ -137,29 +141,29 @@
     <section>
         <div class="container">
             <div class="trending-categories">
-                <h2 class="section-heading mb-5">TRENDING CATEGORY</h2>
+                <h2 class="section-heading mb-5 wow animate__animated animate__fadeInUp">TRENDING CATEGORY</h2>
                 <div class="row justify-content-center">
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-4 col-md-6 " data-wow-delay="0.5s">
                         <div class="category-box">
-                            <div class="category-image">
+                            <div class="category-image wow animate__animated animate__zoomOutLite">
                                 <img src="assets/images/category/cat1.jpg" alt="Men's Grooming" />
                             </div>
                             <div class="category-title">MENS GROOMING</div>
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
-                        <div class="category-box">
-                            <div class="category-image">
+                    <div class="col-lg-4 col-md-6 mt-4 mt-lg-0 " data-wow-delay="0.5s">
+                        <div class="category-box ">
+                            <div class="category-image wow animate__animated animate__zoomOutLite">
                                 <img src="assets/images/category/cat2.jpg" alt="Korean Beauty" />
                             </div>
                             <div class="category-title">KOREAN BEAUTY</div>
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
-                        <div class="category-box">
-                            <div class="category-image">
+                    <div class="col-lg-4 col-md-6 mt-4 mt-lg-0 " data-wow-delay="0.5s">
+                        <div class="category-box ">
+                            <div class="category-image wow animate__animated animate__zoomOutLite">
                                 <img src="assets/images/category/cat3.jpg" alt="Babycare" />
                             </div>
                             <div class="category-title">BABYCARE</div>
@@ -173,16 +177,16 @@
     <!---- start combo banner Section------>
     <section>
         <div class="container ">
-            <div class="row">
+            <div class="row wow animate__animated animate__fadeInUp">
                 <div class="col text-center mb-3">
                     <h1 style="font-size: 48px; font-weight: 400;">COMBOS FOR YOU</h1>
                 </div>
             </div>
             <div class="row mt-4 mt-lg-5 ">
-                <div class="col-lg-12">
+                <div class="col-lg-12 ">
                     <div class="combo-img">
                         <a href=""> <img src="assets/images/product-banner/pbanner1.jpg" alt="Combo Image"
-                                class="img-fluid" /></a>
+                                class="img-fluid wow animate__animated animate__zoomOutLite" /></a>
                     </div>
                 </div>
             </div>
@@ -191,50 +195,56 @@
     <!---- end combo banner Section------>
     <!---- start recent drops Section------>
     <div class="recent-drops-section py-5">
-        <div class="container">
-            <h2 class="section-heading mb-5">RECENT DROPS</h2>
+        <div class="container ">
+            <h2 class="section-heading mb-5 wow animate__animated animate__fadeInUp">RECENT DROPS</h2>
 
             <div class="row g-4">
                 <!-- First Row -->
-                <div class="col-md-4">
+                <div class="col-md-4 ">
                     <div class="drop-card">
-                        <img src="assets/images/product-banner/rd1.jpg" alt="" />
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd1.jpg"
+                            alt="" />
                         <h4>UP TO 25% OFF</h4>
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4 ">
                     <div class="drop-card">
-                        <img src="assets/images/product-banner/rd2.jpg" alt="" />
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd2.jpg"
+                            alt="" />
                         <h4>UP TO 25% OFF</h4>
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4 ">
                     <div class="drop-card">
-                        <img src="assets/images/product-banner/rd3.jpg" alt="" />
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd3.jpg"
+                            alt="" />
                         <h4>UP TO 25% OFF</h4>
                     </div>
                 </div>
 
                 <!-- Second Row -->
-                <div class="col-md-4">
+                <div class="col-md-4 ">
                     <div class="drop-card">
-                        <img src="assets/images/product-banner/rd4.jpg" alt="" />
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd4.jpg"
+                            alt="" />
+                        <h4>UP TO 25% OFF</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4 ">
+                    <div class="drop-card">
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd5.jpg"
+                            alt="" />
                         <h4>UP TO 25% OFF</h4>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="drop-card">
-                        <img src="assets/images/product-banner/rd5.jpg" alt="" />
-                        <h4>UP TO 25% OFF</h4>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="drop-card">
-                        <img src="assets/images/product-banner/rd6.jpg" alt="" />
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd6.jpg"
+                            alt="" />
                         <h4>UP TO 25% OFF</h4>
                     </div>
                 </div>
@@ -245,27 +255,31 @@
     <!---- start recent drops Section------>
     <div class="recent-drops-section py-5">
         <div class="container">
-            <h2 class="section-heading text-center mb-5">OHSOGO Recommends</h2>
+            <h2 class="section-heading text-center mb-5 wow animate__animated animate__fadeInUp">OHSOGO Recommends</h2>
 
             <div class="row g-4">
                 <div class="col-lg-3">
                     <div class="or-img-box">
-                        <img src="assets/images/product-banner/or1.jpg" alt="" />
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/or1.jpg"
+                            alt="" />
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="or-img-box">
-                        <img src="assets/images/product-banner/or2.jpg" alt="" />
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/or2.jpg"
+                            alt="" />
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="or-img-box">
-                        <img src="assets/images/product-banner/or3.jpg" alt="" />
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/or3.jpg"
+                            alt="" />
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="or-img-box">
-                        <img src="assets/images/product-banner/or4.jpg" alt="" />
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/or4.jpg"
+                            alt="" />
                     </div>
                 </div>
             </div>
@@ -275,41 +289,47 @@
     <!---- start brand Section------>
     <div class="recent-drops-section py-5">
         <div class="container">
-            <h2 class="section-heading  mb-5">HANDPICKED BRANDS</h2>
+            <h2 class="section-heading  mb-5  wow animate__animated animate__fadeInUp">HANDPICKED BRANDS</h2>
             <div class="banner-slider3 owl-carousel owl-theme">
                 <div class="item">
                     <div class="brand-card">
-                        <img src="assets/images/product-banner/rd1.jpg" alt="" />
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd1.jpg"
+                            alt="" />
                         <h4>UP TO 25% OFF</h4>
                     </div>
                 </div>
                 <div class="item">
                     <div class="brand-card">
-                        <img src="assets/images/product-banner/rd2.jpg" alt="" />
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd2.jpg"
+                            alt="" />
                         <h4>UP TO 25% OFF</h4>
                     </div>
                 </div>
                 <div class="item">
                     <div class="brand-card">
-                        <img src="assets/images/product-banner/rd3.jpg" alt="" />
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd3.jpg"
+                            alt="" />
                         <h4>UP TO 25% OFF</h4>
                     </div>
                 </div>
                 <div class="item">
                     <div class="brand-card">
-                        <img src="assets/images/product-banner/rd4.jpg" alt="" />
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd4.jpg"
+                            alt="" />
                         <h4>UP TO 25% OFF</h4>
                     </div>
                 </div>
                 <div class="item">
                     <div class="brand-card">
-                        <img src="assets/images/product-banner/rd5.jpg" alt="" />
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd5.jpg"
+                            alt="" />
                         <h4>UP TO 25% OFF</h4>
                     </div>
                 </div>
                 <div class="item">
                     <div class="brand-card">
-                        <img src="assets/images/product-banner/rd6.jpg" alt="" />
+                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd6.jpg"
+                            alt="" />
                         <h4>UP TO 25% OFF</h4>
                     </div>
                 </div>
@@ -320,14 +340,14 @@
     <!---- start brand Section------>
     <section class="section py-5">
         <div class="container">
-            <h2 class="section-heading mb-5">SHOP BY INGREDIENTS</h2>
+            <h2 class="section-heading mb-5 wow animate__animated animate__fadeInUp">SHOP BY INGREDIENTS</h2>
             <div class="row ">
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-3  wow animate__animated animate__fadeInLeft">
                     <div class="ingredient-card">
                         <img src="assets/images/product-banner/ni1.jpg" alt="Ingredient Image" class="img-fluid" />
                     </div>
                 </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-3  wow animate__animated animate__fadeInRight">
                     <div class="ingredient-card">
 
                     </div>
@@ -338,11 +358,13 @@
     <!---- end brand Section------>
     <!---- start brand Section------>
     <section class="section home">
-        <div class="container  py-lg-5">
-            <h1 class="text-center mb-5">WHAT DO YOU HAVE <strong>CONCERN WITH?</strong></h1>
+        <div class="container py-lg-5 ">
+            <h1 class="text-center mb-5  wow animate__animated animate__fadeInUp">WHAT DO YOU HAVE <strong>CONCERN
+                    WITH?</strong></h1>
 
             <!-- Main Category Tabs -->
-            <ul class="nav nav-tabs justify-content-center mb-4" id="mainCategoryTabs" role="tablist">
+            <ul class="nav nav-tabs justify-content-center mb-4  wow animate__animated animate__zoomOutLite"
+                id="mainCategoryTabs" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="face-tab" data-bs-toggle="tab" data-bs-target="#face"
                         type="button" role="tab" aria-controls="face" aria-selected="true">
@@ -372,7 +394,8 @@
                 <!-- Face Tab Content -->
                 <div class="tab-pane fade show active" id="face" role="tabpanel" aria-labelledby="face-tab">
                     <!-- Subcategory Tabs for Face -->
-                    <ul class="nav nav-tabs mb-4" id="faceSubcategoryTabs" role="tablist">
+                    <ul class="nav nav-tabs mb-4  wow animate__animated animate__zoomOutLite" id="faceSubcategoryTabs"
+                        role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="acne-tab" data-bs-toggle="tab" data-bs-target="#acne"
                                 type="button" role="tab" aria-controls="acne" aria-selected="true">
@@ -420,10 +443,11 @@
                                 @foreach ($newDropProducts as $product)
                                     <div class="item">
                                         <div class="card border-0 product w-100">
-                                            <div class="product-item border border-dark">
+                                            <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
+                                                data-wow-delay="0.5s">
                                                 <a href="{{ route('product.details', ['id' => $product->id]) }}"
-                                                    class="product-img-container">
-                                                    <img class="card-img-top product-img"
+                                                    class="product-img-container ">
+                                                    <img class="card-img-top product-img" data-wow-delay="0.5s"
                                                         src="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $product['thumbnail'] }}"
                                                         alt="{{ $product['id'] }}" />
                                                 </a>
@@ -504,7 +528,8 @@
                 @foreach ($newDropProducts as $product)
                     <div class="item">
                         <div class="card border-0 product w-100">
-                            <div class="product-item border border-dark">
+                            <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
+                                data-wow-delay="0.5s">
                                 <a href="{{ route('product.details', ['id' => $product->id]) }}"
                                     class="product-img-container">
                                     <img class="card-img-top product-img"
@@ -538,13 +563,13 @@
     <!---- End Product Section------>
     <section class="testimonial-section">
         <div class="container ">
-            <h2 class="section-heading">#BEAUTYBFF SPEAKS</h2>
+            <h2 class="section-heading wow animate__animated animate__fadeInUp">#BEAUTYBFF SPEAKS</h2>
             <div class="row mt-5">
                 <div class="col-lg-2"></div>
                 <div class="col-lg-8">
                     <div class="slider-wrapper">
                         <!-- Image Slider -->
-                        <div class="testimonial-slider">
+                        <div class="testimonial-slider ">
                             <div><img src="assets/images/testimonial/customer-1.webp" alt="Skincare Products" /></div>
                             <div><img src="assets/images/testimonial/customer-2.png" alt="Skincare Products" /></div>
                             <div><img src="assets/images/testimonial/customer-3.png" alt="Skincare Products" /></div>
@@ -575,7 +600,7 @@
             <!-- Bootstrap Accordion -->
             <div class="accordion" id="searchesAccordion">
                 <!-- Skincare Category -->
-                <div class="accordion-item">
+                <div class="accordion-item ">
                     <h2 class="accordion-header" id="headingSkincare">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseSkincare" aria-expanded="false" aria-controls="collapseSkincare">
@@ -614,7 +639,7 @@
                 </div>
 
                 <!--More Info-->
-                <div class="accordion-item">
+                <div class="accordion-item ">
                     <h2 class="accordion-header" id="headingMakeup">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseMakeup" aria-expanded="false" aria-controls="collapseMakeup">
