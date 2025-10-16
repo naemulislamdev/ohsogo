@@ -34,8 +34,7 @@
         }
 
         .hero-section {
-            background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
-            padding: 30px 0;
+
             margin-bottom: 30px;
         }
 
@@ -65,13 +64,21 @@
             margin: 0 5px;
         }
 
+        .hero-section .carousel-control-prev {
+            left: 0;
+        }
+
+        .hero-section .carousel-control-next {
+            right: 0;
+        }
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2.5rem;
             }
 
             .carousel-item img {
-                height: 250px;
+                object-fit: contain;
             }
         }
 
@@ -89,6 +96,20 @@
         div {
             font-family: "Avenir", sans-serif;
             color: #414042;
+        }
+
+        .carousel-indicators [data-bs-target] {
+            width: 50px;
+            height: 4px;
+            border-radius: 2px;
+            background-color: #000;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            opacity: .3;
+        }
+
+        .carousel-indicators .active {
+            opacity: 1;
         }
     </style>
 </head>

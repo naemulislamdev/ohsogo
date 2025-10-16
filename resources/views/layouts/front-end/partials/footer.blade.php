@@ -51,17 +51,17 @@
 
             <!-- Copyright -->
             <div class="row">
-                <div class="col-12 text-center copyright">
-                    <p class="text-white">
-                        © 2025, OHSOGO. All rights reserved. Delivery Timeline | Inside
-                        Dhaka within 2 days. Outside Dhaka within 3-5 Days.
-                    </p>
-                </div>
                 <div class="col-12">
                     <div class="payment-methods text-center">
                         <img src="{{ asset('assets') }}/images/payment/pay-with.png" alt="Payment Methods"
                             class="img-fluid" />
                     </div>
+                </div>
+                <div class="col-12 text-center copyright">
+                    <p class="text-white">
+                        © 2025, OHSOGO. All rights reserved. Design & Developed By <a href="https://evertechit.com/"
+                            class="text-white" target="_blank">Evertech IT Ltd</a>.
+                    </p>
                 </div>
             </div>
         </div>

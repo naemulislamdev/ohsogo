@@ -5,7 +5,7 @@
 @section('main-content')
     <!-- Hero Section -->
     <section class="hero-section ">
-        <div class="container">
+        <div class="overflow-hidden mx-auto">
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <!-- Carousel Slider -->
@@ -33,23 +33,13 @@
                                     alt="Hair Care Products" />
                             </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- start benefit section -->
-    <section class="benefit-section py-5 wow animate__animated animate__fadeInUp">
+    <section class="benefit-section py-4 py-lg-5 wow animate__animated animate__fadeInUp">
         <div class="container ">
             <div class="row justify-content-center justify-content-lg-between">
                 <div class="col-md-6 col-lg-4 wow animate__animated animate__zoomIn"data-wow-duration="1.5s">
