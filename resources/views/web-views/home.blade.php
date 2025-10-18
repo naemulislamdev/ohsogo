@@ -16,7 +16,7 @@
                             <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="1"></button>
                             <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="2"></button>
                         </div>
-                        <div class="carousel-inner ">
+                        <div class="carousel-inner">
                             <div class="carousel-item active  ">
                                 <img src="assets/images/slider/tbanner1.jpg"
                                     class="d-block w-100 wow animate__animated animate__zoomOutLite" data-wow-delay="0.5s"

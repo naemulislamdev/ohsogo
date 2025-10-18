@@ -141,7 +141,6 @@
     <script src="{{ asset('assets') }}/js/xzoom.min.js"></script>
     <script src="{{ asset('assets') }}/slick/slick.min.js"></script>
     <script src="{{ asset('assets') }}/js/wow.min.js"></script>
-
     <script>
         new WOW().init();
     </script>
@@ -153,8 +152,8 @@
             owl.owlCarousel({
                 loop: true,
                 autoplay: true,
-                autoplayTimeout: 3000, // প্রতিটি slide 3 সেকেন্ড পর পরিবর্তন হবে
-                autoplayHoverPause: true, // mouse hover করলে থেমে যাবে
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
                 margin: 40,
                 responsiveClass: true,
                 nav: true,
@@ -558,28 +557,6 @@
             });
         });
     </script>
-    {{-- <script>
-        $(document).ready(function() {
-            $('.center').slick({
-                centerMode: true,
-                centerPadding: '0rem',
-                slidesToShow: 3,
-                infinite: true,
-                arrows: true,
-                autoplay: true,
-                autoplaySpeed: 2500,
-                pauseOnHover: false,
-                responsive: [{
-                    breakpoint: 768,
-                    settings: {
-                        arrows: false,
-                        centerMode: true,
-                        slidesToShow: 1
-                    }
-                }]
-            });
-        });
-    </script> --}}
     <script>
         $(document).ready(function() {
             const testimonials = [{
