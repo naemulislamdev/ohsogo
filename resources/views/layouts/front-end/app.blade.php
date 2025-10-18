@@ -144,6 +144,31 @@
     <script>
         new WOW().init();
     </script>
+    <script>
+        $(document).ready(function() {
+            const firstItem = $('.ingredient-list li:first');
+            const img = $('#ingredient-image');
+            const desc = $('#desc-text');
+
+            const defaultImg = firstItem.data('img');
+            const defaultText = firstItem.data('text');
+
+            img.attr('src', defaultImg);
+            desc.text(defaultText);
+
+            $('.ingredient-list li').on('mouseenter click', function() {
+                $('.ingredient-list h4').removeClass('active');
+                $(this).find('h4').addClass('active');
+
+                const newImg = $(this).data('img');
+                const newText = $(this).data('text');
+
+                img.attr('src', newImg);
+                desc.text(newText);
+            });
+        });
+    </script>
+
 
     {{-- owl carosel for product slide --}}
     <script>
@@ -161,7 +186,7 @@
                     '<i class="fa fa-chevron-left text-white"></i>',
                     '<i class="fa fa-chevron-right text-white"></i>'
                 ],
-                smartSpeed: 800,
+                smartSpeed: 500,
                 responsive: {
                     0: {
                         items: 2

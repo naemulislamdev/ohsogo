@@ -11,14 +11,15 @@
         transform: scale(1);
     }
 }
-.carousel-inner {
-    height: 80vh;
-}
+
 .animate__zoomOutLite {
     animation-name: zoomOutLite;
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
+}
+.carousel-inner {
+    height: 80vh;
 }
 * {
     margin: 0;
@@ -895,6 +896,34 @@ header .cart-badge {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
+section.ingredients h4 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 31px;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+section.ingredients p {
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 2.375rem;
+    color: #212326;
+}
+.ingredient-card img {
+    transition: all 0.4s ease;
+}
+
+.ingredient-list li.active h4 {
+    color: #000;
+}
+
+.ingredient-list h4.active {
+    color: #000;
+    font-weight: 600;
+}
+
 /*--------------------Product Tab Section-------------------------*/
 .nav-tabs {
     border-bottom: none;
