@@ -18,17 +18,17 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active  ">
-                                <img src="assets/images/slider/tbanner1.jpg"
+                                <img style="transform: scale(1.1);" src="assets/images/slider/tbanner1.jpg"
                                     class="d-block w-100 wow animate__animated animate__zoomOutLite" data-wow-delay="0.5s"
                                     alt="Makeup Products" />
                             </div>
                             <div class="carousel-item ">
-                                <img src="assets/images/slider/tbanner2.jpg"
+                                <img style="transform: scale(1.1);" src="assets/images/slider/tbanner2.jpg"
                                     class="d-block w-100 wow animate__animated animate__zoomOutLite" data-wow-delay="0.5s"
                                     alt="Skincare Products" />
                             </div>
                             <div class="carousel-item ">
-                                <img src="assets/images/slider/slider-1.jpg"
+                                <img style="transform: scale(1.1);" src="assets/images/slider/slider-1.jpg"
                                     class="d-block w-100 wow animate__animated animate__zoomOutLite" data-wow-delay="0.5s"
                                     alt="Hair Care Products" />
                             </div>
