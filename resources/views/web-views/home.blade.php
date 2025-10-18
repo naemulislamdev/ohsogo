@@ -333,7 +333,7 @@
         <div class="container">
             <h2 class="section-heading mb-5 wow animate__animated animate__fadeInUp">SHOP BY INGREDIENTS</h2>
 
-            <div class="row">
+            <div class="row g-0">
                 <!-- Left Side Image -->
                 <div class="col-md-6 mb-3 wow animate__animated animate__fadeInLeft order-2 order-lg-1">
                     <div class="  transform-none shadow-none text-center left-panel">

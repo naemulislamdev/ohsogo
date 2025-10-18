@@ -131,6 +131,9 @@
         line-height: 1.7rem;
         color: #212326;
     }
+    .ingredient-card img {
+        width: 100%;
+    }
 }
 
 @media (max-width: 570px) {

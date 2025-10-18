@@ -912,6 +912,7 @@ section.ingredients p {
     color: #212326;
 }
 .ingredient-card img {
+    width: 90%;
     transition: all 0.4s ease;
 }
 
