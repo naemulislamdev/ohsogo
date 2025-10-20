@@ -26,7 +26,7 @@
                                     class="d-block w-100 wow animate__animated animate__zoomOutLite" data-wow-delay="0.5s"
                                     alt="Skincare Products" />
                             </div>
-                            <div class="carousel-item ">
+                            <div class="carousel-item">
                                 <img style="transform: scale(1.1);" src="assets/images/slider/slider-1.jpg"
                                     class="d-block w-100 wow animate__animated animate__zoomOutLite" data-wow-delay="0.5s"
                                     alt="Hair Care Products" />
