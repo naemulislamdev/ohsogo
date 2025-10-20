@@ -38,7 +38,7 @@ Route::controller(WebController::class)->group(function () {
     Route::get('/contact', 'contact')->name('contact');
     Route::get("/cart", 'cart')->name('product.cart');
     Route::get("/product-checkout", 'productCheckout')->name('product.checkout');
-    Route::get("/product-details/{id}", 'productDetails')->name('product.details');
+    Route::get("/product-details/{slug}", 'productDetails')->name('product.details');
     Route::get("/page", 'page')->name('page');
 });
 

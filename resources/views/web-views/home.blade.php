@@ -89,35 +89,10 @@
             </div>
 
             <div class="owl-carousel related-products product-carosel">
+                @php($decimal_point_settings = \App\CPU\Helpers::get_business_settings('decimal_point_settings'))
                 @foreach ($newDropProducts as $product)
                     <div class="item">
-                        <div class="card border-0 product w-100 ">
-                            <div class="product-item border border-dark wow animate__animated animate__zoomOutLite">
-                                <a href="{{ route('product.details', ['id' => $product->id]) }}"
-                                    class="product-img-container ">
-                                    <img class="card-img-top product-img"
-                                        src="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $product['thumbnail'] }}"
-                                        alt="{{ $product['id'] }}" />
-                                </a>
-                                <button class="btn btn-sm bg-pink position-sticky discount-btn">
-                                    -{{ $product['discount'] }}%
-                                </button>
-                                <div class="product-info">
-                                    <button class="add-to-cart">ADD TO CART</button>
-                                </div>
-                            </div>
-                            <div class="card-body px-0">
-                                <a href="{{ route('product.details', ['id' => $product->id]) }}"
-                                    class="card-title stretched-link h4">
-                                    {{ $product['name'] }}
-                                </a>
-                                <p class="card-text">
-                                    <span class="text-decoration-line-through">৳{{ round($product['unit_price']) }}</span>
-                                    <span class="ms-2">৳{{ round($product['purchase_price']) }}</span>
-                                </p>
-                                <div class="product-rating-star">★★★★★</div>
-                            </div>
-                        </div>
+                        @include('layouts.front-end.partials.home_product', ['product' => $product])
                     </div>
                 @endforeach
             </div>
@@ -432,35 +407,7 @@
                             <div class="owl-carousel related-products product-carosel">
                                 @foreach ($newDropProducts as $product)
                                     <div class="item">
-                                        <div class="card border-0 product w-100">
-                                            <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
-                                                data-wow-delay="0.5s">
-                                                <a href="{{ route('product.details', ['id' => $product->id]) }}"
-                                                    class="product-img-container ">
-                                                    <img class="card-img-top product-img" data-wow-delay="0.5s"
-                                                        src="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $product['thumbnail'] }}"
-                                                        alt="{{ $product['id'] }}" />
-                                                </a>
-                                                <button class="btn btn-sm bg-pink position-sticky discount-btn">
-                                                    -{{ $product['discount'] }}%
-                                                </button>
-                                                <div class="product-info">
-                                                    <button class="add-to-cart">ADD TO CART</button>
-                                                </div>
-                                            </div>
-                                            <div class="card-body px-0">
-                                                <a href="{{ route('product.details', ['id' => $product->id]) }}"
-                                                    class="card-title stretched-link h4">
-                                                    {{ $product['name'] }}
-                                                </a>
-                                                <p class="card-text">
-                                                    <span
-                                                        class="text-decoration-line-through">৳{{ round($product['unit_price']) }}</span>
-                                                    <span class="ms-2">৳{{ round($product['purchase_price']) }}</span>
-                                                </p>
-                                                <div class="product-rating-star">★★★★★</div>
-                                            </div>
-                                        </div>
+                                        @include('layouts.front-end.partials.home_product', ['product' => $product])
                                     </div>
                                 @endforeach
                             </div>
@@ -517,34 +464,7 @@
             <div class="owl-carousel related-products product-carosel">
                 @foreach ($newDropProducts as $product)
                     <div class="item">
-                        <div class="card border-0 product w-100">
-                            <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
-                                data-wow-delay="0.5s">
-                                <a href="{{ route('product.details', ['id' => $product->id]) }}"
-                                    class="product-img-container">
-                                    <img class="card-img-top product-img"
-                                        src="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $product['thumbnail'] }}"
-                                        alt="{{ $product['id'] }}" />
-                                </a>
-                                <button class="btn btn-sm bg-pink position-sticky discount-btn">
-                                    -{{ $product['discount'] }}%
-                                </button>
-                                <div class="product-info">
-                                    <button class="add-to-cart">ADD TO CART</button>
-                                </div>
-                            </div>
-                            <div class="card-body px-0">
-                                <a href="{{ route('product.details', ['id' => $product->id]) }}"
-                                    class="card-title stretched-link h4">
-                                    {{ $product['name'] }}
-                                </a>
-                                <p class="card-text">
-                                    <span class="text-decoration-line-through">৳{{ round($product['unit_price']) }}</span>
-                                    <span class="ms-2">৳{{ round($product['purchase_price']) }}</span>
-                                </p>
-                                <div class="product-rating-star">★★★★★</div>
-                            </div>
-                        </div>
+                        @include('layouts.front-end.partials.home_product', ['product' => $product])
                     </div>
                 @endforeach
             </div>

@@ -61,7 +61,11 @@ class WebController extends Controller
 
     public function home()
     {
-        $newDropProducts =  Product::take(6)->get(); //latest()->take(5)->
+        $newDropProducts =  Product::with(['reviews'])->active()
+            ->where('featured', 1)
+            ->withCount(['order_details'])->orderBy('order_details_count', 'DESC')
+            ->take(12)
+            ->get();
 
         return view("web-views.home", compact("newDropProducts"));
     }
@@ -85,9 +89,9 @@ class WebController extends Controller
     {
         return view('web-views.product-checkout');
     }
-    public function productDetails($id)
+    public function productDetails($slug)
     {
-        $product = Product::find($id);
+        $product = Product::where('slug', $slug)->first();
         if ($product) {
             return view('web-views.product-details', compact('product'));
         } else {

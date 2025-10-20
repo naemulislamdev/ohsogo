@@ -69,8 +69,17 @@
                     </h3>
                     <div class="product-rating">★★★★★</div>
                     <div class="product-price d-flex gap-3">
-                        <h2 class="text-decoration-line-through">৳{{ round($product->unit_price) }}</h2>
-                        <h2 class="text-pink">৳{{ round($product->purchase_price) }}</h2>
+                        @if ($product->discount > 0)
+                            <h2 class="text-decoration-line-through">
+                                {{ \App\CPU\Helpers::currency_converter($product->unit_price) }}</h2>
+                            <h2 class="text-pink">
+                                {{ \App\CPU\Helpers::currency_converter(
+                                    $product->unit_price - \App\CPU\Helpers::get_product_discount($product, $product->unit_price),
+                                ) }}
+                            </h2>
+                        @else
+                            <h2 class="text-pink">{{ \App\CPU\Helpers::currency_converter($product->unit_price) }}</h2>
+                        @endif
                     </div>
                     <div class="product-form-buttons">
                         <button class="btn btn-block w-100 details-add-to-cart">
