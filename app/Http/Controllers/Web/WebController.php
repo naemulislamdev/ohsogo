@@ -34,7 +34,7 @@ use App\User;
 use App\Model\Wishlist;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 // use Illuminate\Support\Facades\Mail;
 // use Illuminate\Support\Facades\Session;
 // use function App\CPU\translate;
@@ -52,6 +52,7 @@ class WebController extends Controller
 {
     public function maintenance_mode()
     {
+
         $maintenance_mode = Helpers::get_business_settings('maintenance_mode') ?? 0;
         if ($maintenance_mode) {
             return view('web-views.maintenance-mode');
