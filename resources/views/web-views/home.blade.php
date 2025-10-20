@@ -1,7 +1,6 @@
 @extends('layouts.front-end.app')
 @section('title', 'Home')
 
-
 @section('main-content')
     <!-- Hero Section -->
     <section class="hero-section ">
@@ -16,19 +15,19 @@
                             <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="1"></button>
                             <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="2"></button>
                         </div>
-                        <div class="carousel-inner ">
+                        <div class="carousel-inner">
                             <div class="carousel-item active  ">
-                                <img src="assets/images/slider/tbanner1.jpg"
+                                <img style="transform: scale(1.1);" src="assets/images/slider/tbanner1.jpg"
                                     class="d-block w-100 wow animate__animated animate__zoomOutLite" data-wow-delay="0.5s"
                                     alt="Makeup Products" />
                             </div>
                             <div class="carousel-item ">
-                                <img src="assets/images/slider/tbanner2.jpg"
+                                <img style="transform: scale(1.1);" src="assets/images/slider/tbanner2.jpg"
                                     class="d-block w-100 wow animate__animated animate__zoomOutLite" data-wow-delay="0.5s"
                                     alt="Skincare Products" />
                             </div>
                             <div class="carousel-item ">
-                                <img src="assets/images/slider/slider-1.jpg"
+                                <img style="transform: scale(1.1);" src="assets/images/slider/slider-1.jpg"
                                     class="d-block w-100 wow animate__animated animate__zoomOutLite" data-wow-delay="0.5s"
                                     alt="Hair Care Products" />
                             </div>
@@ -303,23 +302,58 @@
     </div>
     <!----end brand Section------>
     <!---- start brand Section------>
-    <section class="section py-5">
+    <section class="ingredients section py-5">
         <div class="container">
             <h2 class="section-heading mb-5 wow animate__animated animate__fadeInUp">SHOP BY INGREDIENTS</h2>
-            <div class="row ">
-                <div class="col-md-6 mb-3  wow animate__animated animate__fadeInLeft">
-                    <div class="ingredient-card">
-                        <img src="assets/images/product-banner/ni1.jpg" alt="Ingredient Image" class="img-fluid" />
+
+            <div class="row g-0">
+                <!-- Left Side Image -->
+                <div class="col-md-6 mb-3 wow animate__animated animate__fadeInLeft order-2 order-lg-1">
+                    <div class="  transform-none shadow-none text-center left-panel">
+                        <img id="ingredient-image" src="assets/images/product-banner/ni1.jpg" alt="Ingredient Image" />
+
                     </div>
                 </div>
-                <div class="col-md-6 mb-3  wow animate__animated animate__fadeInRight">
-                    <div class="ingredient-card">
 
+                <!-- Right Side Text -->
+                <div class="col-md-6 mb-3 wow animate__animated animate__fadeInRight order-1 order-lg-2">
+                    <div style="transform: none" class="ingredient-card p-3 pb-2 pb-lg-0 p-lg-5 right-panel">
+                        <ul class="ingredient-list text-start list-unstyled">
+                            <li data-img="assets/images/product-banner/ind1.webp" data-title="NIACINAMIDE"
+                                data-text="Coconut is known for its ability to deeply moisturise and nourish, benefiting both skin and hair.">
+                                <h4 class="active">NIACINAMIDE</h4>
+                            </li>
+                            <li data-img="assets/images/product-banner/ind2.webp" data-title="HYALURONIC ACID"
+                                data-text="Meet your skin's hydration MVP! It locks in moisture, smooths out fine lines, & gives you that lit dewy glow.Total skin game-changer!">
+                                <h4>HYALURONIC ACID</h4>
+                            </li>
+                            <li data-img="assets/images/product-banner/ind3.webp" data-title="AHA BHA PHA"
+                                data-text="This is your skincare dream team. They smooth skin, clear pores, & give you that fresh, lit-from-within glow. Get ready to slay!">
+                                <h4>AHA BHA PHA</h4>
+                            </li>
+                            <li data-img="assets/images/product-banner/ind4.webp" data-title="RETINOL"
+                                data-text="Your ticket to that youthful, glowing skin! It smooths fine lines, boosts collagen, and evens out your skin tone.Get ready for that flawless, fresh look!">
+                                <h4>RETINOL</h4>
+                            </li>
+                            <li data-img="assets/images/product-banner/ind5.jpg" data-title="ALPHA ARBUTIN"
+                                data-text="It is a game-changer! It fades dark spots, evens out your skin tone, and gives you that bright, flawless glow. Get ready to shine!">
+                                <h4>ALPHA ARBUTIN</h4>
+                            </li>
+                        </ul>
+
+                        <div class="desc-box text-start mt-4">
+                            <p id="desc-text" class="mb-4">
+
+                            </p>
+                            <a href="#" class="chekout-cart-btn text-white mt-2 mt-lg-3 py-lg-3 px-lg-4">VIEW
+                                COLLECTION</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <!---- end brand Section------>
     <!---- start brand Section------>
     <section class="section home">

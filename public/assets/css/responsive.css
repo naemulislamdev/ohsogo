@@ -54,6 +54,9 @@
         width: 47%;
         margin: 0 0 0 auto;
     }
+    .carousel-inner {
+        height: auto;
+    }
 }
 
 @media (max-width: 768px) {
@@ -122,6 +125,15 @@
         padding: 0px;
         height: 200px;
     }
+    section.ingredients p {
+        font-size: 1.2rem;
+        font-weight: 400;
+        line-height: 1.7rem;
+        color: #212326;
+    }
+    .ingredient-card img {
+        width: 100%;
+    }
 }
 
 @media (max-width: 570px) {
@@ -137,6 +149,9 @@
         position: absolute;
         top: -14px;
         right: -13px;
+    }
+    .carousel-indicators {
+        bottom: -22px;
     }
 }
 

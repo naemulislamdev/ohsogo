@@ -141,10 +141,34 @@
     <script src="{{ asset('assets') }}/js/xzoom.min.js"></script>
     <script src="{{ asset('assets') }}/slick/slick.min.js"></script>
     <script src="{{ asset('assets') }}/js/wow.min.js"></script>
-
     <script>
         new WOW().init();
     </script>
+    <script>
+        $(document).ready(function() {
+            const firstItem = $('.ingredient-list li:first');
+            const img = $('#ingredient-image');
+            const desc = $('#desc-text');
+
+            const defaultImg = firstItem.data('img');
+            const defaultText = firstItem.data('text');
+
+            img.attr('src', defaultImg);
+            desc.text(defaultText);
+
+            $('.ingredient-list li').on('mouseenter click', function() {
+                $('.ingredient-list h4').removeClass('active');
+                $(this).find('h4').addClass('active');
+
+                const newImg = $(this).data('img');
+                const newText = $(this).data('text');
+
+                img.attr('src', newImg);
+                desc.text(newText);
+            });
+        });
+    </script>
+
 
     {{-- owl carosel for product slide --}}
     <script>
@@ -153,8 +177,8 @@
             owl.owlCarousel({
                 loop: true,
                 autoplay: true,
-                autoplayTimeout: 3000, // প্রতিটি slide 3 সেকেন্ড পর পরিবর্তন হবে
-                autoplayHoverPause: true, // mouse hover করলে থেমে যাবে
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
                 margin: 40,
                 responsiveClass: true,
                 nav: true,
@@ -162,7 +186,7 @@
                     '<i class="fa fa-chevron-left text-white"></i>',
                     '<i class="fa fa-chevron-right text-white"></i>'
                 ],
-                smartSpeed: 800,
+                smartSpeed: 500,
                 responsive: {
                     0: {
                         items: 2
@@ -558,28 +582,6 @@
             });
         });
     </script>
-    {{-- <script>
-        $(document).ready(function() {
-            $('.center').slick({
-                centerMode: true,
-                centerPadding: '0rem',
-                slidesToShow: 3,
-                infinite: true,
-                arrows: true,
-                autoplay: true,
-                autoplaySpeed: 2500,
-                pauseOnHover: false,
-                responsive: [{
-                    breakpoint: 768,
-                    settings: {
-                        arrows: false,
-                        centerMode: true,
-                        slidesToShow: 1
-                    }
-                }]
-            });
-        });
-    </script> --}}
     <script>
         $(document).ready(function() {
             const testimonials = [{
