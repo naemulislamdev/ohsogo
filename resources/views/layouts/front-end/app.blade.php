@@ -571,16 +571,14 @@
     <script>
         $(document).ready(function() {
             $(".xzoom, .xzoom-gallery").xzoom({
-                zoomWidth: 100,
-                zoomHeight: 100,
                 position: "right",
                 offset: 0,
-                lens: true,
                 lensShape: "square",
-                lensSize: 0,
+                lensSize: 200,
                 title: false,
             });
         });
+        /* calling script */
     </script>
     <script>
         $(document).ready(function() {
