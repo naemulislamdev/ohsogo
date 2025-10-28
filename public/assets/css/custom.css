@@ -358,6 +358,8 @@ header.scrolled .menu-area a {
     box-shadow: var(--shadow);
     border-top: var(--border);
     top: 58px;
+    padding: 8px;
+    border-radius: 0 0 5px 5px;
 }
 
 .dropdown-menu1 ul {
@@ -367,6 +369,7 @@ header.scrolled .menu-area a {
 
 .dropdown-menu1 ul li {
     list-style: none;
+    margin-bottom: 10px;
 }
 
 .dropdown-menu1 ul li a {
@@ -412,6 +415,7 @@ header.scrolled .menu-area a {
     opacity: 1;
     visibility: visible;
     transform: scaleY(1);
+    border-radius: 5px;
 }
 
 .dd-btn3 {

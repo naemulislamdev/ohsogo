@@ -25,6 +25,8 @@ use function App\CPU\translate;
 use App\Model\Cart;
 use App\campaing_detalie;
 use App\Http\Requests\ProductRequest;
+use App\Models\SubCategory;
+use App\Models\SubSubCategory;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 
@@ -32,7 +34,7 @@ class ProductController extends BaseController
 {
     public function add_new()
     {
-        $cat = Category::where(['parent_id' => 0])->get();
+        $cat = Category::all();
         $br = Brand::orderBY('name', 'ASC')->get();
         return view('admin-views.product.add-new', compact('cat', 'br'));
     }
@@ -441,23 +443,44 @@ class ProductController extends BaseController
         return response()->json([], 200);
     }
 
-    public function get_categories(Request $request)
-    {
-        $cat = Category::where(['parent_id' => $request->parent_id])->get();
-        $res = '<option value="' . 0 . '" disabled selected>---Select---</option>';
-        foreach ($cat as $row) {
-            if ($row->id == $request->sub_category) {
-                $res .= '<option value="' . $row->id . '" selected >' . $row->name . '</option>';
-            } else {
-                $res .= '<option value="' . $row->id . '">' . $row->name . '</option>';
-            }
-        }
-        return response()->json([
-            'select_tag' => $res,
-        ]);
+
+
+public function getSubCategory(Request $request)
+{
+    $data = SubCategory::where('category_id', $request->id)->get();
+
+    $output = '<option selected disabled value="">---Select---</option>';
+    foreach ($data as $row) {
+        $output .= '<option value="' . $row->id . '">' . $row->name . '</option>';
     }
 
-    public function sku_combination(Request $request)
+    return response($output);
+}
+
+public function getCategoryId(Request $request)
+{
+    $data = Category::where('id', $request->id)->first();
+    return response()->json($data);
+}
+public function getSubsubCategory(Request $request)
+{
+    $data = SubSubCategory::where('sub_category_id', $request->id)->get();
+
+     $output = '<option selected disabled value="">---Select---</option>';
+    foreach ($data as $row) {
+        $output .= '<option value="' . $row->id . '">' . $row->name . '</option>';
+    }
+
+    return response($output);
+}
+
+public function getSubCategoryId(Request $request)
+{
+    $data = SubCategory::where('id', $request->id)->first();
+    return response()->json($data);
+}
+
+public function sku_combination(Request $request)
     {
         $options = [];
         if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {

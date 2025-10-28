@@ -14,7 +14,8 @@
         }
 
         .custom-file-input {
-            display: none; /* Hide the actual file input */
+            display: none;
+            /* Hide the actual file input */
         }
 
         .custom-file-label {
@@ -142,7 +143,7 @@
                                         <label for="name">{{ \App\CPU\translate('Category') }} <span
                                                 class="text-danger">*</span></label>
                                         <select class="js-example-basic-multiple form-control" name="category_id"
-                                            onchange="getRequest('{{ url('/') }}/admin/product/get-categories?parent_id='+this.value,'sub-category-select','select')">
+                                            id="cat_id">
                                             <option value="{{ old('category_id') }}" selected disabled>---Select---
                                             </option>
                                             @foreach ($cat as $c)
@@ -158,16 +159,19 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="name">{{ \App\CPU\translate('Sub Category') }}</label>
+
                                         <select class="js-example-basic-multiple form-control" name="sub_category_id"
-                                            id="sub-category-select"
-                                            onchange="getRequest('{{ url('/') }}/admin/product/get-categories?parent_id='+this.value,'sub-sub-category-select','select')">
+                                            id="subcategory_id">
+                                            <option value="{{ old('sub_category_id') }}" selected disabled>---Select---
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="name">{{ \App\CPU\translate('Sub Sub Category') }}</label>
                                         <select class="js-example-basic-multiple form-control" name="sub_sub_category_id"
-                                            id="sub-sub-category-select">
-
+                                            id="subSubCat_id">
+                                            <option value="{{ old('sub_sub_category_id') }}" selected disabled>---Select---
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -254,6 +258,7 @@
                                                 </option>
                                             @endforeach
                                         </select>
+
                                     </div>
 
                                     <div class="col-md-6">
@@ -498,7 +503,8 @@
                                             style="color: red">* ( {{ \App\CPU\translate('ratio') }} 1:1 )</small>
                                     </div>
                                     <div class="upload-container">
-                                        <input type="file" id="image-upload" name="images[]" multiple accept="image/*" class="custom-file-input">
+                                        <input type="file" id="image-upload" name="images[]" multiple
+                                            accept="image/*" class="custom-file-input">
                                         <label for="image-upload" class="custom-file-label">Select Product Images</label>
                                         <div id="image-preview" class="image-preview-container"></div>
                                     </div>
@@ -545,49 +551,49 @@
     <script src="{{ asset('assets/back-end/js/spartan-multi-image-picker.js') }}"></script>
     <script>
         $(document).ready(function() {
-             const previewContainer = $("#image-preview");
-             $("#image-upload").on("change", function(event) {
-                 previewContainer.empty(); // Clear existing previews
-                 const files = event.target.files;
+            const previewContainer = $("#image-preview");
+            $("#image-upload").on("change", function(event) {
+                previewContainer.empty(); // Clear existing previews
+                const files = event.target.files;
 
-                 if (files) {
-                     $.each(files, function(index, file) {
-                         const reader = new FileReader();
-                         reader.onload = function(e) {
-                             const previewItem = $(`
+                if (files) {
+                    $.each(files, function(index, file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const previewItem = $(`
                                  <div class="preview-item">
                                      <img src="${e.target.result}" class="preview-image">
                                      <button type="button" class="remove-icon" data-index="${index}">&#10005;</button>
                                  </div>
                              `);
-                             previewContainer.append(previewItem);
-                         };
-                         reader.readAsDataURL(file);
-                     });
-                 }
-             });
+                            previewContainer.append(previewItem);
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+            });
 
-             // Handle image removal
-             previewContainer.on("click", ".remove-icon", function() {
-                 const indexToRemove = $(this).data("index");
-                 $(this).parent().remove();
-                 // Remove the corresponding file from the input (file list cannot be modified directly, so create a new list)
-                 const input = document.getElementById("image-upload");
-                 const dataTransfer = new DataTransfer();
-                 const files = input.files;
+            // Handle image removal
+            previewContainer.on("click", ".remove-icon", function() {
+                const indexToRemove = $(this).data("index");
+                $(this).parent().remove();
+                // Remove the corresponding file from the input (file list cannot be modified directly, so create a new list)
+                const input = document.getElementById("image-upload");
+                const dataTransfer = new DataTransfer();
+                const files = input.files;
 
-                 // Add all files except the one to be removed
-                 for (let i = 0; i < files.length; i++) {
-                     if (i !== indexToRemove) {
-                         dataTransfer.items.add(files[i]);
-                     }
-                 }
+                // Add all files except the one to be removed
+                for (let i = 0; i < files.length; i++) {
+                    if (i !== indexToRemove) {
+                        dataTransfer.items.add(files[i]);
+                    }
+                }
 
-                 // Update the input files
-                 input.files = dataTransfer.files;
-             });
-         });
-     </script>
+                // Update the input files
+                input.files = dataTransfer.files;
+            });
+        });
+    </script>
     <script>
         $(function() {
             $("#size_chart").spartanMultiImagePicker({
@@ -720,6 +726,79 @@
         $(".js-example-responsive").select2({
             // dir: "rtl",
             width: 'resolve'
+        });
+    </script>
+
+    <script>
+        // script for add sub-category select
+        $(function() {
+            function loadSubCategory(id) {
+                if (!id) return;
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('admin.product.getSubCategory') }}',
+                    data: {
+                        id: id
+                    },
+                    success: function(result) {
+                        $('#subcategory_id').html(result);
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
+
+            // load on page load
+            loadSubCategory($('#cat_id').val());
+
+            // load on change
+            $(document).on('change', '#cat_id', function() {
+                loadSubCategory($(this).val());
+            });
+        });
+    </script>
+    <script>
+        // script for add sub-sub-category select
+        $(function() {
+            function loadSubSubCategory(id) {
+                if (!id) return;
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('admin.product.getSubsubCategory') }}',
+                    data: {
+                        id: id
+                    },
+                    success: function(result) {
+                        $('#subSubCat_id').html(result); // option print select id
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
+
+            // load on page load
+            loadSubSubCategory($('#subcategory_id').val()); // parent id
+
+            // load on change
+            $(document).on('change', '#subcategory_id', function() { // parent id
+                loadSubSubCategory($(this).val());
+            });
         });
     </script>
 

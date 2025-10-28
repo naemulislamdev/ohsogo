@@ -6,101 +6,80 @@ use App\CPU\Helpers;
 use App\Http\Controllers\Controller;
 use App\Model\Category;
 use App\Model\Translation;
+use App\Models\SubCategory;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class SubCategoryController extends Controller
 {
-    public function index( Request $request )
+    public function index(Request $request)
     {
         $query_param = [];
         $search = $request['search'];
-        if($request->has('search'))
-        {
+        if ($request->has('search')) {
             $key = explode(' ', $request['search']);
-            $categories = Category::where(['position'=>1])->where(function ($q) use ($key) {
+            $categories = SubCategory::where(function ($q) use ($key) {
                 foreach ($key as $value) {
                     $q->orWhere('name', 'like', "%{$value}%");
                 }
             });
             $query_param = ['search' => $request['search']];
-        }else{
-            $categories=Category::where(['position'=>1]);
+        } else {
+
         }
-        $categories = $categories->latest()->paginate(Helpers::pagination_limit())->appends($query_param);
-        return view('admin-views.category.sub-category-view',compact('categories','search'));
+        $subCategories = SubCategory::latest()->paginate(10)->appends(request()->query());
+       
+        return view('admin-views.sub-category.view', compact('subCategories', 'search'));
     }
 
     public function store(Request $request)
     {
-        $category = new Category;
-        $category->name = $request->name[array_search('en', $request->lang)];
-        $category->slug = Str::slug($request->name[array_search('en', $request->lang)]);
-        $category->parent_id = $request->parent_id;
-        $category->position = 1;
-        $category->priority = $request->priority;
-        $category->save();
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
 
-        foreach($request->lang as $index=>$key)
-        {
-            if($request->name[$index] && $key != 'en')
-            {
-                Translation::updateOrInsert(
-                    ['translationable_type'  => 'App\Model\Category',
-                        'translationable_id'    => $category->id,
-                        'locale'                => $key,
-                        'key'                   => 'name'],
-                    ['value'                 => $request->name[$index]]
-                );
-            }
-        }
-        Toastr::success('Category updated successfully!');
-        return back();
+        SubCategory::create([
+            'category_id' => $request->category_id,
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'SubCategory added successfully!'
+        ]);
     }
-
-    public function edit(Request $request)
-    {
-        $data = Category::where('id', $request->id)->first();
-
-        return response()->json($data);
-    }
-
     public function update(Request $request)
     {
-        $category = Category::find($request->id);
-        $category->name = $request->name;
-        $category->slug = Str::slug($request->name);
-        $category->parent_id = $request->parent_id;
-        $category->position = 1;
-        $category->priority = $request->priority;
-        $category->save();
-        return response()->json();
+
+        $subCategory = SubCategory::find($request->id);
+        $subCategory->category_id = $request->category_id;
+        $subCategory->name = $request->name;
+        $subCategory->slug = Str::slug($request->name);
+        $subCategory->save();
+        // return response()->json();
+        Toastr::success('SubCategory Updated successfully!');
+        return back();
     }
 
     public function delete(Request $request)
     {
-        $categories = Category::where('parent_id', $request->id)->get();
-        if (!empty($categories)) {
+        $subCategory = SubCategory::find($request->id);
 
-            foreach ($categories as $category) {
-                $translation = Translation::where('translationable_type','App\Model\Category')
-                                    ->where('translationable_id',$category->id);
-                $translation->delete();
-                Category::destroy($category->id);
-            }
+        if ($subCategory) {
+            $subCategory->delete();
+            return response()->json(['success' => true]);
         }
-        $translation = Translation::where('translationable_type','App\Model\Category')
-                                    ->where('translationable_id',$request->id);
-        $translation->delete();
-        Category::destroy($request->id);
-        return response()->json();
+
+        return response()->json(['success' => false, 'message' => 'Subcategory not found.']);
     }
+
 
     public function fetch(Request $request)
     {
         if ($request->ajax()) {
-            $data = Category::where('position', 1)->orderBy('id', 'desc')->get();
+            $data = SubCategory::where('position', 1)->orderBy('id', 'desc')->get();
             return response()->json($data);
         }
     }

@@ -1,8 +1,11 @@
 <!-- Navigation -->
 @php
-    $categoriesFirst3 = Illuminate\Support\Facades\DB::table('categories')->take(3)->get();
-    $categoriesLast3 = Illuminate\Support\Facades\DB::table('categories')->skip(3)->take(6)->get();
-    $categories = Illuminate\Support\Facades\DB::table('categories')->get();
+
+    $categoriesFirst3 = DB::table('categories')->orderBy('priority', 'asc')->take(3)->get();
+
+    $categoriesLast3 = DB::table('categories')->orderBy('priority', 'asc')->skip(3)->take(6)->get();
+
+    $categories = DB::table('categories')->orderBy('priority', 'asc')->get();
 
 @endphp
 
@@ -34,72 +37,39 @@
                                             class="fa fa-angle-down"></i></a>
                                     {{-- subcategory dropdown  --}}
                                     <div class="dropdown-menu1">
-                                        <ul>
-                                            <li class="dd-btn2">
-                                                <a href="category.html">
-                                                    <span> Hari Tools</span>
-                                                    <i class="fa fa-angle-right float-right mt-1"></i></a>
+                                        @php
+                                            $subcategories = \App\Models\SubCategory::where(
+                                                'category_id',
+                                                $category->id,
+                                            )->get();
+                                        @endphp
 
-                                                <div class="dropdown-menu2">
-                                                    <ul class="w-nav-list level_3">
-                                                        <li class="dd-btn3">
-                                                            <a href="#">Hair cutting<i
-                                                                    class="fa fa-angle-right float-right mt-1"></i></a>
-                                                            <div class="dropdown-menu3">
-                                                                <ul class="w-nav-list level_3">
-                                                                    <li><a href="#">Child manue</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i> Face Makup
-                                                    <i class="fa fa-angle-right float-right mt-1"></i></a>
-                                                <div class="dropdown-menu2">
-                                                    <ul>
-                                                        <li><a href="#">Makup one</a></li>
-                                                        <li><a href="#">Makup two</a></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Face & Body
-                                                    Care<i class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Lip Beauty<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Hari Care<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Clothing<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Eye Makeup<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Jewellery<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Ladies Bag<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Saree<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Cosmetics<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
+                                        <ul>
+                                            @foreach ($subcategories as $subcat)
+                                                <li class="dd-btn2">
+                                                    <a href="category.html">
+                                                        <span>{{ $subcat->name }}</span>
+                                                        <i class="fa fa-angle-right float-right mt-1"></i></a>
+
+                                                    <div class="dropdown-menu2">
+                                                        @php
+                                                            $sub_subcategories = \App\Models\SubSubCategory::where(
+                                                                'sub_category_id',
+                                                                $subcat->id,
+                                                            )->get();
+
+                                                        @endphp
+                                                        <ul class="w-nav-list level_3">
+                                                            @foreach ($sub_subcategories as $sub_subcat)
+                                                                <li class="dd-btn3">
+                                                                    <a href="#">{{ $sub_subcat->name }}</a>
+
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </li>
@@ -590,88 +560,53 @@
                 </a>
             </div>
             <div class="col-lg-4">
-                <nav class="navbar">
-                    <div class="menu-area">
-                        <ul>
-                            @foreach ($categoriesLast3 as $category)
-                                <li class="dd-btn1">
-                                    <a href="{{ route('page') }}"> {{ $category->name }} <i
-                                            class="fa fa-angle-down"></i></a>
-                                    {{-- hover subcategory dropdown --}}
-                                    <div class="dropdown-menu1">
-                                        <ul>
+                <div class="menu-area">
+                    <ul>
+                        @foreach ($categoriesLast3 as $category)
+                            <li class="dd-btn1">
+                                <a href="{{ route('page') }}"> {{ $category->name }} <i
+                                        class="fa fa-angle-down"></i></a>
+                                {{-- subcategory dropdown  --}}
+                                <div class="dropdown-menu1">
+                                    @php
+                                        $subcategories = \App\Models\SubCategory::where(
+                                            'category_id',
+                                            $category->id,
+                                        )->get();
+                                    @endphp
+
+                                    <ul>
+                                        @foreach ($subcategories as $subcat)
                                             <li class="dd-btn2">
                                                 <a href="category.html">
-                                                    <span> Hari Tools</span>
+                                                    <span>{{ $subcat->name }}</span>
                                                     <i class="fa fa-angle-right float-right mt-1"></i></a>
 
                                                 <div class="dropdown-menu2">
+                                                    @php
+                                                        $sub_subcategories = \App\Models\SubSubCategory::where(
+                                                            'sub_category_id',
+                                                            $subcat->id,
+                                                        )->get();
+
+                                                    @endphp
                                                     <ul class="w-nav-list level_3">
-                                                        <li class="dd-btn3">
-                                                            <a href="#">Hair cutting<i
-                                                                    class="fa fa-angle-right float-right mt-1"></i></a>
-                                                            <div class="dropdown-menu3">
-                                                                <ul class="w-nav-list level_3">
-                                                                    <li><a href="#">Child manue</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </li>
+                                                        @foreach ($sub_subcategories as $sub_subcat)
+                                                            <li class="dd-btn3">
+                                                                <a href="#">{{ $sub_subcat->name }}</a>
+
+                                                            </li>
+                                                        @endforeach
                                                     </ul>
                                                 </div>
                                             </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i> Face Makup
-                                                    <i class="fa fa-angle-right float-right mt-1"></i></a>
-                                                <div class="dropdown-menu2">
-                                                    <ul>
-                                                        <li><a href="#">Makup one</a></li>
-                                                        <li><a href="#">Makup two</a></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Face & Body
-                                                    Care<i class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Lip Beauty<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Hari Care<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Clothing<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Eye Makeup<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Jewellery<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Ladies Bag<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Saree<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Cosmetics<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </nav>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
             <div class="col-lg-1">
                 <div class="header-icon d-flex justify-content-between gap-5 align-items-center">
@@ -1163,135 +1098,60 @@
             </div>
             @foreach ($categories as $category)
                 <div class="menu-box">
-                    <div class="menu-link" id="headingOne">
+                    <div class="menu-link" id="heading{{ $category->id }}">
                         <a class="mmenu-btn menu-link-active text-uppercase" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="true">
+                            data-bs-target="#collapse{{ $category->id }}" aria-expanded="true">
                             {{ $category->name }} <i class="fa fa-plus"></i>
                         </a>
                     </div>
-                    <div id="collapseOne" class="menu-body collapse" aria-labelledby="headingOne"
-                        data-bs-parent="#accordionExample">
+                    <div id="collapse{{ $category->id }}" class="menu-body collapse"
+                        aria-labelledby="heading{{ $category->id }}" data-bs-parent="#accordionExample">
                         <div class="card-body">
-                            <ul>
-                                <li class="mega-dd-btn-2">
-                                    <a data-bs-toggle="collapse" href="#category1" role="button"
-                                        aria-expanded="false" aria-controls="category1" class="collapsed">
-                                        Face & Body Care
-                                        <i class="fa fa-angle-down float-right mt-1"></i>
-                                    </a>
-                                    <div class="collapse" id="category1">
-                                        <div class="card card-body scroll-div-dist">
-                                            <ul class="mega-item">
-                                                <li class="mega-dd-btn-2">
-                                                    <a data-bs-toggle="collapse" href="#subCategory1" role="button"
-                                                        aria-expanded="false" aria-controls="subCategory1"
-                                                        class="collapsed">
-                                                        Face & Body Care
-                                                        <i class="fa fa-angle-down float-right mt-1"></i>
-                                                    </a>
-                                                    <div class="collapse" id="subCategory1">
-                                                        <div class="card card-body scroll-div-dist">
-                                                            <ul class="mega-item">
-                                                                <li><a href="#">Face Makeup</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
+                            @php
+                                $subcategories = \App\Models\SubCategory::where('category_id', $category->id)->get();
+                            @endphp
+                            @foreach ($subcategories as $subcat)
+                                <ul>
+                                    <li class="mega-dd-btn-2">
+                                        <a data-bs-toggle="collapse" href="#category{{ $subcat->id }}"
+                                            role="button" aria-expanded="false"
+                                            aria-controls="category{{ $subcat->id }}" class="collapsed">
+                                            {{ $subcat->name }}
+                                            <i class="fa fa-angle-down float-right mt-1"></i>
+                                        </a>
+                                        <div class="collapse" id="category{{ $subcat->id }}">
+                                            <div class="card card-body scroll-div-dist">
+                                                @php
+                                                    $sub_subcategories = \App\Models\SubSubCategory::where(
+                                                        'sub_category_id',
+                                                        $subcat->id,
+                                                    )->get();
+                                                @endphp
+                                                @foreach ($sub_subcategories as $sub_subCat)
+                                                    <ul class="mega-item">
+                                                        <li class="mega-dd-btn-2">
+                                                            <a data-bs-toggle="collapse" href="#subCategory1"
+                                                                role="button" aria-expanded="false"
+                                                                aria-controls="subCategory1" class="collapsed">
+                                                                {{ $sub_subCat->name }}
 
-                                <li class="mega-dd-btn-2">
-                                    <a data-bs-toggle="collapse" href="#subCategory2" role="button"
-                                        aria-expanded="false" aria-controls="subCategory2" class="collapsed">
-                                        Hari Tools<i class="fa fa-angle-down float-right mt-1"></i>
-                                    </a>
-                                    <div class="collapse" id="subCategory2">
-                                        <div class="card card-body scroll-div-dist">
-                                            <ul class="mega-item">
-                                                <li><a href="#">Hari catting</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
+                                                            </a>
 
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-long-arrow-right"></i>Lip Beauty
-                                        <i class="fa fa-angle-right float-right mt-1"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-long-arrow-right"></i>Hari Care
-                                        <i class="fa fa-angle-right float-right mt-1"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-long-arrow-right"></i>Clothing
-                                        <i class="fa fa-angle-right float-right mt-1"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-long-arrow-right"></i>Eye Makeup
-                                        <i class="fa fa-angle-right float-right mt-1"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-long-arrow-right"></i>Jewellery
-                                        <i class="fa fa-angle-right float-right mt-1"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-long-arrow-right"></i>Ladies Bag
-                                        <i class="fa fa-angle-right float-right mt-1"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-long-arrow-right"></i>Saree
-                                        <i class="fa fa-angle-right float-right mt-1"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-long-arrow-right"></i>Cosmetics
-                                        <i class="fa fa-angle-right float-right mt-1"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                @endforeach
+
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
             @endforeach
-
-            {{-- <div class="menu-box">
-                <div class="menu-link" id="headingFive">
-                    <a class="mmenu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
-                        Vendor<i class="fa fa-plus"></i>
-                    </a>
-                </div>
-                <div id="collapseFive" class="collapse menu-body" aria-labelledby="headingFive"
-                    data-bs-parent="#accordionExample">
-                    <div class="card-body">
-                        <ul>
-                            <li>
-                                <a href="{{ route('login') }}"><i class="fa fa-long-arrow-right"></i>Login</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('register') }}">
-                                    <i class="fa fa-long-arrow-right"></i>Register
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
     <div class="mt-5 ps-2">
