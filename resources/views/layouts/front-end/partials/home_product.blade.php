@@ -25,14 +25,14 @@
         <p class="card-text">
             @if ($product->discount > 0)
                 <span
-                    class="text-decoration-line-through">{{ \App\CPU\Helpers::currency_converter($product->unit_price) }}</span>
+                    class="text-decoration-line-through">৳{{ \App\CPU\Helpers::currency_converter($product->unit_price) }}</span>
 
                 <span
-                    class="ms-2">{{ \App\CPU\Helpers::currency_converter(
+                    class="ms-2">৳{{ \App\CPU\Helpers::currency_converter(
                         $product->unit_price - \App\CPU\Helpers::get_product_discount($product, $product->unit_price),
                     ) }}</span>
             @else
-                <span class="ms-2">{{ \App\CPU\Helpers::currency_converter($product->unit_price) }}</span>
+                <span class="ms-2">৳{{ \App\CPU\Helpers::currency_converter($product->unit_price) }}</span>
             @endif
         </p>
         <div class="product-rating-star">★★★★★</div>

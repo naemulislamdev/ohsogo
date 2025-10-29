@@ -19,19 +19,20 @@ class SubSubCategoryController extends Controller
         if($request->has('search'))
         {
             $key = explode(' ', $request['search']);
-            $all_sub_categories = SubSubCategory::where(function ($q) use ($key) {
+            $all_sub_sub_categories = SubSubCategory::where(function ($q) use ($key) {
                 foreach ($key as $value) {
                     $q->orWhere('name', 'like', "%{$value}%");
                 }
             });
             $query_param = ['search' => $request['search']];
         }else{
-            $all_sub_categories=SubSubCategory::all();
+            $all_sub_sub_categories=SubSubCategory::all();
         }
-        $all_sub_categories = SubSubCategory::latest()->paginate(Helpers::pagination_limit())->appends($query_param);
+        $all_sub_sub_categories = SubSubCategory::latest()->paginate(Helpers::pagination_limit())->appends($query_param);
 
 
-        return view('admin-views.sub-sub-category.view',compact('all_sub_categories','search'));
+
+        return view('admin-views.sub-sub-category.view',compact('all_sub_sub_categories','search'));
     }
 
     public function store(Request $request)

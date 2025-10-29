@@ -90,37 +90,18 @@ class ProductController extends BaseController
 
     public function store(ProductRequest $request)
     {
+
+
         $p = new Product();
         $p->user_id = auth('admin')->id();
+        $p->category_id = $request->category_id;
+        $p->sub_category_id = $request->sub_category_id;
+        $p->sub_sub_category_id = $request->sub_sub_category_id;
         $p->added_by = "admin";
         $p->name = $request->name;
         $p->code = $request->code;
         $p->slug = Str::slug($request->name) . '-' . Str::random(6);
 
-        $category = [];
-
-        if ($request->category_id != null) {
-            array_push($category, [
-                'id' => $request->category_id,
-                'position' => 1,
-            ]);
-        }
-
-        if ($request->sub_category_id != null) {
-            array_push($category, [
-                'id' => $request->sub_category_id,
-                'position' => 2,
-            ]);
-        }
-
-        if ($request->sub_sub_category_id != null) {
-            array_push($category, [
-                'id' => $request->sub_sub_category_id,
-                'position' => 3,
-            ]);
-        }
-
-        $p->category_ids = json_encode($category);
         $p->brand_id = $request->brand_id;
         $p->unit = $request->unit;
         $p->details = $request->description;
@@ -455,6 +436,7 @@ public function getSubCategory(Request $request)
     }
 
     return response($output);
+
 }
 
 public function getCategoryId(Request $request)
@@ -537,42 +519,37 @@ public function sku_combination(Request $request)
     {
         $product = Product::withoutGlobalScopes()->with('translations')->find($id);
         $campaingDetalies = campaing_detalie::where(['product_id' => $product->id])->get();
-        $product_category = json_decode($product->category_ids);
+
+        $subCat_id = null;
+        $subSubCat_id = null;
+
         $product->colors = json_decode($product->colors);
-        $categories = Category::where(['parent_id' => 0])->get();
         $br = Brand::orderBY('name', 'ASC')->get();
 
-        return view('admin-views.product.edit', compact('categories', 'br', 'product', 'product_category', 'campaingDetalies'));
+        $cat_id = Category::where("id", $product->category_id)->first()->id;
+        if(isset($product->sub_category_id)){
+            $subCat_id = SubCategory::where("id", $product->sub_category_id)->first()->id;
+        }
+        if(isset($product->sub_sub_category_id)){
+            $subSubCat_id = SubSubCategory::where("id", $product->sub_sub_category_id)->first()->id;
+        }
+
+        $categories = Category::all();
+        return view('admin-views.product.edit', compact('categories', 'br', 'product', 'campaingDetalies', 'cat_id', 'subCat_id', 'subSubCat_id'));
     }
 
     public function update(ProductRequest $request, $id)
     {
 
+
         $product = Product::find($id);
 
         $product->name = $request->name;
-        //$product->slug = Str::slug($request->name[array_search('en', $request->lang)], '-') . '-' . Str::random(6);
+        $product->slug = Str::slug($request->name);
+        $product->category_id = $request->category_id;
+        $product->sub_category_id = $request->sub_category_id;
+        $product->sub_sub_category_id = $request->sub_sub_category_id;
 
-        $category = [];
-        if ($request->category_id != null) {
-            array_push($category, [
-                'id' => $request->category_id,
-                'position' => 1,
-            ]);
-        }
-        if ($request->sub_category_id != null) {
-            array_push($category, [
-                'id' => $request->sub_category_id,
-                'position' => 2,
-            ]);
-        }
-        if ($request->sub_sub_category_id != null) {
-            array_push($category, [
-                'id' => $request->sub_sub_category_id,
-                'position' => 3,
-            ]);
-        }
-        $product->category_ids = json_encode($category);
         $product->brand_id = $request->brand_id;
         $product->unit = $request->unit;
         $product->code = $request->code;
@@ -773,7 +750,7 @@ public function sku_combination(Request $request)
 
             // campaing_detalie::insert($campaing_detalie);
 
-            return back()->with('success', 'Product updated successfully.');
+            return redirect()->back()->with('success', 'Product updated successfully.');
         }
     }
 

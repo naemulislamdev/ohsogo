@@ -1,13 +1,15 @@
 @extends('layouts.front-end.app')
-@section('title', 'Dynamic Title')
+@section('title', $catName)
 @section('main-content')
     <!-- Page Main Content start  -->
+
+    {{-- @dd($products[0]->images) --}}
     <main>
         <section class="dynamic-page-main-content-section my-3">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <h1 class="page-title">Makeup</h1>
+                        <h1 class="page-title">{{ $catName }}</h1>
                     </div>
                 </div>
                 <div class="row my-5">
@@ -235,293 +237,82 @@
                                     <div class="page-products">
 
                                         <div class="row mt-5 justify-content-center justify-content-lg-start">
-                                            <div class="col-sm-6 col-md-6 col-lg-3 product-column"
-                                                data-category="category1">
-                                                <div class="product-box product-box-col-2" data-category="category1">
-                                                    <div class="card border-0 product">
-                                                        <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
-                                                            data-aos-delay="0.5s">
-                                                            <a href="">
-                                                                <img class="card-img-top default-img"
-                                                                    src="./assets/images/related-product/rltd-1.1.jpg"
-                                                                    alt="related product image" />
-                                                                <!-- hover image -->
-                                                                <img class="card-img-top hover-img"
-                                                                    src="./assets/images/related-product/rltd-1.2.jpg"
-                                                                    alt="related product image" />
-                                                            </a>
+                                            @if ($products->count() > 0)
 
-                                                            <button
-                                                                class="btn btn-sm bg-pink w-25 position-sticky discount-btn">
-                                                                -10%
-                                                            </button>
-                                                            <div class="product-info">
-                                                                <button class="add-to-cart btn btn-sm py-2 ">
-                                                                    ADD TO CART
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-body px-0">
-                                                            <a href="" class="card-title h4 stretched-link">
-                                                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
-                                                            </a>
-                                                            <p class="card-text">
-                                                                <span class="text-decoration-line-through">৳450</span><span
-                                                                    class="ms-2">৳352</span>
-                                                            </p>
-                                                            <div class="product-rating-star">
-                                                                ★★★★★
+                                                @foreach ($products as $product)
+                                                    <div class="col-sm-6 col-md-6 col-lg-3 product-column"
+                                                        data-category="category1">
+                                                        <div class="product-box product-box-col-2"
+                                                            data-category="category1">
+                                                            <div class="card border-0 product">
+                                                                <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
+                                                                    data-aos-delay="0.5s">
+                                                                    <a
+                                                                        href="{{ route('product.details', $product->slug) }}">
+                                                                        <img class="card-img-top default-img"
+                                                                            src="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $product->thumbnail }}"
+                                                                            alt="{{ $product->name }}" />
+                                                                        <!-- hover image -->
+
+                                                                        @php
+                                                                            $images = json_decode(
+                                                                                $product->images,
+                                                                                true,
+                                                                            );
+                                                                        @endphp
+
+                                                                        @if (!empty($images) && isset($images[0]))
+                                                                            <img class="card-img-top hover-img"
+                                                                                src="{{ \App\CPU\ProductManager::product_image_path('product') }}/{{ $images[0] }}"
+                                                                                alt="{{ $product->name }}">
+                                                                        @endif
+                                                                    </a>
+
+                                                                    @if ($product->discount > 0)
+                                                                        <button
+                                                                            class="btn btn-sm bg-pink w-25 position-sticky discount-btn">
+                                                                            -{{ $product->discount }}%
+                                                                        </button>
+                                                                    @endif
+                                                                    <div class="product-info">
+                                                                        <button class="add-to-cart btn btn-sm py-2 ">
+                                                                            ADD TO CART
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-body px-0">
+                                                                    <a href="{{ route('product.details', $product->slug) }}"
+                                                                        class="card-title h4 stretched-link">
+                                                                        {{ $product->name }}
+                                                                    </a>
+                                                                    <p class="card-text">
+                                                                        @if ($product->discount > 0)
+                                                                            <span
+                                                                                class="text-decoration-line-through">৳{{ \App\CPU\Helpers::currency_converter($product->unit_price) }}</span>
+
+                                                                            <span
+                                                                                class="ms-2">৳{{ \App\CPU\Helpers::currency_converter(
+                                                                                    $product->unit_price - \App\CPU\Helpers::get_product_discount($product, $product->unit_price),
+                                                                                ) }}</span>
+                                                                        @else
+                                                                            <span
+                                                                                class="ms-2">৳{{ \App\CPU\Helpers::currency_converter($product->unit_price) }}</span>
+                                                                        @endif
+                                                                    </p>
+                                                                    <div class="product-rating-star">
+                                                                        ★★★★★
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-3 product-column"
-                                                data-category="category1">
-                                                <div class="product-box product-box-col-2" data-category="category1">
-                                                    <div class="card border-0 product">
-                                                        <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
-                                                            data-aos-delay="0.5s">
-                                                            <a href="">
-                                                                <img class="card-img-top default-img"
-                                                                    src="./assets/images/related-product/rltd-2.1.webp"
-                                                                    alt="related product image" />
-                                                                <!-- hover image -->
-                                                                <img class="card-img-top hover-img"
-                                                                    src="./assets/images/related-product/rltd-2.2.webp"
-                                                                    alt="related product image" />
-                                                            </a>
+                                                @endforeach
+                                            @else
+                                                <h3>Cant't Find any Product in <strong>{{ $catName }}</strong>
+                                                    Category!</h3>
+                                            @endif
 
-                                                            <button
-                                                                class="btn btn-sm bg-pink w-25 position-sticky discount-btn">
-                                                                -10%
-                                                            </button>
-                                                            <div class="product-info">
-                                                                <button class="add-to-cart btn btn-sm py-2 ">
-                                                                    ADD TO CART
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-body px-0">
-                                                            <a href="" class="card-title h4 stretched-link">
-                                                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
-                                                            </a>
-                                                            <p class="card-text">
-                                                                <span class="text-decoration-line-through">৳450</span><span
-                                                                    class="ms-2">৳352</span>
-                                                            </p>
-                                                            <div class="product-rating-star">
-                                                                ★★★★★
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-3 product-column"
-                                                data-category="category1">
-                                                <div class="product-box product-box-col-2" data-category="category1">
-                                                    <div class="card border-0 product">
-                                                        <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
-                                                            data-aos-delay="0.5s">
-                                                            <a href="">
-                                                                <img class="card-img-top default-img"
-                                                                    src="./assets/images/related-product/rltd-3.1.webp"
-                                                                    alt="related product image" />
-                                                                <!-- hover image -->
-                                                                <img class="card-img-top hover-img"
-                                                                    src="./assets/images/related-product/rltd-3.2.webp"
-                                                                    alt="related product image" />
-                                                            </a>
 
-                                                            <button
-                                                                class="btn btn-sm bg-pink w-25 position-sticky discount-btn">
-                                                                -10%
-                                                            </button>
-                                                            <div class="product-info">
-                                                                <button class="add-to-cart btn btn-sm py-2 ">
-                                                                    ADD TO CART
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-body px-0">
-                                                            <a href="" class="card-title h4 stretched-link">
-                                                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
-                                                            </a>
-                                                            <p class="card-text">
-                                                                <span class="text-decoration-line-through">৳450</span><span
-                                                                    class="ms-2">৳352</span>
-                                                            </p>
-                                                            <div class="product-rating-star">
-                                                                ★★★★★
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-3 product-column"
-                                                data-category="category1">
-                                                <div class="product-box product-box-col-2" data-category="category1">
-                                                    <div class="card border-0 product">
-                                                        <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
-                                                            data-aos-delay="0.5s">
-                                                            <a href="">
-                                                                <img class="card-img-top default-img"
-                                                                    src="./assets/images/related-product/rltd-4.1.webp"
-                                                                    alt="related product image" />
-                                                                <!-- hover image -->
-                                                                <img class="card-img-top hover-img"
-                                                                    src="./assets/images/related-product/rltd-4.2.webp"
-                                                                    alt="related product image" />
-                                                            </a>
-
-                                                            <button
-                                                                class="btn btn-sm bg-pink w-25 position-sticky discount-btn">
-                                                                -10%
-                                                            </button>
-                                                            <div class="product-info">
-                                                                <button class="add-to-cart btn btn-sm py-2 ">
-                                                                    ADD TO CART
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-body px-0">
-                                                            <a href="" class="card-title h4 stretched-link">
-                                                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
-                                                            </a>
-                                                            <p class="card-text">
-                                                                <span class="text-decoration-line-through">৳450</span><span
-                                                                    class="ms-2">৳352</span>
-                                                            </p>
-                                                            <div class="product-rating-star">
-                                                                ★★★★★
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-3 product-column"
-                                                data-category="category1">
-                                                <div class="product-box product-box-col-2" data-category="category1">
-                                                    <div class="card border-0 product">
-                                                        <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
-                                                            data-aos-delay="0.5s">
-                                                            <a href="">
-                                                                <img class="card-img-top default-img"
-                                                                    src="./assets/images/related-product/rltd-4.1.webp"
-                                                                    alt="related product image" />
-                                                                <!-- hover image -->
-                                                                <img class="card-img-top hover-img"
-                                                                    src="./assets/images/related-product/rltd-4.2.webp"
-                                                                    alt="related product image" />
-                                                            </a>
-
-                                                            <button
-                                                                class="btn btn-sm bg-pink w-25 position-sticky discount-btn">
-                                                                -10%
-                                                            </button>
-                                                            <div class="product-info">
-                                                                <button class="add-to-cart btn btn-sm py-2 ">
-                                                                    ADD TO CART
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-body px-0">
-                                                            <a href="" class="card-title h4 stretched-link">
-                                                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
-                                                            </a>
-                                                            <p class="card-text">
-                                                                <span class="text-decoration-line-through">৳450</span><span
-                                                                    class="ms-2">৳352</span>
-                                                            </p>
-                                                            <div class="product-rating-star">
-                                                                ★★★★★
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-3 product-column"
-                                                data-category="category1">
-                                                <div class="product-box product-box-col-2" data-category="category1">
-                                                    <div class="card border-0 product">
-                                                        <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
-                                                            data-aos-delay="0.5s">
-                                                            <a href="">
-                                                                <img class="card-img-top default-img"
-                                                                    src="./assets/images/related-product/rltd-4.1.webp"
-                                                                    alt="related product image" />
-                                                                <!-- hover image -->
-                                                                <img class="card-img-top hover-img"
-                                                                    src="./assets/images/related-product/rltd-4.2.webp"
-                                                                    alt="related product image" />
-                                                            </a>
-
-                                                            <button
-                                                                class="btn btn-sm bg-pink w-25 position-sticky discount-btn">
-                                                                -10%
-                                                            </button>
-                                                            <div class="product-info">
-                                                                <button class="add-to-cart btn btn-sm py-2 ">
-                                                                    ADD TO CART
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-body px-0">
-                                                            <a href="" class="card-title h4 stretched-link">
-                                                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
-                                                            </a>
-                                                            <p class="card-text">
-                                                                <span class="text-decoration-line-through">৳450</span><span
-                                                                    class="ms-2">৳352</span>
-                                                            </p>
-                                                            <div class="product-rating-star">
-                                                                ★★★★★
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-3 product-column"
-                                                data-category="category1">
-                                                <div class="product-box product-box-col-2" data-category="category1">
-                                                    <div class="card border-0 product">
-                                                        <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
-                                                            data-aos-delay="0.5s">
-                                                            <a href="">
-                                                                <img class="card-img-top default-img"
-                                                                    src="./assets/images/related-product/rltd-4.1.webp"
-                                                                    alt="related product image" />
-                                                                <!-- hover image -->
-                                                                <img class="card-img-top hover-img"
-                                                                    src="./assets/images/related-product/rltd-4.2.webp"
-                                                                    alt="related product image" />
-                                                            </a>
-
-                                                            <button
-                                                                class="btn btn-sm bg-pink w-25 position-sticky discount-btn">
-                                                                -10%
-                                                            </button>
-                                                            <div class="product-info">
-                                                                <button class="add-to-cart btn btn-sm py-2 ">
-                                                                    ADD TO CART
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-body px-0">
-                                                            <a href="" class="card-title h4 stretched-link">
-                                                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
-                                                            </a>
-                                                            <p class="card-text">
-                                                                <span class="text-decoration-line-through">৳450</span><span
-                                                                    class="ms-2">৳352</span>
-                                                            </p>
-                                                            <div class="product-rating-star">
-                                                                ★★★★★
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

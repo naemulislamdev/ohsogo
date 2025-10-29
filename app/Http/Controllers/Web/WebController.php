@@ -32,6 +32,8 @@ use App\Model\Transaction;
 use App\Model\Translation;
 use App\User;
 use App\Model\Wishlist;
+use App\Models\SubCategory;
+use App\Models\SubSubCategory;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
@@ -82,10 +84,30 @@ class WebController extends Controller
     {
         return view('web-views.cart');
     }
-    public function page()
+    public function showCollections($slug)
     {
-        return view('web-views.page');
+        $getCat = null;
+        $products = collect();
+        $catName = '';
+
+        if($category = Category::where('slug', $slug)->first()) {
+            $getCat = $category;
+            $products = Product::where('category_id', $getCat->id)->get();
+            $catName = $getCat->name;
+        } else if($subCategory = SubCategory::where('slug', $slug)->first()) {
+            $getCat = $subCategory;
+            $products = Product::where('sub_category_id', $getCat->id)->get();
+            $catName = $getCat->name;
+        } else if($subSubCategory = SubSubCategory::where('slug', $slug)->first()) {
+            $getCat = $subSubCategory;
+            $products = Product::where('sub_sub_category_id', $getCat->id)->get();
+                $catName = $getCat->name;
+        }
+
+        return view('web-views.collections', compact('products', 'catName'));
     }
+
+    
     public function productCheckout()
     {
         return view('web-views.product-checkout');

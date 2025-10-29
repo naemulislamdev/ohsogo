@@ -86,7 +86,7 @@
                         href="{{ route('admin.dashboard') }}">{{ \App\CPU\translate('Dashboard') }}</a>
                 </li>
                 <li class="breadcrumb-item" aria-current="page"><a
-                        href="{{ route('admin.product.list', 'in_house') }}">{{ \App\CPU\translate('Product') }}</a>
+                        href="{{ route('admin.product.list', 'in_house') }}">{{ \App\CPU\translate('Products') }}</a>
                 </li>
                 <li class="breadcrumb-item">{{ \App\CPU\translate('Add') }} {{ \App\CPU\translate('New') }} </li>
             </ol>
@@ -107,7 +107,8 @@
                                 <label class="input-label" for="name">{{ \App\CPU\translate('name') }}<span
                                         class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="name" class="form-control" placeholder="Enter product name">
+                                <input type="text" name="name" class="form-control" placeholder="Enter product name"
+                                    value="{{ old('name') }}">
                                 @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -162,16 +163,16 @@
 
                                         <select class="js-example-basic-multiple form-control" name="sub_category_id"
                                             id="subcategory_id">
-                                            <option value="{{ old('sub_category_id') }}" selected disabled>---Select---
-                                            </option>
+                                           <option value="{{ null }}" selected disabled>
+                                                ---{{ \App\CPU\translate('Select') }}---</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="name">{{ \App\CPU\translate('Sub Sub Category') }}</label>
                                         <select class="js-example-basic-multiple form-control" name="sub_sub_category_id"
                                             id="subSubCat_id">
-                                            <option value="{{ old('sub_sub_category_id') }}" selected disabled>---Select---
-                                            </option>
+                                         <option value="{{ null }}" selected disabled>
+                                                ---{{ \App\CPU\translate('Select') }}---</option>
                                         </select>
                                     </div>
                                 </div>

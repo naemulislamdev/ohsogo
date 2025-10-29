@@ -68,7 +68,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($all_sub_categories as $key => $subsubcat)
+                                    @foreach ($all_sub_sub_categories as $key => $subsubcat)
                                         {{-- @dd($subsubcat->category->name) --}}
                                         <tr>
                                             <td>{{ ++$key }}</td>
@@ -90,101 +90,109 @@
                                                 </a>
                                             </td>
                                         </tr>
-                                        <!-- Edit Sub-sub-category Modal start-->
-                                        <div class="modal fade" id="exampleModal_{{ $subsubcat->id }}" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h3 class="modal-title" id="exampleModalLabel">Edit Sub sub-category
-                                                        </h3>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
+                <!-- Edit Sub-sub-category Modal start-->
+                <div class="modal fade" id="exampleModal_{{ $subsubcat->id }}" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="exampleModalLabel">Edit Sub sub-category
+                                </h3>
+                                <button type="button" class="close" data-dismiss="modal"
+                                    aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <div>
+                                        <form action="{{ route('admin.sub-sub-category.update') }}"
+                                            method="POST">
+                                            @csrf
+                                            <div class="row">
+
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label
+                                                            class="input-label">{{ \App\CPU\translate('main') }}
+                                                            {{ \App\CPU\translate('category') }}
+                                                            <span
+                                                                class="input-label-secondary">*</span></label>
+                                                        <select name="category_id" id="cat_id2"
+                                                            class="form-control" required>
+
+                                                            @foreach (\App\Model\Category::all() as $category)
+                                                                <option
+                                                                    {{ $subsubcat->category->id == $category['id'] ? 'selected' : '' }}
+                                                                    value="{{ $category['id'] }}">
+                                                                    {{ $category['name'] }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <div>
-                                                            <div>
-                                                                <form action="{{ route('admin.sub-sub-category.update') }}"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    <div class="row">
+                                                </div>
+                                                <input type="hidden" name="id"
+                                                    value="{{ $subsubcat->id }}">
+                                                <div class="col-12">
 
+                                                    <label
+                                                        for="name">{{ \App\CPU\translate('sub_category') }}
+                                                        {{ \App\CPU\translate('name') }}</label>
+                                                          {{-- @dd($subsubcat->category_id) --}}
+                                                    <select name="subcategory_id" id="parent_id2"
+                                                        class="form-control">
 
-                                                                        <div class="col-12">
-                                                                            <div class="form-group">
-                                                                                <label
-                                                                                    class="input-label">{{ \App\CPU\translate('main') }}
-                                                                                    {{ \App\CPU\translate('category') }}
-                                                                                    <span
-                                                                                        class="input-label-secondary">*</span></label>
-                                                                                <select name="category_id" id="cat_id2"
-                                                                                    class="form-control" required>
-
-                                                                                    @foreach (\App\Model\Category::all() as $category)
-                                                                                        <option
-                                                                                            {{ $subsubcat->category->id == $category['id'] ? 'selected' : '' }}
-                                                                                            value="{{ $category['id'] }}">
-                                                                                            {{ $category['name'] }}
-                                                                                        </option>
-                                                                                    @endforeach
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <input type="hidden" name="id"
-                                                                            value="{{ $subsubcat->id }}">
-                                                                        <div class="col-12">
-                                                                            <label
-                                                                                for="name">{{ \App\CPU\translate('sub_category') }}
-                                                                                {{ \App\CPU\translate('name') }}</label>
-                                                                            <select name="subcategory_id" id="parent_id2"
-                                                                                class="form-control">
-                                                                                <option value="">select</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="col-12">
-                                                                            <div class="form-group lang_form"
-                                                                                id="">
-                                                                                <label
-                                                                                    class="input-label">{{ \App\CPU\translate('Sub_sub_category') }}
-                                                                                    {{ \App\CPU\translate('name') }}
-                                                                                </label>
-                                                                                <input type="text"
-                                                                                    value="{{ $subsubcat->name }}"
-                                                                                    name="name" class="form-control"
-                                                                                    placeholder="{{ \App\CPU\translate('New_Sub_Category') }}"
-                                                                                    required>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                        <div class="modal-footer border-t-0">
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-dismiss="modal">{{ \App\CPU\translate('close') }}</button>
-                                                                            <button type="submit"
-                                                                                class="btn btn-primary px-5">{{ \App\CPU\translate('Update') }}
-                                                                            </button>
-                                                                        </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
+                                                          @foreach (\App\Models\SubCategory::where("category_id", $subsubcat->category_id)->get()  as $subCategory)
+                                                                <option
+                                                                    {{ $subsubcat->category->id == $subCategory['id'] ? 'selected' : '' }}
+                                                                    value="{{ $subCategory['id'] }}">
+                                                                    {{ $subCategory['name'] }}
+                                                                </option>
+                                                            @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group lang_form"
+                                                        >
+                                                         <label
+                                                        for="name">{{ \App\CPU\translate('sub_sub_category') }}
+                                                        {{ \App\CPU\translate('name') }}</label>
+                                                        <input type="text"
+                                                            value="{{ $subsubcat->name }}"
+                                                            name="name" class="form-control"
+                                                            placeholder="{{ \App\CPU\translate('New_Sub_Category') }}"
+                                                            required>
                                                     </div>
 
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <!-- Edit Subcategory Modal End-->
+
+                                                <div class="modal-footer border-t-0">
+                                                    <button type="button"
+                                                        class="btn btn-secondary"
+                                                        data-dismiss="modal">{{ \App\CPU\translate('close') }}</button>
+                                                    <button type="submit"
+                                                        class="btn btn-primary px-5">{{ \App\CPU\translate('Update') }}
+                                                    </button>
+                                                </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Edit Subcategory Modal End-->
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="card-footer">
-                        {{ $all_sub_categories->links() }}
+                        {{ $all_sub_sub_categories->links() }}
                     </div>
-                    @if (count($all_sub_categories) == 0)
+                    @if (count($all_sub_sub_categories) == 0)
                         <div class="text-center p-4">
                             <img class="mb-3" src="{{ asset('assets/back-end') }}/svg/illustrations/sorry.svg"
                                 alt="Image Description" style="width: 7rem;">
@@ -334,7 +342,7 @@
             }
 
             // load on page load
-            loadSubCategory($('#cat_id2').val());
+            // loadSubCategory($('#cat_id2').val());
 
             // load on change
             $(document).on('change', '#cat_id2', function() {
