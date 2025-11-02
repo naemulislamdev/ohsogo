@@ -12,6 +12,29 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class ProductManager
 {
+    public static function getRelatedProducts($cat_id, $sub_id = null, $child_id = null,)
+    {
+        if (!empty($child_id)) {
+            return Product::where('sub_sub_category_id', $child_id)
+                ->latest()
+                ->take(4)
+                ->get();
+        }
+
+        if (!empty($sub_id) && empty($child_id)) {
+            return Product::where('sub_category_id', $sub_id)
+                ->latest()
+                ->take(4)
+                ->get();
+        }
+
+        if (!empty($cat_id) && empty($sub_id) && empty($child_id)) {
+            return Product::where('category_id', $cat_id)
+                ->latest()
+                ->take(4)
+                ->get();
+        }
+    }
     public static function get_product($id)
     {
         return Product::active()->with(['rating'])->where('id', $id)->first();
@@ -31,7 +54,7 @@ class ProductManager
 
     public static function get_video_shopping_products($limit = 10, $offset = 1)
     {
-        $paginator = Product::where('video_shopping',1)->active()->with(['rating'])->latest()->paginate($limit, ['*'], 'page', $offset);
+        $paginator = Product::where('video_shopping', 1)->active()->with(['rating'])->latest()->paginate($limit, ['*'], 'page', $offset);
         /*$paginator->count();*/
         return [
             'total_size' => $paginator->total(),
@@ -121,7 +144,7 @@ class ProductManager
 
     public static function search_products($name, $limit = 10, $offset = 1)
     {
-         $key = explode(' ', $name);
+        $key = explode(' ', $name);
         // $key = [base64_decode($name)];
 
         $paginator = Product::active()->with(['rating'])->where(function ($q) use ($key) {
@@ -318,7 +341,7 @@ class ProductManager
         foreach ($data as $item) {
             $storage[] = [
                 'product' => $item->product['name'] ?? '',
-                'customer' => isset($item->customer) ? $item->customer->f_name .' '. $item->customer->l_name : '' ,
+                'customer' => isset($item->customer) ? $item->customer->f_name . ' ' . $item->customer->l_name : '',
                 'comment' => $item->comment,
                 'rating' => $item->rating
             ];

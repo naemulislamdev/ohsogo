@@ -10,6 +10,7 @@ use App\CPU\ProductManager;
 use App\CPU\CartManager;
 use App\Http\Controllers\Controller;
 use App\Model\Admin;
+use App\Model\Banner;
 use App\Model\Brand;
 use App\Model\BusinessSetting;
 use App\Model\Cart;
@@ -64,13 +65,14 @@ class WebController extends Controller
 
     public function home()
     {
+        $banners = Banner::where("published", "1")->get();
         $newDropProducts =  Product::with(['reviews'])->active()
             ->where('featured', 1)
             ->withCount(['order_details'])->orderBy('order_details_count', 'DESC')
             ->take(12)
             ->get();
 
-        return view("web-views.home", compact("newDropProducts"));
+        return view("web-views.home", compact("newDropProducts", "banners"));
     }
     public function about()
     {
@@ -90,24 +92,22 @@ class WebController extends Controller
         $products = collect();
         $catName = '';
 
-        if($category = Category::where('slug', $slug)->first()) {
+        if ($category = Category::where('slug', $slug)->first()) {
             $getCat = $category;
             $products = Product::where('category_id', $getCat->id)->get();
             $catName = $getCat->name;
-        } else if($subCategory = SubCategory::where('slug', $slug)->first()) {
+        } else if ($subCategory = SubCategory::where('slug', $slug)->first()) {
             $getCat = $subCategory;
             $products = Product::where('sub_category_id', $getCat->id)->get();
             $catName = $getCat->name;
-        } else if($subSubCategory = SubSubCategory::where('slug', $slug)->first()) {
+        } else if ($subSubCategory = SubSubCategory::where('slug', $slug)->first()) {
             $getCat = $subSubCategory;
             $products = Product::where('sub_sub_category_id', $getCat->id)->get();
-                $catName = $getCat->name;
+            $catName = $getCat->name;
         }
 
         return view('web-views.collections', compact('products', 'catName'));
     }
-
-    
     public function productCheckout()
     {
         return view('web-views.product-checkout');

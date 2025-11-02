@@ -86,6 +86,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
             Route::post('business-overview', 'business_overview')->name('business-overview');
         });
         Route::get('/complain/list', [ComplainAdminController::class, 'list'])->name('complain.list');
+        Route::get('/complain/view', [ComplainAdminController::class, 'list'])->name('complain.view');
         //system routes
         Route::get('search-function', [SystemController::class, 'search_function'])->name('search-function');
         Route::get('maintenance-mode', [SystemController::class, 'maintenance_mode'])->name('maintenance-mode');

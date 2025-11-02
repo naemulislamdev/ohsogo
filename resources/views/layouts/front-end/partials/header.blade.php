@@ -28,7 +28,8 @@
                 </div>
             </div>
 
-            <div class="col-lg-3">
+
+            <div class=" col-lg-3">
                 <nav class="navbar">
                     <div class="menu-area">
                         <ul>
@@ -81,6 +82,7 @@
                                                     @endforeach
                                                 </ul>
                                             </div>
+                                            </a>
                                 </li>
                             @endforeach
                         </ul>
@@ -88,11 +90,14 @@
                     </li>
                     @endforeach
                     </ul>
-            </div>
 
+
+            </div>
             <i class="fa fa-bars menu-icon"></i>
+
             <a class="d-block d-lg-none" style="margin-left: 20px; margin-top: 12px;" href="{{ url('/') }}">
-                <img style="width: 100px"src="assets/images/logo/logo_High_Res_Mob_x320.avif" alt="logo">
+                <img style="width: 100px"src="{{ asset('storage/company') . '/' . $web_config['web_logo']->value }}"
+                    onerror="this.src='{{ asset('assets/front-end/img/image-place-holder.png') }}" alt="logo">
             </a>
             {{-- moblile search --}}
             <div class="d-block d-lg-none mt-2">
@@ -562,7 +567,8 @@
         </div>
         <div class="col-lg-2 text-center">
             <a href="{{ url('/') }}" class="navbar-brand">
-                <img class="header-logo" src="{{ asset('assets') }}/images/logo/top-logo.png" alt="" />
+                <img class="header-logo" src="{{ asset('storage/company') . '/' . $web_config['web_logo']->value }}"
+                    onerror="this.src='{{ asset('assets/front-end/img/image-place-holder.png') }}" alt="" />
             </a>
         </div>
         <div class="col-lg-4">
@@ -1094,8 +1100,8 @@
 <div class="mobile-menu ">
     <div class="mm-logo" style="background: #fff; padding: 0.6875rem 1.125rem">
         <a href="{{ url('/') }}">
-            <img style="width: 50%" src="{{ asset('assets') }}/images/logo/logo_High_Res_Mob_x320.avif"
-                alt="" />
+            <img style="width: 50%" src="{{ asset('storage/company') . '/' . $web_config['web_logo']->value }}"
+                onerror="this.src='{{ asset('assets/front-end/img/image-place-holder.png') }}" alt="" />
         </a>
         <div class="mm-cross-icon">
             <i class="fa fa-times mm-ci"></i>

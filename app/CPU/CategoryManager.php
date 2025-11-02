@@ -10,7 +10,7 @@ class CategoryManager
 {
     public static function parents()
     {
-        $x = Category::with(['childes.childes'])->priority()->get();
+        $x = Category::priority()->get();
         return $x;
     }
 

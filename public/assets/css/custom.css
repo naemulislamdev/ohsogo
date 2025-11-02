@@ -2360,11 +2360,11 @@ input[type="range"].active::-webkit-slider-thumb {
 #mainCategoryTabs {
     gap: 40px;
 }
-#faceSubcategoryTabs {
+.subcategoryTabs {
     justify-content: center;
     gap: 30px;
 }
-#faceSubcategoryTabs .nav-link {
+.subcategoryTabs .nav-link {
     margin-bottom: -1px;
     border: 1px solid #e2f0d8 !important;
     background: #fff;
@@ -2376,7 +2376,7 @@ input[type="range"].active::-webkit-slider-thumb {
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
 }
-#faceSubcategoryTabs .nav-link.active {
+.subcategoryTabs .nav-link.active {
     background-color: #e2f0d8;
 }
 .faq-section .accordion-button:not(.collapsed) {

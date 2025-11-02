@@ -1871,4 +1871,13 @@
   'main ' => 'Main ',
   'sub-category' => 'Sub-category',
   '<i class="tio-arrow-long-left"></i> sub-category' => ' i class= tio-arrow-long-left   /i  sub-category',
+  'Product Bulk Import' => 'Product Bulk Import',
+  'Instructions' => 'Instructions',
+  'Download the format file and fill it with proper data' => 'Download the format file and fill it with proper data',
+  'You can download the example file to understand how the data must be filled' => 'You can download the example file to understand how the data must be filled',
+  'Once you have downloaded and filled the format file, upload it in the form below and submit' => 'Once you have downloaded and filled the format file  upload it in the form below and submit',
+  'After uploading products you need to edit them and set product images and choices' => 'After uploading products you need to edit them and set product images and choices',
+  'You can get brand and category id from their list, please input the right ids' => 'You can get brand and category id from their list  please input the right ids',
+  'Import Products File' => 'Import Products File',
+  'Download Format' => 'Download Format',
 );
