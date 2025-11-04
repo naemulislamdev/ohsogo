@@ -21,15 +21,29 @@
 
 @extends('layouts.front-end.app')
 
-@section('title', 'Product-details')
-@php
-    $relatedProducts = \App\CPU\ProductManager::getRelatedProducts(
+@section('title', $product['name'])
+{{-- @php
+    $drelatedProducts = \App\CPU\ProductManager::getRelatedProducts(
         $product['category_id'],
         $product['sub_category_id'],
         $product['sub_sub_category_id'],
     );
 
+@endphp --}}
+@php
+    $query = App\Model\Product::query()->where('status', $product->status);
+    if ($product->sub_sub_category_id) {
+        $query->where('sub_sub_category_id', $product->sub_sub_category_id);
+    } elseif ($product->subcategory_id) {
+        $query->where('subcategory_id', $product->subcategory_id);
+    } else {
+        $query->where('category_id', $product->category_id);
+    }
+
+    // Fetch 12 random related products
+    $related_products = $query->inRandomOrder()->take(12)->get();
 @endphp
+
 @section('main-content')
     <!-- Main product -->
     <section class="main-product">
@@ -92,6 +106,27 @@
                         @else
                             <h2 class="text-pink">{{ \App\CPU\Helpers::currency_converter($product->unit_price) }}</h2>
                         @endif
+                    </div>
+                    <div class="d-flex gap-4">
+                        <div>
+                            <h4>Product Quantity:</h4>
+                        </div>
+                        <div
+                            class="d-flex align-items-center gap-3 cart-increment-decrement  cart-increment-decrement mb-4">
+                            <button style="height: 40px; width: 40px;" class="decrement btn btn-danger rounded-circle"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-dash" viewBox="0 0 16 16">
+                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                </svg></button>
+                            <input type="hidden" name="quantity" class="quantity">
+                            <span class="showItem lead" style="color: #414042;">1</span>
+                            <button style="height: 40px; width: 40px;" class="increment btn btn-danger rounded-circle"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-plus" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                </svg></i></button>
+                        </div>
                     </div>
                     <div class="product-form-buttons">
                         <button class="btn btn-block w-100 details-add-to-cart">
@@ -275,7 +310,7 @@
     </section>
     <section class="related-products">
         <div class="container">
-            <h2 class="h1 text-center my-4">You May Also Like</h2>
+            <h2 class="h1 text-center my-4">You May Also Like </h2>
             <div class="row mt-5">
                 {{-- @php
                     $drelatedProducts = \App\Model\Product::with(['reviews'])
@@ -285,8 +320,35 @@
                         ->active()
                         ->get();
                 @endphp --}}
-                @if ($relatedProducts)
-                    @foreach ($relatedProducts as $rltdProduct)
+
+                {{-- @php
+
+                    $drelatedProducts = \App\Model\Product::with('reviews')
+                        ->where('id', '!=', $product->id) // exclude current product
+                        ->when($product->sub_sub_category_id, function ($query) use ($product) {
+                            // Match same sub-sub-category if exists
+                            $query->where('sub_sub_category_id', $product->sub_sub_category_id);
+                        })
+                        ->when(!$product->sub_sub_category_id && $product->sub_category_id, function ($query) use (
+                            $product,
+                        ) {
+                            // If no sub_sub_category, fallback to sub_category
+                            $query->where('sub_category_id', $product->sub_category_id);
+                        })
+                        ->when(
+                            !$product->sub_sub_category_id && !$product->sub_category_id && $product->category_id,
+                            function ($query) use ($product) {
+                                // If only main category available
+                                $query->where('category_id', $product->category_id);
+                            },
+                        )
+                        ->active() // your model scope for active products
+                        ->take(4) // limit number of related products
+                        ->get();
+                @endphp --}}
+
+                @if ($related_products)
+                    @foreach ($related_products as $rltdProduct)
                         <div class="col-6 col-sm-6 col-lg-3 pe-md-5">
                             <div class="card border-0 product w-100">
                                 <div class="product-item border border-dark">

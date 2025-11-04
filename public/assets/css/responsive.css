@@ -134,6 +134,21 @@
     .ingredient-card img {
         width: 100%;
     }
+    ul.subcategoryTabs {
+        display: flex;
+        justify-content: start;
+        gap: 17px;
+    }
+    .subcategoryTabs .nav-link {
+        padding: 8px 16px !important;
+    }
+    #mainCategoryTabs {
+        gap: 21px;
+        justify-content: start !important;
+    }
+    #mainCategoryTabs .nav-link {
+        padding: 11px 28px;
+    }
 }
 
 @media (max-width: 570px) {

@@ -2,8 +2,11 @@
 @section('title', $catName)
 @section('main-content')
     <!-- Page Main Content start  -->
+    @php
+        $maxPrice = \App\CPU\Helpers::currency_converter($products->max('purchase_price'));
 
-    {{-- @dd($products[0]->images) --}}
+    @endphp
+
     <main>
         <section class="dynamic-page-main-content-section my-3">
             <div class="container">
@@ -30,16 +33,19 @@
                                     <p class="mb-2" style="font-weight: 400;">RESET</p>
 
                                     <div class="price-range">
+
                                         <div class="d-flex align-items-center justify-content-center mb-1">
                                             <p class="mb-0 position-relative"
                                                 style="width:5%; color:#414042; font-size:14px; bottom: -9px">৳</p>
                                             <div class="range-slider ms-2" style="width:95%;">
+
                                                 <div class="slider-track"></div>
                                                 <div class="slider-range"></div>
-                                                <input type="range" class="minRange" min="0" max="1790"
-                                                    value="0">
-                                                <input type="range" class="maxRange" min="0" max="1790"
-                                                    value="1790">
+                                                <input type="range" class="minRange" min="0"
+                                                    max="{{ $maxPrice }}" value="0">
+
+                                                <input type="range" class="maxRange" min="0"
+                                                    max="{{ $maxPrice }}" value="{{ $maxPrice }}">
                                             </div>
                                         </div>
                                         <div class="values d-flex range-values mt-3">
@@ -70,7 +76,7 @@
                                 <div class="offcanvas-header ">
                                     <div class="text-center w-100" id="mobileProductSortOffcanvasLabel">
                                         <h5 style="font-weight: 400; font-size: 14px;">Filter And Sort</h5>
-                                        <p class="mb-0" style="font-size: 14px;">34 Products</p>
+                                        <p class="mb-0" style="font-size: 14px;">{{ $products->count() }} Products</p>
                                     </div>
 
                                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
@@ -85,10 +91,11 @@
                                             <div class="range-slider ms-2" style="width:95%;">
                                                 <div class="slider-track"></div>
                                                 <div class="slider-range"></div>
-                                                <input type="range" class="minRange" min="0" max="1790"
-                                                    value="0">
-                                                <input type="range" class="maxRange" min="0" max="1790"
-                                                    value="1790">
+                                                <input type="range" class="minRange" min="0"
+                                                    max="{{ $maxPrice }}" value="0">
+
+                                                <input type="range" class="maxRange" min="0"
+                                                    max="{{ $maxPrice }}" value="{{ $maxPrice }}">
                                             </div>
                                         </div>
                                         <div class="values d-flex range-values mt-3">
@@ -185,7 +192,7 @@
                                     </ul>
                                 </div>
                                 <p style="color: rgba(65, 64, 66, 0.7); font-size: 14px; font-weight: 400;"
-                                    class="mb-0 mt-3">34 Products</p>
+                                    class="mb-0 mt-3">{{ $products->count() }} Products</p>
                             </div>
                             <div class="col-lg-9">
                                 <!-- Grid system icon section start -->
@@ -231,6 +238,7 @@
                             </div>
                         </div>
                         <!-- Grid Products Row start -->
+
                         <div class="row product-grid">
                             <div class="col-lg-12">
                                 <div class="related-products ">
@@ -245,7 +253,7 @@
                                                         <div class="product-box product-box-col-2"
                                                             data-category="category1">
                                                             <div class="card border-0 product">
-                                                                <div class="product-item border border-dark wow animate__animated animate__zoomOutLite"
+                                                                <div class="product-item border border-dark wow animate__animated animate__zoomIn"
                                                                     data-aos-delay="0.5s">
                                                                     <a
                                                                         href="{{ route('product.details', $product->slug) }}">
@@ -275,7 +283,9 @@
                                                                         </button>
                                                                     @endif
                                                                     <div class="product-info">
-                                                                        <button class="add-to-cart btn btn-sm py-2 ">
+                                                                        <button
+                                                                            onclick="buy_now('form-{{ $product->id }}')"
+                                                                            class="add-to-cart btn btn-sm py-2 ">
                                                                             ADD TO CART
                                                                         </button>
                                                                     </div>
@@ -308,8 +318,7 @@
                                                     </div>
                                                 @endforeach
                                             @else
-                                                <h3>Cant't Find any Product in <strong>{{ $catName }}</strong>
-                                                    Category!</h3>
+                                                <h3>Sorry, there are no products in this collection</h3>
                                             @endif
 
 

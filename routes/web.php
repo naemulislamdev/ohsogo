@@ -13,6 +13,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Web\CartController;
 use App\Http\Controllers\Web\WebController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -36,10 +37,12 @@ Route::controller(WebController::class)->group(function () {
     Route::get('/', 'home')->name('home');
     Route::get('/about', 'about')->name('about');
     Route::get('/contact', 'contact')->name('contact');
+    Route::get('/shop', 'shopAllNewDrops')->name('shop');
     Route::get("/cart", 'cart')->name('product.cart');
     Route::get("/product-checkout", 'productCheckout')->name('product.checkout');
     Route::get("/product-details/{slug}", 'productDetails')->name('product.details');
     Route::get("/collections/{slug}", 'showCollections')->name('collections');
+    Route::get("/brandCollection/{slug}", 'showBrandCollections')->name('brandCollection');
 });
 
 
@@ -51,3 +54,17 @@ Route::view('/terms', 'web-views.terms')->name('terms');
 Route::view('/shipping', 'web-views.shipping')->name('shipping');
 Route::view('/privacy', 'web-views.privacy')->name('privacy');
 Route::view('/faqs', 'web-views.faqs')->name('faqs');
+
+//check done
+Route::controller(CartController::class)->prefix('/cart')->as('cart.')->group(function () {
+    Route::post('variant_price', 'variant_price')->name('variant_price');
+    Route::post('/add-product', 'addToCartOnSession')->name('add');
+    Route::post('/remove', 'removeFromCart')->name('remove');
+    Route::post('/nav-cart-items', 'updateNavCart')->name('nav_cart');
+    Route::post('total-cart-count', 'totalCartCount')->name('totalCart');
+    Route::post('/updateQuantity', 'updateQuantity')->name('updateQuantity');
+    Route::get('/subdomain-ordernow/{id}', 'subdomainOrdernow');
+    // In web.php
+    // Route::post('/add-to-cart', 'CartController@addToCart')->name('add.to.cart');
+
+});

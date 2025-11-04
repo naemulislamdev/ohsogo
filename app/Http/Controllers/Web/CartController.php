@@ -58,99 +58,185 @@ class CartController extends Controller
         ];
     }
 
+    // public function addToCartOnSession(Request $request)
+    // {
+    //     $product = Product::find($request->id);
+    //     $data = array();
+    //     $data['id'] = $product->id;
+    //     $str = '';
+    //     $variations = [];
+    //     $price = 0;
+    //     //chek if out of stock
+    //     if ($product['current_stock'] < $request['quantity']) {
+    //         return response()->json([
+    //             'data' => 0
+    //         ]);
+    //     }
+    //     //check the color enabled or disabled for the product
+    //     if ($request->has('color')) {
+    //         //dd($request['color']);
+    //         $data['color'] = $request['color'];
+    //         $str = Color::where('code', $request['color'])->first()->name;
+    //         //dd($str);
+    //         $variations['color'] = $str;
+    //     }
+    //     //Gets all the choice values of customer choice option and generate a string like Black-S-Cotton
+    //     foreach (json_decode(Product::find($request->id)->choice_options) as $key => $choice) {
+    //         $data[$choice->name] = $request[$choice->name];
+    //         $variations[$choice->title] = $request[$choice->name];
+    //         if ($str != null) {
+    //             $str .= '-' . str_replace(' ', '', $request[$choice->name]);
+    //         } else {
+    //             $str .= str_replace(' ', '', $request[$choice->name]);
+    //         }
+    //     }
+    //     $data['variations'] = $variations;
+    //     $data['variant'] = $str;
+    //     if ($request->session()->has('cart')) {
+    //         if (count($request->session()->get('cart')) > 0) {
+    //             foreach ($request->session()->get('cart') as $key => $cartItem) {
+    //                 if ($cartItem['id'] == $request['id'] && $cartItem['variant'] == $str) {
+    //                     return response()->json([
+    //                         'data' => 1
+    //                     ]);
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     //Check the string and decreases quantity for the stock
+    //     if ($str != null) {
+    //         $count = count(json_decode($product->variation));
+    //         for ($i = 0; $i < $count; $i++) {
+    //             if (json_decode($product->variation)[$i]->type == $str) {
+    //                 $price = json_decode($product->variation)[$i]->price;
+    //                 if (json_decode($product->variation)[$i]->qty < $request['quantity']) {
+    //                     return response()->json([
+    //                         'data' => 0
+    //                     ]);
+    //                 }
+    //             }
+    //         }
+    //     } else {
+    //         $price = $product->unit_price;
+    //     }
+
+    //     $tax = ($price * $product->tax) / 100;
+    //     $shipping_id = 1;
+    //     $shipping_cost = 0;
+
+    //     $data['quantity'] = $request['quantity'];
+    //     $data['shipping_method_id'] = $shipping_id;
+    //     $data['price'] = $price;
+    //     $data['tax'] = $tax;
+    //     $data['slug'] = $product->slug;
+    //     $data['name'] = $product->name;
+    //     $data['discount'] = Helpers::get_product_discount($product, $price);
+    //     $data['shipping_cost'] = $shipping_cost;
+    //     $data['thumbnail'] = $product->thumbnail;
+
+    //     if ($request->session()->has('cart')) {
+    //         $cart = $request->session()->get('cart', collect([]));
+    //         $cart->push($data);
+    //     } else {
+    //         $cart = collect([$data]);
+    //         $request->session()->put('cart', $cart);
+    //     }
+
+    //     session()->forget('coupon_code');
+    //     session()->forget('coupon_discount');
+
+    //     return response()->json([
+    //         'data' => $data,
+    //         'status' => 'success',
+    //         'count' => session()->has('cart') ? count(session()->get('cart')) : 0
+    //     ]);
+    // }
+
     public function addToCartOnSession(Request $request)
     {
+        $request->dd();
         $product = Product::find($request->id);
-        $data = array();
+
+        if (!$product) {
+            return response()->json(['status' => 'error', 'message' => 'Product not found']);
+        }
+
+        // Out of stock check
+        if ($product->current_stock < $request->quantity) {
+            return response()->json(['status' => 'error', 'message' => 'Out of stock']);
+        }
+
+        $data = [];
         $data['id'] = $product->id;
-        $str = '';
-        $variations = [];
-        $price = 0;
-        //chek if out of stock
-        if ($product['current_stock'] < $request['quantity']) {
-            return response()->json([
-                'data' => 0
-            ]);
-        }
-        //check the color enabled or disabled for the product
-        if ($request->has('color')) {
-            //dd($request['color']);
-            $data['color'] = $request['color'];
-            $str = Color::where('code', $request['color'])->first()->name;
-            //dd($str);
-            $variations['color'] = $str;
-        }
-        //Gets all the choice values of customer choice option and generate a string like Black-S-Cotton
-        foreach (json_decode(Product::find($request->id)->choice_options) as $key => $choice) {
-            $data[$choice->name] = $request[$choice->name];
-            $variations[$choice->title] = $request[$choice->name];
-            if ($str != null) {
-                $str .= '-' . str_replace(' ', '', $request[$choice->name]);
-            } else {
-                $str .= str_replace(' ', '', $request[$choice->name]);
-            }
-        }
-        $data['variations'] = $variations;
-        $data['variant'] = $str;
-        if ($request->session()->has('cart')) {
-            if (count($request->session()->get('cart')) > 0) {
-                foreach ($request->session()->get('cart') as $key => $cartItem) {
-                    if ($cartItem['id'] == $request['id'] && $cartItem['variant'] == $str) {
-                        return response()->json([
-                            'data' => 1
-                        ]);
-                    }
-                }
-            }
-        }
-        //Check the string and decreases quantity for the stock
-        if ($str != null) {
-            $count = count(json_decode($product->variation));
-            for ($i = 0; $i < $count; $i++) {
-                if (json_decode($product->variation)[$i]->type == $str) {
-                    $price = json_decode($product->variation)[$i]->price;
-                    if (json_decode($product->variation)[$i]->qty < $request['quantity']) {
-                        return response()->json([
-                            'data' => 0
-                        ]);
-                    }
-                }
-            }
-        } else {
-            $price = $product->unit_price;
-        }
-
-        $tax = ($price * $product->tax) / 100;
-        $shipping_id = 1;
-        $shipping_cost = 0;
-
-        $data['quantity'] = $request['quantity'];
-        $data['shipping_method_id'] = $shipping_id;
-        $data['price'] = $price;
-        $data['tax'] = $tax;
+        $data['quantity'] = $request->quantity;
         $data['slug'] = $product->slug;
         $data['name'] = $product->name;
-        $data['discount'] = Helpers::get_product_discount($product, $price);
-        $data['shipping_cost'] = $shipping_cost;
         $data['thumbnail'] = $product->thumbnail;
 
-        if ($request->session()->has('cart')) {
-            $cart = $request->session()->get('cart', collect([]));
-            $cart->push($data);
-        } else {
-            $cart = collect([$data]);
-            $request->session()->put('cart', $cart);
+        $variantString = '';
+        $variations = [];
+
+        // Color check
+        if ($request->has('color') && $request->color) {
+            $colorName = Color::where('code', $request->color)->value('name');
+            $variations['Color'] = $colorName;
+            $variantString = $colorName;
+            $data['color'] = $request->color;
         }
 
-        session()->forget('coupon_code');
-        session()->forget('coupon_discount');
+        // Choice options
+        if (!empty($product->choice_options)) {
+            foreach (json_decode($product->choice_options) as $choice) {
+                $value = $request->get($choice->name);
+                $variations[$choice->title] = $value;
+                $variantString .= ($variantString ? '-' : '') . str_replace(' ', '', $value);
+                $data[$choice->name] = $value;
+            }
+        }
+
+        $data['variations'] = $variations;
+        $data['variant'] = $variantString;
+
+        // Check duplicate product in cart
+        $cart = collect(session('cart', []));
+        foreach ($cart as $item) {
+            if ($item['id'] == $product->id && $item['variant'] == $variantString) {
+                return response()->json(['status' => 'exists', 'message' => 'Already in cart']);
+            }
+        }
+
+        // Price setup
+        $price = $product->unit_price;
+        if (!empty($variantString) && !empty($product->variation)) {
+            foreach (json_decode($product->variation) as $variant) {
+                if ($variant->type === $variantString) {
+                    $price = $variant->price;
+                    if ($variant->qty < $request->quantity) {
+                        return response()->json(['status' => 'error', 'message' => 'Not enough stock']);
+                    }
+                }
+            }
+        }
+
+        $data['price'] = $price;
+        $data['tax'] = ($price * $product->tax) / 100;
+        $data['discount'] = \App\CPU\Helpers::get_product_discount($product, $price);
+        $data['shipping_cost'] = 0;
+
+        // Store in session
+        $cart->push($data);
+        session(['cart' => $cart]);
+        session()->forget(['coupon_code', 'coupon_discount']);
 
         return response()->json([
-            'data' => $data,
             'status' => 'success',
-            'count' => session()->has('cart') ? count(session()->get('cart')) : 0
+            'message' => 'Product added to cart',
+            'count' => $cart->count(),
+            'data' => $data
         ]);
     }
+
+
     public function subdomainOrdernow($id)
     {
         $request = request();
@@ -214,7 +300,7 @@ class CartController extends Controller
 
     public function updateNavCart()
     {
-        return view('layouts.front-end.partials.cart');
+        return view('web-views.product-checkout');
     }
 
     //removes from Cart
@@ -231,9 +317,10 @@ class CartController extends Controller
         session()->forget('coupon_discount');
         session()->forget('shipping_method_id');
 
-        return view('layouts.front-end.partials.cart_details');
+        return view('web-views.cart');
     }
-    public function totalCartCount(){
+    public function totalCartCount()
+    {
         $data = session()->has('cart') ? count(session()->get('cart')) : 0;
         return $data;
     }
@@ -281,6 +368,6 @@ class CartController extends Controller
         session()->forget('coupon_code');
         session()->forget('coupon_discount');
 
-        return view('layouts.front-end.partials.cart_details');
+        return view('web-views.cart');
     }
 }

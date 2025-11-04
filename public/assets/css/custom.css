@@ -2535,3 +2535,22 @@ input[type="range"].active::-webkit-slider-thumb {
 .testimonial-section {
     height: 700px;
 }
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #eb3986;
+    border-color: #eb3986;
+}
+.page-link {
+    color: #eb3986;
+    font-size: 18px;
+}
+.page-link:hover {
+    color: #eb3986;
+}
+.page-link:focus {
+    color: #eb3986;
+    background-color: #e9ecef;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(235, 57, 134, 0.25);
+}

@@ -19,10 +19,12 @@
                         <div class="carousel-inner">
                             @foreach ($banners as $banner)
                                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                    <img style="transform: scale(1.1);"
-                                        src="{{ asset('storage') }}/banner/{{ $banner->photo }}"
-                                        class="d-block w-100 wow animate__animated animate__zoomOutLite"
-                                        data-wow-delay="0.5s" alt="{{ $banner->banner_type }}" />
+                                    <a href="{{ $banner->url }}">
+                                        <img style="transform: scale(1.1);"
+                                            src="{{ asset('storage') }}/banner/{{ $banner->photo }}"
+                                            class="d-block w-100 wow animate__animated animate__zoomOutLite"
+                                            data-wow-delay="0.5s" alt="{{ $banner->banner_type }}" />
+                                    </a>
                                 </div>
                             @endforeach
                         </div>
@@ -98,7 +100,7 @@
             </div>
 
             <div class="text-center">
-                <a class="chekout-cart-btn text-white" href="">View all</a>
+                <a class="chekout-cart-btn text-white" href="{{ route('shop') }}">View all</a>
             </div>
         </div>
     </section>
@@ -169,50 +171,62 @@
                 <!-- First Row -->
                 <div class="col-md-4 ">
                     <div class="drop-card">
-                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd1.jpg"
-                            alt="" />
-                        <h4>UP TO 25% OFF</h4>
+                        <a href="{{ route('brandCollection', 'Ribana') }}">
+                            <img class="wow animate__animated animate__zoomOutLite"
+                                src="assets/images/product-banner/rd1.jpg" alt="" />
+                            <h4>UP TO 25% OFF</h4>
+                        </a>
                     </div>
                 </div>
 
                 <div class="col-md-4 ">
                     <div class="drop-card">
-                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd2.jpg"
-                            alt="" />
-                        <h4>UP TO 25% OFF</h4>
+                        <a href="{{ route('brandCollection', 'Olay') }}">
+                            <img class="wow animate__animated animate__zoomOutLite"
+                                src="assets/images/product-banner/rd2.jpg" alt="" />
+                            <h4>UP TO 25% OFF</h4>
+                        </a>
                     </div>
                 </div>
 
                 <div class="col-md-4 ">
                     <div class="drop-card">
-                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd3.jpg"
-                            alt="" />
-                        <h4>UP TO 25% OFF</h4>
+                        <a href="{{ route('brandCollection', 'Arong Earth') }}">
+                            <img class="wow animate__animated animate__zoomOutLite"
+                                src="assets/images/product-banner/rd3.jpg" alt="" />
+                            <h4>UP TO 25% OFF</h4>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Second Row -->
                 <div class="col-md-4 ">
                     <div class="drop-card">
-                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd4.jpg"
-                            alt="" />
-                        <h4>UP TO 25% OFF</h4>
+                        <a href="{{ route('brandCollection', 'Parachute Advansed Secrets') }}">
+                            <img class="wow animate__animated animate__zoomOutLite"
+                                src="assets/images/product-banner/rd4.jpg" alt="" />
+                            <h4>UP TO 25% OFF</h4>
+                        </a>
                     </div>
                 </div>
 
                 <div class="col-md-4 ">
                     <div class="drop-card">
-                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd5.jpg"
-                            alt="" />
-                        <h4>UP TO 25% OFF</h4>
+                        <a href="{{ route('brandCollection', 'Garnier') }}">
+                            <img class="wow animate__animated animate__zoomOutLite"
+                                src="assets/images/product-banner/rd5.jpg" alt="" />
+                            <h4>UP TO 25% OFF</h4>
+                        </a>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="drop-card">
-                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd6.jpg"
-                            alt="" />
-                        <h4>UP TO 25% OFF</h4>
+                        <a href="{{ route('brandCollection', 'boots') }}">
+                            <img class="wow animate__animated animate__zoomOutLite"
+                                src="assets/images/product-banner/rd6.jpg" alt="" />
+                            <h4>UP TO 25% OFF</h4>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -806,22 +820,19 @@
             </div>
     </section>
     <!---- end brand Section------>
-
-
-
     <!----Start Recently Viewed Product Section------>
-    <section class="product-section  home">
+    <section class="product-section  home mt-5 mt-lg-0">
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h2 class="section-heading mb-5">Recently viewed</h2>
+                    <h2 class="section-heading mb-5">Recently viewed </h2>
                 </div>
             </div>
             @php($decimal_point_settings = \App\CPU\Helpers::get_business_settings('decimal_point_settings'))
             <div class="owl-carousel related-products product-carosel">
-                @foreach ($newDropProducts as $product)
+                @foreach ($recentlyViewed as $product)
                     <div class="item">
-                        @include('layouts.front-end.partials.home_product', ['product' => $product])
+                        @include('layouts.front-end.partials.home_product_hover', ['product' => $product])
                     </div>
                 @endforeach
             </div>
@@ -1024,4 +1035,6 @@
             </div>
         </div>
     </section>
+
+
 @endsection

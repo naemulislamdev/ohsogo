@@ -500,34 +500,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Note button -->
-                                <div class="note-modal-box text-center mt-5 mb-4">
-                                    <button class="border-0 bg-transparent text-uppercase fw-normal"
-                                        style="font-size: 12px" data-bs-toggle="modal" data-bs-target="#customModal">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i> Note
-                                    </button>
-                                </div>
 
-                                <!-- Custom Modal -->
-                                <div class="modal fade" id="customModal" tabindex="-1" data-bs-backdrop="false">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header border-0">
-                                                <h6 class="modal-title">
-                                                    Order special instructions
-                                                </h6>
-                                                <button type="button" class="btn-close"
-                                                    data-bs-dismiss="modal"></button>
-                                            </div>
-                                            <div class="modal-body pt-0">
-                                                <textarea class="form-control" rows="3" name="cart-note"></textarea>
-                                                <button class="chekout-cart-btn w-100 mt-3">
-                                                    Apply
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <!-- Subtotal -->
                                 <div class="sub-total-info">
@@ -1027,34 +1000,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Note button -->
-                                <div class="note-modal-box text-center mt-5 mb-4">
-                                    <button class="border-0 bg-transparent text-uppercase fw-normal"
-                                        style="font-size: 12px" data-bs-toggle="modal" data-bs-target="#customModal">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i> Note
-                                    </button>
-                                </div>
 
-                                <!-- Custom Modal -->
-                                <div class="modal fade" id="customModal" tabindex="-1" data-bs-backdrop="false">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header border-0">
-                                                <h6 class="modal-title">
-                                                    Order special instructions
-                                                </h6>
-                                                <button type="button" class="btn-close"
-                                                    data-bs-dismiss="modal"></button>
-                                            </div>
-                                            <div class="modal-body pt-0">
-                                                <textarea class="form-control" rows="3" name="cart-note"></textarea>
-                                                <button class="chekout-cart-btn w-100 mt-3">
-                                                    Apply
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <!-- Subtotal -->
                                 <div class="sub-total-info">

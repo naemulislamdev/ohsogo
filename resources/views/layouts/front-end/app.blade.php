@@ -4,7 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+    <meta name="_token" content="{{ csrf_token() }}">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title> @yield('title') - {{ config('app.name') }}</title>
     <link rel="shortcut icon" href="{{ asset('storage/company') }}/{{ $web_config['fav_icon']->value }}"
         type="image/x-icon" />
@@ -145,9 +149,47 @@
     <script src="{{ asset('assets') }}/slick/slick.min.js"></script>
     <script src="{{ asset('assets') }}/js/wow.min.js"></script>
     <script>
+        // $(document).ready(function() {
+        //     updateCart();
+        // });
+
+        function addToCart(product_id, redirect_to_checkout = false) {
+            let token = "{{ csrf_token() }}";
+
+            $.ajax({
+                url: "{{ route('cart.add') }}",
+                method: "POST",
+                data: {
+                    id: product_id,
+                    _token: token
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        toastr.success(response.message);
+                        updateCart();
+
+                        if (redirect_to_checkout) {
+                            window.location.href = "{{ route('product.checkout') }}";
+                        }
+                    } else {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function() {
+                    toastr.error("Something went wrong!");
+                }
+            });
+        }
+
+        function buyNow(product_id) {
+            addToCart(product_id, true);
+        }
+    </script>
+    <script>
         new WOW().init();
     </script>
     <script>
+        // ingredients item hover change image content
         $(document).ready(function() {
             const firstItem = $('.ingredient-list li:first');
             const img = $('#ingredient-image');
@@ -173,7 +215,9 @@
     </script>
 
 
+
     {{-- owl carosel for product slide --}}
+
     <script>
         $(document).ready(function() {
             const owl = $('.owl-carousel');
@@ -200,12 +244,19 @@
                     992: {
                         items: 4
                     }
+                },
+                onInitialized: function(event) {
+                    if (event.item.count <= 1) {
+                        $('.owl-nav').show();
+                    }
                 }
             });
+
+            if ($('.owl-carousel .owl-item').length <= 1) {
+                $('.owl-carousel .owl-nav').show();
+            }
         });
     </script>
-
-
     <!-- Script for search system -->
     <script>
         $(document).ready(function() {
@@ -284,23 +335,8 @@
             });
         });
     </script>
-    {{-- Script for Cart Note Modal Box open --}}
-    <script>
-        // cart note modal js script
-        const modal = document.getElementById("customModal");
-        const cartBody = document.querySelector(".product-cart-offcanvas");
 
-        modal.addEventListener("show.bs.modal", function() {
-            let backdrop = document.createElement("div");
-            backdrop.classList.add("custom-modal-backdrop");
-            cartBody.appendChild(backdrop);
-        });
 
-        modal.addEventListener("hidden.bs.modal", function() {
-            const backdrop = cartBody.querySelector(".custom-modal-backdrop");
-            if (backdrop) backdrop.remove();
-        });
-    </script>
     {{-- Script cart product increment and decrement --}}
     <script>
         // cart increment decrement buttton script
@@ -660,6 +696,140 @@
             });
         });
     </script>
+    <script>
+        window.addEventListener("pageshow", function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+    </script>
+    <script>
+        // add to cart
+        // Add product to cart with stock validation
+        public
+
+        function addToCart(Request $request) {
+            $product = Product::find($request - > id); // Find product by ID
+
+            // Check if product exists
+            if (!$product) {
+                return response() - > json(['status' => 'error', 'message' => 'Product not found!']);
+            }
+
+            // Check stock availability
+            if ($product - > stock <= 0) {
+                return response() - > json(['status' => 'error', 'message' => 'Out of stock!']);
+            }
+
+            // Get current cart session
+            $cart = session() - > get('cart', []);
+            // Calculate discount price if applicable
+            $discountPrice = 0;
+            if ($product - > discount_price > 0) {
+                if ($product - > discount_type == 'percentage') {
+                    $discountPrice = $product - > price - ($product - > price * $product - > discount / 100);
+                }
+                elseif($product - > discount_type == 'fixed') {
+                    $discountPrice = $product - > discount_price;
+                }
+            }
+
+            // If product already in cart, increase quantity
+            if (isset($cart[$product - > id])) {
+                if ($cart[$product - > id]['quantity'] >= $product - > stock) {
+                    return response() - > json(['status' => 'error', 'message' => 'Not enough stock available!']);
+                }
+                $cart[$product - > id]['quantity'] += 1;
+            } else {
+                // Add new product to cart
+                $cart[$product - > id] = [
+                    'name' => $product - > name,
+                    'price' => $product - > price,
+                    'discount' => $discountPrice,
+                    'thumbnail' => $product - > thumbnail,
+                    'quantity' => 1,
+                    'stock' => $product - > stock
+                ];
+            }
+
+            // Save back to session
+            session() - > put('cart', $cart);
+
+            return response() - > json([
+                'status' => 'success',
+                'message' => $product - > name.
+                ' added to cart successfully!',
+                'cart' => $cart
+            ]);
+        }
+
+        public
+
+        function getCartItems() {
+            $cart = session() - > get('cart', []);
+            return response() - > json($cart);
+        }
+
+        public
+
+        function removeCartItem(Request $request) {
+            $cart = session() - > get('cart', []);
+
+            if (isset($cart[$request - > id])) {
+                unset($cart[$request - > id]);
+                session() - > put('cart', $cart);
+            }
+
+            return response() - > json([
+                'status' => 'success',
+                'message' => 'Item removed from cart!',
+                'cart' => $cart
+            ]);
+        }
+        public
+
+        function updateCart(Request $request) {
+            $cart = session() - > get('cart', []);
+            $product = Product::find($request - > id);
+
+            if (!$product) {
+                return response() - > json(['status' => 'error', 'message' => 'Product not found!']);
+            }
+
+            if (isset($cart[$request - > id])) {
+                if ($request - > action == "increase") {
+                    if ($cart[$request - > id]['quantity'] >= $product - > stock) {
+                        return response() - > json(['status' => 'error', 'message' => 'Not enough stock available!']);
+                    }
+                    $cart[$request - > id]['quantity'] += 1;
+                }
+                elseif($request - > action == "decrease") {
+                    if ($cart[$request - > id]['quantity'] > 1) {
+                        $cart[$request - > id]['quantity'] -= 1;
+                    } else {
+                        unset($cart[$request - > id]); // Remove item if quantity is 0
+                    }
+                }
+            }
+
+            session() - > put('cart', $cart);
+
+            $subtotal = collect($cart) - > sum(function($item) {
+                $price = $item['discount'] > 0 ? $item['discount'] : $item[
+                    'price']; // Check if discount is available
+                return $price * $item['quantity']; // Multiply by quantity
+            });
+
+            return response() - > json([
+                'status' => 'success',
+                'message' => 'Cart updated successfully!',
+                'cart' => $cart,
+                'subtotal' => $subtotal,
+                'total' => $subtotal
+            ]);
+        }
+    </script>
+
 
 </body>
 
