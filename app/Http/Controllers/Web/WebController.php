@@ -71,6 +71,7 @@ class WebController extends Controller
     }
     public function home()
     {
+
         $banners = Banner::where("published", "1")->get();
         $newDropProducts =  Product::with(['reviews'])->active()
             ->where('featured', 1)
@@ -86,6 +87,7 @@ class WebController extends Controller
         if (!empty($viewedProducts)) {
             $recentlyViewed = Product::whereIn('id', $viewedProducts)->latest()->get();
         }
+
 
 
 

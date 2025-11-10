@@ -15,7 +15,8 @@
             </button>
         @endif
         <div class="product-info">
-            <button onclick="addToCart({{ $product->id }})" class="add-to-cart">ADD TO CART</button>
+            <button onclick="addToCart({{ $product->id }})" class="add-to-cart addCart">ADD TO
+                CART</button>
         </div>
     </div>
     <div class="card-body px-0">

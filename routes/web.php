@@ -58,9 +58,10 @@ Route::view('/faqs', 'web-views.faqs')->name('faqs');
 //check done
 Route::controller(CartController::class)->prefix('/cart')->as('cart.')->group(function () {
     Route::post('variant_price', 'variant_price')->name('variant_price');
-    Route::post('/add-product', 'addToCartOnSession')->name('add');
-    Route::post('/remove', 'removeFromCart')->name('remove');
-    Route::post('/nav-cart-items', 'updateNavCart')->name('nav_cart');
+    Route::get('/cart-items', 'getCartItems')->name('items');
+    Route::post('/add-product', 'addToCart')->name('add');
+    Route::post('/remove', 'removeCartItem')->name('remove');
+    Route::post('/nav-cart-items', 'updateCart')->name('update');
     Route::post('total-cart-count', 'totalCartCount')->name('totalCart');
     Route::post('/updateQuantity', 'updateQuantity')->name('updateQuantity');
     Route::get('/subdomain-ordernow/{id}', 'subdomainOrdernow');

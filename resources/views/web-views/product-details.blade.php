@@ -581,6 +581,23 @@
         </div>
     </section>
 
+    @push('scripts')
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let collapseEl = document.querySelector(".writeReviewCollapse");
+                let btnText = document.querySelector(".review-btn-txt-changeable");
+                let status = false;
 
+                btnText.addEventListener("click", function() {
+                    status = !status;
+                    if (status) {
+                        this.textContent = "CANCEL A REVIEW";
+                    } else {
+                        this.textContent = "WRITE A REVIEW";
+                    }
+                });
+            });
+        </script>
+    @endpush
 
 @endsection

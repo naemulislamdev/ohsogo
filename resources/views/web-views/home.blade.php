@@ -327,7 +327,7 @@
                 <!-- Left Side Image -->
                 <div class="col-md-6 mb-3 wow animate__animated animate__fadeInLeft order-2 order-lg-1">
                     <div class="  transform-none shadow-none text-center left-panel">
-                        <img id="ingredient-image" src="assets/images/product-banner/ni1.jpg" alt="Ingredient Image" />
+                        <img id="ingredient-image" src="assets/images/product-banner/ind1.webp" alt="Ingredient Image" />
 
                     </div>
                 </div>

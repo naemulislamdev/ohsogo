@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/slick/slick.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/slick/slick-theme.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/animate.min.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/toastr.min.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/sweetalert2.min.css">
 
     <style>
         :root {
@@ -122,6 +124,8 @@
 </head>
 
 <body>
+
+
     <!-- Header Start -->
     @if (!request()->is('product-checkout'))
         @include('layouts.front-end.partials.header')
@@ -148,14 +152,39 @@
     <script src="{{ asset('assets') }}/js/xzoom.min.js"></script>
     <script src="{{ asset('assets') }}/slick/slick.min.js"></script>
     <script src="{{ asset('assets') }}/js/wow.min.js"></script>
+    <script src="{{ asset('assets') }}/js/toastr.min.js"></script>
+    <script src="{{ asset('assets') }}/js/sweetalert2.min.js"></script>
+
     <script>
-        // $(document).ready(function() {
-        //     updateCart();
-        // });
+        @if (session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
 
+        @if (session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if (session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
+
+        @if (session('info'))
+            toastr.info("{{ session('info') }}");
+        @endif
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            positionClass: "toast-top-right",
+            timeOut: 2000,
+            tapToDismiss: true
+        };
+    </script>
+
+    <script>
         function addToCart(product_id, redirect_to_checkout = false) {
-            let token = "{{ csrf_token() }}";
 
+
+            let token = "{{ csrf_token() }}";
             $.ajax({
                 url: "{{ route('cart.add') }}",
                 method: "POST",
@@ -166,7 +195,10 @@
                 success: function(response) {
                     if (response.status === 'success') {
                         toastr.success(response.message);
-                        updateCart();
+                        // updateCart();
+                        $('#cartAddedItems').load(location.href + " #cartAddedItems > *");
+                        $('#cartCount').text(response.count);
+
 
                         if (redirect_to_checkout) {
                             window.location.href = "{{ route('product.checkout') }}";
@@ -174,6 +206,8 @@
                     } else {
                         toastr.error(response.message);
                     }
+
+
                 },
                 error: function() {
                     toastr.error("Something went wrong!");
@@ -181,10 +215,29 @@
             });
         }
 
-        function buyNow(product_id) {
-            addToCart(product_id, true);
+
+        function removeProduct(id) {
+            let token = "{{ csrf_token() }}";
+
+            $.ajax({
+                url: "{{ route('cart.remove') }}",
+                method: "POST",
+                data: {
+                    id: id,
+                    _token: token
+                },
+                success: function(response) {
+                    toastr.success(response.message);
+                    updateCart();
+                    window.location.reload();
+                },
+                error: function() {
+                    toastr.error("Something went wrong!");
+                }
+            });
         }
     </script>
+
     <script>
         new WOW().init();
     </script>
@@ -214,10 +267,7 @@
         });
     </script>
 
-
-
     {{-- owl carosel for product slide --}}
-
     <script>
         $(document).ready(function() {
             const owl = $('.owl-carousel');
@@ -289,6 +339,7 @@
             });
         });
     </script>
+
     <!-- Script for Mobile Menu -->
     <script>
         $(document).ready(function() {
@@ -369,9 +420,9 @@
         const priceSlider = document.getElementById("price");
         const priceValue = document.getElementById("price-value");
 
-        priceSlider.addEventListener("input", () => {
-            priceValue.textContent = priceSlider.value;
-        });
+        // priceSlider.addEventListener("input", () => {
+        //     priceValue.textContent = priceSlider.value;
+        // });
     </script>
 
     <script>
@@ -484,69 +535,6 @@
             });
         });
     </script>
-    {{-- product checkout scroll hint button script --}}
-    <script>
-        // product checkout scroll hint button script
-        $(document).ready(function() {
-            let $container = $(".all-checkout-container");
-            let $scrollHint = $(".scroll-hint");
-
-            if ($container[0].scrollHeight > $container[0].clientHeight) {
-                $scrollHint.show();
-            } else {
-                $scrollHint.hide();
-            }
-
-            $container.on("scroll", function() {
-                if ($(this).scrollTop() > 11) {
-                    $scrollHint.addClass("hide");
-                } else {
-                    $scrollHint.removeClass("hide");
-                }
-            });
-        });
-    </script>
-    {{-- script for mini two accordion hide show text --}}
-    <script>
-        // script for mini two accordion hide show text
-        const btn1 = document.getElementById('totalSingleItemOne');
-        const btn2 = document.getElementById('totalSingleItemTwo');
-        const acc1 = document.getElementById('panelsStayOpen-collapseOne');
-        const acc2 = document.getElementById('panelsStayOpen-collapseTwo');
-
-        acc1.addEventListener('shown.bs.collapse', function() {
-            btn1.textContent = "Hide 8 items";
-        });
-
-        acc1.addEventListener('hidden.bs.collapse', function() {
-            btn1.textContent = "Show 8 items";
-        });
-        //
-        acc2.addEventListener('shown.bs.collapse', function() {
-            btn2.textContent = "Hide 8 items";
-        });
-
-        acc2.addEventListener('hidden.bs.collapse', function() {
-            btn2.textContent = "Show 8 items";
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let collapseEl = document.querySelector(".writeReviewCollapse");
-            let btnText = document.querySelector(".review-btn-txt-changeable");
-            let status = false;
-
-            btnText.addEventListener("click", function() {
-                status = !status;
-                if (status) {
-                    this.textContent = "CANCEL A REVIEW";
-                } else {
-                    this.textContent = "WRITE A REVIEW";
-                }
-            });
-        });
-    </script>
-
     {{-- new grid view script --}}
     <script>
         // lg device grid system
@@ -703,133 +691,7 @@
             }
         });
     </script>
-    <script>
-        // add to cart
-        // Add product to cart with stock validation
-        public
-
-        function addToCart(Request $request) {
-            $product = Product::find($request - > id); // Find product by ID
-
-            // Check if product exists
-            if (!$product) {
-                return response() - > json(['status' => 'error', 'message' => 'Product not found!']);
-            }
-
-            // Check stock availability
-            if ($product - > stock <= 0) {
-                return response() - > json(['status' => 'error', 'message' => 'Out of stock!']);
-            }
-
-            // Get current cart session
-            $cart = session() - > get('cart', []);
-            // Calculate discount price if applicable
-            $discountPrice = 0;
-            if ($product - > discount_price > 0) {
-                if ($product - > discount_type == 'percentage') {
-                    $discountPrice = $product - > price - ($product - > price * $product - > discount / 100);
-                }
-                elseif($product - > discount_type == 'fixed') {
-                    $discountPrice = $product - > discount_price;
-                }
-            }
-
-            // If product already in cart, increase quantity
-            if (isset($cart[$product - > id])) {
-                if ($cart[$product - > id]['quantity'] >= $product - > stock) {
-                    return response() - > json(['status' => 'error', 'message' => 'Not enough stock available!']);
-                }
-                $cart[$product - > id]['quantity'] += 1;
-            } else {
-                // Add new product to cart
-                $cart[$product - > id] = [
-                    'name' => $product - > name,
-                    'price' => $product - > price,
-                    'discount' => $discountPrice,
-                    'thumbnail' => $product - > thumbnail,
-                    'quantity' => 1,
-                    'stock' => $product - > stock
-                ];
-            }
-
-            // Save back to session
-            session() - > put('cart', $cart);
-
-            return response() - > json([
-                'status' => 'success',
-                'message' => $product - > name.
-                ' added to cart successfully!',
-                'cart' => $cart
-            ]);
-        }
-
-        public
-
-        function getCartItems() {
-            $cart = session() - > get('cart', []);
-            return response() - > json($cart);
-        }
-
-        public
-
-        function removeCartItem(Request $request) {
-            $cart = session() - > get('cart', []);
-
-            if (isset($cart[$request - > id])) {
-                unset($cart[$request - > id]);
-                session() - > put('cart', $cart);
-            }
-
-            return response() - > json([
-                'status' => 'success',
-                'message' => 'Item removed from cart!',
-                'cart' => $cart
-            ]);
-        }
-        public
-
-        function updateCart(Request $request) {
-            $cart = session() - > get('cart', []);
-            $product = Product::find($request - > id);
-
-            if (!$product) {
-                return response() - > json(['status' => 'error', 'message' => 'Product not found!']);
-            }
-
-            if (isset($cart[$request - > id])) {
-                if ($request - > action == "increase") {
-                    if ($cart[$request - > id]['quantity'] >= $product - > stock) {
-                        return response() - > json(['status' => 'error', 'message' => 'Not enough stock available!']);
-                    }
-                    $cart[$request - > id]['quantity'] += 1;
-                }
-                elseif($request - > action == "decrease") {
-                    if ($cart[$request - > id]['quantity'] > 1) {
-                        $cart[$request - > id]['quantity'] -= 1;
-                    } else {
-                        unset($cart[$request - > id]); // Remove item if quantity is 0
-                    }
-                }
-            }
-
-            session() - > put('cart', $cart);
-
-            $subtotal = collect($cart) - > sum(function($item) {
-                $price = $item['discount'] > 0 ? $item['discount'] : $item[
-                    'price']; // Check if discount is available
-                return $price * $item['quantity']; // Multiply by quantity
-            });
-
-            return response() - > json([
-                'status' => 'success',
-                'message' => 'Cart updated successfully!',
-                'cart' => $cart,
-                'subtotal' => $subtotal,
-                'total' => $subtotal
-            ]);
-        }
-    </script>
-
+    @stack('scripts')
 
 </body>
 

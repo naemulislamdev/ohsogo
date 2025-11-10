@@ -439,14 +439,18 @@
                                                                         alt="">
                                                                     <img src="./assets/images/logo/american-express.svg"
                                                                         alt="">
-                                                                    <div class="d-inline-block position-relative paymentTwo-box">
+                                                                    <div
+                                                                        class="d-inline-block position-relative paymentTwo-box">
                                                                         <span
                                                                             class="btn btn-light py-0 border payment-2btn">+2</span>
-                                                                            <div class="d-flex justify-content-between align-items-center gap-1 bg-dark px-3 py-2 rounded-2 payment-hover-item" >
-                                                                                <img src="./assets/images/logo/diners_club.svg" alt="diners club">
-                                                                                <img src="./assets/images/logo/unionpay.svg" alt="unionpay">
-                                                                                <div class="triangle"></div>
-                                                                            </div>
+                                                                        <div
+                                                                            class="d-flex justify-content-between align-items-center gap-1 bg-dark px-3 py-2 rounded-2 payment-hover-item">
+                                                                            <img src="./assets/images/logo/diners_club.svg"
+                                                                                alt="diners club">
+                                                                            <img src="./assets/images/logo/unionpay.svg"
+                                                                                alt="unionpay">
+                                                                            <div class="triangle"></div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </label>
@@ -783,4 +787,51 @@
             </div>
         </div>
     </section>
+
+    @push('scripts')
+        <script>
+            // product checkout scroll hint button script
+            $(document).ready(function() {
+                let $container = $(".all-checkout-container");
+                let $scrollHint = $(".scroll-hint");
+
+                if ($container[0].scrollHeight > $container[0].clientHeight) {
+                    $scrollHint.show();
+                } else {
+                    $scrollHint.hide();
+                }
+
+                $container.on("scroll", function() {
+                    if ($(this).scrollTop() > 11) {
+                        $scrollHint.addClass("hide");
+                    } else {
+                        $scrollHint.removeClass("hide");
+                    }
+                });
+            });
+        </script>
+        <script>
+            // script for mini two accordion hide show text
+            const btn1 = document.getElementById('totalSingleItemOne');
+            const btn2 = document.getElementById('totalSingleItemTwo');
+            const acc1 = document.getElementById('panelsStayOpen-collapseOne');
+            const acc2 = document.getElementById('panelsStayOpen-collapseTwo');
+
+            acc1.addEventListener('shown.bs.collapse', function() {
+                btn1.textContent = "Hide 8 items";
+            });
+
+            acc1.addEventListener('hidden.bs.collapse', function() {
+                btn1.textContent = "Show 8 items";
+            });
+            //
+            acc2.addEventListener('shown.bs.collapse', function() {
+                btn2.textContent = "Hide 8 items";
+            });
+
+            acc2.addEventListener('hidden.bs.collapse', function() {
+                btn2.textContent = "Show 8 items";
+            });
+        </script>
+    @endpush
 @endsection

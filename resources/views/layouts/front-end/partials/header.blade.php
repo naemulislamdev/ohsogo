@@ -12,6 +12,7 @@
 
 <!-- Start Header & Navigation Section -->
 <header id="header">
+
     <div class="container">
         <div class="row py-2 py-lg-3">
             {{-- desktop search --}}
@@ -116,7 +117,9 @@
                 <div class="cart-wrapper" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                     aria-controls="offcanvasRight">
                     <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                    <span class="badge bg-dark rounded-pill cart-badge">3</span>
+                    <span id="cartCount"
+                        class="badge bg-dark rounded-pill cart-badge">{{ session()->has('cart') ? count(session('cart')) : 0 }}
+                    </span>
                 </div>
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
                     aria-labelledby="offcanvasRightLabel">
@@ -261,113 +264,49 @@
                                 </h6>
 
                                 <div class="cart-added-products">
-                                    <div class="cart-item">
-                                        <div class="cart-img">
-                                            <a href="">
-                                                <img src="{{ asset('assets') }}/images/product-img/showergel_128x128.avif"
-                                                    alt="product image" />
-                                            </a>
-                                        </div>
-                                        <div class="cart-item-product-info ms-3">
-                                            <a href="">
-                                                Zayn & Myza Age Defense Retinol & Niacinamide
-                                                Shower Gel - 200ml
-                                            </a>
-                                            <div
-                                                class="cart-item-quantity_price mt-4 d-flex justify-content-between align-items-center">
-                                                <div class="cart-item-quantity cart-increment-decrement">
-                                                    <button class="decrement">
-                                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                                    </button>
-                                                    <p class="mb-0 mx-2 showItem">3</p>
-                                                    <input type="hidden" name="quantity" class="quantity" />
-                                                    <button class="increment">
-                                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    </button>
+
+                                    <div id="cartAddedItems">
+                                        @if (session()->has('cart') && count(session()->get('cart')) > 0)
+                                            @foreach (session()->get('cart') as $id => $cartItem)
+                                                <div class="cart-item">
+                                                    <div class="cart-img">
+                                                        <a href="">
+                                                            <img src="{{ asset('assets') }}/images/product-img/showergel_128x128.avif"
+                                                                alt="product image" />
+                                                        </a>
+                                                    </div>
+                                                    <div class="cart-item-product-info ms-3">
+                                                        <a href="">
+                                                            {{ $cartItem['name'] }}
+                                                        </a>
+                                                        <div
+                                                            class="cart-item-quantity_price mt-4 d-flex justify-content-between align-items-center">
+                                                            <div class="cart-item-quantity cart-increment-decrement">
+                                                                <button class="decrement">
+                                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                                </button>
+                                                                <p class="mb-0 mx-2 showItem">1</p>
+                                                                <input type="hidden" name="quantity"
+                                                                    class="quantity" />
+                                                                <button class="increment">
+                                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="cart-item-rate">
+                                                                <h5>৳199</h5>
+                                                            </div>
+                                                        </div>
+                                                        <button onclick="removeProduct({{ $id }})"
+                                                            title="Remove Cart" style="width: 50px; height: 50px"
+                                                            class="border-0 bg-white cart-item-remove-icon position-absolute">
+                                                            <img width="20px"
+                                                                src="{{ asset('assets') }}/images/icon/close-x.svg"
+                                                                alt="" />
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                                <div class="cart-item-rate">
-                                                    <h5>৳199</h5>
-                                                </div>
-                                            </div>
-                                            <button title="Remove Cart"
-                                                class="border-0 bg-transparent cart-item-remove-icon position-absolute">
-                                                <img width="20px"
-                                                    src="{{ asset('assets') }}/images/icon/close-x.svg"
-                                                    alt="" />
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="cart-item">
-                                        <div class="cart-img">
-                                            <a href="">
-                                                <img src="{{ asset('assets') }}/images/product-img/Zayn_Myza_Vitamin_C_Brightening_Shower_Gel_-_Vaitamin_128x128.avif"
-                                                    alt="product image" />
-                                            </a>
-                                        </div>
-                                        <div class="cart-item-product-info ms-3">
-                                            <a href="">
-                                                Zayn & Myza Age Defense Retinol & Niacinamide
-                                                Shower Gel - 200ml
-                                            </a>
-                                            <div
-                                                class="cart-item-quantity_price mt-4 d-flex justify-content-between align-items-center">
-                                                <div class="cart-item-quantity cart-increment-decrement">
-                                                    <button class="decrement">
-                                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                                    </button>
-                                                    <p class="mb-0 mx-2 showItem">3</p>
-                                                    <input type="hidden" name="quantity" class="quantity" />
-                                                    <button class="increment">
-                                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    </button>
-                                                </div>
-                                                <button title="Remove Cart"
-                                                    class="border-0 bg-transparent cart-item-remove-icon position-absolute">
-                                                    <img width="20px"
-                                                        src="{{ asset('assets') }}/images/icon/close-x.svg"
-                                                        alt="" />
-                                                </button>
-                                                <div class="cart-item-rate">
-                                                    <h5>৳199</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="cart-item">
-                                        <div class="cart-img">
-                                            <a href="">
-                                                <img src="{{ asset('assets') }}/images/product-img/Zayn_Myza_3x_Vitamin_E_Moisturizing_Cream_50gm_-_B1G1_128x128.avif"
-                                                    alt="product image" />
-                                            </a>
-                                        </div>
-                                        <div class="cart-item-product-info ms-3">
-                                            <a href="">
-                                                Zayn & Myza Age Defense Retinol & Niacinamide
-                                                Shower Gel - 200ml
-                                            </a>
-                                            <div
-                                                class="cart-item-quantity_price mt-4 d-flex justify-content-between align-items-center">
-                                                <div class="cart-item-quantity cart-increment-decrement">
-                                                    <button class="decrement">
-                                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                                    </button>
-                                                    <p class="mb-0 mx-2 showItem">3</p>
-                                                    <input type="hidden" name="quantity" class="quantity" />
-                                                    <button class="increment">
-                                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    </button>
-                                                </div>
-                                                <button title="Remove Cart"
-                                                    class="border-0 bg-transparent cart-item-remove-icon position-absolute">
-                                                    <img width="20px"
-                                                        src="{{ asset('assets') }}/images/icon/close-x.svg"
-                                                        alt="" />
-                                                </button>
-                                                <div class="cart-item-rate">
-                                                    <h5>৳199</h5>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                     <!-- Mobile Related Products -->
                                     <div class="sm-related-product-section d-block d-md-none">
@@ -616,7 +555,9 @@
                 <div class="cart-wrapper" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightLG"
                     aria-controls="offcanvasRightLG">
                     <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                    <span class="badge bg-dark rounded-pill cart-badge">3</span>
+                    <span id="cartCount"
+                        class="badge bg-dark rounded-pill cart-badge">{{ session()->has('cart') ? count(session('cart')) : 0 }}
+                    </span>
                 </div>
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightLG"
                     aria-labelledby="offcanvasRightLabelLG">
@@ -761,113 +702,49 @@
                                 </h6>
 
                                 <div class="cart-added-products">
-                                    <div class="cart-item">
-                                        <div class="cart-img">
-                                            <a href="">
-                                                <img src="{{ asset('assets') }}/images/product-img/showergel_128x128.avif"
-                                                    alt="product image" />
-                                            </a>
-                                        </div>
-                                        <div class="cart-item-product-info ms-3">
-                                            <a href="">
-                                                Zayn & Myza Age Defense Retinol & Niacinamide
-                                                Shower Gel - 200ml
-                                            </a>
-                                            <div
-                                                class="cart-item-quantity_price mt-4 d-flex justify-content-between align-items-center">
-                                                <div class="cart-item-quantity cart-increment-decrement">
-                                                    <button class="decrement">
-                                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                                    </button>
-                                                    <p class="mb-0 mx-2 showItem">3</p>
-                                                    <input type="hidden" name="quantity" class="quantity" />
-                                                    <button class="increment">
-                                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    </button>
+                                    <div id="cartAddedItems">
+                                        @if (session()->has('cart') && count(session()->get('cart')) > 0)
+                                            @foreach (session()->get('cart') as $id => $cartItem)
+                                                <div class="cart-item">
+                                                    <div class="cart-img">
+                                                        <a href="">
+                                                            <img src="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $cartItem['thumbnail'] }}"
+                                                                alt="{{ $cartItem['name'] }}" />
+                                                        </a>
+                                                    </div>
+                                                    <div class="cart-item-product-info ms-3">
+                                                        <a href="">
+                                                            {{ $cartItem['name'] }}
+                                                        </a>
+                                                        <div
+                                                            class="cart-item-quantity_price mt-4 d-flex justify-content-between align-items-center">
+                                                            <div class="cart-item-quantity cart-increment-decrement">
+                                                                <button class="decrement">
+                                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                                </button>
+                                                                <p class="mb-0 mx-2 showItem">1</p>
+                                                                <input type="hidden" name="quantity"
+                                                                    class="quantity" />
+                                                                <button class="increment">
+                                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="cart-item-rate">
+                                                                <h5>৳199</h5>
+                                                            </div>
+                                                        </div>
+                                                        <button style="width: 50px; height: 50px"
+                                                            onclick="removeProduct({{ $id }})"
+                                                            title="Remove Cart"
+                                                            class="border-0 bg-white cart-item-remove-icon position-absolute">
+                                                            <img width="20px"
+                                                                src="{{ asset('assets') }}/images/icon/close-x.svg"
+                                                                alt="" />
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                                <div class="cart-item-rate">
-                                                    <h5>৳199</h5>
-                                                </div>
-                                            </div>
-                                            <button title="Remove Cart"
-                                                class="border-0 bg-transparent cart-item-remove-icon position-absolute">
-                                                <img width="20px"
-                                                    src="{{ asset('assets') }}/images/icon/close-x.svg"
-                                                    alt="" />
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="cart-item">
-                                        <div class="cart-img">
-                                            <a href="">
-                                                <img src="{{ asset('assets') }}/images/product-img/Zayn_Myza_Vitamin_C_Brightening_Shower_Gel_-_Vaitamin_128x128.avif"
-                                                    alt="product image" />
-                                            </a>
-                                        </div>
-                                        <div class="cart-item-product-info ms-3">
-                                            <a href="">
-                                                Zayn & Myza Age Defense Retinol & Niacinamide
-                                                Shower Gel - 200ml
-                                            </a>
-                                            <div
-                                                class="cart-item-quantity_price mt-4 d-flex justify-content-between align-items-center">
-                                                <div class="cart-item-quantity cart-increment-decrement">
-                                                    <button class="decrement">
-                                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                                    </button>
-                                                    <p class="mb-0 mx-2 showItem">3</p>
-                                                    <input type="hidden" name="quantity" class="quantity" />
-                                                    <button class="increment">
-                                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    </button>
-                                                </div>
-                                                <button title="Remove Cart"
-                                                    class="border-0 bg-transparent cart-item-remove-icon position-absolute">
-                                                    <img width="20px"
-                                                        src="{{ asset('assets') }}/images/icon/close-x.svg"
-                                                        alt="" />
-                                                </button>
-                                                <div class="cart-item-rate">
-                                                    <h5>৳199</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="cart-item">
-                                        <div class="cart-img">
-                                            <a href="">
-                                                <img src="{{ asset('assets') }}/images/product-img/Zayn_Myza_3x_Vitamin_E_Moisturizing_Cream_50gm_-_B1G1_128x128.avif"
-                                                    alt="product image" />
-                                            </a>
-                                        </div>
-                                        <div class="cart-item-product-info ms-3">
-                                            <a href="">
-                                                Zayn & Myza Age Defense Retinol & Niacinamide
-                                                Shower Gel - 200ml
-                                            </a>
-                                            <div
-                                                class="cart-item-quantity_price mt-4 d-flex justify-content-between align-items-center">
-                                                <div class="cart-item-quantity cart-increment-decrement">
-                                                    <button class="decrement">
-                                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                                    </button>
-                                                    <p class="mb-0 mx-2 showItem">3</p>
-                                                    <input type="hidden" name="quantity" class="quantity" />
-                                                    <button class="increment">
-                                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    </button>
-                                                </div>
-                                                <button title="Remove Cart"
-                                                    class="border-0 bg-transparent cart-item-remove-icon position-absolute">
-                                                    <img width="20px"
-                                                        src="{{ asset('assets') }}/images/icon/close-x.svg"
-                                                        alt="" />
-                                                </button>
-                                                <div class="cart-item-rate">
-                                                    <h5>৳199</h5>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                     <!-- Mobile Related Products -->
                                     <div class="sm-related-product-section d-block d-md-none">

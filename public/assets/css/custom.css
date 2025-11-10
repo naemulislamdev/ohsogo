@@ -2,6 +2,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Jost:ital,wght@0,100..900;1,100..900&display=swap'); */
 @import url("https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Jost:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 @import url("https://fonts.cdnfonts.com/css/avenir");
+
+.toast-success {
+    background-color: green !important;
+    box-shadow: none;
+    color: #ffffff !important;
+}
+.toast-message {
+    color: #fff !important;
+}
+.toast-error {
+    background-color: #dc3545 !important;
+    box-shadow: none;
+    color: #fff !important;
+}
+
+.toast-info {
+    background-color: #17a2b8 !important;
+    box-shadow: none;
+    color: #fff !important;
+}
+
+.toast-warning {
+    background-color: #ffc107 !important;
+    box-shadow: none;
+    color: #000 !important;
+}
+
+#toast-container > div {
+    opacity: 1 !important;
+    box-shadow: none !important;
+}
 @keyframes zoomOutLite {
     0% {
         transform: scale(1.1);
@@ -2553,4 +2584,12 @@ input[type="range"].active::-webkit-slider-thumb {
     background-color: #e9ecef;
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgba(235, 57, 134, 0.25);
+}
+.cart-item .cart-img {
+    height: 150px;
+    width: 100px;
+}
+.cart-item .cart-img img {
+    max-width: 100%;
+    height: auto;
 }
