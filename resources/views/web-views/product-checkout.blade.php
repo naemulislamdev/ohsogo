@@ -30,7 +30,7 @@
                                     <img class="logo" src="./assets/images/logo/logo_High_Res_Mob_x320.avif"
                                         alt="OHSOGO Logo" />
                                 </a>
-                                <a href="#" class="text-dark"><i class="fa fa-shopping-bag"></i></a>
+                                <a href="{{route('product.cart')}}" class="text-dark"><i class="fa fa-shopping-bag"></i></a>
                             </div>
 
                             <!-- Mobile Order Summary Accordion Start -->
@@ -439,14 +439,18 @@
                                                                         alt="">
                                                                     <img src="./assets/images/logo/american-express.svg"
                                                                         alt="">
-                                                                    <div class="d-inline-block position-relative paymentTwo-box">
+                                                                    <div
+                                                                        class="d-inline-block position-relative paymentTwo-box">
                                                                         <span
                                                                             class="btn btn-light py-0 border payment-2btn">+2</span>
-                                                                            <div class="d-flex justify-content-between align-items-center gap-1 bg-dark px-3 py-2 rounded-2 payment-hover-item" >
-                                                                                <img src="./assets/images/logo/diners_club.svg" alt="diners club">
-                                                                                <img src="./assets/images/logo/unionpay.svg" alt="unionpay">
-                                                                                <div class="triangle"></div>
-                                                                            </div>
+                                                                        <div
+                                                                            class="d-flex justify-content-between align-items-center gap-1 bg-dark px-3 py-2 rounded-2 payment-hover-item">
+                                                                            <img src="./assets/images/logo/diners_club.svg"
+                                                                                alt="diners club">
+                                                                            <img src="./assets/images/logo/unionpay.svg"
+                                                                                alt="unionpay">
+                                                                            <div class="triangle"></div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </label>
@@ -640,25 +644,39 @@
             <div class="col-lg-6 section-scroll checkout-cart-details d-none d-lg-block">
                 <div class="container">
                     <div class="all-checkout-container">
-                        <div class="cart-dtls-item">
-                            <div class="checkout-cart-item row">
-                                <div class="product-image position-relative col-2 p-0">
-                                    <img class=" border rounded-3"
-                                        src="./assets/images/product-img/showergel_128x128.avif" alt="product image" />
-                                    <span class="badge rounded-pill cart-badge">3</span>
+                        @if (session()->has('cart') && count(session()->get('cart')) > 0)
+                            @foreach (session()->get('cart') as $id => $cartItem)
+                                <div class="cart-dtls-item mb-3">
+                                    <div class="checkout-cart-item row">
+                                        <div class="product-image position-relative col-2 p-0">
+                                            <img class=" border rounded-3"
+                                                src="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $cartItem['thumbnail'] }}"
+                                                alt="product image" />
+                                            <span class="badge rounded-pill cart-badge">{{$cartItem['quantity']}}</span>
+                                        </div>
+                                        <div class="product-name col-8">
+                                            <h6>
+                                                {{ $cartItem['name'] }}
+                                            </h6>
+                                        </div>
+                                        <div class="product-price col-2">
+                                            <h6>৳{{ $a = \App\CPU\Helpers::currency_converter(
+                                                $cartItem['unit_price'] - \App\CPU\Helpers::get_product_discount_for_cart($cartItem, $cartItem['unit_price']),
+                                            ) }}
+                                            </h6>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="product-name col-8">
-                                    <h6>
-                                        Zayn & Myza Age Defense Retinol & Niacinamide Shower Gel - 200ml
-                                    </h6>
-                                </div>
-                                <div class="product-price col-2">
-                                    <h6>৳199.00</h6>
-                                </div>
+                            @endforeach
+                        @else
+                            <div class="text-center mt-3">
+                                <i style="font-size: 40px !important;" class="fa fa-shopping-bag fa-4x"
+                                    aria-hidden="true"></i>
+                                <h3 class="my-3">Your Cart is Empty!</h3>
+                                <a href="" class="btn btn-secondary">Return to Shop</a>
                             </div>
-
-                        </div>
-                        <div class="cart-dtls-item mt-4">
+                        @endif
+                        {{-- <div class="cart-dtls-item mt-4">
                             <div class="checkout-cart-item row">
                                 <div class="product-image position-relative col-2 p-0">
                                     <img class=" border rounded-3"
@@ -707,47 +725,10 @@
                                 </div>
                             </div>
 
-                        </div>
-                        <div class="cart-dtls-item mt-4">
-                            <div class="checkout-cart-item row">
-                                <div class="product-image position-relative col-2 p-0">
-                                    <img class=" border rounded-3"
-                                        src="./assets/images/product-img/Zayn_Myza_3x_Vitamin_E_Moisturizing_Cream_50gm_-_B1G1_128x128.avif"
-                                        alt="product image" />
-                                    <span class="badge rounded-pill cart-badge">4</span>
-                                </div>
-                                <div class="product-name col-8">
-                                    <h6>
-                                        Zayn & Myza Moisture Boost Hyaluronic Acid Moisturizing Cream with 3x Vitamin E
-                                        (50gm) - B1G1
-                                    </h6>
-                                </div>
-                                <div class="product-price col-2">
-                                    <h6>৳599.00</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cart-dtls-item mt-4">
-                            <div class="checkout-cart-item row">
-                                <div class="product-image position-relative col-2 p-0">
-                                    <img class=" border rounded-3"
-                                        src="./assets/images/product-img/Zayn_Myza_3x_Vitamin_E_Moisturizing_Cream_50gm_-_B1G1_128x128.avif"
-                                        alt="product image" />
-                                    <span class="badge rounded-pill cart-badge">4</span>
-                                </div>
-                                <div class="product-name col-8">
-                                    <h6>
-                                        Zayn & Myza Moisture Boost Hyaluronic Acid Moisturizing Cream with 3x Vitamin E
-                                        (50gm) - B1G1
-                                    </h6>
-                                </div>
-                                <div class="product-price col-2">
-                                    <h6>৳599.00</h6>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button class="scroll-hint">Scroll for more items <i class="fas fa-arrow-down    "></i></button>
+                        </div> --}}
+                        <button class="scroll-hint">
+                            Scroll down for more items
+                        </button>
                     </div>
                     <div class="checkout-summary mt-4">
                         <div class="discount-code">
@@ -764,7 +745,7 @@
                         <div class="price-info">
                             <div class="order-summary mt-4">
                                 <div class="d-flex justify-content-between mb-2">
-                                    <span>Subtotal · 5 items</span>
+                                    <span>Subtotal · {{count(session()->get('cart'))}} items</span>
                                     <span>৳1,395.00</span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-2">
@@ -783,4 +764,51 @@
             </div>
         </div>
     </section>
+
+    @push('scripts')
+        <script>
+            // product checkout scroll hint button script
+            $(document).ready(function() {
+                let $container = $(".all-checkout-container");
+                let $scrollHint = $(".scroll-hint");
+
+                if ($container[0].scrollHeight > $container[0].clientHeight) {
+                    $scrollHint.show();
+                } else {
+                    $scrollHint.hide();
+                }
+
+                $container.on("scroll", function() {
+                    if ($(this).scrollTop() > 11) {
+                        $scrollHint.addClass("hide");
+                    } else {
+                        $scrollHint.removeClass("hide");
+                    }
+                });
+            });
+        </script>
+        <script>
+            // script for mini two accordion hide show text
+            const btn1 = document.getElementById('totalSingleItemOne');
+            const btn2 = document.getElementById('totalSingleItemTwo');
+            const acc1 = document.getElementById('panelsStayOpen-collapseOne');
+            const acc2 = document.getElementById('panelsStayOpen-collapseTwo');
+
+            acc1.addEventListener('shown.bs.collapse', function() {
+                btn1.textContent = "Hide 8 items";
+            });
+
+            acc1.addEventListener('hidden.bs.collapse', function() {
+                btn1.textContent = "Show 8 items";
+            });
+            //
+            acc2.addEventListener('shown.bs.collapse', function() {
+                btn2.textContent = "Hide 8 items";
+            });
+
+            acc2.addEventListener('hidden.bs.collapse', function() {
+                btn2.textContent = "Show 8 items";
+            });
+        </script>
+    @endpush
 @endsection

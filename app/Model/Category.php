@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\CPU\Helpers;
+use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
@@ -32,6 +33,10 @@ class Category extends Model
     public function childes()
     {
         return $this->hasMany(Category::class, 'parent_id')->orderBy('priority','desc');
+    }
+    public function subCategory()
+    {
+        return $this->hasMany(SubCategory::class, 'category_id');
     }
 
     public function getNameAttribute($name)

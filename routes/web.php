@@ -13,6 +13,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Web\CartController;
 use App\Http\Controllers\Web\WebController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -36,10 +37,12 @@ Route::controller(WebController::class)->group(function () {
     Route::get('/', 'home')->name('home');
     Route::get('/about', 'about')->name('about');
     Route::get('/contact', 'contact')->name('contact');
+    Route::get('/shop', 'shopAllNewDrops')->name('shop');
     Route::get("/cart", 'cart')->name('product.cart');
     Route::get("/product-checkout", 'productCheckout')->name('product.checkout');
     Route::get("/product-details/{slug}", 'productDetails')->name('product.details');
-    Route::get("/collections/{slug}", 'collections')->name('collections');
+    Route::get("/collections/{slug}", 'showCollections')->name('collections');
+    Route::get("/brandCollection/{slug}", 'showBrandCollections')->name('brandCollection');
 });
 
 
@@ -51,3 +54,20 @@ Route::view('/terms', 'web-views.terms')->name('terms');
 Route::view('/shipping', 'web-views.shipping')->name('shipping');
 Route::view('/privacy', 'web-views.privacy')->name('privacy');
 Route::view('/faqs', 'web-views.faqs')->name('faqs');
+
+// cart add_to_cart, Remove_to_cart, update_to_cart
+Route::controller(CartController::class)->prefix('/cart')->as('cart.')->group(function () {
+    Route::post('variant_price', 'variant_price')->name('variant_price');
+    Route::get('/cart-items', 'getCartItems')->name('items');
+    Route::post('/add-product', 'addToCart')->name('add');
+    Route::post('/remove', 'removeCartItem')->name('remove');
+    Route::post('/nav-cart-items', 'updateCart')->name('update');
+    Route::post('/updateQuantity',  'updateQuantity')->name('updateQuantity');
+    Route::get("/cart-offcanva", function() {
+        return view("layouts.front-end.partials.cart.cart_items");
+    });
+
+    Route::post('/increment', 'cartIncrement')->name('increment');
+    Route::post('/decrement', 'cartDecrement')->name('decrement');
+
+});

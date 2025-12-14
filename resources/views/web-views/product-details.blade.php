@@ -21,7 +21,29 @@
 
 @extends('layouts.front-end.app')
 
-@section('title', 'Product-details')
+@section('title', $product['name'])
+{{-- @php
+    $drelatedProducts = \App\CPU\ProductManager::getRelatedProducts(
+        $product['category_id'],
+        $product['sub_category_id'],
+        $product['sub_sub_category_id'],
+    );
+
+@endphp --}}
+@php
+    $query = App\Model\Product::query()->where('status', $product->status);
+    if ($product->sub_sub_category_id) {
+        $query->where('sub_sub_category_id', $product->sub_sub_category_id);
+    } elseif ($product->subcategory_id) {
+        $query->where('subcategory_id', $product->subcategory_id);
+    } else {
+        $query->where('category_id', $product->category_id);
+    }
+
+    // Fetch 12 random related products
+    $related_products = $query->inRandomOrder()->take(12)->get();
+@endphp
+
 @section('main-content')
     <!-- Main product -->
     <section class="main-product">
@@ -30,8 +52,8 @@
                 <a class="breadcrumb-item text-dark font-weight-bold" href="/">HOME /</a>
             </nav>
             <div class="row mt-4">
-                <div class="col-12 col-md-6">
-                    <div class="xzoom-container">
+                <div class="col-12 col-md-6 pe-lg-5">
+                    <div class="xzoom-container ">
                         <!-- Main Product Image -->
                         <img class="xzoom d-block w-100" id="xzoom-default"
                             src="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $product['thumbnail'] }}"
@@ -39,26 +61,30 @@
 
                         <!-- Thumbnail Images -->
                         <div class="xzoom-thumbs mt-3">
-                            <a href="{{ asset('assets') }}/images/product-img/product-1.avif">
+                            <a
+                                href="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $product['thumbnail'] }}">
                                 <img class="xzoom-gallery" width="100"
-                                    src="{{ asset('assets') }}/images/product-img/product-1.avif"
-                                    xpreview="{{ asset('assets') }}/images/product-img/product-1.avif" />
+                                    src="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $product['thumbnail'] }}"
+                                    xpreview="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $product['thumbnail'] }}"
+                                    alt="{{ $product->name }}" />
                             </a>
-                            <a href="{{ asset('assets') }}/images/product-img/product-2.avif">
-                                <img class="xzoom-gallery" width="100"
-                                    src="{{ asset('assets') }}/images/product-img/product-2.avif"
-                                    xpreview="{{ asset('assets') }}/images/product-img/product-2.avif" />
-                            </a>
-                            <a href="{{ asset('assets') }}/images/product-img/product-3.avif">
-                                <img class="xzoom-gallery" width="100"
-                                    src="{{ asset('assets') }}/images/product-img/product-3.avif"
-                                    xpreview="{{ asset('assets') }}/images/product-img/product-3.avif" />
-                            </a>
-                            <a href="{{ asset('assets') }}/images/product-img/product-4.avif">
-                                <img class="xzoom-gallery" width="100"
-                                    src="{{ asset('assets') }}/images/product-img/product-4.avif"
-                                    xpreview="{{ asset('assets') }}/images/product-img/product-4.avif" />
-                            </a>
+                            @php
+                                $images = json_decode($product->images, true);
+                            @endphp
+
+                            @if (!empty($images) && isset($images))
+                                @foreach ($images as $image)
+                                    <a
+                                        href="{{ \App\CPU\ProductManager::product_image_path('product') }}/{{ $image }}">
+                                        <img class="xzoom-gallery" width="100"
+                                            src="{{ \App\CPU\ProductManager::product_image_path('product') }}/{{ $image }}"
+                                            xpreview="{{ \App\CPU\ProductManager::product_image_path('product') }}/{{ $image }}"
+                                            alt="{{ $product->name }}" />
+                                    </a>
+                                @endforeach
+                            @endif
+
+
                         </div>
                     </div>
                 </div>
@@ -80,6 +106,27 @@
                         @else
                             <h2 class="text-pink">{{ \App\CPU\Helpers::currency_converter($product->unit_price) }}</h2>
                         @endif
+                    </div>
+                    <div class="d-flex gap-4">
+                        <div>
+                            <h4>Product Quantity:</h4>
+                        </div>
+                        <div
+                            class="d-flex align-items-center gap-3 cart-increment-decrement  cart-increment-decrement mb-4">
+                            <button style="height: 40px; width: 40px;" class="decrement btn btn-danger rounded-circle"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-dash" viewBox="0 0 16 16">
+                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                </svg></button>
+                            <input type="hidden" name="quantity" class="quantity">
+                            <span class="showItem lead" style="color: #414042;">1</span>
+                            <button style="height: 40px; width: 40px;" class="increment btn btn-danger rounded-circle"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-plus" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                </svg></i></button>
+                        </div>
                     </div>
                     <div class="product-form-buttons">
                         <button class="btn btn-block w-100 details-add-to-cart">
@@ -108,83 +155,8 @@
                                         aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body border-0">
                                             <div class="description-details">
-                                                <p>
-                                                    <strong class="d-block">What it is</strong>
-                                                    Skin Cafe 100% Natural Rosemary Essential Oil is
-                                                    formulated with 100% pure rosemary oil. It is a one
-                                                    stop solution for all problems. It‚Äôs a
-                                                    multi-purpose oil that can diminish dandruff,
-                                                    increase the hair regrowth and darkness as well.
-                                                    This essential oil can reduce joint pain, headache,
-                                                    stomach cramps, constipation, and so forth.
-                                                    Moreover, it can be used as mouthwash to improve
-                                                    oral health. It can also be used as air freshener,
-                                                    mosquito repellent and cleaning spray.
+                                                {!! $product['details'] !!}
 
-                                                    <strong class="d-block">What is it does:</strong>
-                                                    <br />
-                                                    ¬†
-                                                    <br />
-                                                    <strong class="d-block">For Skin:</strong>
-                                                    Skin Cafe 100% Natural Rosemary Essential Oil can
-                                                    help reduce the appearance of dark spots and
-                                                    blemishes on the skin by massaging it into the face.
-                                                    balances the natural oils of the skin. Skin Cafe
-                                                    100% Natural Rosemary Essential Oil provides your
-                                                    face with the nutrients it needs, whether it has dry
-                                                    or oilier skin. gives the skin a moisturizing and
-                                                    moistened feeling. This rosemary essential oil's
-                                                    anti-inflammatory qualities aid in reducing skin
-                                                    edema and puffiness. Additionally, it lessens acne,
-                                                    soothes the skin, and aids in burn recovery.
-
-                                                    <strong class="d-block">For Hair:</strong>
-                                                    Rosemary essential oil from Skin Cafe is 100 percent
-                                                    natural and helps with alopecia. Its
-                                                    anti-inflammatory effects, ability to encourage
-                                                    nerve growth, and improved circulation offer
-                                                    thinning hair new life and thicker locks. The
-                                                    essential oil's antifungal property aids in reducing
-                                                    dandruff and addresses hyperactive fungal activity
-                                                    in the scalp. Over time, it may turn lighter hair
-                                                    darker. By simply ensuring that the hair follicles
-                                                    have enough melanin pigment, the health of the scalp
-                                                    is improved. As a result, the hair fibers naturally
-                                                    darken.
-
-                                                    <strong class="d-block">For Health and Body:</strong>
-                                                    Skin Cafe 100% Natural Rosemary Essential Oil
-                                                    reduces pain, soothes inflammation, eliminates
-                                                    headaches and strengthens the immune system. Through
-                                                    massage, this oil stimulates circulation, which
-                                                    allows the body to better absorb nutrients from
-                                                    food. Breathing rosemary oil may help to focus and
-                                                    remember information and reduce stress level. It is
-                                                    a natural disinfectant that can help remove bad oral
-                                                    bacteria that causes cavities, bad breath, plaque
-                                                    buildup, and other minor dental issues.
-
-                                                    <strong class="d-block">Others:</strong>
-                                                    The 100% natural rosemary essential oil from Skin
-                                                    Cafe can be used as a cleaning spray, insect
-                                                    repellant, and air freshener. What factors account
-                                                    for the rising use of rosemary essential oil?
-                                                    Rosemary essential oil serves a variety of purposes.
-                                                    This essential oil promotes good health by enhancing
-                                                    concentration and memory, preventing hair loss,
-                                                    reducing pain and inflammation, warding off some
-                                                    insects, and reducing stress.
-
-                                                    <strong class="d-block">Disclaimer</strong>
-
-                                                    For external use only. Avoid direct contact with
-                                                    eyes and mouth. Store it in a cool and dry place
-                                                    away from sunlight. If irritation occurs,
-                                                    discontinue use.
-                                                    <br />
-                                                    ¬†
-                                                    <br />
-                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -338,138 +310,110 @@
     </section>
     <section class="related-products">
         <div class="container">
-            <h2 class="h1 text-center my-4">You May Also Like</h2>
+            <h2 class="h1 text-center my-4">You May Also Like </h2>
             <div class="row mt-5">
-                <div class="col-6 col-sm-6 col-lg-3 pe-md-5">
-                    <div class="card border-0 product w-100">
-                        <div class="product-item border border-dark">
-                            <a href="">
-                                <img class="card-img-top default-img"
-                                    src="{{ asset('assets') }}/images/related-product/rltd-1.2.jpg"
-                                    alt="related product image" />
-                                <!-- hover image -->
-                                <img class="card-img-top hover-img"
-                                    src="{{ asset('assets') }}/images/related-product/rltd-1.1.jpg"
-                                    alt="related product image" />
-                            </a>
+                {{-- @php
+                    $drelatedProducts = \App\Model\Product::with(['reviews'])
+                        ->where('category_id', $product->category_id)
+                        ->where('sub_category_id', $product->sub_category_id)
+                        ->where('sub_sub_category_id', $product->sub_sub_category_id)
+                        ->active()
+                        ->get();
+                @endphp --}}
 
-                            <button class="btn btn-sm bg-pink w-25 position-sticky discount-btn">
-                                -10%
-                            </button>
-                            <div class="product-info">
-                                <button class="add-to-cart">ADD TO CART</button>
+                {{-- @php
+
+                    $drelatedProducts = \App\Model\Product::with('reviews')
+                        ->where('id', '!=', $product->id) // exclude current product
+                        ->when($product->sub_sub_category_id, function ($query) use ($product) {
+                            // Match same sub-sub-category if exists
+                            $query->where('sub_sub_category_id', $product->sub_sub_category_id);
+                        })
+                        ->when(!$product->sub_sub_category_id && $product->sub_category_id, function ($query) use (
+                            $product,
+                        ) {
+                            // If no sub_sub_category, fallback to sub_category
+                            $query->where('sub_category_id', $product->sub_category_id);
+                        })
+                        ->when(
+                            !$product->sub_sub_category_id && !$product->sub_category_id && $product->category_id,
+                            function ($query) use ($product) {
+                                // If only main category available
+                                $query->where('category_id', $product->category_id);
+                            },
+                        )
+                        ->active() // your model scope for active products
+                        ->take(4) // limit number of related products
+                        ->get();
+                @endphp --}}
+
+                @if ($related_products)
+                    @foreach ($related_products as $rltdProduct)
+                        <div class="col-6 col-sm-6 col-lg-3 pe-md-5">
+                            <div class="card border-0 product w-100">
+                                <div class="product-item border border-dark">
+                                    <a href="{{ route('product.details', $rltdProduct->slug) }}">
+                                        <img class="card-img-top product-img"
+                                            src="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $rltdProduct['thumbnail'] }}"
+                                            alt="{{ $rltdProduct['id'] }}" />
+                                        <!-- hover image -->
+                                        @php
+                                            $images = json_decode($rltdProduct->images, true);
+                                        @endphp
+
+                                        @if (!empty($images) && isset($images[0]))
+                                            <img class="card-img-top hover-img"
+                                                src="{{ \App\CPU\ProductManager::product_image_path('product') }}/{{ $images[0] }}"
+                                                alt="{{ $rltdProduct->name }}">
+                                        @endif
+                                    </a>
+
+                                    @php
+                                        $decimal_point_settings = \App\CPU\Helpers::get_business_settings(
+                                            'decimal_point_settings',
+                                        );
+                                    @endphp
+
+                                    @if ($rltdProduct->discount > 0)
+                                        <button class="btn btn-sm bg-pink position-sticky discount-btn">
+                                            @if ($rltdProduct->discount_type == 'percent')
+                                                {{ round($rltdProduct->discount, $decimal_point_settings) }}%
+                                            @elseif($rltdProduct->discount_type == 'flat')
+                                                {{ \App\CPU\Helpers::currency_converter($rltdProduct->discount) }}
+                                            @endif
+                                        </button>
+                                    @endif
+                                    <div class="product-info">
+                                        <button class="add-to-cart">ADD TO CART</button>
+                                    </div>
+                                </div>
+                                <div class="card-body px-0">
+                                    <a href="{{ route('product.details', $rltdProduct->slug) }}"
+                                        class="card-title stretched-link h4">
+                                        {{ $rltdProduct->name }}
+                                    </a>
+                                    <p class="card-text">
+                                        @if ($rltdProduct->discount > 0)
+                                            <span
+                                                class="text-decoration-line-through">৳{{ \App\CPU\Helpers::currency_converter($rltdProduct->unit_price) }}</span>
+
+                                            <span
+                                                class="ms-2">৳{{ \App\CPU\Helpers::currency_converter(
+                                                    $rltdProduct->unit_price - \App\CPU\Helpers::get_product_discount($rltdProduct, $rltdProduct->unit_price),
+                                                ) }}</span>
+                                        @else
+                                            <span
+                                                class="ms-2">৳{{ \App\CPU\Helpers::currency_converter($rltdProduct->unit_price) }}</span>
+                                        @endif
+                                    </p>
+                                    <div class="product-rating-star">★★★★★</div>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-body px-0">
-                            <a href="" class="card-title stretched-link h4">
-                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
-                            </a>
-                            <p class="card-text">
-                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
-                            </p>
-                            <div class="product-rating-star">★★★★★</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-lg-3  mt-sm-0  pe-md-5">
-                    <div class="card border-0 product">
-                        <div class="product-item border border-dark">
-                            <a href="">
-                                <img class="card-img-top default-img"
-                                    src="{{ asset('assets') }}/images/related-product/rltd-2.1.webp"
-                                    alt="related product image" />
-                                <!-- hover image -->
-                                <img class="card-img-top hover-img"
-                                    src="{{ asset('assets') }}/images/related-product/rltd-2.2.webp"
-                                    alt="related product image" />
-                            </a>
+                    @endforeach
+                @endif
 
-                            <button class="btn btn-sm bg-pink w-25 position-sticky discount-btn">
-                                -10%
-                            </button>
-                            <div class="product-info">
-                                <button class="add-to-cart btn btn-sm py-2">
-                                    ADD TO CART
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body px-0">
-                            <a href="" class="card-title h4 stretched-link">
-                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
-                            </a>
-                            <p class="card-text">
-                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
-                            </p>
-                            <div class="product-rating-star">★★★★★</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-lg-3 mt-4 mt-md-4 mt-lg-0 pe-md-5">
-                    <div class="card border-0 product">
-                        <div class="product-item border border-dark">
-                            <a href="">
-                                <img class="card-img-top default-img"
-                                    src="{{ asset('assets') }}/images/related-product/rltd-3.1.webp"
-                                    alt="related product image" />
-                                <!-- hover image -->
-                                <img class="card-img-top hover-img"
-                                    src="{{ asset('assets') }}/images/related-product/rltd-3.2.webp"
-                                    alt="related product image" />
-                            </a>
 
-                            <button class="btn btn-sm bg-pink w-25 position-sticky discount-btn">
-                                -10%
-                            </button>
-                            <div class="product-info">
-                                <button class="add-to-cart btn btn-sm py-2">
-                                    ADD TO CART
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body px-0">
-                            <a href="" class="card-title h4 stretched-link">
-                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
-                            </a>
-                            <p class="card-text">
-                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
-                            </p>
-                            <div class="product-rating-star">★★★★★</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-lg-3 mt-4 mt-md-4 mt-lg-0 pe-md-5">
-                    <div class="card border-0 product">
-                        <div class="product-item border border-dark">
-                            <a href="">
-                                <img class="card-img-top default-img"
-                                    src="{{ asset('assets') }}/images/related-product/rltd-4.1.webp"
-                                    alt="related product image" />
-                                <!-- hover image -->
-                                <img class="card-img-top hover-img"
-                                    src="{{ asset('assets') }}/images/related-product/rltd-4.2.webp"
-                                    alt="related product image" />
-                            </a>
-
-                            <button class="btn btn-sm bg-pink w-25 position-sticky discount-btn">
-                                -10%
-                            </button>
-                            <div class="product-info">
-                                <button class="add-to-cart btn btn-sm py-2">
-                                    ADD TO CART
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body px-0">
-                            <a href="" class="card-title h4 stretched-link">
-                                Skin Cafe 98% Pure and Natural Aloe Vera Gel (240ml)
-                            </a>
-                            <p class="card-text">
-                                <span class="text-decoration-line-through">৳450</span><span class="ms-2">৳352</span>
-                            </p>
-                            <div class="product-rating-star">★★★★★</div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -636,4 +580,24 @@
             </div>
         </div>
     </section>
+
+    @push('scripts')
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let collapseEl = document.querySelector(".writeReviewCollapse");
+                let btnText = document.querySelector(".review-btn-txt-changeable");
+                let status = false;
+
+                btnText.addEventListener("click", function() {
+                    status = !status;
+                    if (status) {
+                        this.textContent = "CANCEL A REVIEW";
+                    } else {
+                        this.textContent = "WRITE A REVIEW";
+                    }
+                });
+            });
+        </script>
+    @endpush
+
 @endsection

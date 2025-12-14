@@ -40,9 +40,9 @@
                                 Banani, Dhaka-1213, Bangladesh
                             </p>
                             <p><strong>Timings:</strong> 8:00a.m.-10:00p.m.</p>
-                            <p><i class="fa fa-phone text-white me-2"></i> +880 9647554411</p>
+                            <p><i class="fa fa-phone text-white me-2"></i>{{ $web_config['phone']->value }}</p>
                             <p>
-                                <i class="fa fa-envelope text-white me-2"></i> support@ohsogo.com
+                                <i class="fa fa-envelope text-white me-2"></i> {{ $web_config['email']->value }}
                             </p>
                         </div>
                     </div>
@@ -59,8 +59,9 @@
                 </div>
                 <div class="col-12 text-center copyright">
                     <p class="text-white">
-                        © 2025, OHSOGO. All rights reserved. Design & Developed By <a href="https://evertechit.com/"
-                            class="text-white" target="_blank">Evertech IT Ltd</a>.
+                        © 2025, {{ $web_config['name']->value }}. All rights reserved.
+                        {{ $web_config['copyright_text']->value }} <a href="https://evertechit.com/" class="text-white"
+                            target="_blank">Evertech IT Ltd</a>.
                     </p>
                 </div>
             </div>

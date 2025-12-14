@@ -9,6 +9,7 @@ use App\Model\Color;
 use App\Model\Coupon;
 use App\Model\Currency;
 use App\Model\Order;
+use App\Model\Product;
 use App\Model\Review;
 use App\Model\Seller;
 use App\Model\ShippingMethod;
@@ -23,9 +24,20 @@ use Spatie\ImageOptimizer\OptimizerChainFactory;
 
 class Helpers
 {
+    public static function findConcernProducts($text)
+    {
+        $products = Product::where('name', 'like', "%{$text}%")
+            ->orWhere('short_description', 'like', "%{$text}%")
+            ->orWhere('details', 'like', "%{$text}%")
+            ->get();
+
+        return $products;
+    }
+
     //Start image upload manager
     public static function uploadWithCompress(string $dir, string $format, int $targetSizeKB, $image = null)
     {
+
         if ($image !== null) {
 
             $fileSize = $image->getSize();
@@ -102,6 +114,7 @@ class Helpers
         if (Storage::disk('public')->exists($dir . $old_image)) {
             Storage::disk('public')->delete($dir . $old_image);
         }
+
         $imageName = Helpers::uploadWithCompress($dir, $format, $image, 300);
         return $imageName;
     }
@@ -520,6 +533,17 @@ class Helpers
             $discount = ($price * $product->discount) / 100;
         } elseif ($product->discount_type == 'flat') {
             $discount = $product->discount;
+        }
+
+        return floatval($discount);
+    }
+    public static function get_product_discount_for_cart($product, $price)
+    {
+        $discount = 0;
+        if ($product['discount_type'] == 'percent') {
+            $discount = ($price * $product['discount']) / 100;
+        } elseif ($product['discount_type'] == 'flat') {
+            $discount = $product['discount'];
         }
 
         return floatval($discount);

@@ -2,6 +2,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Jost:ital,wght@0,100..900;1,100..900&display=swap'); */
 @import url("https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Jost:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 @import url("https://fonts.cdnfonts.com/css/avenir");
+
+.toast-success {
+    background-color: green !important;
+    box-shadow: none;
+    color: #ffffff !important;
+}
+.toast-message {
+    color: #fff !important;
+}
+.toast-error {
+    background-color: #dc3545 !important;
+    box-shadow: none;
+    color: #fff !important;
+}
+
+.toast-info {
+    background-color: #17a2b8 !important;
+    box-shadow: none;
+    color: #fff !important;
+}
+
+.toast-warning {
+    background-color: #ffc107 !important;
+    box-shadow: none;
+    color: #000 !important;
+}
+
+#toast-container > div {
+    opacity: 1 !important;
+    box-shadow: none !important;
+}
 @keyframes zoomOutLite {
     0% {
         transform: scale(1.1);
@@ -358,6 +389,8 @@ header.scrolled .menu-area a {
     box-shadow: var(--shadow);
     border-top: var(--border);
     top: 58px;
+    padding: 8px;
+    border-radius: 0 0 5px 5px;
 }
 
 .dropdown-menu1 ul {
@@ -367,6 +400,7 @@ header.scrolled .menu-area a {
 
 .dropdown-menu1 ul li {
     list-style: none;
+    margin-bottom: 10px;
 }
 
 .dropdown-menu1 ul li a {
@@ -412,6 +446,7 @@ header.scrolled .menu-area a {
     opacity: 1;
     visibility: visible;
     transform: scaleY(1);
+    border-radius: 5px;
 }
 
 .dd-btn3 {
@@ -1569,7 +1604,7 @@ section.related-products {
     position: absolute;
     right: 0;
     top: -3px;
-    background: #817e7b;
+    background: #000;
 }
 
 .all-checkout-container {
@@ -1658,7 +1693,7 @@ section.related-products {
 }
 .cart-added-products .cart-item {
     display: flex;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
 }
 h6.free-shiping-txt {
     font-size: 0.875rem;
@@ -2356,11 +2391,11 @@ input[type="range"].active::-webkit-slider-thumb {
 #mainCategoryTabs {
     gap: 40px;
 }
-#faceSubcategoryTabs {
+.subcategoryTabs {
     justify-content: center;
     gap: 30px;
 }
-#faceSubcategoryTabs .nav-link {
+.subcategoryTabs .nav-link {
     margin-bottom: -1px;
     border: 1px solid #e2f0d8 !important;
     background: #fff;
@@ -2372,7 +2407,7 @@ input[type="range"].active::-webkit-slider-thumb {
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
 }
-#faceSubcategoryTabs .nav-link.active {
+.subcategoryTabs .nav-link.active {
     background-color: #e2f0d8;
 }
 .faq-section .accordion-button:not(.collapsed) {
@@ -2530,4 +2565,31 @@ input[type="range"].active::-webkit-slider-thumb {
 }
 .testimonial-section {
     height: 700px;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #eb3986;
+    border-color: #eb3986;
+}
+.page-link {
+    color: #eb3986;
+    font-size: 18px;
+}
+.page-link:hover {
+    color: #eb3986;
+}
+.page-link:focus {
+    color: #eb3986;
+    background-color: #e9ecef;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(235, 57, 134, 0.25);
+}
+.cart-item .cart-img {
+    height: 150px;
+    width: 100px;
+}
+.cart-item .cart-img img {
+    max-width: 100%;
+    height: auto;
 }

@@ -4,9 +4,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title> @yield('title') - {{ config('app.name') }}</title>
-    <link rel="shortcut icon" href="{{ asset('assets') }}/images/logo/favicon.png" type="image/x-icon" />
+
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+    <meta name="_token" content="{{ csrf_token() }}">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="shortcut icon" href="{{ asset('storage/company') }}/{{ $web_config['fav_icon']->value }}"
+        type="image/x-icon" />
+
+
     <link rel="stylesheet" href="{{ asset('assets') }}/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/bs_customize.css">
@@ -18,7 +26,8 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/slick/slick.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/slick/slick-theme.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/animate.min.css">
-
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/toastr.min.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/sweetalert2.min.css">
     <style>
         :root {
             --primary-color: #ff6b6b;
@@ -115,6 +124,7 @@
 </head>
 
 <body>
+
     <!-- Header Start -->
     @if (!request()->is('product-checkout'))
         @include('layouts.front-end.partials.header')
@@ -141,10 +151,135 @@
     <script src="{{ asset('assets') }}/js/xzoom.min.js"></script>
     <script src="{{ asset('assets') }}/slick/slick.min.js"></script>
     <script src="{{ asset('assets') }}/js/wow.min.js"></script>
+    <script src="{{ asset('assets') }}/js/toastr.min.js"></script>
+    <script src="{{ asset('assets') }}/js/sweetalert2.min.js"></script>
+
+    <script>
+        @if (session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+
+        @if (session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if (session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
+
+        @if (session('info'))
+            toastr.info("{{ session('info') }}");
+        @endif
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            positionClass: "toast-top-right",
+            timeOut: 2000,
+            tapToDismiss: true
+        };
+    </script>
+
+    <script>
+        function addToCart(product_id, redirect_to_checkout = false) {
+
+            let token = "{{ csrf_token() }}";
+            $.ajax({
+                url: "{{ route('cart.add') }}",
+                method: "POST",
+                data: {
+                    id: product_id,
+                    _token: token
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        toastr.success(response.message);
+                        // updateCart();
+                        // location.reload();
+                        $('.cart_count').html(response.cart_count);
+                        $('.cart-offcanva').load("/cart/cart-offcanva");
+
+
+                        if (redirect_to_checkout) {
+                            window.location.href = "{{ route('product.checkout') }}";
+                        }
+                    } else {
+                        toastr.error(response.message);
+                    }
+
+
+                },
+                error: function() {
+                    toastr.error("Something went wrong!");
+                }
+            });
+        }
+
+        function removeFromCart(id) {
+            let token = "{{ csrf_token() }}";
+
+            $.ajax({
+                url: "{{ route('cart.remove') }}",
+                method: "POST",
+                data: {
+                    id: id,
+                    _token: token
+                },
+                success: function(response) {
+                    toastr.success(response.message);
+                    // updateCart();
+                    // location.reload();
+                    $('.cart_count').html(response.cart_count);
+                    $('.cart-offcanva').load("/cart/cart-offcanva");
+                },
+                error: function() {
+                    toastr.error("Something went wrong!");
+                }
+            });
+        }
+
+        function incrementQuantity(id) {
+            let token = "{{ csrf_token() }}";
+            $.ajax({
+                url: "{{ route('cart.increment') }}",
+                method: "POST",
+                data: {
+                    id: id,
+                    _token: token
+                },
+                success: function(response) {
+                     $('.cart-offcanva').load("/cart/cart-offcanva");
+                },
+                error: function() {
+                    toastr.error("Something went wrong!");
+                }
+            });
+        }
+
+        function decrementQuantity(id) {
+            let token = "{{ csrf_token() }}";
+            $.ajax({
+                url: "{{ route('cart.decrement') }}",
+                method: "POST",
+                data: {
+                    id: id,
+                    _token: token
+                },
+                success: function(response) {
+                     $('.cart-offcanva').load("/cart/cart-offcanva");
+                },
+                error: function() {
+                    toastr.error("Something went wrong!");
+                }
+            });
+        }
+    </script>
+
+
     <script>
         new WOW().init();
     </script>
     <script>
+        // ingredients item hover change image content
         $(document).ready(function() {
             const firstItem = $('.ingredient-list li:first');
             const img = $('#ingredient-image');
@@ -169,19 +304,20 @@
         });
     </script>
 
-
     {{-- owl carosel for product slide --}}
     <script>
         $(document).ready(function() {
-            const owl = $('.owl-carousel');
-            owl.owlCarousel({
-                loop: true,
+            const $owl = $('.owl-carousel');
+            const itemCount = $owl.find('.item').length;
+
+            $owl.owlCarousel({
+                loop: itemCount > 1,
                 autoplay: true,
                 autoplayTimeout: 3000,
                 autoplayHoverPause: true,
                 margin: 40,
                 responsiveClass: true,
-                nav: true,
+                nav: itemCount > 1,
                 navText: [
                     '<i class="fa fa-chevron-left text-white"></i>',
                     '<i class="fa fa-chevron-right text-white"></i>'
@@ -199,9 +335,13 @@
                     }
                 }
             });
+
+            // Just to be extra safe
+            if (itemCount <= 1) {
+                $owl.find('.owl-nav').hide();
+            }
         });
     </script>
-
 
     <!-- Script for search system -->
     <script>
@@ -235,6 +375,7 @@
             });
         });
     </script>
+
     <!-- Script for Mobile Menu -->
     <script>
         $(document).ready(function() {
@@ -281,62 +422,21 @@
             });
         });
     </script>
-    {{-- Script for Cart Note Modal Box open --}}
-    <script>
-        // cart note modal js script
-        const modal = document.getElementById("customModal");
-        const cartBody = document.querySelector(".product-cart-offcanvas");
 
-        modal.addEventListener("show.bs.modal", function() {
-            let backdrop = document.createElement("div");
-            backdrop.classList.add("custom-modal-backdrop");
-            cartBody.appendChild(backdrop);
-        });
 
-        modal.addEventListener("hidden.bs.modal", function() {
-            const backdrop = cartBody.querySelector(".custom-modal-backdrop");
-            if (backdrop) backdrop.remove();
-        });
-    </script>
     {{-- Script cart product increment and decrement --}}
-    <script>
-        // cart increment decrement buttton script
-        document
-            .querySelectorAll(".cart-increment-decrement")
-            .forEach(function(item) {
-                const decrementBtn = item.querySelector(".decrement");
-                const incrementBtn = item.querySelector(".increment");
-                const showItem = item.querySelector(".showItem");
-                const hiddenInput = item.querySelector(".quantity");
 
-                incrementBtn.addEventListener("click", function() {
-                    let currentValue = parseInt(showItem.textContent);
-                    currentValue++;
-                    showItem.textContent = currentValue;
-                    hiddenInput.value = currentValue;
-                });
-
-                decrementBtn.addEventListener("click", function() {
-                    let currentValue = parseInt(showItem.textContent);
-                    if (currentValue > 1) {
-                        currentValue--;
-                        showItem.textContent = currentValue;
-                        hiddenInput.value = currentValue;
-                    }
-                });
-            });
-    </script>
     <script>
         const priceSlider = document.getElementById("price");
         const priceValue = document.getElementById("price-value");
 
-        priceSlider.addEventListener("input", () => {
-            priceValue.textContent = priceSlider.value;
-        });
+        // priceSlider.addEventListener("input", () => {
+        //     priceValue.textContent = priceSlider.value;
+        // });
     </script>
 
     <script>
-        // Dynamicsort option select and active color
+        // Dynamic page sort option select and active color
         document.querySelectorAll(".sort-option").forEach(button => {
             button.addEventListener("click", function() {
 
@@ -445,69 +545,6 @@
             });
         });
     </script>
-    {{-- product checkout scroll hint button script --}}
-    <script>
-        // product checkout scroll hint button script
-        $(document).ready(function() {
-            let $container = $(".all-checkout-container");
-            let $scrollHint = $(".scroll-hint");
-
-            if ($container[0].scrollHeight > $container[0].clientHeight) {
-                $scrollHint.show();
-            } else {
-                $scrollHint.hide();
-            }
-
-            $container.on("scroll", function() {
-                if ($(this).scrollTop() > 11) {
-                    $scrollHint.addClass("hide");
-                } else {
-                    $scrollHint.removeClass("hide");
-                }
-            });
-        });
-    </script>
-    {{-- script for mini two accordion hide show text --}}
-    <script>
-        // script for mini two accordion hide show text
-        const btn1 = document.getElementById('totalSingleItemOne');
-        const btn2 = document.getElementById('totalSingleItemTwo');
-        const acc1 = document.getElementById('panelsStayOpen-collapseOne');
-        const acc2 = document.getElementById('panelsStayOpen-collapseTwo');
-
-        acc1.addEventListener('shown.bs.collapse', function() {
-            btn1.textContent = "Hide 8 items";
-        });
-
-        acc1.addEventListener('hidden.bs.collapse', function() {
-            btn1.textContent = "Show 8 items";
-        });
-        //
-        acc2.addEventListener('shown.bs.collapse', function() {
-            btn2.textContent = "Hide 8 items";
-        });
-
-        acc2.addEventListener('hidden.bs.collapse', function() {
-            btn2.textContent = "Show 8 items";
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let collapseEl = document.querySelector(".writeReviewCollapse");
-            let btnText = document.querySelector(".review-btn-txt-changeable");
-            let status = false;
-
-            btnText.addEventListener("click", function() {
-                status = !status;
-                if (status) {
-                    this.textContent = "CANCEL A REVIEW";
-                } else {
-                    this.textContent = "WRITE A REVIEW";
-                }
-            });
-        });
-    </script>
-
     {{-- new grid view script --}}
     <script>
         // lg device grid system
@@ -657,6 +694,16 @@
             });
         });
     </script>
+    <script>
+        window.addEventListener("pageshow", function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+    </script>
+
+
+    @stack('scripts')
 
 </body>
 

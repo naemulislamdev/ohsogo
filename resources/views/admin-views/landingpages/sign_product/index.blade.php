@@ -18,7 +18,8 @@
                     <li class="breadcrumb-item" aria-current="page">{{ \App\CPU\translate('Landing Pages') }}</li>
                 </ol>
             </nav>
-            <a href="{{route('admin.landingpages.create')}}" class="btn btn-primary">{{ \App\CPU\translate('Add new') }}</a>
+            <a href="{{ route('admin.landingpages.create') }}"
+                class="btn btn-primary">{{ \App\CPU\translate('Add new') }}</a>
         </div>
 
         <!-- Content Row -->
@@ -65,7 +66,7 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                {{ $lPage->product->name}}
+                                                {{ $lPage->name }}
                                             </td>
                                             <td>
                                                 <a title="{{ \App\CPU\translate('Edit') }}"

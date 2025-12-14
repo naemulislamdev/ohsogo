@@ -133,7 +133,7 @@ class POSController extends Controller
     {
         $category = $request->query('category_id', 0);
         $keyword = $request->query('search', false);
-        $categories = Category::where('position',0)->latest()->get();
+        $categories = Category::latest()->get();
 
         $key = explode(' ', $keyword);
         $products = Product::where('added_by','admin')->where('status',1)

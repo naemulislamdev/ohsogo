@@ -10,27 +10,23 @@
                     <!-- Carousel Slider -->
                     <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
                         <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="0"
-                                class="active"></button>
-                            <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="1"></button>
-                            <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="2"></button>
+                            @foreach ($banners as $key => $banner)
+                                <button type="button" data-bs-target="#productCarousel"
+                                    data-bs-slide-to="{{ $key }}"
+                                    class="{{ $loop->first ? 'active' : '' }}"></button>
+                            @endforeach
                         </div>
                         <div class="carousel-inner">
-                            <div class="carousel-item active  ">
-                                <img style="transform: scale(1.1);" src="assets/images/slider/tbanner1.jpg"
-                                    class="d-block w-100 wow animate__animated animate__zoomOutLite" data-wow-delay="0.5s"
-                                    alt="Makeup Products" />
-                            </div>
-                            <div class="carousel-item ">
-                                <img style="transform: scale(1.1);" src="assets/images/slider/tbanner2.jpg"
-                                    class="d-block w-100 wow animate__animated animate__zoomOutLite" data-wow-delay="0.5s"
-                                    alt="Skincare Products" />
-                            </div>
-                            <div class="carousel-item">
-                                <img style="transform: scale(1.1);" src="assets/images/slider/slider-1.jpg"
-                                    class="d-block w-100 wow animate__animated animate__zoomOutLite" data-wow-delay="0.5s"
-                                    alt="Hair Care Products" />
-                            </div>
+                            @foreach ($banners as $banner)
+                                <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                    <a href="{{ $banner->url }}">
+                                        <img style="transform: scale(1.1);"
+                                            src="{{ asset('storage') }}/banner/{{ $banner->photo }}"
+                                            class="d-block w-100 wow animate__animated animate__zoomOutLite"
+                                            data-wow-delay="0.5s" alt="{{ $banner->banner_type }}" />
+                                    </a>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -52,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mt-4 mt-md-0 wow animate__animated animate__zoomIn" data-wow-duration="2s">
+                <div class="col-md-6 col-lg-4 mt-2 mt-md-0 wow animate__animated animate__zoomIn" data-wow-duration="2s">
                     <div class="benefit-box text-center d-flex align-items-center justify-content-center">
                         <div class="me-3">
                             <img src="assets/images/icon/bf2.png" alt="Free Shipping" />
@@ -63,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mt-4 mt-lg-0 wow animate__animated animate__zoomIn" data-wow-duration="2s">
+                <div class="col-md-6 col-lg-4 mt-2 mt-lg-0 wow animate__animated animate__zoomIn" data-wow-duration="2s">
                     <div class="benefit-box text-center d-flex align-items-center justify-content-center">
                         <div class="me-3">
                             <img src="assets/images/icon/bf3.png" alt="Easy Returns" />
@@ -78,8 +74,9 @@
         </div>
     </section>
     <!-- end benefit section -->
+
     <!----Product Section------>
-    <section class="product-section py-5">
+    <section class="product-section py-3 py-lg-5">
         <div class="container ">
             <div class="row wow animate__animated animate__fadeInUp">
                 <div class="col">
@@ -87,16 +84,23 @@
                 </div>
             </div>
 
-            <div class="owl-carousel related-products product-carosel">
-                @php($decimal_point_settings = \App\CPU\Helpers::get_business_settings('decimal_point_settings'))
+            @php
+                $decimal_point_settings = \App\CPU\Helpers::get_business_settings('decimal_point_settings');
+            @endphp
+
+            <div class="owl-carousel related-products product-carousel">
                 @foreach ($newDropProducts as $product)
                     <div class="item">
-                        @include('layouts.front-end.partials.home_product', ['product' => $product])
+                        @include('layouts.front-end.partials.home_product', [
+                            'product' => $product,
+                            'decimal_point_settings' => $decimal_point_settings,
+                        ])
                     </div>
                 @endforeach
             </div>
+
             <div class="text-center">
-                <a class="chekout-cart-btn text-white" href="#">View all</a>
+                <a class="chekout-cart-btn text-white" href="{{ route('shop') }}">View all</a>
             </div>
         </div>
     </section>
@@ -108,30 +112,30 @@
                 <h2 class="section-heading mb-5 wow animate__animated animate__fadeInUp">TRENDING CATEGORY</h2>
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-md-6 " data-wow-delay="0.5s">
-                        <div class="category-box">
+                        <a href="{{ route('collections', 'mens-grooming') }}" class="category-box ">
                             <div class="category-image wow animate__animated animate__zoomOutLite">
                                 <img src="assets/images/category/cat1.jpg" alt="Men's Grooming" />
                             </div>
-                            <div class="category-title">MENS GROOMING</div>
-                        </div>
+                            <div class="category-title stretched-link">MENS GROOMING</div>
+                        </a>
                     </div>
 
                     <div class="col-lg-4 col-md-6 mt-4 mt-lg-0 " data-wow-delay="0.5s">
-                        <div class="category-box ">
+                        <a href="{{ route('collections', 'skincare') }}" class="category-box ">
                             <div class="category-image wow animate__animated animate__zoomOutLite">
                                 <img src="assets/images/category/cat2.jpg" alt="Korean Beauty" />
                             </div>
-                            <div class="category-title">KOREAN BEAUTY</div>
-                        </div>
+                            <div class="category-title stretched-link">KOREAN BEAUTY</div>
+                        </a>
                     </div>
 
                     <div class="col-lg-4 col-md-6 mt-4 mt-lg-0 " data-wow-delay="0.5s">
-                        <div class="category-box ">
+                        <a href="{{ route('collections', 'baby-care') }}" class="category-box ">
                             <div class="category-image wow animate__animated animate__zoomOutLite">
                                 <img src="assets/images/category/cat3.jpg" alt="Babycare" />
                             </div>
                             <div class="category-title">BABYCARE</div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -157,6 +161,7 @@
         </div>
     </section>
     <!---- end combo banner Section------>
+
     <!---- start recent drops Section------>
     <div class="recent-drops-section py-5">
         <div class="container ">
@@ -166,50 +171,62 @@
                 <!-- First Row -->
                 <div class="col-md-4 ">
                     <div class="drop-card">
-                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd1.jpg"
-                            alt="" />
-                        <h4>UP TO 25% OFF</h4>
+                        <a href="{{ route('brandCollection', 'Ribana') }}">
+                            <img class="wow animate__animated animate__zoomOutLite"
+                                src="assets/images/product-banner/rd1.jpg" alt="" />
+                            <h4>UP TO 25% OFF</h4>
+                        </a>
                     </div>
                 </div>
 
                 <div class="col-md-4 ">
                     <div class="drop-card">
-                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd2.jpg"
-                            alt="" />
-                        <h4>UP TO 25% OFF</h4>
+                        <a href="{{ route('brandCollection', 'Olay') }}">
+                            <img class="wow animate__animated animate__zoomOutLite"
+                                src="assets/images/product-banner/rd2.jpg" alt="" />
+                            <h4>UP TO 25% OFF</h4>
+                        </a>
                     </div>
                 </div>
 
                 <div class="col-md-4 ">
                     <div class="drop-card">
-                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd3.jpg"
-                            alt="" />
-                        <h4>UP TO 25% OFF</h4>
+                        <a href="{{ route('brandCollection', 'Arong Earth') }}">
+                            <img class="wow animate__animated animate__zoomOutLite"
+                                src="assets/images/product-banner/rd3.jpg" alt="" />
+                            <h4>UP TO 25% OFF</h4>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Second Row -->
                 <div class="col-md-4 ">
                     <div class="drop-card">
-                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd4.jpg"
-                            alt="" />
-                        <h4>UP TO 25% OFF</h4>
+                        <a href="{{ route('brandCollection', 'Parachute Advansed Secrets') }}">
+                            <img class="wow animate__animated animate__zoomOutLite"
+                                src="assets/images/product-banner/rd4.jpg" alt="" />
+                            <h4>UP TO 25% OFF</h4>
+                        </a>
                     </div>
                 </div>
 
                 <div class="col-md-4 ">
                     <div class="drop-card">
-                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd5.jpg"
-                            alt="" />
-                        <h4>UP TO 25% OFF</h4>
+                        <a href="{{ route('brandCollection', 'Garnier') }}">
+                            <img class="wow animate__animated animate__zoomOutLite"
+                                src="assets/images/product-banner/rd5.jpg" alt="" />
+                            <h4>UP TO 25% OFF</h4>
+                        </a>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="drop-card">
-                        <img class="wow animate__animated animate__zoomOutLite" src="assets/images/product-banner/rd6.jpg"
-                            alt="" />
-                        <h4>UP TO 25% OFF</h4>
+                        <a href="{{ route('brandCollection', 'boots') }}">
+                            <img class="wow animate__animated animate__zoomOutLite"
+                                src="assets/images/product-banner/rd6.jpg" alt="" />
+                            <h4>UP TO 25% OFF</h4>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -308,15 +325,15 @@
 
             <div class="row g-0 overflow-hidden">
                 <!-- Left Side Image -->
-                <div class="col-md-6 mb-3 wow animate__animated animate__fadeInLeft order-2 order-lg-1">
+                <div class="col-md-6 mb-3 wow animate__animated animate__fadeInLeft ">
                     <div class="  transform-none shadow-none text-center left-panel">
-                        <img id="ingredient-image" src="assets/images/product-banner/ni1.jpg" alt="Ingredient Image" />
+                        <img id="ingredient-image" src="assets/images/product-banner/ind1.webp" alt="Ingredient Image" />
 
                     </div>
                 </div>
 
                 <!-- Right Side Text -->
-                <div class="col-md-6 mb-3 wow animate__animated animate__fadeInRight order-1 order-lg-2">
+                <div class="col-md-6 mb-3 wow animate__animated animate__fadeInRight ">
                     <div style="transform: none" class="ingredient-card p-3 pb-2 pb-lg-0 p-lg-5 right-panel">
                         <ul class="ingredient-list text-start list-unstyled">
                             <li data-img="assets/images/product-banner/ind1.webp" data-title="NIACINAMIDE"
@@ -345,7 +362,8 @@
                             <p id="desc-text" class="mb-4">
 
                             </p>
-                            <a href="#" class="chekout-cart-btn text-white mt-2 mt-lg-3 py-lg-3 px-lg-4">VIEW
+                            <a href="{{ route('collections', 'face') }}"
+                                class="chekout-cart-btn text-white mt-2 mt-lg-3 py-lg-3 px-lg-4">VIEW
                                 COLLECTION</a>
                         </div>
                     </div>
@@ -356,13 +374,13 @@
 
     <!---- end brand Section------>
     <!---- start brand Section------>
-    <section class="section home">
+    <section class="section home brand-section">
         <div class="container py-lg-5 ">
             <h1 class="text-center mb-5  wow animate__animated animate__fadeInUp">WHAT DO YOU HAVE <strong>CONCERN
                     WITH?</strong></h1>
 
-            <!-- Main Category Tabs -->
-            <ul class="nav nav-tabs justify-content-center mb-4  wow animate__animated animate__zoomOutLite"
+            <!-- Main Category Tabs start -->
+            <ul class="nav nav-tabs justify-content-center mb-4  wow animate__animated animate__zoomOutLite mainCategoryTabs"
                 id="mainCategoryTabs" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="face-tab" data-bs-toggle="tab" data-bs-target="#face"
@@ -383,18 +401,19 @@
                     </button>
                 </li>
             </ul>
+            <!-- Main Category Tabs end -->
 
             <div class="text-center mb-5">
                 <p style="font-size: 18px"><strong>Select the concern below </strong> to find the Products you need.</p>
             </div>
 
-            <!-- Tab Content -->
+            <!--  Tab Content -->
             <div class="tab-content" id="mainCategoryTabsContent">
+
                 <!-- Face Tab Content -->
                 <div class="tab-pane fade show active" id="face" role="tabpanel" aria-labelledby="face-tab">
                     <!-- Subcategory Tabs for Face -->
-                    <ul class="nav nav-tabs mb-4  wow animate__animated animate__zoomOutLite" id="faceSubcategoryTabs"
-                        role="tablist">
+                    <ul class="nav nav-tabs mb-4 subcategoryTabs" id="faceSubcategoryTabs" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="acne-tab" data-bs-toggle="tab" data-bs-target="#acne"
                                 type="button" role="tab" aria-controls="acne" aria-selected="true">
@@ -434,79 +453,392 @@
                     </ul>
 
                     <!-- Subcategory Content for Face -->
-                    <div class="tab-content" id="faceSubcategoryTabsContent">
+                    <div class="tab-content subcategoryTabs" id="faceSubcategoryTabsContent">
                         <!-- Acne Products -->
                         <div class="tab-pane fade show active" id="acne" role="tabpanel"
                             aria-labelledby="acne-tab">
+
+                            @php
+                                $hydration = \App\CPU\Helpers::findConcernProducts('acne');
+                            @endphp
                             <div class="owl-carousel related-products product-carosel">
-                                @foreach ($newDropProducts as $product)
-                                    <div class="item">
-                                        @include('layouts.front-end.partials.home_product', [
-                                            'product' => $product,
-                                        ])
-                                    </div>
-                                @endforeach
+                                @if ($hydration->count() > 0)
+                                    @foreach ($hydration as $product)
+                                        <div class="item">
+                                            @include('layouts.front-end.partials.home_product_hover', [
+                                                'product' => $product,
+                                            ])
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
+                            @if ($hydration->count() <= 0)
+                                <div class="text-center py-5">
+                                    <h3>Cant't Find any Products in <strong>Acne</strong> Category!</h3>
+
+                                </div>
+                            @endif
+
                         </div>
 
-                        <!-- Other subcategories would go here -->
+
                         <div class="tab-pane fade" id="hyper" role="tabpanel" aria-labelledby="hyper-tab">
-                            <!-- Hyperpigmentation products would go here -->
-                            <div class="text-center py-5">
-                                <h3>Hyperpigmentation Products</h3>
-                                <p>Content would load here when tab is selected</p>
+
+                            @php
+                                $Hyperpigmentation = \App\CPU\Helpers::findConcernProducts('Hyperpigmentation');
+                            @endphp
+                            <div class="owl-carousel related-products product-carosel">
+                                @if ($Hyperpigmentation->count() > 0)
+                                    @foreach ($Hyperpigmentation as $product)
+                                        <div class="item">
+                                            @include('layouts.front-end.partials.home_product_hover', [
+                                                'product' => $product,
+                                            ])
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
+                            @if ($Hyperpigmentation->count() <= 0)
+                                <div class="text-center py-5">
+                                    <h3>Cant't Find any Products in <strong>Hyperpigmentation</strong> Category!</h3>
+
+                                </div>
+                            @endif
                         </div>
 
                         <div class="tab-pane fade" id="ageing" role="tabpanel" aria-labelledby="ageing-tab">
-                            <!-- Premature Skin Ageing products would go here -->
-                            <div class="text-center py-5">
-                                <h3>Premature Skin Ageing Products</h3>
-                                <p>Content would load here when tab is selected</p>
+                            @php
+                                $Ageing = \App\CPU\Helpers::findConcernProducts('Premature Skin Ageing');
+                            @endphp
+                            <div class="owl-carousel related-products product-carosel">
+                                @if ($Ageing->count() > 0)
+                                    @foreach ($Ageing as $product)
+                                        <div class="item">
+                                            @include('layouts.front-end.partials.home_product_hover', [
+                                                'product' => $product,
+                                            ])
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
+                            @if ($Ageing->count() <= 0)
+                                <div class="text-center py-5">
+                                    <h3>Cant't Find any Products in <strong>Premature Skin Ageing</strong> Category!</h3>
+
+                                </div>
+                            @endif
+                        </div>
+                        <div class="tab-pane fade" id="sun" role="tabpanel" aria-labelledby="sun-tab">
+                            @php
+                                $sunProtection = \App\CPU\Helpers::findConcernProducts('Sun Protection');
+                            @endphp
+                            <div class="owl-carousel related-products product-carosel">
+                                @if ($sunProtection->count() > 0)
+                                    @foreach ($sunProtection as $product)
+                                        <div class="item">
+                                            @include('layouts.front-end.partials.home_product_hover', [
+                                                'product' => $product,
+                                            ])
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            @if ($sunProtection->count() <= 0)
+                                <div class="text-center py-5">
+                                    <h3>Cant't Find any Products in <strong>Sun Protection</strong> Category!</h3>
+
+                                </div>
+                            @endif
+                        </div>
+                        <div class="tab-pane fade" id="circles" role="tabpanel" aria-labelledby="circles-tab">
+                            @php
+                                $darkCircles = \App\CPU\Helpers::findConcernProducts('Dark Circles');
+                            @endphp
+                            <div class="owl-carousel related-products product-carosel">
+                                @if ($darkCircles->count() > 0)
+                                    @foreach ($darkCircles as $product)
+                                        <div class="item">
+                                            @include('layouts.front-end.partials.home_product_hover', [
+                                                'product' => $product,
+                                            ])
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            @if ($darkCircles->count() <= 0)
+                                <div class="text-center py-5">
+                                    <h3>Cant't Find any Products in <strong>Dark Circles</strong> Category!</h3>
+
+                                </div>
+                            @endif
+                        </div>
+                        <div class="tab-pane fade" id="hydration" role="tabpanel" aria-labelledby="hydration-tab">
+                            @php
+                                $hydration = \App\CPU\Helpers::findConcernProducts('Hydration');
+                            @endphp
+                            <div class="owl-carousel related-products product-carosel">
+                                @if ($hydration->count() > 0)
+                                    @foreach ($hydration as $product)
+                                        <div class="item">
+                                            @include('layouts.front-end.partials.home_product_hover', [
+                                                'product' => $product,
+                                            ])
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            @if ($hydration->count() <= 0)
+                                <div class="text-center py-5">
+                                    <h3>Cant't Find any Products in <strong>Hydration</strong> Category!</h3>
+
+                                </div>
+                            @endif
+
+
                         </div>
 
-                        <!-- Other subcategory panes would follow the same pattern -->
                     </div>
+
                 </div>
 
-                <!-- Skin Tab Content -->
+                <!--  Main Skin Tab Content start-->
                 <div class="tab-pane fade" id="skin" role="tabpanel" aria-labelledby="skin-tab">
-                    <div class="text-center py-5">
-                        <h3>SKIN Products</h3>
-                        <p>Content would load here when tab is selected</p>
+                    <!-- Subcategory Tabs for Skin -->
+                    <ul class="nav nav-tabs mb-4 subcategoryTabs" id="skinSubcategoryTabs" role="tablist">
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="dryskin-tab" data-bs-toggle="tab"
+                                data-bs-target="#dryskin" type="button" role="tab" aria-controls="dryskin"
+                                aria-selected="true">
+                                Dry Skin
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="strwSkin-tab" data-bs-toggle="tab" data-bs-target="#strwSkin"
+                                type="button" role="tab" aria-controls="strwSkin" aria-selected="false">
+                                Strawberry Skin
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="tanRemove-tab" data-bs-toggle="tab" data-bs-target="#tanRemove"
+                                type="button" role="tab" aria-controls="tanRemove" aria-selected="false">
+                                Tan Removal
+                            </button>
+                        </li>
+
+                    </ul>
+
+                    <!-- Subcategory Content for skin -->
+                    <div class="tab-content subcategoryTabs" id="skinSubcategoryTabsContent">
+                        <!-- Dry Skin tab Products -->
+                        <div class="tab-pane fade show active" id="dryskin" role="tabpanel"
+                            aria-labelledby="dryskin-tab">
+
+                            @php
+                                $drySkin = \App\CPU\Helpers::findConcernProducts('Dry Skin');
+                            @endphp
+                            <div class="owl-carousel related-products product-carosel">
+                                @if ($drySkin->count() > 0)
+                                    @foreach ($drySkin as $product)
+                                        <div class="item">
+                                            @include('layouts.front-end.partials.home_product_hover', [
+                                                'product' => $product,
+                                            ])
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            @if ($drySkin->count() <= 0)
+                                <div class="text-center py-5">
+                                    <h3>Cant't Find any Products in <strong>Dry Skin</strong> Category!</h3>
+
+                                </div>
+                            @endif
+                        </div>
+                        {{-- Strawberry Skin tab products --}}
+                        <div class="tab-pane fade" id="strwSkin" role="tabpanel" aria-labelledby="strwSkin-tab">
+
+                            @php
+                                $strwberrySkin = \App\CPU\Helpers::findConcernProducts('Strawberry Skin');
+                            @endphp
+                            <div class="owl-carousel related-products product-carosel">
+                                @if ($strwberrySkin->count() > 0)
+                                    @foreach ($strwberrySkin as $product)
+                                        <div class="item">
+                                            @include('layouts.front-end.partials.home_product_hover', [
+                                                'product' => $product,
+                                            ])
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            @if ($strwberrySkin->count() <= 0)
+                                <div class="text-center py-5">
+                                    <h3>Cant't Find any Products in <strong>Strawberry Skin</strong> Category!</h3>
+
+                                </div>
+                            @endif
+                        </div>
+                        <!-- Tan Removal tab products -->
+                        <div class="tab-pane fade" id="tanRemove" role="tabpanel" aria-labelledby="tanRemove-tab">
+
+                            @php
+                                $tanRemoval = \App\CPU\Helpers::findConcernProducts('Tan Removal');
+                            @endphp
+                            <div class="owl-carousel related-products product-carosel">
+                                @if ($tanRemoval->count() > 0)
+                                    @foreach ($tanRemoval as $product)
+                                        <div class="item">
+                                            @include('layouts.front-end.partials.home_product_hover', [
+                                                'product' => $product,
+                                            ])
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            @if ($tanRemoval->count() <= 0)
+                                <div class="text-center py-5">
+                                    <h3>Cant't Find any Products in <strong>Tan Removal</strong> Category!</h3>
+
+                                </div>
+                            @endif
+                        </div>
                     </div>
+
                 </div>
 
-                <!-- Hair Tab Content -->
+                <!-- Hair Tab Content start-->
                 <div class="tab-pane fade" id="hair" role="tabpanel" aria-labelledby="hair-tab">
-                    <div class="text-center py-5">
-                        <h3>HAIR Products</h3>
-                        <p>Content would load here when tab is selected</p>
+                    <!-- Subcategory Tabs for hair -->
+                    <ul class="nav nav-tabs mb-4 subcategoryTabs" id="hairSubcategoryTabs" role="tablist">
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="thinning-tab" data-bs-toggle="tab"
+                                data-bs-target="#thinning" type="button" role="tab" aria-controls="thinning"
+                                aria-selected="true">
+                                Hair Thinning
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="frizzy-tab" data-bs-toggle="tab" data-bs-target="#frizzy"
+                                type="button" role="tab" aria-controls="frizzy" aria-selected="false">
+                                Dry and Frizzy Hair
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="Oily-tab" data-bs-toggle="tab" data-bs-target="#Oily"
+                                type="button" role="tab" aria-controls="Oily" aria-selected="false">
+                                Oily Scalp
+                            </button>
+                        </li>
+
+                    </ul>
+
+                    <!-- Subcategory Content for hair -->
+                    <div class="tab-content subcategoryTabs" id="hairSubcategoryTabsContent">
+                        <!--  Hair Thinning Products -->
+                        <div class="tab-pane fade show active" id="thinning" role="tabpanel"
+                            aria-labelledby="thinning-tab">
+
+                            @php
+                                $hairThinning = \App\CPU\Helpers::findConcernProducts('Hair Thinning');
+                            @endphp
+                            <div class="owl-carousel related-products product-carosel">
+                                @if ($hairThinning->count() > 0)
+                                    @foreach ($hairThinning as $product)
+                                        <div class="item">
+                                            @include('layouts.front-end.partials.home_product_hover', [
+                                                'product' => $product,
+                                            ])
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            @if ($hairThinning->count() <= 0)
+                                <div class="text-center py-5">
+                                    <h3>Cant't Find any Products in <strong>Hair Thinning</strong> Category!</h3>
+
+                                </div>
+                            @endif
+                        </div>
+
+                        <!-- Dry and Frizzy Hair -->
+                        <div class="tab-pane fade" id="frizzy" role="tabpanel" aria-labelledby="frizzy-tab">
+                            <div class="text-center py-5">
+                                @php
+                                    $dryandFrizzy = \App\CPU\Helpers::findConcernProducts('Dry and Frizzy Hair');
+                                @endphp
+                                <div class="owl-carousel related-products product-carosel">
+                                    @if ($dryandFrizzy->count() > 0)
+                                        @foreach ($dryandFrizzy as $product)
+                                            <div class="item">
+                                                @include('layouts.front-end.partials.home_product_hover', [
+                                                    'product' => $product,
+                                                ])
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                                @if ($dryandFrizzy->count() <= 0)
+                                    <div class="text-center py-5">
+                                        <h3>Cant't Find any Products in <strong>Dry and Frizzy Hair</strong> Category!</h3>
+
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                        <!--  Oily Scalp -->
+                        <div class="tab-pane fade" id="Oily" role="tabpanel" aria-labelledby="Oily-tab">
+
+                            @php
+                                $oilyScalp = \App\CPU\Helpers::findConcernProducts('Oily Scalp');
+                            @endphp
+                            <div class="owl-carousel related-products product-carosel">
+                                @if ($oilyScalp->count() > 0)
+                                    @foreach ($oilyScalp as $product)
+                                        <div class="item">
+                                            @include('layouts.front-end.partials.home_product_hover', [
+                                                'product' => $product,
+                                            ])
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            @if ($oilyScalp->count() <= 0)
+                                <div class="text-center py-5">
+                                    <h3>Cant't Find any Products in <strong>Oily Scalp</strong> Category!</h3>
+
+                                </div>
+                            @endif
+                        </div>
                     </div>
+
+
                 </div>
+                <!-- Hair Tab Content end-->
+
             </div>
-        </div>
     </section>
     <!---- end brand Section------>
-    <!----Product Section------>
-    <section class="product-section  home">
+    <!----Start Recently Viewed Product Section------>
+    <section class="product-section  home mt-5 mt-lg-0">
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h2 class="section-heading mb-5">Recently viewed</h2>
+                    <h2 class="section-heading mb-5">Recently viewed </h2>
                 </div>
             </div>
+            @php($decimal_point_settings = \App\CPU\Helpers::get_business_settings('decimal_point_settings'))
             <div class="owl-carousel related-products product-carosel">
-                @foreach ($newDropProducts as $product)
+                @foreach ($recentlyViewed as $product)
                     <div class="item">
-                        @include('layouts.front-end.partials.home_product', ['product' => $product])
+                        @include('layouts.front-end.partials.home_product_hover', ['product' => $product])
                     </div>
                 @endforeach
             </div>
         </div>
     </section>
-    <!---- End Product Section------>
+    <!---- End Recently Viewed Product Section------>
     <section class="testimonial-section">
         <div class="container ">
             <h2 class="section-heading wow animate__animated animate__fadeInUp">#BEAUTYBFF SPEAKS</h2>
@@ -703,4 +1035,6 @@
             </div>
         </div>
     </section>
+
+
 @endsection

@@ -10,277 +10,210 @@ use App\Model\Cart;
 use App\Model\Color;
 use App\Model\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
-    public function variant_price(Request $request)
+    // Add product to cart with stock validation
+    public function addToCart(Request $request)
     {
-        $product = Product::find($request->id);
-        $str = '';
-        $quantity = 0;
-        $price = 0;
+        $product = Product::find($request->id); // Find product by ID
 
-        if ($request->has('color')) {
-            $str = Color::where('code', $request['color'])->first()->name;
+        // Check if product exists
+        if (!$product) {
+            return response()->json(['status' => 'error', 'message' => 'Product not found!']);
         }
 
-        foreach (json_decode(Product::find($request->id)->choice_options) as $key => $choice) {
-            if ($str != null) {
-                $str .= '-' . str_replace(' ', '', $request[$choice->name]);
-            } else {
-                $str .= str_replace(' ', '', $request[$choice->name]);
+        // Check stock availability
+        if ($product->current_stock <= 0) {
+            return response()->json(['status' => 'error', 'message' => 'Out of stock!']);
+        }
+
+        // Get current cart session
+        $cart = session()->get('cart', []);
+        // Calculate discount price if applicable
+        $discountPrice = 0;
+        if ($product->discount_price > 0) {
+            if ($product->discount_type == 'percentage') {
+                $discountPrice = $product->price - ($product->price * $product->discount / 100);
+            } elseif ($product->discount_type == 'fixed') {
+                $discountPrice = $product->discount_price;
             }
         }
 
-        if ($str != null) {
-            $count = count(json_decode($product->variation));
-            for ($i = 0; $i < $count; $i++) {
-                if (json_decode($product->variation)[$i]->type == $str) {
-                    $tax = Helpers::tax_calculation(json_decode($product->variation)[$i]->price, $product['tax'], $product['tax_type']);
-                    $discount = Helpers::get_product_discount($product, json_decode($product->variation)[$i]->price);
-                    $price = json_decode($product->variation)[$i]->price - $discount + $tax;
-                    $quantity = json_decode($product->variation)[$i]->qty;
-                }
+
+        // If product already in cart, increase quantity
+        if (isset($cart[$product->id])) {
+            if ($cart[$product->id]['quantity'] >= $product->current_stock) {
+                return response()->json(['status' => 'error', 'message' => 'Not enough stock available!']);
             }
+            $cart[$product->id]['quantity'] += 1;
+            return response()->json(['status' => 'info', 'message' => 'Already card added you!']);
         } else {
-            $tax = Helpers::tax_calculation($product->unit_price, $product['tax'], $product['tax_type']);
-            $discount = Helpers::get_product_discount($product, $product->unit_price);
-            $price = $product->unit_price - $discount + $tax;
-            $quantity = $product->current_stock;
+            // Add new product to cart
+            $cart[$product->id] = [
+                'name' => $product->name,
+                'purchase_price' => $product->purchase_price,
+                'unit_price' => $product->unit_price,
+                'thumbnail' => $product->thumbnail,
+                'quantity' => 1,
+                'current_stock' => $product->current_stock,
+                'discount' => $product->discount,
+                'discount_type' => $product->discount_type,
+
+            ];
         }
 
-        return [
-            'price' => \App\CPU\Helpers::currency_converter($price * $request->quantity),
-            'discount' => \App\CPU\Helpers::currency_converter($discount),
-            'tax' => \App\CPU\Helpers::currency_converter($tax),
-            'quantity' => $quantity
-        ];
-    }
-
-    public function addToCartOnSession(Request $request)
-    {
-        $product = Product::find($request->id);
-        $data = array();
-        $data['id'] = $product->id;
-        $str = '';
-        $variations = [];
-        $price = 0;
-        //chek if out of stock
-        if ($product['current_stock'] < $request['quantity']) {
-            return response()->json([
-                'data' => 0
-            ]);
-        }
-        //check the color enabled or disabled for the product
-        if ($request->has('color')) {
-            //dd($request['color']);
-            $data['color'] = $request['color'];
-            $str = Color::where('code', $request['color'])->first()->name;
-            //dd($str);
-            $variations['color'] = $str;
-        }
-        //Gets all the choice values of customer choice option and generate a string like Black-S-Cotton
-        foreach (json_decode(Product::find($request->id)->choice_options) as $key => $choice) {
-            $data[$choice->name] = $request[$choice->name];
-            $variations[$choice->title] = $request[$choice->name];
-            if ($str != null) {
-                $str .= '-' . str_replace(' ', '', $request[$choice->name]);
-            } else {
-                $str .= str_replace(' ', '', $request[$choice->name]);
-            }
-        }
-        $data['variations'] = $variations;
-        $data['variant'] = $str;
-        if ($request->session()->has('cart')) {
-            if (count($request->session()->get('cart')) > 0) {
-                foreach ($request->session()->get('cart') as $key => $cartItem) {
-                    if ($cartItem['id'] == $request['id'] && $cartItem['variant'] == $str) {
-                        return response()->json([
-                            'data' => 1
-                        ]);
-                    }
-                }
-            }
-        }
-        //Check the string and decreases quantity for the stock
-        if ($str != null) {
-            $count = count(json_decode($product->variation));
-            for ($i = 0; $i < $count; $i++) {
-                if (json_decode($product->variation)[$i]->type == $str) {
-                    $price = json_decode($product->variation)[$i]->price;
-                    if (json_decode($product->variation)[$i]->qty < $request['quantity']) {
-                        return response()->json([
-                            'data' => 0
-                        ]);
-                    }
-                }
-            }
-        } else {
-            $price = $product->unit_price;
-        }
-
-        $tax = ($price * $product->tax) / 100;
-        $shipping_id = 1;
-        $shipping_cost = 0;
-
-        $data['quantity'] = $request['quantity'];
-        $data['shipping_method_id'] = $shipping_id;
-        $data['price'] = $price;
-        $data['tax'] = $tax;
-        $data['slug'] = $product->slug;
-        $data['name'] = $product->name;
-        $data['discount'] = Helpers::get_product_discount($product, $price);
-        $data['shipping_cost'] = $shipping_cost;
-        $data['thumbnail'] = $product->thumbnail;
-
-        if ($request->session()->has('cart')) {
-            $cart = $request->session()->get('cart', collect([]));
-            $cart->push($data);
-        } else {
-            $cart = collect([$data]);
-            $request->session()->put('cart', $cart);
-        }
-
-        session()->forget('coupon_code');
-        session()->forget('coupon_discount');
+        // Save back to session
+        session()->put('cart', $cart);
 
         return response()->json([
-            'data' => $data,
             'status' => 'success',
-            'count' => session()->has('cart') ? count(session()->get('cart')) : 0
+            'message' => ' Add to cart successfully!',
+            'cart' => $cart,
+            'cart_count' => count($cart)
         ]);
     }
-    public function subdomainOrdernow($id)
+
+
+    public function getCartItems()
     {
-        $request = request();
-        $quantity = 1;
-        $product = Product::find($id);
-        $data = array();
-        $data['id'] = $product->id;
-        $str = '';
-        $variations = [];
-        $price = 0;
-        //chek if out of stock
-        if ($product['current_stock'] < $quantity) {
-            return response()->json([
-                'data' => 0
-            ]);
+        $cart = session()->get('cart', []);
+
+        return response()->json($cart);
+    }
+
+    public function removeCartItem(Request $request)
+    {
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$request->id])) {
+            unset($cart[$request->id]);
+            session()->put('cart', $cart);
         }
 
-        //Check the string and decreases quantity for the stock
-        if ($str != null) {
-            $count = count(json_decode($product->variation));
-            for ($i = 0; $i < $count; $i++) {
-                if (json_decode($product->variation)[$i]->type == $str) {
-                    $price = json_decode($product->variation)[$i]->price;
-                    if (json_decode($product->variation)[$i]->qty < $quantity) {
-                        return response()->json([
-                            'data' => 0
-                        ]);
-                    }
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Item removed from cart!',
+            'cart' => $cart,
+            'cart_count' => count($cart)
+        ]);
+    }
+
+
+    public function updateCart(Request $request)
+    {
+        $cart = session()->get('cart', []);
+        $product = Product::find($request->id);
+
+        if (!$product) {
+            return response()->json(['status' => 'error', 'message' => 'Product not found!']);
+        }
+
+        if (isset($cart[$request->id])) {
+            if ($request->action == "increase") {
+                if ($cart[$request->id]['quantity'] >= $product->current_stock) {
+                    return response()->json(['status' => 'error', 'message' => 'Not enough stock available!']);
                 }
-            }
-        } else {
-            $price = $product->unit_price;
-        }
-
-        $tax = ($price * $product->tax) / 100;
-        $shipping_id = 1;
-        $shipping_cost = 0;
-
-        $data['quantity'] = $quantity;
-        $data['shipping_method_id'] = $shipping_id;
-        $data['price'] = $price;
-        $data['tax'] = $tax;
-        $data['slug'] = $product->slug;
-        $data['name'] = $product->name;
-        $data['discount'] = Helpers::get_product_discount($product, $price);
-        $data['shipping_cost'] = $shipping_cost;
-        $data['thumbnail'] = $product->thumbnail;
-
-        if ($request->session()->has('cart')) {
-            $cart = $request->session()->get('cart', collect([]));
-            $cart->push($data);
-        } else {
-            $cart = collect([$data]);
-            $request->session()->put('cart', $cart);
-        }
-
-        session()->forget('coupon_code');
-        session()->forget('coupon_discount');
-        return redirect()->route('shop-cart');
-    }
-
-    public function updateNavCart()
-    {
-        return view('layouts.front-end.partials.cart');
-    }
-
-    //removes from Cart
-
-    public function removeFromCart(Request $request)
-    {
-        if ($request->session()->has('cart')) {
-            $cart = $request->session()->get('cart', collect([]));
-            $cart->forget($request->key);
-            $request->session()->put('cart', $cart);
-        }
-
-        session()->forget('coupon_code');
-        session()->forget('coupon_discount');
-        session()->forget('shipping_method_id');
-
-        return view('layouts.front-end.partials.cart_details');
-    }
-    public function totalCartCount(){
-        $data = session()->has('cart') ? count(session()->get('cart')) : 0;
-        return $data;
-    }
-
-    //updated the quantity for a cart item
-    public function updateQuantity(Request $request)
-    {
-        $status = 1;
-        $qty = 0;
-        $cart = $request->session()->get('cart', collect([]));
-        $cart = $cart->map(function ($object, $key) use ($request, &$status, &$qty) {
-            if ($key == $request->key) {
-                $product = Product::find($object['id']);
-                $count = count(json_decode($product->variation));
-                if ($count) {
-                    for ($i = 0; $i < $count; $i++) {
-                        if (json_decode($product->variation)[$i]->type == $object['variant']) {
-                            if (json_decode($product->variation)[$i]->qty < $request->quantity) {
-                                $status = 0;
-                                $qty = $object['quantity'];
-                            } else {
-                                $object['quantity'] = $request->quantity;
-                            }
-                        }
-                    }
-                } else if ($product['current_stock'] < $request->quantity) {
-                    $status = 0;
-                    $qty = $object['quantity'];
+                $cart[$request->id]['quantity'] += 1;
+            } elseif ($request->action == "decrease") {
+                if ($cart[$request->id]['quantity'] > 1) {
+                    $cart[$request->id]['quantity'] -= 1;
                 } else {
-                    $object['quantity'] = $request->quantity;
+                    unset($cart[$request->id]); // Remove item if quantity is 0
                 }
             }
-            return $object;
+        }
+
+        session()->put('cart', $cart);
+
+        $subtotal = collect($cart)->sum(function ($item) {
+            $price = $item['discount'] > 0 ? $item['discount'] : $item['price']; // Check if discount is available
+            return $price * $item['quantity']; // Multiply by quantity
         });
 
-        if ($status == 0) {
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Cart updated successfully!',
+            'cart' => $cart,
+            'subtotal' => $subtotal,
+            'total' => $subtotal
+        ]);
+    }
+    public function updateQuantity(Request $request)
+    {
+        $id = $request->id;
+        $qty = (int) $request->qty;
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] = $qty;
+            session()->put('cart', $cart);
+
             return response()->json([
-                'data' => $status,
-                'qty' => $qty,
+                'status' => 'success',
+                'message' => 'Quantity updated',
+                'cart' => $cart[$id]
             ]);
         }
 
-        $request->session()->put('cart', $cart);
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Item not found'
+        ]);
+    }
 
-        session()->forget('coupon_code');
-        session()->forget('coupon_discount');
+    public function cartIncrement(Request $request)
+    {
+        $id = $request->id;
 
-        return view('layouts.front-end.partials.cart_details');
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] += 1;
+            session()->put('cart', $cart);
+
+            return response()->json([
+                'status' => 'success',
+                'quantity' => $cart[$id]['quantity'],
+                'cart_count' => array_sum(array_column($cart, 'quantity'))
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Product not found in cart'
+        ], 404);
+    }
+
+    public function cartDecrement(Request $request)
+    {
+        $id = $request->id;
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+
+            if ($cart[$id]['quantity'] > 1) {
+                $cart[$id]['quantity'] -= 1;
+            } else {
+              
+                unset($cart[$id]);
+            }
+
+            session()->put('cart', $cart);
+
+            return response()->json([
+                'status' => 'success',
+                'quantity' => $cart[$id]['quantity'],
+                'cart_count' => array_sum(array_column($cart, 'quantity'))
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error'
+        ], 404);
     }
 }

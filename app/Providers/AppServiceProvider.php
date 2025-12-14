@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-ini_set('memory_limit',-1);
+ini_set('memory_limit', -1);
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -32,11 +32,13 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        Paginator::useBootstrap();
+        Paginator::useBootstrapFive();
         try {
             $web = BusinessSetting::all();
+
             $settings = Helpers::get_settings($web, 'colors');
             $data = json_decode($settings['value'], true);
+
             $web_config = [
                 'primary_color' => $data['primary'],
                 'secondary_color' => $data['secondary'],
@@ -49,6 +51,7 @@ class AppServiceProvider extends ServiceProvider
                 'about' => Helpers::get_settings($web, 'about_us'),
                 'footer_logo' => Helpers::get_settings($web, 'company_footer_logo'),
                 'copyright_text' => Helpers::get_settings($web, 'company_copyright_text'),
+                'phone' => Helpers::get_settings($web, 'company_phone'),
             ];
 
             //language
@@ -61,7 +64,6 @@ class AppServiceProvider extends ServiceProvider
 
             Schema::defaultStringLength(191);
         } catch (\Exception $ex) {
-
         }
     }
 }
