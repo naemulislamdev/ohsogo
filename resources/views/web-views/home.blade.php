@@ -96,7 +96,7 @@
                 @endforeach
             </div>
             <div class="text-center">
-                <a class="chekout-cart-btn text-white" href="{{ route('page') }}">View all</a>
+                <a class="chekout-cart-btn text-white" href="#">View all</a>
             </div>
         </div>
     </section>

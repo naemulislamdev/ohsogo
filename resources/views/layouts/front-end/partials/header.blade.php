@@ -1,8 +1,9 @@
 <!-- Navigation -->
 @php
-    $categoriesFirst3 = Illuminate\Support\Facades\DB::table('categories')->take(3)->get();
-    $categoriesLast3 = Illuminate\Support\Facades\DB::table('categories')->skip(3)->take(6)->get();
-    $categories = Illuminate\Support\Facades\DB::table('categories')->get();
+use App\Model\Category;
+    $categoriesFirst3 = Category::with(['childes.childes'])->where('position', 0)->priority()->take(3)->get();
+    $categoriesLast3 = Category::with(['childes.childes'])->where('position', 0)->priority()->skip(3)->take(3)->get();
+    $categories = Category::with(['childes.childes'])->get();
 
 @endphp
 
@@ -30,78 +31,35 @@
                         <ul>
                             @foreach ($categoriesFirst3 as $category)
                                 <li class="dd-btn1">
-                                    <a href="{{ route('page') }}"> {{ $category->name }} <i
+                                    <a href="{{ route('collections', $category->slug) }}"> {{ $category->name }} <i
                                             class="fa fa-angle-down"></i></a>
                                     {{-- subcategory dropdown  --}}
-                                    <div class="dropdown-menu1">
-                                        <ul>
-                                            <li class="dd-btn2">
-                                                <a href="category.html">
-                                                    <span> Hari Tools</span>
-                                                    <i class="fa fa-angle-right float-right mt-1"></i></a>
-
-                                                <div class="dropdown-menu2">
-                                                    <ul class="w-nav-list level_3">
-                                                        <li class="dd-btn3">
-                                                            <a href="#">Hair cutting<i
-                                                                    class="fa fa-angle-right float-right mt-1"></i></a>
-                                                            <div class="dropdown-menu3">
+                                    @if ($category->childes->count() > 0)
+                                        <div class="dropdown-menu1">
+                                            <ul>
+                                                @foreach ($category['childes'] as $subCategory)
+                                                    <li class="dd-btn2">
+                                                        <a href="#">
+                                                            <span> {{ $subCategory['name'] }}</span>
+                                                            <i class="fa fa-angle-right float-right mt-1"></i></a>
+                                                        @if ($subCategory->childes->count() > 0)
+                                                            <div class="dropdown-menu2">
                                                                 <ul class="w-nav-list level_3">
-                                                                    <li><a href="#">Child manue</a></li>
+                                                                    @foreach ($subCategory['childes'] as $subSubCategory)
+                                                                        <li class="dd-btn3">
+                                                                            <a href="#">{{ $subSubCategory['name'] }}<i
+                                                                                    class="fa fa-angle-right float-right mt-1"></i></a>
+                                                                        </li>
+                                                                    @endforeach
                                                                 </ul>
                                                             </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i> Face Makup
-                                                    <i class="fa fa-angle-right float-right mt-1"></i></a>
-                                                <div class="dropdown-menu2">
-                                                    <ul>
-                                                        <li><a href="#">Makup one</a></li>
-                                                        <li><a href="#">Makup two</a></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Face & Body
-                                                    Care<i class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Lip Beauty<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Hari Care<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Clothing<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Eye Makeup<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Jewellery<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Ladies Bag<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Saree<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                            <li class="dd-btn2">
-                                                <a href="#"><i class="fa fa-long-arrow-right"></i>Cosmetics<i
-                                                        class="fa fa-angle-right float-right mt-1"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                                        @endif
+                                                    </li>
+                                                @endforeach
+
+                                            </ul>
+                                        </div>
+                                    @endif
                                 </li>
                             @endforeach
                         </ul>
@@ -595,7 +553,7 @@
                         <ul>
                             @foreach ($categoriesLast3 as $category)
                                 <li class="dd-btn1">
-                                    <a href="{{ route('page') }}"> {{ $category->name }} <i
+                                    <a href="{{ route('collections', $category->slug) }}"> {{ $category->name }} <i
                                             class="fa fa-angle-down"></i></a>
                                     {{-- hover subcategory dropdown --}}
                                     <div class="dropdown-menu1">
