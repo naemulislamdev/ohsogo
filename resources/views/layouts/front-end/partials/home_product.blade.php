@@ -15,18 +15,21 @@
             </button>
         @endif
         <div class="product-info">
-            <button onclick="addToCart({{ $product->id }})" class="add-to-cart addCart">ADD TO
+            <button onclick="addToCart('{{ $product->id }}')" class="add-to-cart addCart " data-id="{{ $product->id }}">ADD TO
                 CART</button>
+
         </div>
     </div>
     <div class="card-body px-0">
         <a href="{{ route('product.details', $product->slug) }}" class="card-title stretched-link h4">
-            {{ $product['name'] }}
+            <span class="d-none d-lg-block">{{ \Illuminate\Support\Str::limit($product['name'], 40) }}</span>
+            <span class="d-block d-lg-none">{{ \Illuminate\Support\Str::limit($product['name'], 20) }}</span>
         </a>
         <p class="card-text">
             @if ($product->discount > 0)
                 <span
-                    class="text-decoration-line-through">৳{{ \App\CPU\Helpers::currency_converter($product->unit_price) }}</span>
+                    class="text-decoration-line-through">৳{{ \App\CPU\Helpers::currency_converter($product->unit_price) }}
+                </span>
 
                 <span
                     class="ms-2">৳{{ \App\CPU\Helpers::currency_converter(

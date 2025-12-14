@@ -55,17 +55,19 @@ Route::view('/shipping', 'web-views.shipping')->name('shipping');
 Route::view('/privacy', 'web-views.privacy')->name('privacy');
 Route::view('/faqs', 'web-views.faqs')->name('faqs');
 
-//check done
+// cart add_to_cart, Remove_to_cart, update_to_cart
 Route::controller(CartController::class)->prefix('/cart')->as('cart.')->group(function () {
     Route::post('variant_price', 'variant_price')->name('variant_price');
     Route::get('/cart-items', 'getCartItems')->name('items');
     Route::post('/add-product', 'addToCart')->name('add');
     Route::post('/remove', 'removeCartItem')->name('remove');
     Route::post('/nav-cart-items', 'updateCart')->name('update');
-    Route::post('total-cart-count', 'totalCartCount')->name('totalCart');
-    Route::post('/updateQuantity', 'updateQuantity')->name('updateQuantity');
-    Route::get('/subdomain-ordernow/{id}', 'subdomainOrdernow');
-    // In web.php
-    // Route::post('/add-to-cart', 'CartController@addToCart')->name('add.to.cart');
+    Route::post('/updateQuantity',  'updateQuantity')->name('updateQuantity');
+    Route::get("/cart-offcanva", function() {
+        return view("layouts.front-end.partials.cart.cart_items");
+    });
+ 
+    Route::post('/increment', 'cartIncrement')->name('increment');
+    Route::post('/decrement', 'cartDecrement')->name('decrement');
 
 });

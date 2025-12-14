@@ -15,8 +15,8 @@
                         <h1 class="page-title">{{ $catName }}</h1>
                     </div>
                 </div>
-                <div class="row my-5">
-                    <div class="col-md-4 col-lg-3 pe-lg-5">
+                <div class="row my-5 position-relative">
+                    <div class="col-md-4 col-lg-3 pe-lg-5" style="position: sticky; left: 0; top: 0;">
                         <div class="accordion-item d-none d-md-block">
                             <h2 class="accordion-header" id="headingPriceRange">
                                 <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse"
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8 col-lg-9 " style="height: 100vh; overflow-y: scroll; scrollbar-width: none;">
+                    <div class="col-md-8 col-lg-9 ">
                         <!-- Mobile Product price Range and Sort offcanvas start -->
                         <div class="filter-offcanvas d-block d-md-none">
                             <button class="chekout-cart-btn w-100" type="button" data-bs-toggle="offcanvas"

@@ -88,9 +88,6 @@ class WebController extends Controller
             $recentlyViewed = Product::whereIn('id', $viewedProducts)->latest()->get();
         }
 
-
-
-
         return view("web-views.home", compact("newDropProducts", "banners", "recentlyViewed"));
     }
 
@@ -128,6 +125,10 @@ class WebController extends Controller
             $products = Product::where('sub_sub_category_id', $getCat->id)->get();
             $catName = $getCat->name;
         }
+        if($slug == "all") {
+            $products = Product::all();
+            $catName = "Products";
+        }
 
         return view('web-views.collections', compact('products', 'catName'));
     }
@@ -144,7 +145,8 @@ class WebController extends Controller
     }
     public function productCheckout()
     {
-        return view('web-views.product-checkout');
+        $carts = session()->get("cart");
+        return view('web-views.product-checkout', compact("carts"));
     }
     public function productDetails($slug)
     {
@@ -181,5 +183,14 @@ class WebController extends Controller
         } else {
             return redirect("/");
         }
+    }
+    public function shop_cart()
+    {
+        if (session()->has('cart') && count(session('cart')) > 0) {
+            // dd(session('cart'));
+            return view('web-views.shop-cart');
+        }
+        Toastr::info('No items in your basket!');
+        return redirect('/');
     }
 }

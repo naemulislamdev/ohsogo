@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mt-4 mt-md-0 wow animate__animated animate__zoomIn" data-wow-duration="2s">
+                <div class="col-md-6 col-lg-4 mt-2 mt-md-0 wow animate__animated animate__zoomIn" data-wow-duration="2s">
                     <div class="benefit-box text-center d-flex align-items-center justify-content-center">
                         <div class="me-3">
                             <img src="assets/images/icon/bf2.png" alt="Free Shipping" />
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mt-4 mt-lg-0 wow animate__animated animate__zoomIn" data-wow-duration="2s">
+                <div class="col-md-6 col-lg-4 mt-2 mt-lg-0 wow animate__animated animate__zoomIn" data-wow-duration="2s">
                     <div class="benefit-box text-center d-flex align-items-center justify-content-center">
                         <div class="me-3">
                             <img src="assets/images/icon/bf3.png" alt="Easy Returns" />
@@ -76,7 +76,7 @@
     <!-- end benefit section -->
 
     <!----Product Section------>
-    <section class="product-section py-5">
+    <section class="product-section py-3 py-lg-5">
         <div class="container ">
             <div class="row wow animate__animated animate__fadeInUp">
                 <div class="col">
@@ -325,7 +325,7 @@
 
             <div class="row g-0 overflow-hidden">
                 <!-- Left Side Image -->
-                <div class="col-md-6 mb-3 wow animate__animated animate__fadeInLeft order-2 order-lg-1">
+                <div class="col-md-6 mb-3 wow animate__animated animate__fadeInLeft ">
                     <div class="  transform-none shadow-none text-center left-panel">
                         <img id="ingredient-image" src="assets/images/product-banner/ind1.webp" alt="Ingredient Image" />
 
@@ -333,7 +333,7 @@
                 </div>
 
                 <!-- Right Side Text -->
-                <div class="col-md-6 mb-3 wow animate__animated animate__fadeInRight order-1 order-lg-2">
+                <div class="col-md-6 mb-3 wow animate__animated animate__fadeInRight ">
                     <div style="transform: none" class="ingredient-card p-3 pb-2 pb-lg-0 p-lg-5 right-panel">
                         <ul class="ingredient-list text-start list-unstyled">
                             <li data-img="assets/images/product-banner/ind1.webp" data-title="NIACINAMIDE"

@@ -1,6 +1,8 @@
 @extends('layouts.front-end.app')
 @section('title', 'Cart')
 @section('main-content')
+
+{{-- @dd(session()->get('cart')) --}}
     <!-- Cart section start -->
     <section class="cart-section">
         <div class="container">
@@ -23,123 +25,56 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if (session()->has('cart') && count(session()->get('cart')) > 0)
+                        @foreach (session()->get('cart') as $id => $cartItem)
                         <tr>
-                            <!-- Product image + title -->
-                            <td>
-                                <div class="product-content d-flex ">
-                                    <img src="./assets/images/product-img/Combo_09f0db7e-9c15-421f-a7d7-075c5ce14ebf.avif"
-                                        class="rounded me-3" alt="Product">
-                                    <h5>Zayn & Myza Complete Vitamin C Glow Combo</h5>
-                                </div>
-                            </td>
+                                <!-- Product image + title -->
+                                <td>
+                                    <div class="product-content d-flex ">
+                                        <img src="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $cartItem['thumbnail'] }}"
+                                            class="rounded me-3" alt="Product">
+                                        <h5>{{$cartItem['name']}}</h5>
+                                    </div>
+                                </td>
 
-                            <!-- Price -->
-                            <td class="item-price">৳999</td>
+                                <!-- Price -->
+                                <td class="item-price">৳{{ $a = \App\CPU\Helpers::currency_converter(
+                                                $cartItem['unit_price'] - \App\CPU\Helpers::get_product_discount_for_cart($cartItem, $cartItem['unit_price']),
+                                            ) }}</td>
 
-                            <!-- Quantity -->
-                            <td>
-                                <div class="d-flex align-items-center  gap-3 table-quantity cart-increment-decrement">
-                                    <button class="decrement"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                            height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-                                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
-                                        </svg></button>
-                                    <span class="showItem" style="color: #414042;">3</span>
-                                    <input type="hidden" name="quantity" class="quantity">
-                                    <button class="increment"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                            height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                                        </svg></i></button>
-                                </div>
-                            </td>
+                                <!-- Quantity -->
+                                <td>
+                                    <div class="d-flex align-items-center  gap-3 table-quantity cart-increment-decrement">
+                                        <button class="decrement"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                            </svg></button>
+                                        <span class="showItem" style="color: #414042;">1</span>
+                                        <input type="hidden" name="quantity" class="quantity">
+                                        <button class="increment"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                            </svg></i></button>
+                                    </div>
+                                </td>
 
-                            <!-- Total + Delete -->
-                            <td class="d-flex flex-column justify-content-end align-items-end">
-                                <span class="item-price">৳4500</span>
-                                <button title="Remove" style="color: #414042;"
-                                    class="border-0 bg-transparent mt-3 text-muted">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <!-- Product image + title -->
-                            <td>
-                                <div class="product-content d-flex ">
-                                    <img src="./assets/images/product-img/showergel_128x128.avif" class="rounded me-3"
-                                        alt="Product">
-                                    <h5>Zayn & Myza Complete Vitamin C Glow Combo</h5>
-                                </div>
-                            </td>
+                                <!-- Total + Delete -->
+                                <td class="d-flex flex-column justify-content-end align-items-end">
+                                    <span class="item-price">৳{{ $a = \App\CPU\Helpers::currency_converter(
+                                                $cartItem['unit_price'] - \App\CPU\Helpers::get_product_discount_for_cart($cartItem, $cartItem['unit_price']),
+                                            ) * $cartItem['quantity']}}</span>
+                                    <button onclick="removeFromCart({{ $id }})" title="Remove" style="color: #414042;"
+                                        class="border-0 bg-transparent mt-3 text-muted">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
 
-                            <!-- Price -->
-                            <td class="item-price">৳745</td>
+                        @endif
 
-                            <!-- Quantity -->
-                            <td>
-                                <div class="d-flex align-items-center  gap-3 table-quantity cart-increment-decrement">
-                                    <button class="decrement"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                            height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-                                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
-                                        </svg></button>
-                                    <span class="showItem" style="color: #414042;">3</span>
-                                    <input type="hidden" name="quantity" class="quantity">
-                                    <button class="increment"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                            height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                                        </svg></i></button>
-                                </div>
-                            </td>
 
-                            <!-- Total + Delete -->
-                            <td class="d-flex flex-column justify-content-end align-items-end">
-                                <span class="item-price">৳4500</span>
-                                <button title="Remove" style="color: #414042;"
-                                    class="border-0 bg-transparent mt-3 text-muted">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <!-- Product image + title -->
-                            <td>
-                                <div class="product-content d-flex ">
-                                    <img src="./assets/images/product-img/Zayn_Myza_3x_Vitamin_E_Moisturizing_Cream_50gm_-_B1G1_128x128.avif"
-                                        class="rounded me-3" alt="Product">
-                                    <h5>Zayn & Myza Complete Vitamin C Glow Combo</h5>
-                                </div>
-                            </td>
-
-                            <!-- Price -->
-                            <td class="item-price">৳999</td>
-
-                            <!-- Quantity -->
-                            <td>
-                                <div class="d-flex align-items-center  gap-3 table-quantity cart-increment-decrement">
-                                    <button class="decrement"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                            height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-                                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
-                                        </svg></button>
-                                    <span class="showItem" style="color: #414042;">3</span>
-                                    <input type="hidden" name="quantity" class="quantity">
-                                    <button class="increment"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                            height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                                        </svg></i></button>
-                                </div>
-                            </td>
-
-                            <!-- Total + Delete -->
-                            <td class="d-flex flex-column justify-content-end align-items-end">
-                                <span class="item-price">৳4500</span>
-                                <button title="Remove" style="color: #414042;"
-                                    class="border-0 bg-transparent mt-3 text-muted">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </button>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -281,7 +216,7 @@
                         <h6>Subtotal ৳2,895 BDT</h6>
                         <p>Taxes and shipping calculated at checkout</p>
                         <div class="btn-container mt-3 ms-auto">
-                            <a style="color: #fff;" href="product_checkout.html"
+                            <a style="color: #fff;" href="{{route('product.checkout')}}"
                                 class="chekout-cart-btn text-center w-100 py-3">CHECK OUT </a>
                             <h6 style="font-size: 14px;" class="free-shiping-txt shipping-gradient  mt-2 ">
                                 You are eligible for free shipping.
@@ -435,5 +370,5 @@
         </div>
     </section>
     <!-- Related Product section end -->
-    
+
 @endsection

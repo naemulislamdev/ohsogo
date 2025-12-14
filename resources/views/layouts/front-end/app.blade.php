@@ -4,12 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> @yield('title') - {{ config('app.name') }}</title>
+
     {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
     <meta name="_token" content="{{ csrf_token() }}">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title> @yield('title') - {{ config('app.name') }}</title>
     <link rel="shortcut icon" href="{{ asset('storage/company') }}/{{ $web_config['fav_icon']->value }}"
         type="image/x-icon" />
 
@@ -27,7 +28,6 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/css/animate.min.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/sweetalert2.min.css">
-
     <style>
         :root {
             --primary-color: #ff6b6b;
@@ -125,7 +125,6 @@
 
 <body>
 
-
     <!-- Header Start -->
     @if (!request()->is('product-checkout'))
         @include('layouts.front-end.partials.header')
@@ -183,7 +182,6 @@
     <script>
         function addToCart(product_id, redirect_to_checkout = false) {
 
-
             let token = "{{ csrf_token() }}";
             $.ajax({
                 url: "{{ route('cart.add') }}",
@@ -196,8 +194,9 @@
                     if (response.status === 'success') {
                         toastr.success(response.message);
                         // updateCart();
-                        $('#cartAddedItems').load(location.href + " #cartAddedItems > *");
-                        $('#cartCount').text(response.count);
+                        // location.reload();
+                        $('.cart_count').html(response.cart_count);
+                        $('.cart-offcanva').load("/cart/cart-offcanva");
 
 
                         if (redirect_to_checkout) {
@@ -215,8 +214,7 @@
             });
         }
 
-
-        function removeProduct(id) {
+        function removeFromCart(id) {
             let token = "{{ csrf_token() }}";
 
             $.ajax({
@@ -228,8 +226,46 @@
                 },
                 success: function(response) {
                     toastr.success(response.message);
-                    updateCart();
-                    window.location.reload();
+                    // updateCart();
+                    // location.reload();
+                    $('.cart_count').html(response.cart_count);
+                    $('.cart-offcanva').load("/cart/cart-offcanva");
+                },
+                error: function() {
+                    toastr.error("Something went wrong!");
+                }
+            });
+        }
+
+        function incrementQuantity(id) {
+            let token = "{{ csrf_token() }}";
+            $.ajax({
+                url: "{{ route('cart.increment') }}",
+                method: "POST",
+                data: {
+                    id: id,
+                    _token: token
+                },
+                success: function(response) {
+                     $('.cart-offcanva').load("/cart/cart-offcanva");
+                },
+                error: function() {
+                    toastr.error("Something went wrong!");
+                }
+            });
+        }
+
+        function decrementQuantity(id) {
+            let token = "{{ csrf_token() }}";
+            $.ajax({
+                url: "{{ route('cart.decrement') }}",
+                method: "POST",
+                data: {
+                    id: id,
+                    _token: token
+                },
+                success: function(response) {
+                     $('.cart-offcanva').load("/cart/cart-offcanva");
                 },
                 error: function() {
                     toastr.error("Something went wrong!");
@@ -237,6 +273,7 @@
             });
         }
     </script>
+
 
     <script>
         new WOW().init();
@@ -270,15 +307,17 @@
     {{-- owl carosel for product slide --}}
     <script>
         $(document).ready(function() {
-            const owl = $('.owl-carousel');
-            owl.owlCarousel({
-                loop: true,
+            const $owl = $('.owl-carousel');
+            const itemCount = $owl.find('.item').length;
+
+            $owl.owlCarousel({
+                loop: itemCount > 1,
                 autoplay: true,
                 autoplayTimeout: 3000,
                 autoplayHoverPause: true,
                 margin: 40,
                 responsiveClass: true,
-                nav: true,
+                nav: itemCount > 1,
                 navText: [
                     '<i class="fa fa-chevron-left text-white"></i>',
                     '<i class="fa fa-chevron-right text-white"></i>'
@@ -294,19 +333,16 @@
                     992: {
                         items: 4
                     }
-                },
-                onInitialized: function(event) {
-                    if (event.item.count <= 1) {
-                        $('.owl-nav').show();
-                    }
                 }
             });
 
-            if ($('.owl-carousel .owl-item').length <= 1) {
-                $('.owl-carousel .owl-nav').show();
+            // Just to be extra safe
+            if (itemCount <= 1) {
+                $owl.find('.owl-nav').hide();
             }
         });
     </script>
+
     <!-- Script for search system -->
     <script>
         $(document).ready(function() {
@@ -389,33 +425,7 @@
 
 
     {{-- Script cart product increment and decrement --}}
-    <script>
-        // cart increment decrement buttton script
-        document
-            .querySelectorAll(".cart-increment-decrement")
-            .forEach(function(item) {
-                const decrementBtn = item.querySelector(".decrement");
-                const incrementBtn = item.querySelector(".increment");
-                const showItem = item.querySelector(".showItem");
-                const hiddenInput = item.querySelector(".quantity");
 
-                incrementBtn.addEventListener("click", function() {
-                    let currentValue = parseInt(showItem.textContent);
-                    currentValue++;
-                    showItem.textContent = currentValue;
-                    hiddenInput.value = currentValue;
-                });
-
-                decrementBtn.addEventListener("click", function() {
-                    let currentValue = parseInt(showItem.textContent);
-                    if (currentValue > 1) {
-                        currentValue--;
-                        showItem.textContent = currentValue;
-                        hiddenInput.value = currentValue;
-                    }
-                });
-            });
-    </script>
     <script>
         const priceSlider = document.getElementById("price");
         const priceValue = document.getElementById("price-value");
@@ -426,7 +436,7 @@
     </script>
 
     <script>
-        // Dynamicsort option select and active color
+        // Dynamic page sort option select and active color
         document.querySelectorAll(".sort-option").forEach(button => {
             button.addEventListener("click", function() {
 
@@ -691,6 +701,8 @@
             }
         });
     </script>
+
+
     @stack('scripts')
 
 </body>

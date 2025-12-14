@@ -27,12 +27,13 @@
             </button>
         @endif
         <div class="product-info">
-            <a href="#" onclick="addToCart({{ $product->id }})" class="add-to-cart">ADD TO CART</a>
+            <button onclick="addToCart('form-{{ $product->id }}')" class="add-to-cart">ADD TO CART</button>
         </div>
     </div>
     <div class="card-body px-0">
         <a href="{{ route('product.details', $product->slug) }}" class="card-title stretched-link h4">
-            {{ $product['name'] }}
+            <span class="d-none d-lg-block">{{ \Illuminate\Support\Str::limit($product['name'], 40) }}</span>
+            <span class="d-block d-lg-none">{{ \Illuminate\Support\Str::limit($product['name'], 20) }}</span>
         </a>
         <p class="card-text">
             @if ($product->discount > 0)

@@ -10,6 +10,7 @@ use App\Model\Cart;
 use App\Model\Color;
 use App\Model\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class CartController extends Controller
@@ -53,11 +54,14 @@ class CartController extends Controller
             // Add new product to cart
             $cart[$product->id] = [
                 'name' => $product->name,
-                'price' => $product->price,
-                'discount' => $discountPrice,
+                'purchase_price' => $product->purchase_price,
+                'unit_price' => $product->unit_price,
                 'thumbnail' => $product->thumbnail,
                 'quantity' => 1,
-                'current_stock' => $product->current_stock
+                'current_stock' => $product->current_stock,
+                'discount' => $product->discount,
+                'discount_type' => $product->discount_type,
+
             ];
         }
 
@@ -66,16 +70,17 @@ class CartController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => $product->name . ' added to cart successfully!',
+            'message' => ' Add to cart successfully!',
             'cart' => $cart,
-            'count' => count($cart)
-
+            'cart_count' => count($cart)
         ]);
     }
+
 
     public function getCartItems()
     {
         $cart = session()->get('cart', []);
+
         return response()->json($cart);
     }
 
@@ -91,9 +96,12 @@ class CartController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Item removed from cart!',
-            'cart' => $cart
+            'cart' => $cart,
+            'cart_count' => count($cart)
         ]);
     }
+
+
     public function updateCart(Request $request)
     {
         $cart = session()->get('cart', []);
@@ -132,5 +140,80 @@ class CartController extends Controller
             'subtotal' => $subtotal,
             'total' => $subtotal
         ]);
+    }
+    public function updateQuantity(Request $request)
+    {
+        $id = $request->id;
+        $qty = (int) $request->qty;
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] = $qty;
+            session()->put('cart', $cart);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Quantity updated',
+                'cart' => $cart[$id]
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Item not found'
+        ]);
+    }
+
+    public function cartIncrement(Request $request)
+    {
+        $id = $request->id;
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] += 1;
+            session()->put('cart', $cart);
+
+            return response()->json([
+                'status' => 'success',
+                'quantity' => $cart[$id]['quantity'],
+                'cart_count' => array_sum(array_column($cart, 'quantity'))
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Product not found in cart'
+        ], 404);
+    }
+
+    public function cartDecrement(Request $request)
+    {
+        $id = $request->id;
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+
+            if ($cart[$id]['quantity'] > 1) {
+                $cart[$id]['quantity'] -= 1;
+            } else {
+              
+                unset($cart[$id]);
+            }
+
+            session()->put('cart', $cart);
+
+            return response()->json([
+                'status' => 'success',
+                'quantity' => $cart[$id]['quantity'],
+                'cart_count' => array_sum(array_column($cart, 'quantity'))
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error'
+        ], 404);
     }
 }

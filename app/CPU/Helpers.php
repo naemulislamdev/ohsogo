@@ -537,6 +537,17 @@ class Helpers
 
         return floatval($discount);
     }
+    public static function get_product_discount_for_cart($product, $price)
+    {
+        $discount = 0;
+        if ($product['discount_type'] == 'percent') {
+            $discount = ($price * $product['discount']) / 100;
+        } elseif ($product['discount_type'] == 'flat') {
+            $discount = $product['discount'];
+        }
+
+        return floatval($discount);
+    }
 
     public static function module_permission_check($mod_name)
     {

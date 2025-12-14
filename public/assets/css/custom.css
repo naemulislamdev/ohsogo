@@ -1604,7 +1604,7 @@ section.related-products {
     position: absolute;
     right: 0;
     top: -3px;
-    background: #817e7b;
+    background: #000;
 }
 
 .all-checkout-container {
@@ -1693,7 +1693,7 @@ section.related-products {
 }
 .cart-added-products .cart-item {
     display: flex;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
 }
 h6.free-shiping-txt {
     font-size: 0.875rem;
