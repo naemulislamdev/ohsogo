@@ -1,5 +1,6 @@
 <!-- Navigation -->
 @php
+    use Illuminate\Support\Facades\DB;
     // first 3 main category
     $categoriesFirst3 = DB::table('categories')->orderBy('priority', 'asc')->take(3)->get();
     // last 3 main category
@@ -116,7 +117,7 @@
                 </div>
             </div>
             {{-- Mobile offcanvas start --}}
-            @include("layouts.front-end.partials.cart.cart_sm_offcanvas")
+            @include('layouts.front-end.partials.cart.cart_sm_offcanvas')
             {{-- Mobile offcanvas end --}}
             </nav>
         </div>
@@ -193,8 +194,8 @@
 
             <a class="d-none d-lg-block" href="{{ route('login') }}"><i class="fa fa-user-o"
                     aria-hidden="true"></i></a>
-                {{-- Lg device offcanvas --}}
-                @include("layouts.front-end.partials.cart.cart_lg_offcanvas")
+            {{-- Lg device offcanvas --}}
+            @include('layouts.front-end.partials.cart.cart_lg_offcanvas')
 
             {{-- lg device offcanvas --}}
         </div>
