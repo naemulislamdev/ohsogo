@@ -112,26 +112,27 @@ class WebController extends Controller
 
         if ($category = Category::where('slug', $slug)->first()) {
             $getCat = $category;
-            $products = Product::where('category_id', $getCat->id)->get();
+            $products = Product::where('category_id', $getCat->id)->paginate(20);
 
             $catName = $getCat->name;
         } else if ($subCategory = SubCategory::where('slug', $slug)->first()) {
             $getCat = $subCategory;
-            $products = Product::where('sub_category_id', $getCat->id)->get();
+            $products = Product::where('sub_category_id', $getCat->id)->paginate(20);
 
             $catName = $getCat->name;
         } else if ($subSubCategory = SubSubCategory::where('slug', $slug)->first()) {
             $getCat = $subSubCategory;
-            $products = Product::where('sub_sub_category_id', $getCat->id)->get();
+            $products = Product::where('sub_sub_category_id', $getCat->id)->paginate(20);
             $catName = $getCat->name;
         }
         if($slug == "all") {
-            $products = Product::all();
-            $catName = "Products";
+            $products = Product::paginate(20);
+            $catName = "All Products";
         }
 
         return view('web-views.collections', compact('products', 'catName'));
     }
+
     public function showBrandCollections($slug)
     {
         $products = collect();
@@ -193,4 +194,59 @@ class WebController extends Controller
         Toastr::info('No items in your basket!');
         return redirect('/');
     }
+
+    public function orderStore(Request $request)
+    {
+
+        $request->validate([
+            // 1. Phone or Email
+            'phone_email' => ['required', 'string'],
+            // 2. Notify offer (checkbox)
+            'notify_offer' => ['nullable', 'boolean'],
+            // 3. Country
+            'country' => ['required', 'string'],
+            // 4. Nam
+            'first_name' => ['required', 'string', 'max:100'],
+            'last_name' => ['required', 'string', 'max:10'],
+            // 5. Addres
+            'address' => ['nullable', 'string'],
+            // 6. Apartment (optional)
+            'apartment' => ['nullable', 'string', 'max:255'],
+
+            // 7. City
+            'city' => ['required', 'string', 'max:100'],
+
+            // 8. Emirate (ONLY for UAE)
+            'emirate' => ['required_if:country,United Arab Emirates', 'nullable', 'string'],
+
+            // 10. Phone
+            'phone' => ['required', 'max:20'],
+
+            // 11. Save info (checkbox)
+            'save_info' => ['nullable', 'boolean'],
+
+            // 12. Shipping method
+        ]);
+
+        Order::create([
+            'phone_email' => $request->phone_email,
+            'notify_offer' => $request->notify_offer,
+            'country' => $request->country,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'address' => $request->address,
+            'appartment' => $request->appartment,
+            'city' => $request->city,
+            'emirate' => $request->emirate,
+            'phone' => $request->phone,
+            'save_info' => $request->save_info,
+        ]);
+
+
+        return redirect()->back()->with('success', 'Order Placed successfully!');
+    }
+
+
+
+
 }

@@ -43,10 +43,8 @@ Route::controller(WebController::class)->group(function () {
     Route::get("/product-details/{slug}", 'productDetails')->name('product.details');
     Route::get("/collections/{slug}", 'showCollections')->name('collections');
     Route::get("/brandCollection/{slug}", 'showBrandCollections')->name('brandCollection');
+    Route::post('/order/store', 'orderStore')->name('order.store');
 });
-
-
-
 
 
 // static page route
@@ -64,10 +62,14 @@ Route::controller(CartController::class)->prefix('/cart')->as('cart.')->group(fu
     Route::post('/nav-cart-items', 'updateCart')->name('update');
     Route::post('/updateQuantity',  'updateQuantity')->name('updateQuantity');
     Route::get("/cart-offcanva", function() {
-        return view("layouts.front-end.partials.cart.cart_items");
+        return view("layouts.front-end.partials.cart.cart_items")->render();
     });
- 
+    Route::get("/cart-details", function() {
+        return view("layouts.front-end.partials.cart.cart_details")->render();
+    });
+
     Route::post('/increment', 'cartIncrement')->name('increment');
     Route::post('/decrement', 'cartDecrement')->name('decrement');
 
 });
+

@@ -7,6 +7,8 @@
     // mobile main category
     $categories = DB::table('categories')->orderBy('priority', 'asc')->get();
 
+    // dd(session()->get('cart'))
+
 @endphp
 
 

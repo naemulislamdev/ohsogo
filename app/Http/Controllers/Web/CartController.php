@@ -20,6 +20,7 @@ class CartController extends Controller
     {
         $product = Product::find($request->id); // Find product by ID
 
+
         // Check if product exists
         if (!$product) {
             return response()->json(['status' => 'error', 'message' => 'Product not found!']);
@@ -54,14 +55,14 @@ class CartController extends Controller
             // Add new product to cart
             $cart[$product->id] = [
                 'name' => $product->name,
+                'id' => $product->id,
                 'purchase_price' => $product->purchase_price,
                 'unit_price' => $product->unit_price,
                 'thumbnail' => $product->thumbnail,
                 'quantity' => 1,
                 'current_stock' => $product->current_stock,
-                'discount' => $product->discount,
+                'discount' => Helpers::get_product_discount($product, $product->unit_price),
                 'discount_type' => $product->discount_type,
-
             ];
         }
 
@@ -199,8 +200,19 @@ class CartController extends Controller
             if ($cart[$id]['quantity'] > 1) {
                 $cart[$id]['quantity'] -= 1;
             } else {
-              
-                unset($cart[$id]);
+                $cart = session()->get('cart', []);
+
+                if (isset($cart[$request->id])) {
+                    unset($cart[$request->id]);
+                    session()->put('cart', $cart);
+                }
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Item removed from cart!',
+                    'cart' => $cart,
+                    'cart_count' => count($cart)
+                ]);
             }
 
             session()->put('cart', $cart);
@@ -215,5 +227,24 @@ class CartController extends Controller
         return response()->json([
             'status' => 'error'
         ], 404);
+    }
+    public function addCoupon(Request $request)
+    {
+        // Validate if needed
+        $request->validate([
+            'discount_code' => 'required|string',
+        ]);
+
+        // Get the code from request
+        $couponCode = $request->discount_code;
+
+        // Store in session
+        session(['coupon_code' => $couponCode]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Coupon applied successfully!',
+            'coupon_code' => $couponCode,
+        ]);
     }
 }

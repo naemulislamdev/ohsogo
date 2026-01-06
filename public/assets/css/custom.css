@@ -544,7 +544,7 @@ header.scrolled .menu-area a {
     cursor: pointer;
 }
 
-header .cart-badge {
+ .cart-badge {
     position: absolute;
     top: 1px;
     right: 0px;

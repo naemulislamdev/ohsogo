@@ -7,6 +7,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+
+    protected $fillable = [
+        'phone_email',
+        'notify_offer',
+        'country',
+        'first_name',
+        'last_name',
+        'address',
+        'apartment',
+        'city',
+        'emirate',
+        'post_code',
+        'phone',
+        'save_info',
+        'shipping_method',
+        'order_amount',
+        'discount_amount',
+        'shipping_cost',
+        'payment_method',
+    ];
+
+
     protected $casts = [
         'order_amount' => 'float',
         'discount_amount' => 'float',

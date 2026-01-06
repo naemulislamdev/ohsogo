@@ -197,6 +197,7 @@
                         // location.reload();
                         $('.cart_count').html(response.cart_count);
                         $('.cart-offcanva').load("/cart/cart-offcanva");
+                           $('.cart_details').load("/cart/cart-details");
 
 
                         if (redirect_to_checkout) {
@@ -230,6 +231,7 @@
                     // location.reload();
                     $('.cart_count').html(response.cart_count);
                     $('.cart-offcanva').load("/cart/cart-offcanva");
+                     $('.cart_details').load("/cart/cart-details");
                 },
                 error: function() {
                     toastr.error("Something went wrong!");
@@ -247,7 +249,9 @@
                     _token: token
                 },
                 success: function(response) {
-                     $('.cart-offcanva').load("/cart/cart-offcanva");
+                    $('.cart-offcanva').load("/cart/cart-offcanva");
+                        $('.cart_details').load("/cart/cart-details");
+
                 },
                 error: function() {
                     toastr.error("Something went wrong!");
@@ -265,13 +269,16 @@
                     _token: token
                 },
                 success: function(response) {
-                     $('.cart-offcanva').load("/cart/cart-offcanva");
+                    $('.cart-offcanva').load("/cart/cart-offcanva");
+                    $('.cart_details').load("/cart/cart-details");
+
                 },
                 error: function() {
                     toastr.error("Something went wrong!");
                 }
             });
         }
+    
     </script>
 
 

@@ -18,7 +18,7 @@
                             <div class="cart-item-product-info ms-3">
                                 <a href="">
                                     {{ $cartItem['name'] }}
-                                    
+
                                 </a>
                                 <div
                                     class="cart-item-quantity_price mt-4 d-flex justify-content-between align-items-center">
@@ -36,14 +36,7 @@
 
                                     <div class="cart-item-rate">
                                         @php
-                                            $discounted_price =
-                                                $cartItem['unit_price'] -
-                                                \App\CPU\Helpers::get_product_discount_for_cart(
-                                                    $cartItem,
-                                                    $cartItem['unit_price'],
-                                                );
-                                            $total_price = $discounted_price * $cartItem['quantity'];
-
+                                            $total_price = ($cartItem['unit_price'] - $cartItem['discount']) * $cartItem['quantity'];
 
                                         @endphp
                                         <h5>৳ {{ \App\CPU\Helpers::currency_converter($total_price) }}</h5>
@@ -79,8 +72,20 @@
                 </div>
                 <div class="col-6">
                     <div class="sub-total-price text-end">
+                        @php
+                            $sub_total = 0;
+                            $cartItems = session()->get('cart', []); 
 
-                        <h5>৳ 2895 BDT</h5>
+                            foreach ($cartItems as $cartItem) {
+                                $unit_price = $cartItem['unit_price'];
+                                $discount = $cartItem['discount'];
+
+
+                                $sub_total += ($unit_price - $discount) * $cartItem['quantity'];
+                            }
+                        @endphp
+
+                        <h5>৳ {{ \App\CPU\Helpers::currency_converter($sub_total) }} BDT</h5>
 
                     </div>
                 </div>

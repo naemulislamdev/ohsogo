@@ -14,7 +14,7 @@
     }
 </style>
 @extends('layouts.front-end.app')
-@section('title', 'Product-checkout')
+@section('title', 'Checkout')
 @section('main-content')
     <section class="product-checkout-section overflow-hidden">
         <div class="row">
@@ -30,189 +30,12 @@
                                     <img class="logo" src="./assets/images/logo/logo_High_Res_Mob_x320.avif"
                                         alt="OHSOGO Logo" />
                                 </a>
-                                <a href="{{route('product.cart')}}" class="text-dark"><i class="fa fa-shopping-bag"></i></a>
+                                <a href="{{ route('product.cart') }}" class="text-dark"><i
+                                        class="fa fa-shopping-bag"></i></a>
                             </div>
 
                             <!-- Mobile Order Summary Accordion Start -->
-                            <div class="order-summary-accordion mt-4 mb-4 d-block d-lg-none">
-                                <div class="accordion" id="orderSummaryAccordion">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="headingSummary">
-                                            <button
-                                                class="accordion-button d-flex justify-content-between align-items-center"
-                                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseSummary"
-                                                aria-expanded="false" aria-controls="collapseSummary">
-                                                <span class="text-dark fw-bold">Order Summary</span>
-                                                <span class="ms-auto fw-bold">৳1,395.00</span>
-                                            </button>
-                                        </h2>
-                                        <div id="collapseSummary" class="accordion-collapse collapse hide"
-                                            aria-labelledby="headingSummary" data-bs-parent="#orderSummaryAccordion">
-                                            <div class="accordion-body border-top">
-                                                <div>
-                                                    <div class="all-checkout">
-                                                        <div class="cart-dtls-item">
-                                                            <div class="checkout-cart-item row">
-                                                                <div class="product-image position-relative col-2 p-0">
-                                                                    <img class=" border rounded-3"
-                                                                        src="./assets/images/product-img/showergel_128x128.avif"
-                                                                        alt="product image" />
-                                                                    <span class="badge rounded-pill cart-badge">3</span>
-                                                                </div>
-                                                                <div class="product-name col-7">
-                                                                    <h6>
-                                                                        Zayn & Myza Age Defense Retinol & Niacinamide Shower
-                                                                        Gel - 200ml
-                                                                    </h6>
-                                                                </div>
-                                                                <div class="product-price col-3">
-                                                                    <h6>৳199.00</h6>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="cart-dtls-item mt-4">
-                                                            <div class="checkout-cart-item row">
-                                                                <div class="product-image position-relative col-2 p-0">
-                                                                    <img class=" border rounded-3"
-                                                                        src="./assets/images/product-img/Zayn_Myza_3x_Vitamin_E_Moisturizing_Cream_50gm_-_B1G1_128x128.avif"
-                                                                        alt="product image" />
-                                                                    <span class="badge rounded-pill cart-badge">4</span>
-                                                                </div>
-                                                                <div class="product-name col-7">
-                                                                    <h6>
-                                                                        Zayn & Myza Moisture Boost Hyaluronic Acid
-                                                                        Moisturizing Cream with 3x Vitamin E (50gm) - B1G1
-                                                                    </h6>
-
-                                                                    <!-- mobile mini accordion -->
-                                                                    <div class="mini-accordion">
-                                                                        <div class="accordion multiple-product-accordion mt-2"
-                                                                            id="accordionPanelsStayOpenExample">
-                                                                            <div class="accordion-item border-0">
-                                                                                <h2 class="accordion-header"
-                                                                                    id="panelsStayOpen-headingOne">
-                                                                                    <button id="totalSingleItemOne"
-                                                                                        class="accordion-button collapsed p-0"
-                                                                                        type="button"
-                                                                                        data-bs-toggle="collapse"
-                                                                                        data-bs-target="#panelsStayOpen-collapseOne"
-                                                                                        aria-expanded="false"
-                                                                                        aria-controls="panelsStayOpen-collapseOne">
-                                                                                        Show 8 items
-                                                                                    </button>
-                                                                                </h2>
-                                                                                <div id="panelsStayOpen-collapseOne"
-                                                                                    class="accordion-collapse collapse"
-                                                                                    aria-labelledby="panelsStayOpen-headingOne"
-                                                                                    data-bs-parent="#accordionPanelsStayOpenExample">
-                                                                                    <div class="accordion-body">
-                                                                                        <div class="sub-product d-flex">
-                                                                                            <img style="height: 50px; width: 50px;"
-                                                                                                src="./assets/images/product-img/Zayn_Myza_3x_Vitamin_E_Moisturizing_Cream_50gm_-_B1G1_128x128.avif"
-                                                                                                alt="product image">
-                                                                                            <p style="font-size: 12px; font-weight: 600;"
-                                                                                                class="mb-0 ms-3">
-                                                                                                8 × Zayn & Myza Moisture
-                                                                                                Boost Hyaluronic Acid
-                                                                                                Moisturizing
-                                                                                                Cream with 3x Vitamin E
-                                                                                                (50gm)
-                                                                                            </p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class="product-price col-3">
-                                                                    <h6>৳599.00</h6>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="cart-dtls-item mt-4">
-                                                            <div class="checkout-cart-item row">
-                                                                <div class="product-image position-relative col-2 p-0">
-                                                                    <img class=" border rounded-3"
-                                                                        src="./assets/images/product-img/Zayn_Myza_3x_Vitamin_E_Moisturizing_Cream_50gm_-_B1G1_128x128.avif"
-                                                                        alt="product image" />
-                                                                    <span class="badge rounded-pill cart-badge">4</span>
-                                                                </div>
-                                                                <div class="product-name col-7">
-                                                                    <h6>
-                                                                        Zayn & Myza Moisture Boost Hyaluronic Acid
-                                                                        Moisturizing Cream with 3x Vitamin E (50gm) - B1G1
-                                                                    </h6>
-                                                                </div>
-                                                                <div class="product-price col-3">
-                                                                    <h6>৳599.00</h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="cart-dtls-item mt-4">
-                                                            <div class="checkout-cart-item row">
-                                                                <div class="product-image position-relative col-2 p-0">
-                                                                    <img class=" border rounded-3"
-                                                                        src="./assets/images/product-img/Zayn_Myza_3x_Vitamin_E_Moisturizing_Cream_50gm_-_B1G1_128x128.avif"
-                                                                        alt="product image" />
-                                                                    <span class="badge rounded-pill cart-badge">4</span>
-                                                                </div>
-                                                                <div class="product-name col-7">
-                                                                    <h6>
-                                                                        Zayn & Myza Moisture Boost Hyaluronic Acid
-                                                                        Moisturizing Cream with 3x Vitamin E (50gm) - B1G1
-                                                                    </h6>
-                                                                </div>
-                                                                <div class="product-price col-3">
-                                                                    <h6>৳599.00</h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="checkout-summary mt-4">
-                                                        <div class="discount-code">
-                                                            <form action="" class="d-flex">
-                                                                <div class="form-floating">
-                                                                    <input class="form-control discountInput"
-                                                                        type="text" name="discount-code"
-                                                                        id="discount_code" placeholder="Discount Code">
-                                                                    <label for="discount_code">Discount Code</label>
-                                                                </div>
-                                                                <button type="submit"
-                                                                    class="ms-3 border border-2 btn btn-light btn-lg applyBtn"
-                                                                    disabled>Apply</button>
-                                                            </form>
-                                                        </div>
-                                                        <div class="price-info">
-                                                            <div class="order-summary mt-4">
-                                                                <div class="d-flex justify-content-between mb-2">
-                                                                    <span>Subtotal · 5 items</span>
-                                                                    <span>৳1,395.00</span>
-                                                                </div>
-                                                                <div class="d-flex justify-content-between mb-2">
-                                                                    <span>Shipping</span>
-                                                                    <span>Free</span>
-                                                                </div>
-
-                                                                <div class="d-flex justify-content-between fw-bold mt-3">
-                                                                    <span class="fs-5">Total</span>
-                                                                    <span><span class="bdt-txt">(BDT)</span>
-                                                                        ৳1,395.00</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
+                            @include('layouts.front-end.partials.mobile_checkout_accordion')
                             <!-- Order Summary Accordion End -->
 
                             <!-- Contact -->
@@ -223,14 +46,24 @@
 
                             <!-- Checkout Form -->
                             <div class="checkout-form mt-2">
-                                <form action="">
+                                <form action="{{ route('order.store') }}" method="POST">
+                                    @csrf
                                     <!-- Email -->
                                     <div class="email-info">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" name="email_phone"
-                                                id="email_phone" placeholder="name@example.com">
-                                            <label class="text-muted" for="email_phone">Email or mobile phone
+                                            <input autofocus type="text"
+                                                class="form-control @error('phone_email')
+                                                is-invalid
+                                            @enderror "
+                                                value="{{ old('phone_email') }}" name="phone_email" id="phone_email"
+                                                placeholder="name@example.com">
+                                            <label class="text-muted" for="phone_email">Email or mobile phone
                                                 number</label>
+                                            @error('phone_email')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
 
                                         {{-- <div class="mt-2 d-flex align-items-center">
@@ -259,46 +92,79 @@
                                         <!-- Country -->
                                         <div class="form-floating">
 
-                                            <select class="form-select form-select-lg" name="country" id="country">
+                                            <select
+                                                class="form-select form-select-lg @error('country')
+                                                is-invalid
+                                            @enderror"
+                                                name="country" id="country">
                                                 <option value="Bangladesh">Bangladesh</option>
-                                                <option value="United Arab Emirates">
+                                                <option selected value="United Arab Emirates">
                                                     United Arab Emirates
                                                 </option>
                                             </select>
                                             <label class="mb-3 " for="country">Country/Region</label>
+                                            @error('country')
+                                                is-invalid
+                                            @enderror
                                         </div>
 
                                         <!-- Name -->
                                         <div class="row mt-3">
                                             <div class="col-lg-6">
                                                 <div class="form-floating">
-                                                    <input class="form-control " type="text" name="first-name"
+                                                    <input class="form-control @error('first_name') is-invalid @enderror"
+                                                        value="{{ old('first_name') }}" type="text" name="first_name"
                                                         id="first-name" placeholder="First name" />
                                                     <label class="text-muted" for="first-name">First name</label>
+                                                    @error('first_name')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
+
                                             </div>
                                             <div class="col-lg-6 mt-3 mt-lg-0">
                                                 <div class="form-floating">
-                                                    <input class="form-control " type="text" name="last-name"
+                                                    <input
+                                                        class="form-control @error('last_name')
+                                                is-invalid
+                                            @enderror"
+                                                        value="{{ old('last_name') }}" type="text" name="last_name"
                                                         id="last-name" placeholder="Last name" />
                                                     <label class="text-muted" for="last-name">Last name</label>
-
+                                                    @error('last_name')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
+
                                             </div>
                                         </div>
 
                                         <!-- Address -->
                                         <div class="mt-3">
                                             <div class="form-floating">
-                                                <input class="form-control " type="text" name="address"
+                                                <input
+                                                    class="form-control  @error('address')
+                                                is-invalid
+                                            @enderror"
+                                                    value="{{ old('address') }}" type="text" name="address"
                                                     id="address" placeholder="Address" />
                                                 <label for="address">Address</label>
+                                                @error('address')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="mt-3">
                                             <div class="form-floating">
-                                                <input class="form-control " type="text" name="apartment"
-                                                    id="appartment" placeholder="Apartment, suite, etc. (optional)" />
+                                                <input class="form-control " value="{{ old('appartment') }}" type="text"
+                                                    name="apartment" id="appartment"
+                                                    placeholder="Apartment, suite, etc. (optional)" />
                                                 <label for="appartment">Apartment, suite, etc. (optional)</label>
                                             </div>
                                         </div>
@@ -307,16 +173,52 @@
                                         <div class="row mt-3">
                                             <div class="col-lg-6">
                                                 <div class="form-floating">
-                                                    <input class="form-control " type="text" name="city"
+                                                    <input
+                                                        class="form-control  @error('city')
+                                                is-invalid
+                                            @enderror"
+                                                        type="text" value="{{ old('city') }}" name="city"
                                                         id="city" placeholder="City" />
                                                     <label for="city">City</label>
+                                                    @error('city')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 mt-3 mt-lg-0">
-                                                <div class="form-floating">
-                                                    <input class="form-control" type="text" name="post_code"
+                                                <div class="form-floating" id="postalCodeBox">
+                                                    <input class="form-control  @error('post_code')
+                                                is-invalid
+                                            @enderror" value="{{old('post-code')}}" type="text" name="post_code"
                                                         id="post_code" placeholder="Postal code (option)">
-                                                    <label>Postal code (option)</label>
+                                                    <label>Postal code (optional)</label>
+                                                     @error('post_code')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-floating d-none" id="emirateBox">
+                                                    <select class="form-select form-select-lg  @error('emirate')
+                                                is-invalid
+                                            @enderror" name="emirate"
+                                                        id="emirate">
+                                                        <option value="Abu Dhabi">Abu Dhabi</option>
+                                                        <option value="Ajman">Ajman</option>
+                                                        <option value="Dubai">Dubai</option>
+                                                        <option value="Fujairah">Fujairah</option>
+                                                        <option value="Ras al-khaimah">Ras al-khaimah</option>
+                                                        <option value="Sharjah">Sharjah</option>
+                                                        <option value="Umm al-Quiwen">Umm al-Quwain</option>
+                                                    </select>
+                                                    <label class="mb-3 " for="emirate">Emirate</label>
+                                                    @error('emirate')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -324,15 +226,23 @@
                                         <!-- Phone -->
                                         <div class="mt-3">
                                             <div class="form-floating">
-                                                <input class="form-control form-select-lg" type="tel" name="phone"
+                                                <input class="form-control  @error('phone')
+                                                is-invalid
+                                            @enderror" value="{{old('phone')}}" type="tel" name="phone"
                                                     id="phone" placeholder="Phone" />
                                                 <label for="phone">Phone</label>
+                                                 @error('phone')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                             </div>
                                         </div>
 
                                         <!-- Save Info -->
                                         <div class="mt-3 d-flex align-items-center">
-                                            <input type="checkbox" class="form-check-input border" id="save-info" />
+                                            <input value="1" name="save_info" type="checkbox" class="form-check-input border"
+                                                id="save-info" />
                                             <label for="save-info" class="form-label mb-0 ms-2 mt-1">
                                                 Save this information for next time
                                             </label>
@@ -343,6 +253,28 @@
                                             <label for="text-news-offer" class="form-label mb-0 ms-2 mt-1">
                                                 Text me with news and offers
                                             </label>
+                                        </div>
+                                        <div>
+                                            <!-- Hidden input box -->
+                                            <div class="mt-3" id="extra-input-box" style="display: none">
+                                                <div class="form-floating">
+                                                    <input class="form-control form-select-lg" type="tel"
+                                                        name="phone" id="phone" value="+880"
+                                                        placeholder="Mobile Number" />
+                                                    <label for="phone">Mobile Number</label>
+                                                </div>
+                                                <p style="font-size: 12px; font-weight: 400; color: #707070; line-height: 18px"
+                                                    class="mt-3">By signing up via text, you agree to receive recurring
+                                                    automated marketing messages, including cart reminders, at the phone
+                                                    number provided. Consent is not a condition of purchase. Reply STOP to
+                                                    unsubscribe. Reply HELP for help. Message frequency varies. Msg & data
+                                                    rates may apply. View our <a
+                                                        style="color: inherit; text-decoration: underline"
+                                                        href="{{ route('privacy') }}">Privacy
+                                                        Policy</a> and <a
+                                                        style="color: inherit; text-decoration: underline"
+                                                        href="{{ route('terms') }}">Terms & Service.</a></p>
+                                            </div>
                                         </div>
 
                                         <!-- Shipping -->
@@ -365,7 +297,9 @@
                                                 <div class="col-lg-4">
 
                                                     <div class="form-floating">
-                                                        <select class="form-select form-select-lg" name="division"
+                                                        <select class="form-select @error('division')
+                                                is-invalid
+                                            @enderror" name="division"
                                                             id="division">
                                                             <option>Select</option>
                                                             <option value="Dhaka">Dhaka</option>
@@ -377,6 +311,11 @@
                                                             <option value="Khulna">Khulna</option>
                                                         </select>
                                                         <label for="division">Division</label>
+                                                         @error('division')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 mt-3  mt-lg-0">
@@ -428,8 +367,8 @@
 
 
                                                             <label class="shipping-box">
-                                                                <input class="form-check-input" checked type="radio"
-                                                                    name="payment_method" value="" onchange="">
+                                                                <input class="form-check-input" value="SSLCOMMERZ" checked
+                                                                    type="radio" name="payment_method">
                                                                 <span class="d-inline-block ms-1 mt-1 text-dark ">
                                                                     SSLCOMMERZ</span>
                                                                 <div class="ms-auto">
@@ -477,7 +416,7 @@
 
                                                             <label class="shipping-box">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="payment_method" value="">
+                                                                    name="payment_method" value="Cash On Delivery">
                                                                 <span class="d-inline-block mt-1 text-dark ">Cash On
                                                                     Delivery</span>
                                                             </label>
@@ -564,37 +503,37 @@
                                                                     <div class="row mt-3">
                                                                         <div class="col-lg-6">
                                                                             <input class="form-control" type="text"
-                                                                                name="first-name"
+                                                                                name=""
                                                                                 placeholder="First name">
                                                                         </div>
                                                                         <div class="col-lg-6 mt-3 mt-lg-0">
                                                                             <input class="form-control" type="text"
-                                                                                name="last-name" placeholder="Last name">
+                                                                                name="" placeholder="Last name">
                                                                         </div>
                                                                     </div>
                                                                     <div class="mt-3">
                                                                         <input class="form-control" type="text"
-                                                                            name="address" placeholder="Address">
+                                                                             placeholder="Address">
                                                                     </div>
                                                                     <div class="mt-3">
                                                                         <input class="form-control" type="text"
-                                                                            name="appertment"
+
                                                                             placeholder="Appertment, suite, etc. (optional)">
                                                                     </div>
                                                                     <div class="row mt-3">
                                                                         <div class="col-lg-6">
                                                                             <input class="form-control" type="text"
-                                                                                name="city" placeholder="City">
+                                                                                placeholder="City">
                                                                         </div>
                                                                         <div class="col-lg-6 mt-3 mt-lg-0">
                                                                             <input class="form-control" type="text"
-                                                                                name="postal-code"
+                                                                                name=""
                                                                                 placeholder="Postal Code">
                                                                         </div>
                                                                     </div>
                                                                     <div class="mt-3">
                                                                         <input class="form-control" type="text"
-                                                                            name="phone" placeholder="Phone">
+                                                                            name="" placeholder="Phone">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -603,8 +542,8 @@
                                                 </div>
 
                                             </div>
-                                            <button type="submit" class="btn btn-lg btn-danger w-100 my-4">Pay
-                                                Now</button>
+                                            <button type="submit" class="btn btn-lg btn-danger w-100 my-4">Complete
+                                                Order</button>
                                         </div>
 
                                         <div class="important-links">
@@ -639,7 +578,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Cart Details -->
             <div class="col-lg-6 section-scroll checkout-cart-details d-none d-lg-block">
                 <div class="container">
@@ -652,7 +590,7 @@
                                             <img class=" border rounded-3"
                                                 src="{{ \App\CPU\ProductManager::product_image_path('thumbnail') }}/{{ $cartItem['thumbnail'] }}"
                                                 alt="product image" />
-                                            <span class="badge rounded-pill cart-badge">{{$cartItem['quantity']}}</span>
+                                            <span class="badge rounded-pill cart-badge">{{ $cartItem['quantity'] }}</span>
                                         </div>
                                         <div class="product-name col-8">
                                             <h6>
@@ -660,10 +598,13 @@
                                             </h6>
                                         </div>
                                         <div class="product-price col-2">
-                                            <h6>৳{{ $a = \App\CPU\Helpers::currency_converter(
-                                                $cartItem['unit_price'] - \App\CPU\Helpers::get_product_discount_for_cart($cartItem, $cartItem['unit_price']),
-                                            ) }}
-                                            </h6>
+                                            @php
+                                                $total_price =
+                                                    ($cartItem['unit_price'] - $cartItem['discount']) *
+                                                    $cartItem['quantity'];
+                                            @endphp
+                                            <h6>৳ {{ \App\CPU\Helpers::currency_converter($total_price) }}</h6>
+
                                         </div>
                                     </div>
                                 </div>
@@ -726,27 +667,42 @@
                             </div>
 
                         </div> --}}
+
+
                         <button class="scroll-hint">
                             Scroll down for more items
                         </button>
                     </div>
                     <div class="checkout-summary mt-4">
                         <div class="discount-code">
-                            <form class="d-flex">
+                            <form class="d-flex add_coupon" method="POST">
+                                @csrf
                                 <div class="form-floating w-75">
                                     <input class="form-control discountInput" type="text" id="discount_code"
-                                        name="discount-code" placeholder="Discount Code">
+                                        name="discount_code" placeholder="Discount Code">
                                     <label for="discount_code">Discount Code</label>
                                 </div>
-                                <button class="ms-3 border border-2 btn btn-light btn-lg applyBtn" disabled>Apply</button>
+                                <button type="submit" class="ms-3 border border-2 btn btn-light btn-lg applyBtn"
+                                    disabled>Apply</button>
 
                             </form>
                         </div>
                         <div class="price-info">
                             <div class="order-summary mt-4">
                                 <div class="d-flex justify-content-between mb-2">
-                                    <span>Subtotal · {{count(session()->get('cart'))}} items</span>
-                                    <span>৳1,395.00</span>
+                                    @php
+                                        $sub_total = 0;
+                                        $cartItems = session()->get('cart', []);
+
+                                        foreach ($cartItems as $cartItem) {
+                                            $unit_price = $cartItem['unit_price'];
+                                            $discount = $cartItem['discount'];
+
+                                            $sub_total += ($unit_price - $discount) * $cartItem['quantity'];
+                                        }
+                                    @endphp
+                                    <span>Subtotal · {{ count(session()->get('cart')) }} items</span>
+                                    <span>৳ {{ \App\CPU\Helpers::currency_converter($sub_total) }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-2">
                                     <span>Shipping</span>
@@ -755,7 +711,8 @@
 
                                 <div class="d-flex justify-content-between fw-bold mt-3">
                                     <span class="fs-5">Total</span>
-                                    <span><span class="bdt-txt">(BDT)</span> ৳1,395.00</span>
+                                    <span><span class="bdt-txt">(BDT)</span>
+                                        {{ \App\CPU\Helpers::currency_converter($sub_total) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -788,26 +745,40 @@
             });
         </script>
         <script>
-            // script for mini two accordion hide show text
-            const btn1 = document.getElementById('totalSingleItemOne');
-            const btn2 = document.getElementById('totalSingleItemTwo');
-            const acc1 = document.getElementById('panelsStayOpen-collapseOne');
-            const acc2 = document.getElementById('panelsStayOpen-collapseTwo');
+            const checkbox = document.getElementById('text-news-offer');
+            const inputBox = document.getElementById('extra-input-box');
 
-            acc1.addEventListener('shown.bs.collapse', function() {
-                btn1.textContent = "Hide 8 items";
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    inputBox.style.display = 'block';
+                } else {
+                    inputBox.style.display = 'none';
+                }
             });
+        </script>
+        <script>
+            $(document).ready(function() {
 
-            acc1.addEventListener('hidden.bs.collapse', function() {
-                btn1.textContent = "Show 8 items";
-            });
-            //
-            acc2.addEventListener('shown.bs.collapse', function() {
-                btn2.textContent = "Hide 8 items";
-            });
+                function toggleCountryFields() {
+                    let country = $('#country').val();
 
-            acc2.addEventListener('hidden.bs.collapse', function() {
-                btn2.textContent = "Show 8 items";
+                    if (country === 'Bangladesh') {
+                        $('#postalCodeBox').removeClass('d-none');
+                        $('#emirateBox').addClass('d-none');
+                    } else if (country === 'United Arab Emirates') {
+                        $('#postalCodeBox').addClass('d-none');
+                        $('#emirateBox').removeClass('d-none');
+                    }
+                }
+
+                // On page load
+                toggleCountryFields();
+
+                // On change
+                $('#country').on('change', function() {
+                    toggleCountryFields();
+                });
+
             });
         </script>
     @endpush

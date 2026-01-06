@@ -1,5 +1,6 @@
 @extends('layouts.front-end.app')
 @section('title', $catName)
+
 @section('main-content')
     <!-- Page Main Content start  -->
     @php
@@ -246,7 +247,6 @@
 
                                         <div class="row mt-5 justify-content-center justify-content-lg-start">
                                             @if ($products->count() > 0)
-
                                                 @foreach ($products as $product)
                                                     <div class="col-sm-6 col-md-6 col-lg-3 product-column"
                                                         data-category="category1">
@@ -284,7 +284,7 @@
                                                                     @endif
                                                                     <div class="product-info">
                                                                         <button
-                                                                            onclick="buy_now('form-{{ $product->id }}')"
+                                                                            onclick="addToCart('{{ $product->id }}')"
                                                                             class="add-to-cart btn btn-sm py-2 ">
                                                                             ADD TO CART
                                                                         </button>
@@ -320,8 +320,9 @@
                                             @else
                                                 <h3>Sorry, there are no products in this collection</h3>
                                             @endif
-
-
+                                        </div>
+                                        <div>
+                                              {{ $products->links() }}
                                         </div>
                                     </div>
                                 </div>
