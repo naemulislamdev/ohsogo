@@ -207,9 +207,9 @@
                                                                         </button>
                                                                     @endif
                                                                     <div class="product-info">
-                                                                        <button
-                                                                            onclick="buy_now('form-{{ $product->id }}')"
-                                                                            class="add-to-cart btn btn-sm py-2 ">
+                                                                        <button onclick="addToCart('{{ $product->id }}')"
+                                                                            class="add-to-cart btn btn-sm py-2 "
+                                                                            data-id="{{ $product->id }}">
                                                                             ADD TO CART
                                                                         </button>
                                                                     </div>

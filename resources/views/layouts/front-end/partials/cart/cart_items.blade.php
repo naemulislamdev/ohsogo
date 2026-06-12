@@ -18,7 +18,6 @@
                             <div class="cart-item-product-info ms-3">
                                 <a href="">
                                     {{ $cartItem['name'] }}
-
                                 </a>
                                 <div
                                     class="cart-item-quantity_price mt-4 d-flex justify-content-between align-items-center">
@@ -37,7 +36,6 @@
                                     <div class="cart-item-rate">
                                         @php
                                             $total_price = ($cartItem['unit_price'] - $cartItem['discount']) * $cartItem['quantity'];
-
                                         @endphp
                                         <h5>৳ {{ \App\CPU\Helpers::currency_converter($total_price) }}</h5>
                                     </div>
