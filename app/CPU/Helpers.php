@@ -191,6 +191,7 @@ class Helpers
 
     public static function get_customer_check($request = null)
     {
+        //dd($request->all());
         $user = null;
         if (auth('customer')->check()) {
             $user = auth('customer')->user(); // for web
@@ -219,8 +220,8 @@ class Helpers
                         $password = bcrypt($request->phone);
                         // Create a new user
                         $newUser = User::create([
-                            'f_name' => $request->name,
-                            'l_name' => 'bd' . rand(),
+                            'f_name' => $request->f_name,
+                            'l_name' => $request->l_name,
                             'email' => $email,
                             'phone' => $request->phone,
                             'password' => $password
@@ -237,8 +238,8 @@ class Helpers
 
                     // Create a new user
                     $newUser = User::create([
-                        'f_name' => $request->name,
-                        'l_name' => 'bd' . rand(),
+                        'f_name' => $request->f_name,
+                        'l_name' => $request->l_name,
                         'email' => $email,
                         'phone' => $request->phone,
                         'password' => $password

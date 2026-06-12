@@ -8,6 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * php artisan migrate --path=/database/migrations/2025_10_23_155754_create_sub_categories_table.php
      */
     public function up(): void
     {

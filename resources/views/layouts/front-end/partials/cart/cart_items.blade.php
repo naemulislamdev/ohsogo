@@ -59,7 +59,6 @@
                     </div>
                 @endif
             </div>
-            @include('layouts.front-end.partials.cart.cart_sm_related_products')
         </div>
 
         <!-- Subtotal -->
@@ -74,7 +73,7 @@
                     <div class="sub-total-price text-end">
                         @php
                             $sub_total = 0;
-                            $cartItems = session()->get('cart', []); 
+                            $cartItems = session()->get('cart', []);
 
                             foreach ($cartItems as $cartItem) {
                                 $unit_price = $cartItem['unit_price'];
@@ -95,11 +94,11 @@
         <!-- Checkout / View Cart buttons -->
         <div class="two-btn mt-5 row">
             <div class="col-lg-6">
-                <a href="{{ route('product.checkout') }}" class="chekout-cart-btn w-100 text-white text-center">Check
+                <a href="{{ route('product.checkout') }}" class="btn btn-primary w-100 text-white text-center">Check
                     Out</a>
             </div>
             <div class="col-lg-6">
-                <a href="{{ route('product.cart') }}" class="view-cart-btn w-100 text-center">View
+                <a href="{{ route('product.cart') }}" class="btn btn-secondary w-100 text-center">View
                     Cart</a>
             </div>
         </div>

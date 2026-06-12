@@ -39,7 +39,7 @@ Route::controller(WebController::class)->group(function () {
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/shop', 'shopAllNewDrops')->name('shop');
     Route::get("/cart", 'cart')->name('product.cart');
-    Route::get("/product-checkout", 'productCheckout')->name('product.checkout');
+    Route::get("/checkout", 'productCheckout')->name('product.checkout');
     Route::get("/product-details/{slug}", 'productDetails')->name('product.details');
     Route::get("/collections/{slug}", 'showCollections')->name('collections');
     Route::get("/brandCollection/{slug}", 'showBrandCollections')->name('brandCollection');
@@ -64,12 +64,9 @@ Route::controller(CartController::class)->prefix('/cart')->as('cart.')->group(fu
     Route::get("/cart-offcanva", function() {
         return view("layouts.front-end.partials.cart.cart_items")->render();
     });
-<<<<<<< HEAD
     Route::get("/cart-details", function() {
         return view("layouts.front-end.partials.cart.cart_details")->render();
     });
-=======
->>>>>>> 225476262bbb3394556b7381b4e74e24b2e397d0
 
     Route::post('/increment', 'cartIncrement')->name('increment');
     Route::post('/decrement', 'cartDecrement')->name('decrement');

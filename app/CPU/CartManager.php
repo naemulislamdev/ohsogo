@@ -141,11 +141,9 @@ class CartManager
     public static function cart_grand_total($cart) // needed
     {
         $total = 0;
-        // return response()->json(['order_id'=>$cart,translate('order_placed_successfully')], 200);
         if (!empty($cart)) {
             foreach ($cart as $item) {
-                $product_subtotal = ($item['price'] * $item['quantity'])
-                    + ($item['tax'] * $item['quantity'])
+                $product_subtotal = ($item['unit_price'] * $item['quantity'])
                     - $item['discount']* $item['quantity'];
                 $total += $product_subtotal;
             }

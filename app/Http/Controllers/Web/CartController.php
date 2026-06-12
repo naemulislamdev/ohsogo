@@ -19,6 +19,8 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $product = Product::find($request->id); // Find product by ID
+        $variations = [];
+        $variantStr = '';
 
 
         // Check if product exists
@@ -37,7 +39,7 @@ class CartController extends Controller
         $discountPrice = 0;
         if ($product->discount_price > 0) {
             if ($product->discount_type == 'percentage') {
-                $discountPrice = $product->price - ($product->price * $product->discount / 100);
+                $discountPrice = $product->unit_price - ($product->unit_price * $product->discount / 100);
             } elseif ($product->discount_type == 'fixed') {
                 $discountPrice = $product->discount_price;
             }
@@ -63,6 +65,8 @@ class CartController extends Controller
                 'current_stock' => $product->current_stock,
                 'discount' => Helpers::get_product_discount($product, $product->unit_price),
                 'discount_type' => $product->discount_type,
+                'variant' => $variantStr,
+                'variations' => $variations
             ];
         }
 

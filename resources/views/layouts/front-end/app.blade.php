@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/css/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/sweetalert2.min.css">
     <style>
-        :root {
+       :root {
             --primary-color: #ff6b6b;
             --secondary-color: #ff8e8e;
             --dark-color: #333;
@@ -121,6 +121,7 @@
             opacity: 1;
         }
     </style>
+    @stack('styles')
 </head>
 
 <body>
@@ -197,7 +198,7 @@
                         // location.reload();
                         $('.cart_count').html(response.cart_count);
                         $('.cart-offcanva').load("/cart/cart-offcanva");
-                           $('.cart_details').load("/cart/cart-details");
+                        $('.cart_details').load("/cart/cart-details");
 
 
                         if (redirect_to_checkout) {
@@ -231,7 +232,7 @@
                     // location.reload();
                     $('.cart_count').html(response.cart_count);
                     $('.cart-offcanva').load("/cart/cart-offcanva");
-                     $('.cart_details').load("/cart/cart-details");
+                    $('.cart_details').load("/cart/cart-details");
                 },
                 error: function() {
                     toastr.error("Something went wrong!");
@@ -250,7 +251,7 @@
                 },
                 success: function(response) {
                     $('.cart-offcanva').load("/cart/cart-offcanva");
-                        $('.cart_details').load("/cart/cart-details");
+                    $('.cart_details').load("/cart/cart-details");
 
                 },
                 error: function() {
@@ -278,7 +279,6 @@
                 }
             });
         }
-    
     </script>
 
 

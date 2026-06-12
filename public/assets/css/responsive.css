@@ -253,9 +253,9 @@
 }
 
 @media (min-width: 768px) {
-    .product-offcanvas .offcanvas-end {
+    /* .product-offcanvas .offcanvas-end {
         max-width: 750px;
-    }
+    } */
     .cart-item-remove-icon {
         right: 0;
     }

@@ -74,7 +74,7 @@ class WebController extends Controller
 
         $banners = Banner::where("published", "1")->get();
         $newDropProducts =  Product::with(['reviews'])->active()
-            ->where('featured', 1)
+            ->where('featured_status', 1)
             ->withCount(['order_details'])->orderBy('order_details_count', 'DESC')
             ->take(12)
             ->latest()
@@ -125,7 +125,7 @@ class WebController extends Controller
             $products = Product::where('sub_sub_category_id', $getCat->id)->paginate(20);
             $catName = $getCat->name;
         }
-        if($slug == "all") {
+        if ($slug == "all") {
             $products = Product::paginate(20);
             $catName = "All Products";
         }
@@ -146,8 +146,12 @@ class WebController extends Controller
     }
     public function productCheckout()
     {
-        $carts = session()->get("cart");
-        return view('web-views.product-checkout', compact("carts"));
+        if (session()->has('cart') && count(session('cart')) > 0) {
+            $carts = session()->get("cart");
+            return view('web-views.checkout', compact("carts"));
+        }
+        Toastr::info('Your cart is empty!');
+        return redirect('/');
     }
     public function productDetails($slug)
     {
@@ -245,8 +249,4 @@ class WebController extends Controller
 
         return redirect()->back()->with('success', 'Order Placed successfully!');
     }
-
-
-
-
 }
